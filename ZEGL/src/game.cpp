@@ -29,7 +29,7 @@ void Game::Init(const Window& window)
 		-0.5f, 0.5f
 	};
 
-	GLuint indexData[] = { 0, 1, 2, 3 };
+	GLuint indexData[] = { 3, 2, 1, 0 };
 
 	glGenVertexArrays(1, &gVAO);
 	glBindVertexArray(gVAO);
@@ -54,7 +54,9 @@ void Game::ProcessInput(const Input& input, float delta)
 
 void Game::Update(float delta)
 {
+	shader.Bind();
 	shader.UpdateUniforms(*m_camera);
+	shader.UnBind();
 }
 
 void Game::Render()

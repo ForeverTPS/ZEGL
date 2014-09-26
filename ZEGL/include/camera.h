@@ -13,8 +13,10 @@ public:
 	inline float	GetZoom() const		{ return m_zoom; }
 
 	inline void		SetOrigin(float x, float y) { m_origin.SetX(x); m_origin.SetY(y); }
+	inline void		SetPos(float x, float y) { m_pos.SetX(x); m_pos.SetY(y); }
+	inline void		SetRot(float rot) { m_rot = rot; }
 
-	Matrix4f GetTransform();
+	Matrix4f		GetTransform();
 
 protected:
 private:

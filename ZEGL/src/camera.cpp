@@ -34,5 +34,5 @@ void Camera::RecreateTransform()
 	rotMat.InitRotationEuler(0.0f, 0.0f, m_rot);
 	transMat.InitTranslation(Vector3f(m_origin.GetX(), m_origin.GetY(), 0.0f));
 
-	m_transform.m_matrix = reverseTransMat * scaleMat * rotMat * transMat;
+	m_transform.m_matrix = reverseTransMat * rotMat * scaleMat * transMat;
 }
