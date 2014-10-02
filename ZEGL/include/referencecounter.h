@@ -18,11 +18,28 @@
  * limitations under the License.
  */
 
-#version 150
+#ifndef REFERENCECOUNTER_H
+#define REFERENCECOUNTER_H
 
-out vec4 fragColor;
-
-void main()
+class ReferenceCounter
 {
-    fragColor = vec4(0.0, 0.0, 1.0, 1.0);
-}
+public:
+	ReferenceCounter() : 
+		m_refCount(1) {}
+
+	virtual ~ReferenceCounter() {}
+	
+	inline void AddReference()		{ m_refCount++; }
+	inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
+
+	inline int GetReferenceCount()	{ return m_refCount; }
+
+protected:
+private:
+	ReferenceCounter(ReferenceCounter const&) = delete;
+	ReferenceCounter& operator=(ReferenceCounter const&) = delete;
+
+	int m_refCount;
+};
+
+#endif
