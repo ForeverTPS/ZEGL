@@ -16,6 +16,9 @@
     <Filter Include="res\shaders">
       <UniqueIdentifier>{95514c89-2817-41c1-a1d6-8a57a44b0899}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\textures">
+      <UniqueIdentifier>{b78ba35d-b7d3-42b3-9ab7-eec8358d8906}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,6 +58,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\transform.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,6 +119,12 @@
     <ClInclude Include="include\transform.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\entity.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entitycomponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic_shader_vs.glsl">
@@ -118,5 +133,21 @@
     <None Include="res\shaders\basic_shader_fs.glsl">
       <Filter>res\shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\black.png">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\default_normal.jpg">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\white.png">
+      <Filter>res\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\temp.txt">
+      <Filter>res\shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

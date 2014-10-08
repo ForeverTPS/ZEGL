@@ -20,7 +20,6 @@
 
 #include "core.h"
 #include "game.h"
-#include "input.h"
 #include "timing.h"
 #include "util.h"
 #include "window.h"
@@ -102,7 +101,7 @@ void Core::Start()
 
 		if (render)
 		{
-			m_game->Render();
+			m_game->Render(nullptr);
 
 			//The newly rendered image will be in the window's back buffer,
 			//so the buffers must be swapped to display the new image.

@@ -18,37 +18,38 @@
  * limitations under the License.
  */
 
-#ifndef GAME_H
-#define GAME_H
+#include "util.h"
+#include <SDL2/SDL.h>
 
-#include "entity.h"
-#include "logfile.h"
-
-class Window;
-
-class Game
+void Util::Sleep(int milliseconds)
 {
-public:
-	Game() { LOG_INIT("ZEGL"); }
-	virtual ~Game() { LOG_CLEANUP(); }
+	SDL_Delay(milliseconds);
+}
 
-	void Init(const Window& window);
+std::vector<std::string> Util::Split(const std::string &s, char delim)
+{
+	std::vector<std::string> elems;
 
-	void ProcessInput(const Input& input, float delta);
-	void Update(float delta);
-	void Render(Renderer* renderer);
+	const char* cstr = s.c_str();
+	unsigned int strLength = (unsigned int)s.length();
+	unsigned int start = 0;
+	unsigned int end = 0;
 
-	inline void AddToScene(Entity* child) { m_root.AddChild(child); }
+	while (end <= strLength)
+	{
+		while (end <= strLength)
+		{
+			if (cstr[end] == delim)
+			{
+				break;
+			}
+			end++;
+		}
 
-	inline void SetCore(Core* core) { m_root.SetCore(core); }
+		elems.push_back(s.substr(start, end - start));
+		start = end + 1;
+		end = start;
+	}
 
-protected:
-private:
-	Game(Game const&) = delete;
-	Game& operator=(Game const&) = delete;
-
-	Camera*	m_camera;
-	Entity	m_root;
-};
-
-#endif
+	return elems;
+}

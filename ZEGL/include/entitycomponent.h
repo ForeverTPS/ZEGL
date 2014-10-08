@@ -18,37 +18,34 @@
  * limitations under the License.
  */
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef ENTITYCOMPONENT_H
+#define ENTITYCOMPONENT_H
 
 #include "entity.h"
-#include "logfile.h"
 
-class Window;
-
-class Game
+class EntityComponent
 {
 public:
-	Game() { LOG_INIT("ZEGL"); }
-	virtual ~Game() { LOG_CLEANUP(); }
+	EntityComponent() :	m_parent(nullptr) {}
+	virtual ~EntityComponent() {}
 
-	void Init(const Window& window);
+	virtual void ProcessInput(const Input& input, float delta) {}
+	virtual void Update(float delta) {}
+	virtual void Render(const Shader& shader, const Renderer& renderer, const Camera& camera) const {}
 
-	void ProcessInput(const Input& input, float delta);
-	void Update(float delta);
-	void Render(Renderer* renderer);
+	virtual void AddToEngine(Core* engine) const { }
 
-	inline void AddToScene(Entity* child) { m_root.AddChild(child); }
+	inline Transform* GetTransform()				{ return m_parent->GetTransform(); }
+	inline const Transform& GetTransform() const	{ return *m_parent->GetTransform(); }
 
-	inline void SetCore(Core* core) { m_root.SetCore(core); }
+	inline virtual void SetParent(Entity* parent) { m_parent = parent; }
 
 protected:
 private:
-	Game(Game const&) = delete;
-	Game& operator=(Game const&) = delete;
+	EntityComponent(EntityComponent const&) = delete;
+	EntityComponent& operator=(EntityComponent const&) = delete;
 
-	Camera*	m_camera;
-	Entity	m_root;
+	Entity* m_parent;
 };
 
 #endif

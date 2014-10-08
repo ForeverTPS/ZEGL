@@ -24,10 +24,11 @@
 #include "camera.h"
 #include "mappedvalues.h"
 #include "shader.h"
-#include "window.h"
+//#include "window.h"
 #include <map>
 
 class Entity;
+class Window;
 
 class Renderer : public MappedValues
 {

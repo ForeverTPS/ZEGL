@@ -31,8 +31,7 @@ public:
 
 	Matrix4f GetTransformation() const;
 
-	bool HasChanged()		const;
-	void UpdateOldVals()	const;
+	bool HasChanged() const;
 
 	inline Vector3f* GetPos()                   { return &m_pos; }
 	inline const Vector3f& GetPos()		const	{ return m_pos; }
@@ -52,7 +51,8 @@ private:
 
 	const Matrix4f& GetParentMatrix() const;
 
-	void RecreateTransform() const;
+	void RecreateTransform()	const;
+	void UpdateOldVals()		const;
 
 	Vector3f			m_pos;
 	float				m_rot;

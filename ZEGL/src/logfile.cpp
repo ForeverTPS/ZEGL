@@ -33,6 +33,8 @@ int             LogFile::m_logLevel = LOG_INFO;
 int             LogFile::m_logLevel = LOG_ERROR;
 #endif
 
+char LogFile::s_errorMsg[LogFile::MAX_ERROR_LEN];
+
 bool LogFile::Init(const std::string& fname) 
 {
 	bool success = true;

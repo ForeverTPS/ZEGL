@@ -64,9 +64,7 @@ public:
 		m_materialData->AddReference();
 	}
 
-	Material(const std::string& materialName, const Texture& diffuse, float specularIntensity, float specularPower,
-		const Texture& normalMap = Texture("default_normal.jpg"),
-		const Texture& dispMap = Texture("default_disp.png"), float dispMapScale = 0.0f, float dispMapOffset = 0.0f) :
+	Material(const std::string& materialName, const Texture& diffuse, float specularIntensity, float specularPower,	const Texture& normalMap = Texture("default_normal.jpg")) :
 		m_materialName(materialName)
 	{
 		m_materialData = new MaterialData();
@@ -76,11 +74,6 @@ public:
 		m_materialData->SetFloat("specularIntensity", specularIntensity);
 		m_materialData->SetFloat("specularPower", specularPower);
 		m_materialData->SetTexture("normalMap", normalMap);
-		m_materialData->SetTexture("dispMap", dispMap);
-
-		float baseBias = dispMapScale / 2.0f;
-		m_materialData->SetFloat("dispMapScale", dispMapScale);
-		m_materialData->SetFloat("dispMapBias", -baseBias + baseBias * dispMapOffset);
 	}
 
 	virtual ~Material()

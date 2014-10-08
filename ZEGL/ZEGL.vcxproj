@@ -99,6 +99,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
+    <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />
@@ -108,11 +109,14 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\timing.cpp" />
     <ClCompile Include="src\transform.cpp" />
+    <ClCompile Include="src\util.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\core.h" />
+    <ClInclude Include="include\entity.h" />
+    <ClInclude Include="include\entitycomponent.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\input.h" />
     <ClInclude Include="include\logfile.h" />
@@ -132,6 +136,14 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   <ItemGroup>
     <None Include="res\shaders\basic_shader_fs.glsl" />
     <None Include="res\shaders\basic_shader_vs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\black.png" />
+    <Image Include="res\textures\default_normal.jpg" />
+    <Image Include="res\textures\white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\temp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,7 +43,7 @@ public:
 		LOG_INFO
 	};
 
-	const int MAX_ERROR_LEN = 256;
+	static const int MAX_ERROR_LEN = 256;
 
 	static bool Init(const std::string& fname = "ZEGL");
 	static void Cleanup();
@@ -52,6 +52,8 @@ public:
 
 	static void SetLogLevel(int level);
 	static inline void SetLogActive(bool active) { m_isActive = active; }
+
+	static char s_errorMsg[MAX_ERROR_LEN];
 
 protected:
 private:

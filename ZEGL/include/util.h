@@ -21,19 +21,17 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <SDL2/SDL.h>
-#include <iostream>
-#include <string>
 #include <vector>
 
 #ifndef WIN32
 	#include <unistd.h>
 #endif
 
-#ifdef WIN32
-	#define SNPRINTF _snprintf_s
-#else
-	#define SNPRINTF snprintf
+#if _MSC_VER
+	#define WIN32_LEAN_AND_MEAN
+	#define snprintf	_snprintf_s
+	#define vsprintf	vsprintf_s
+	#define vsnprintf	vsnprintf_s
 #endif
 
 #define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
@@ -54,38 +52,9 @@
 
 namespace Util
 {
-	void Sleep(int milliseconds)
-	{
-		SDL_Delay(milliseconds);
-	}
+	void Sleep(int milliseconds);
 
-	std::vector<std::string> Split(const std::string &s, char delim)
-	{
-		std::vector<std::string> elems;
-
-		const char* cstr = s.c_str();
-		unsigned int strLength = (unsigned int)s.length();
-		unsigned int start = 0;
-		unsigned int end = 0;
-
-		while (end <= strLength)
-		{
-			while (end <= strLength)
-			{
-				if (cstr[end] == delim)
-				{
-					break;
-				}
-				end++;
-			}
-
-			elems.push_back(s.substr(start, end - start));
-			start = end + 1;
-			end = start;
-		}
-
-		return elems;
-	}
+	std::vector<std::string> Split(const std::string &s, char delim);
 
 	template<class T> void SafeDelete(T*& pVal)
 	{

@@ -20,6 +20,8 @@
 
 #include "shader.h"
 #include "camera.h"
+#include "logfile.h"
+#include "util.h"
 #include <GL/glew.h>
 #include <cassert>
 #include <fstream>
@@ -234,8 +236,9 @@ void Shader::AddUniform(const std::string& uniformName, const std::string& unifo
 
 	if (location == 0xFFFFFFFF)
 	{
-		//LogFile::AddEntry("Invalid uniform location - " + uniformName, LogFile::LOG_ERROR);
-		assert(0 != 0);
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Invalid uniform location -  %s", uniformName);
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		ASSERT(0 != 0, LogFile::s_errorMsg);
 	}
 
 	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));
@@ -273,7 +276,7 @@ void Shader::UpdateUniforms(Camera& camera) const
 		}	
 		else
 		{
-			throw "Invalid Uniform: " + uniformName;
+			//throw "Invalid Uniform: " + uniformName;
 		}
 	}
 }
@@ -288,9 +291,19 @@ void Shader::SetUniformf(const std::string& uniformName, float value) const
 	glUniform1f(m_uniformMap.at(uniformName), value);
 }
 
+void Shader::SetUniformVector2f(const std::string& uniformName, const Vector2f& value) const
+{
+	glUniform2f(m_uniformMap.at(uniformName), value.GetX(), value.GetY());
+}
+
 void Shader::SetUniformVector3f(const std::string& uniformName, const Vector3f& value) const
 {
 	glUniform3f(m_uniformMap.at(uniformName), value.GetX(), value.GetY(), value.GetZ());
+}
+
+void Shader::SetUniformVector4f(const std::string& uniformName, const Vector4f& value) const
+{
+	glUniform4f(m_uniformMap.at(uniformName), value.GetX(), value.GetY(), value.GetZ(), value.GetW());
 }
 
 void Shader::SetUniformMatrix4f(const std::string& uniformName, const Matrix4f& value) const

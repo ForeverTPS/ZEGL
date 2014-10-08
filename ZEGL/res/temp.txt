@@ -27,7 +27,7 @@ out vec4 fragColor;
 uniform sampler2D u_diffuse;
 uniform sampler2D u_normals;
 
-uniform vec2 Resolution;
+uniform vec3 Resolution;
 uniform vec3 LightPos;
 uniform vec4 LightColor;
 uniform vec4 AmbientColor;
