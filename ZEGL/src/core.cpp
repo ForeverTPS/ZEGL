@@ -101,7 +101,7 @@ void Core::Start()
 
 		if (render)
 		{
-			m_game->Render(nullptr);
+			m_game->Render();
 
 			//The newly rendered image will be in the window's back buffer,
 			//so the buffers must be swapped to display the new image.

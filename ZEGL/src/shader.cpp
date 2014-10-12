@@ -88,7 +88,10 @@ static std::string LoadShader(const std::string& fileName)
 
 Shader::Shader(const std::string& fileName)
 {
-	//Load(fileName);
+	if (fileName != "")
+	{
+		Load(fileName);
+	}
 }
 
 Shader::~Shader()

@@ -21,34 +21,37 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "entity.h"
-#include "logfile.h"
+#include <vector>
 
+class Camera;
+class Input;
+class Light;
+class Shader;
 class Window;
 
 class Game
 {
 public:
-	Game() { LOG_INIT("ZEGL"); }
-	virtual ~Game() { LOG_CLEANUP(); }
+	Game();
+	virtual ~Game();
 
 	void Init(const Window& window);
 
 	void ProcessInput(const Input& input, float delta);
 	void Update(float delta);
-	void Render(Renderer* renderer);
-
-	inline void AddToScene(Entity* child) { m_root.AddChild(child); }
-
-	inline void SetCore(Core* core) { m_root.SetCore(core); }
+	void Render();
 
 protected:
 private:
 	Game(Game const&) = delete;
 	Game& operator=(Game const&) = delete;
 
-	Camera*	m_camera;
-	Entity	m_root;
+	Camera*				m_camera;
+	const Window*		m_window;
+
+	Shader*				m_defaultShader;
+	Light*				m_activeLight;
+	std::vector<Light*>	m_lights;
 };
 
 #endif

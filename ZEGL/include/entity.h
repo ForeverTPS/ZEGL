@@ -21,8 +21,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "transform.h"
-#include <vector>
+#include "mymath.h"
 
 class Camera;
 class Core;
@@ -35,38 +34,32 @@ class Entity
 {
 public:
 	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_transform(pos, rot, scale),
-		m_core(nullptr) {}
+		m_pos(pos),
+		m_rot(rot),
+		m_scale(scale) {}
+	virtual ~Entity() {}
 
-	virtual ~Entity();
+	void ProcessInput(const Input& input, float delta) {}
+	void Update(float delta) {}
+	void Render(const Shader& shader, const Renderer& renderer, const Camera& camera) const {}
 
-	Entity* AddChild(Entity* child);
-	Entity* AddComponent(EntityComponent* component);
+	inline Vector3f	GetPos()	const { return m_pos; }
+	inline float	GetRot()	const { return m_rot; }
+	inline float	GetScale()	const { return m_scale; }
 
-	void ProcessInputAll(const Input& input, float delta);
-	void UpdateAll(float delta);
-	void RenderAll(const Shader& shader, const Renderer& renderer, const Camera& camera) const;
-
-	std::vector<Entity*> GetAllAttached();
-
-	inline Transform* GetTransform() { return &m_transform; }
-
-	void SetCore(Core* engine);
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.SetX(x); m_pos.SetY(y); }
+	inline void	SetPos(Vector3f& pos)						{ m_pos = pos; }
+	inline void	SetRot(float rot)							{ m_rot = rot; }
+	inline void	SetScale(float scale)						{ m_scale = scale; }
 
 protected:
 private:
 	Entity(Entity const&) = delete;
 	Entity& operator=(Entity const&) = delete;
 
-	void ProcessInput(const Input& input, float delta);
-	void Update(float delta);
-	void Render(const Shader& shader, const Renderer& renderer, const Camera& camera) const;
-
-	Core*		m_core;
-	Transform	m_transform;
-
-	std::vector<Entity*>			m_children;
-	std::vector<EntityComponent*>	m_components;
+	Vector3f	m_pos;
+	float		m_rot;
+	float		m_scale;
 };
 
 #endif

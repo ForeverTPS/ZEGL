@@ -61,12 +61,6 @@ namespace Util
 		delete pVal;
 		pVal = NULL;
 	}
-
-	template<class T> void SafeDeleteArray(T*& pVal)
-	{
-		delete[] pVal;
-		pVal = NULL;
-	}
 };
 
 #endif

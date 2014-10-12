@@ -99,16 +99,13 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
-    <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />
-    <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\timing.cpp" />
-    <ClCompile Include="src\transform.cpp" />
     <ClCompile Include="src\util.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
@@ -116,34 +113,34 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\core.h" />
     <ClInclude Include="include\entity.h" />
-    <ClInclude Include="include\entitycomponent.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\input.h" />
+    <ClInclude Include="include\lighting.h" />
     <ClInclude Include="include\logfile.h" />
-    <ClInclude Include="include\mappedvalues.h" />
-    <ClInclude Include="include\material.h" />
     <ClInclude Include="include\mymath.h" />
     <ClInclude Include="include\referencecounter.h" />
-    <ClInclude Include="include\renderer.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\texture.h" />
     <ClInclude Include="include\timing.h" />
-    <ClInclude Include="include\transform.h" />
     <ClInclude Include="include\util.h" />
     <ClInclude Include="include\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\ambient_shader_fs.glsl" />
+    <None Include="res\shaders\ambient_shader_vs.glsl" />
     <None Include="res\shaders\basic_shader_fs.glsl" />
     <None Include="res\shaders\basic_shader_vs.glsl" />
+    <None Include="res\shaders\point_light_fs.glsl" />
+    <None Include="res\shaders\point_light_vs.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\black.png" />
+    <Image Include="res\textures\defaultTexture.png" />
     <Image Include="res\textures\default_normal.jpg" />
+    <Image Include="res\textures\rock.png" />
+    <Image Include="res\textures\rock_n.png" />
     <Image Include="res\textures\white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="res\temp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

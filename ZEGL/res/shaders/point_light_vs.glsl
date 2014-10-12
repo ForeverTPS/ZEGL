@@ -18,20 +18,20 @@
  * limitations under the License.
  */
 
-#include "core.h"
-#include "game.h"
-#include "window.h"
+#version 150
 
-#include "vld.h"
+#define attribute in
 
-int main(int argc, char *argv[])
-{
-	Game game;
-	Window window(800, 600, "ZEGL");
+attribute vec2 pos;
+attribute vec2 texCoord;
 
-	Core engine(60, &window, &game);
-	engine.Start();
+out vec4 vCol;
+out vec2 vTexCoord;
 
-	return 0;
+uniform mat4 MVP;
+
+void main() 
+{ 
+	vTexCoord = texCoord;  
+	gl_Position = MVP * vec4(pos.x, pos.y, 0, 1);
 }
-

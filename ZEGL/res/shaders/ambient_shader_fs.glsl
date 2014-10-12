@@ -18,20 +18,17 @@
  * limitations under the License.
  */
 
-#include "core.h"
-#include "game.h"
-#include "window.h"
+#version 150
 
-#include "vld.h"
+in vec2 vTexCoord;
 
-int main(int argc, char *argv[])
+out vec4 fragColor;
+
+uniform sampler2D u_diffuse;
+
+uniform vec3 AmbientColor;
+
+void main() 
 {
-	Game game;
-	Window window(800, 600, "ZEGL");
-
-	Core engine(60, &window, &game);
-	engine.Start();
-
-	return 0;
+	fragColor = texture2D(u_diffuse, vTexCoord) * vec4(AmbientColor, 1);
 }
-

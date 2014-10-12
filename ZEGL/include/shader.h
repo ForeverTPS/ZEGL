@@ -31,7 +31,7 @@ class Camera;
 class Shader
 {
 public:
-	Shader(const std::string& fileName = "basic_shader");
+	Shader(const std::string& fileName = "");
 	virtual ~Shader();
 
 	void Load(const std::string& fileName);
