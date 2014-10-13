@@ -25,41 +25,58 @@
 
 class Camera;
 class Core;
-class EntityComponent;
 class Input;
-class Renderer;
 class Shader;
+class Texture;
 
 class Entity
 {
 public:
 	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_pos(pos),
-		m_rot(rot),
-		m_scale(scale) {}
+		m_texture(nullptr),
+		m_normalMap(nullptr)
+	{
+		data.m_pos = pos;
+		data.m_rot = rot;
+		data.m_scale = scale;
+	}
+		
 	virtual ~Entity() {}
 
 	void ProcessInput(const Input& input, float delta) {}
 	void Update(float delta) {}
-	void Render(const Shader& shader, const Renderer& renderer, const Camera& camera) const {}
+	void Render(const Shader& shader, const Camera& camera) const {}
 
-	inline Vector3f	GetPos()	const { return m_pos; }
-	inline float	GetRot()	const { return m_rot; }
-	inline float	GetScale()	const { return m_scale; }
+	inline Vector3f	GetPos()	const { return data.m_pos; }
+	inline float	GetRot()	const { return data.m_rot; }
+	inline float	GetScale()	const { return data.m_scale; }
 
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.SetX(x); m_pos.SetY(y); }
-	inline void	SetPos(Vector3f& pos)						{ m_pos = pos; }
-	inline void	SetRot(float rot)							{ m_rot = rot; }
-	inline void	SetScale(float scale)						{ m_scale = scale; }
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ data.m_pos.SetX(x); data.m_pos.SetY(y); }
+	inline void	SetPos(Vector3f& pos)						{ data.m_pos = pos; }
+	inline void	SetRot(float rot)							{ data.m_rot = rot; }
+	inline void	SetScale(float scale)						{ data.m_scale = scale; }
+
+	inline void	SetTextureRow(int row)						{ data.m_texRow = row; }
+	inline void	SetTextureCol(int col)						{ data.m_texCol = col; }
 
 protected:
+	struct EntityData
+	{
+		Vector3f	m_pos;			// 12 bytes
+		float		m_rot;			// 4 bytes	- offset 12
+		float		m_scale;		// 4 bytes	- offset 16
+		int			m_texRow;		// 4 bytes	- offset 20
+		int			m_texCol;		// 4 bytes	- offset 24
+	};
+
+	EntityData	data;
+
+	Texture*	m_texture;
+	Texture*	m_normalMap;
+
 private:
 	Entity(Entity const&) = delete;
 	Entity& operator=(Entity const&) = delete;
-
-	Vector3f	m_pos;
-	float		m_rot;
-	float		m_scale;
 };
 
 #endif

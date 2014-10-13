@@ -45,7 +45,8 @@ public:
 
 protected:
 private:
-	void RecreateTransform();
+	Camera(Camera const&) = delete;
+	Camera& operator=(Camera const&) = delete;
 
 	struct Transformation
 	{
@@ -60,6 +61,8 @@ private:
 			m_lastPos = p; m_lastOrigin = origin; m_lastZoom = zoom; m_lastRot = rotation;
 		}
 	};
+
+	void RecreateTransform();
 
 	Vector2f		m_pos;
 	float			m_rot;
