@@ -28,5 +28,5 @@ uniform sampler2D u_diffuse;
 
 void main() 
 {
-	fragColor = texture2D(u_diffuse, vTexCoord);
+	fragColor = texture(u_diffuse, vTexCoord);
 }

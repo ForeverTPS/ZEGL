@@ -19,6 +19,7 @@
  */
 
 #include "util.h"
+#include <string>
 #include <SDL2/SDL.h>
 
 void Util::Sleep(int milliseconds)

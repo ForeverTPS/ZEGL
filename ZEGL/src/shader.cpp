@@ -143,7 +143,7 @@ void Shader::AddProgram(const std::string& text, int type)
 	const GLchar* p[1];
 	p[0] = text.c_str();
 	GLint lengths[1];
-	lengths[0] = text.length();
+	lengths[0] = (int)text.length();
 
 	glShaderSource(shader, 1, p, lengths);
 	glCompileShader(shader);
@@ -239,7 +239,7 @@ void Shader::AddUniform(const std::string& uniformName, const std::string& unifo
 
 	if (location == 0xFFFFFFFF)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Invalid uniform location -  %s", uniformName);
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Invalid uniform location -  %s", uniformName.c_str());
 		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
 		ASSERT(0 != 0, LogFile::s_errorMsg);
 	}

@@ -21,6 +21,8 @@
 #include "logfile.h"
 #include <fstream>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 unsigned int    LogFile::m_numWarnings = 0u;
 unsigned int    LogFile::m_numErrors = 0u;
@@ -38,8 +40,24 @@ char LogFile::s_errorMsg[LogFile::MAX_ERROR_LEN];
 bool LogFile::Init(const std::string& fname) 
 {
 	bool success = true;
+    char path[MAX_ERROR_LEN];
+    char filepath[MAX_ERROR_LEN];
+    
+#ifdef WIN32
+    char* home = getenv("HOMEPATH");
+#else
+    char* home = getenv("HOME");
+#endif
+    
+    if (home != nullptr)
+    {
+        snprintf(path, sizeof(path), "%s/Library/Application Support/ZEGL", home);
+        snprintf(filepath, sizeof(filepath), "%s/Library/Application Support/ZEGL/%s", home, (fname + ".html").c_str());
+        
+        mkdir(path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    }
 
-	m_fileName = fname + ".html";
+	m_fileName = filepath;
 
 	std::ofstream logfile(m_fileName, std::ios_base::out);
 
@@ -130,9 +148,9 @@ const std::string LogFile::CurrentDateTime()
 	time_t now = time(0);
 	struct tm tstruct;
 	char buf[80];
-
-	localtime_s(&tstruct, &now);
-	strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
 
 	return buf;
 }

@@ -36,10 +36,10 @@ uniform vec3 Falloff;
 void main() 
 {
 	//RGBA of our diffuse color
-	vec4 DiffuseColor = texture2D(u_diffuse, vTexCoord);
+	vec4 DiffuseColor = texture(u_diffuse, vTexCoord);
 
 	//RGB of our normal map
-	vec3 NormalMap = texture2D(u_normals, vTexCoord).rgb;
+	vec3 NormalMap = texture(u_normals, vTexCoord).rgb;
 	
 	//The delta position of light
 	vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);

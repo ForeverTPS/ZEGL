@@ -30,5 +30,5 @@ uniform vec3 AmbientColor;
 
 void main() 
 {
-	fragColor = texture2D(u_diffuse, vTexCoord) * vec4(AmbientColor, 1);
+	fragColor = texture(u_diffuse, vTexCoord) * vec4(AmbientColor, 1);
 }

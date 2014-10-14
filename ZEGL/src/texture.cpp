@@ -192,7 +192,7 @@ Texture::Texture(const std::string& fileName, GLenum textureTarget, GLfloat filt
 
 		if (data == nullptr)
 		{
-			snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Unable to load texture - %s", fileName);
+			snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Unable to load texture - %s", fileName.c_str());
 			LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
 			ASSERT(0 != 0, LogFile::s_errorMsg);
 		}
@@ -243,7 +243,7 @@ Texture::~Texture()
 
 void Texture::Bind(unsigned int unit) const
 {
-	if (unit < 0 || unit > 31)
+	if (unit > 31)
 	{
 		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Attempting to bind to invalid texture index (Should be 0 - 32) - %d", unit);
 		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
