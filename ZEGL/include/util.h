@@ -32,6 +32,7 @@
 	#define snprintf	_snprintf_s
 	#define vsprintf	vsprintf_s
 	#define vsnprintf	vsnprintf_s
+	#define	getenv		_dupenv_s
 #endif
 
 #define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))

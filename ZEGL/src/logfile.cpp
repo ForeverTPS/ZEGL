@@ -19,10 +19,20 @@
  */
 
 #include "logfile.h"
+#include "util.h"
 #include <fstream>
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#ifdef WIN32
+#include <direct.h>
+#include <iostream>
+#include <shlobj.h>
+#include <stdlib.h>
+
+#pragma comment(lib, "shell32.lib")
+#endif
 
 unsigned int    LogFile::m_numWarnings = 0u;
 unsigned int    LogFile::m_numErrors = 0u;
@@ -44,18 +54,28 @@ bool LogFile::Init(const std::string& fname)
     char filepath[MAX_ERROR_LEN];
     
 #ifdef WIN32
-    char* home = getenv("HOMEPATH");
+	TCHAR myDocuments[MAX_ERROR_LEN];
+	HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, myDocuments);
+
+	if (result == S_OK)
+	{
+		size_t i;
+		wcstombs_s(&i, path, (size_t)MAX_ERROR_LEN,	myDocuments, (size_t)MAX_ERROR_LEN);
+		snprintf(path, sizeof(path), "%s/%s", path, "ZEGL");
+		snprintf(filepath, sizeof(filepath), "%s/%s", path, (fname + ".html").c_str());
+
+		_mkdir(path);
+	}
 #else
     char* home = getenv("HOME");
-#endif
-    
-    if (home != nullptr)
-    {
-        snprintf(path, sizeof(path), "%s/Library/Application Support/ZEGL", home);
-        snprintf(filepath, sizeof(filepath), "%s/Library/Application Support/ZEGL/%s", home, (fname + ".html").c_str());
-        
+	if (home != nullptr)
+	{
+		snprintf(path, sizeof(path), "%s/Library/Application Support/ZEGL", home);
+		snprintf(filepath, sizeof(filepath), "%s/Library/Application Support/ZEGL/%s", home, (fname + ".html").c_str());
+
         mkdir(path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     }
+#endif
 
 	m_fileName = filepath;
 
@@ -149,7 +169,11 @@ const std::string LogFile::CurrentDateTime()
 	struct tm tstruct;
 	char buf[80];
     
+#ifdef WIN32
+	localtime_s(&tstruct, &now);
+#else
     tstruct = *localtime(&now);
+#endif
     strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
 
 	return buf;

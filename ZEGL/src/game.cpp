@@ -57,6 +57,9 @@ Game::~Game()
 	{
 		Util::SafeDelete(m_lights[i]);
 	}
+
+	Util::SafeDelete(rock);
+	Util::SafeDelete(rock_n);
 	
 	LOG_CLEANUP();
 }
