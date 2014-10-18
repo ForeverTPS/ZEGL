@@ -23,13 +23,15 @@
 
 #include "mymath.h"
 
+class Window;
+
 class Camera
 {
 public:
-	Camera();
+	Camera(const Window* window = nullptr);
 	virtual ~Camera() {};
 
-	Matrix4f		GetTransform();
+	Matrix4f		GetTransform(const Window* window);
 
 	inline Vector2f	GetOrigin() const { return m_origin; }
 	inline Vector2f	GetPos()	const { return m_pos; }
@@ -62,7 +64,7 @@ private:
 		}
 	};
 
-	void RecreateTransform();
+	void RecreateTransform(const Window* window);
 
 	Vector2f		m_pos;
 	float			m_rot;

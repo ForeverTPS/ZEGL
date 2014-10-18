@@ -19,8 +19,10 @@
  */
 
 #include "camera.h"
+#include "window.h"
+#include <GL/glew.h>
 
-Camera::Camera() : 
+Camera::Camera(const Window* window) :
 	m_zoom(1.0f),
 	m_pos(Vector2f(0.0f, 0.0f)),
 	m_rot(0.0f),
@@ -28,23 +30,23 @@ Camera::Camera() :
 {
 	m_transform.Update(m_pos, m_origin, m_zoom, m_rot);
 
-	RecreateTransform();
+	RecreateTransform(window);
 }
 
-Matrix4f Camera::GetTransform()
+Matrix4f Camera::GetTransform(const Window* window)
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||
 		m_transform.m_lastOrigin != m_origin ||
 		m_transform.m_lastZoom != m_zoom)
 	{
-		RecreateTransform();
+		RecreateTransform(window);
 	}
 
 	return m_transform.m_matrix;
 }
 
-void Camera::RecreateTransform()
+void Camera::RecreateTransform(const Window* window)
 {
 	m_transform.Update(m_pos, m_origin, m_zoom, m_rot);
 
@@ -54,5 +56,15 @@ void Camera::RecreateTransform()
 	rotMat.InitRotationEuler(0.0f, 0.0f, m_rot);
 	transMat.InitTranslation(Vector3f(m_origin.GetX(), m_origin.GetY(), 0.0f));
 
-	m_transform.m_matrix = reverseTransMat * rotMat * scaleMat * transMat;
+	Matrix4f ortho;
+	if (window)
+	{
+		ortho.InitOrthographic(0.0f, (float)window->GetWidth(), 0.0f, (float)window->GetHeight(), -1.0f, 1.0f);
+	}
+	else
+	{
+		ortho.InitIdentity();
+	}
+
+	m_transform.m_matrix = ortho * reverseTransMat * rotMat * scaleMat * transMat;
 }

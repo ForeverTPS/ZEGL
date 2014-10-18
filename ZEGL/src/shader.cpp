@@ -266,7 +266,7 @@ void Shader::UnBind() const
 	glUseProgram(0);
 }
 
-void Shader::UpdateUniforms(Camera& camera) const
+void Shader::UpdateUniforms(Camera& camera, const Window* window) const
 {
 	for (unsigned int i = 0; i < m_uniformNames.size(); i++)
 	{
@@ -275,7 +275,7 @@ void Shader::UpdateUniforms(Camera& camera) const
 
 		if (uniformName == "MVP")
 		{
-			SetUniformMatrix4f(uniformName, camera.GetTransform());
+			SetUniformMatrix4f(uniformName, camera.GetTransform(window));
 		}	
 		else
 		{

@@ -42,7 +42,7 @@ Vector2f mouse_x;
 float mouse_y;
 
 Game::Game() :
-	m_camera(new Camera()),
+	m_camera(nullptr),
 	m_defaultShader(nullptr)
 {
 	LOG_INIT("ZEGL");
@@ -67,6 +67,7 @@ Game::~Game()
 void Game::Init(const Window& window)
 {
 	m_window = &window;
+	m_camera = new Camera(m_window);
     
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
@@ -114,10 +115,10 @@ void Game::Init(const Window& window)
     
     GLfloat vertexData[] =
     {
-        -0.5f, -0.5f,	// bottom left
-        0.5f, -0.5f,	// bottom right
-        0.5f, 0.5f,		// top right
-        -0.5f, 0.5f		// top left
+        0.0f, 0.0f,		// bottom left
+        100.0f, 0.0f,	// bottom right
+        100.0f, 100.0f,	// top right
+        0.0f, 100.0f	// top left
     };
     
     GLfloat texData[] =
@@ -161,15 +162,15 @@ void Game::ProcessInput(const Input& input, float delta)
 void Game::Update(float delta)
 {
 	m_defaultShader->Bind();
-	m_defaultShader->UpdateUniforms(*m_camera);
+	m_defaultShader->UpdateUniforms(*m_camera, m_window);
 	m_defaultShader->UnBind();
     
     shader.Bind();
-    shader.UpdateUniforms(*m_camera);
+    shader.UpdateUniforms(*m_camera, m_window);
     shader.SetUniformVector3f("LightPos", light->GetPos());
     shader.UnBind();
     shader2.Bind();
-    shader2.UpdateUniforms(*m_camera);
+    shader2.UpdateUniforms(*m_camera, m_window);
     shader2.UnBind();
 }
 
