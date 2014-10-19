@@ -92,7 +92,6 @@
 		74841B0F19ED46EF0096AF82 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity.h; path = include/entity.h; sourceTree = "<group>"; };
 		74841B1019ED46EF0096AF82 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = include/game.h; sourceTree = "<group>"; };
 		74841B1119ED46EF0096AF82 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = include/input.h; sourceTree = "<group>"; };
-		74841B1219ED46EF0096AF82 /* lighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lighting.h; path = include/lighting.h; sourceTree = "<group>"; };
 		74841B1319ED46EF0096AF82 /* logfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = logfile.h; path = include/logfile.h; sourceTree = "<group>"; };
 		74841B1419ED46EF0096AF82 /* mymath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mymath.h; path = include/mymath.h; sourceTree = "<group>"; };
 		74841B1519ED46EF0096AF82 /* referencecounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = referencecounter.h; path = include/referencecounter.h; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 		74841B4019ED48E40096AF82 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		74841B4D19ED5B870096AF82 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		74841B4F19ED662E0096AF82 /* libGLEW.1.11.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.11.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.11.0/lib/libGLEW.1.11.0.dylib; sourceTree = "<group>"; };
+		7491858119F4500F00DDB9EC /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = light.h; path = include/light.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,12 +186,12 @@
 		74841B0319ED460F0096AF82 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				7491858119F4500F00DDB9EC /* light.h */,
 				74841B0D19ED46EF0096AF82 /* camera.h */,
 				74841B0E19ED46EF0096AF82 /* core.h */,
 				74841B0F19ED46EF0096AF82 /* entity.h */,
 				74841B1019ED46EF0096AF82 /* game.h */,
 				74841B1119ED46EF0096AF82 /* input.h */,
-				74841B1219ED46EF0096AF82 /* lighting.h */,
 				74841B1319ED46EF0096AF82 /* logfile.h */,
 				74841B1419ED46EF0096AF82 /* mymath.h */,
 				74841B1519ED46EF0096AF82 /* referencecounter.h */,
@@ -488,6 +488,7 @@
 				74841B0C19ED460F0096AF82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

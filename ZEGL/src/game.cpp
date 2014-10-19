@@ -38,9 +38,11 @@ float mouse_y;
 
 Game::Game() :
 	m_camera(nullptr),
+    m_window(nullptr),
 	m_defaultShader(Shader("ambient_shader")),
 	m_ambientColor(Vector3f(0.2f, 0.2f, 0.2f)),
-	m_ambientIntensity(1.0f) {}
+	m_ambientIntensity(1.0f),
+    m_activeLight(nullptr) {}
 
 Game::~Game()
 {
@@ -163,4 +165,6 @@ void Game::Render()
 		glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
 	}
+    
+    m_activeLight = nullptr;
 }

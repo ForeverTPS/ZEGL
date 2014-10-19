@@ -100,7 +100,7 @@ ShaderData::ShaderData(const std::string& fileName)
 
 	if (m_program == 0)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader program - %s", fileName);
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader program - %s", fileName.c_str());
 		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
 		LOG_CLEANUP();
 		exit(1);
