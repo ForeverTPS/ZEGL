@@ -220,9 +220,9 @@ Texture::Texture(const Texture& texture) :
 void Texture::operator=(Texture texture)
 {
 	char* temp[sizeof(Texture) / sizeof(char)];
-	memcpy(temp, this, sizeof(Texture));
-	memcpy(this, &texture, sizeof(Texture));
-	memcpy(&texture, temp, sizeof(Texture));
+	memcpy(temp, (void*)this, sizeof(Texture));
+	memcpy((void*)this, (void*)&texture, sizeof(Texture));
+	memcpy((void*)&texture, temp, sizeof(Texture));
 }
 
 Texture::~Texture()
