@@ -20,8 +20,11 @@
 
 #include "shader.h"
 #include "camera.h"
+#include "game.h"
+#include "lighting.h"
 #include "logfile.h"
 #include "util.h"
+#include "window.h"
 #include <GL/glew.h>
 #include <cassert>
 #include <fstream>
@@ -266,20 +269,103 @@ void Shader::UnBind() const
 	glUseProgram(0);
 }
 
-void Shader::UpdateUniforms(Camera& camera, const Window* window) const
+void Shader::UpdateUniforms(Camera& camera, Game* game) const
 {
 	for (unsigned int i = 0; i < m_uniformNames.size(); i++)
 	{
 		std::string uniformName = m_uniformNames[i];
 		std::string uniformType = m_uniformTypes[i];
 
-		if (uniformName == "MVP")
+		if (uniformType == "sampler2D")
 		{
-			SetUniformMatrix4f(uniformName, camera.GetTransform(window));
-		}	
+			continue;
+		}
+		else if (uniformName.substr(0, 2) == "L_")
+		{
+			std::string unprefixedName = uniformName.substr(2, uniformName.length());
+			Light* light = game->GetActiveLight();
+
+			if (unprefixedName == "AmbientColor")
+			{
+				Vector3f color;
+				float intensity;
+				if (light)
+				{
+					color = light->GetAmbientColor();
+					intensity = light->GetAmbientIntensity();
+				}
+				else
+				{
+					color = game->GetAmbientColor();
+					intensity = game->GetAmbientIntensity();
+				}
+				
+				SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
+			}
+			else if (unprefixedName == "Resolution")
+			{
+				SetUniformVector2f(uniformName, Vector2f((float)game->GetWindow()->GetWidth(), (float)game->GetWindow()->GetHeight()));
+			}
+			else if (unprefixedName == "LightPos")
+			{
+				if (light)
+				{
+					SetUniformVector3f(uniformName, light->GetPos());
+				}
+				else
+				{
+					throw "No active light";
+				}
+			}
+			else if (unprefixedName == "LightColor")
+			{
+				if (light)
+				{
+					Vector3f color = light->GetLightColor();
+					float intensity = light->GetLightIntensity();
+					SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
+				}
+				else
+				{
+					throw "No active light";
+				}
+			}
+			else if (unprefixedName == "LightColor")
+			{
+				if (light)
+				{
+					Vector3f color = light->GetLightColor();
+					float intensity = light->GetLightIntensity();
+					SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
+				}
+				else
+				{
+					throw "No active light";
+				}
+			}
+			else if (unprefixedName == "Falloff")
+			{
+				if (light)
+				{
+					SetUniformVector3f(uniformName, light->GetFalloff());
+				}
+				else
+				{
+					throw "No active light";
+				}
+			}
+			else
+			{
+				throw "Invalid Uniform: " + uniformName;
+			}
+		}
+		else if (uniformName == "MVP")
+		{
+			SetUniformMatrix4f(uniformName, camera.GetTransform(game->GetWindow()));
+		}
 		else
 		{
-			//throw "Invalid Uniform: " + uniformName;
+			throw "Invalid Uniform: " + uniformName;
 		}
 	}
 }

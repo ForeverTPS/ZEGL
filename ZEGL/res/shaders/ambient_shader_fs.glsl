@@ -26,9 +26,9 @@ out vec4 fragColor;
 
 uniform sampler2D u_diffuse;
 
-uniform vec3 AmbientColor;
+uniform vec3 L_AmbientColor;
 
 void main() 
 {
-	fragColor = texture(u_diffuse, vTexCoord) * vec4(AmbientColor, 1);
+	fragColor = texture(u_diffuse, vTexCoord) * vec4(L_AmbientColor, 1);
 }

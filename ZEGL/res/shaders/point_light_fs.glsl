@@ -27,11 +27,11 @@ out vec4 fragColor;
 uniform sampler2D u_diffuse;
 uniform sampler2D u_normals;
 
-uniform vec2 Resolution;
-uniform vec3 LightPos;
-uniform vec4 LightColor;
-uniform vec4 AmbientColor;
-uniform vec3 Falloff;
+uniform vec2 L_Resolution;
+uniform vec3 L_LightPos;
+uniform vec4 L_LightColor;
+uniform vec4 L_AmbientColor;
+uniform vec3 L_Falloff;
 
 void main() 
 {
@@ -42,10 +42,10 @@ void main()
 	vec3 NormalMap = texture(u_normals, vTexCoord).rgb;
 	
 	//The delta position of light
-	vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
+	vec3 LightDir = vec3(L_LightPos.xy - (gl_FragCoord.xy / L_Resolution.xy), L_LightPos.z);
 	
 	//Correct for aspect ratio
-	LightDir.x *= Resolution.x / Resolution.y;
+	LightDir.x *= L_Resolution.x / L_Resolution.y;
 	
 	//Determine distance (used for attenuation) BEFORE we normalize our LightDir
 	float D = length(LightDir);
@@ -56,13 +56,13 @@ void main()
 	
 	//Pre-multiply light color with intensity
 	//Then perform N dot L to determine diffuse term
-	vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
+	vec3 Diffuse = (L_LightColor.rgb * L_LightColor.a) * max(dot(N, L), 0.0);
 	
 	//Pre-multiply ambient color with intensity
-	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
+	vec3 Ambient = L_AmbientColor.rgb * L_AmbientColor.a;
 	
 	//Calculate attenuation
-	float Attenuation = 1.0 / ( Falloff.x + (Falloff.y*D) + (Falloff.z*D*D) );
+	float Attenuation = 1.0 / ( L_Falloff.x + (L_Falloff.y*D) + (L_Falloff.z*D*D) );
 	
 	//The calculation which brings it all together
 	vec3 Intensity = Ambient + Diffuse * Attenuation;

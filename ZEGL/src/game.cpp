@@ -32,10 +32,7 @@
 enum { POSITION_VB, TEXCOORD_VB, INDEX_VB };
 GLuint gVAO;
 GLuint gVAB[3];
-Shader shader;
-Shader shader2;
 Light* light;
-Light* light2;
 Texture* rock;
 Texture* rock_n;
 Vector2f mouse_x;
@@ -43,7 +40,9 @@ float mouse_y;
 
 Game::Game() :
 	m_camera(nullptr),
-	m_defaultShader(nullptr)
+	m_defaultShader(nullptr),
+	m_ambientColor(Vector3f(0.2f, 0.2f, 0.2f)),
+	m_ambientIntensity(1.0f)
 {
 	LOG_INIT("ZEGL");
 }
@@ -79,39 +78,20 @@ void Game::Init(const Window& window)
 	m_defaultShader = new Shader("ambient_shader");
 
 	m_defaultShader->Bind();
-	m_defaultShader->SetUniformVector3f("AmbientColor", Vector3f(0.2f, 0.2f, 0.2f));
+	m_defaultShader->SetUniformVector3f("L_AmbientColor", Vector3f(0.2f, 0.2f, 0.2f));
 	m_defaultShader->UnBind();
     
     rock = new Texture("rock.png");
     rock_n = new Texture("rock_n.png");
     
-    light = new Light();
-    light2 = new Light();
-    m_lights.push_back(light);
-    m_lights.push_back(light2);
-    
-    shader.Load("point_light");
-    shader2.Load("point_light");
-    
-    shader.Bind();
-    shader.SetUniformi("u_diffuse", 0);
-    shader.SetUniformi("u_normals", 1);
-    shader.SetUniformVector2f("Resolution", Vector2f(800.0f, 600.0f));
-    shader.SetUniformVector3f("LightPos", light->GetPos());
-    shader.SetUniformVector4f("LightColor", Vector4f(light->GetLightColor().GetX(), light->GetLightColor().GetY(), light->GetLightColor().GetZ(), light->GetLightIntensity()));
-    shader.SetUniformVector4f("AmbientColor", Vector4f(light->GetAmbientColor().GetX(), light->GetAmbientColor().GetY(), light->GetAmbientColor().GetZ(), light->GetAmbientIntensity()));
-    shader.SetUniformVector3f("Falloff", light->GetFalloff());
-    shader.UnBind();
-    
-    shader2.Bind();
-    shader2.SetUniformi("u_diffuse", 0);
-    shader2.SetUniformi("u_normals", 1);
-    shader2.SetUniformVector2f("Resolution", Vector2f(800.0f, 600.0f));
-    shader2.SetUniformVector3f("LightPos", light->GetPos());
-    shader2.SetUniformVector4f("LightColor", Vector4f(1,0,0,1));
-    shader2.SetUniformVector4f("AmbientColor", Vector4f(light->GetAmbientColor().GetX(), light->GetAmbientColor().GetY(), light->GetAmbientColor().GetZ(), light->GetAmbientIntensity()));
-    shader2.SetUniformVector3f("Falloff", light->GetFalloff());
-    shader2.UnBind();
+	Shader* shader = new Shader("point_light");
+    shader->Bind();
+	shader->SetUniformi("u_diffuse", 0);
+	shader->SetUniformi("u_normals", 1);
+	shader->UnBind();
+
+	light = new Light(shader);
+	m_lights.push_back(light);
     
     GLfloat vertexData[] =
     {
@@ -156,22 +136,12 @@ void Game::Init(const Window& window)
 void Game::ProcessInput(const Input& input, float delta)
 {
     Vector2f mousePos = input.GetMousePosition();
-    light->SetPos((mousePos.GetX() / 800.0f), (1.0f - mousePos.GetY() / 600.0f));
+    light->SetPos((mousePos.GetX() / m_window->GetWidth()), (1.0f - mousePos.GetY() / m_window->GetHeight()));
 }
 
 void Game::Update(float delta)
 {
-	m_defaultShader->Bind();
-	m_defaultShader->UpdateUniforms(*m_camera, m_window);
-	m_defaultShader->UnBind();
-    
-    shader.Bind();
-    shader.UpdateUniforms(*m_camera, m_window);
-    shader.SetUniformVector3f("LightPos", light->GetPos());
-    shader.UnBind();
-    shader2.Bind();
-    shader2.UpdateUniforms(*m_camera, m_window);
-    shader2.UnBind();
+
 }
 
 void Game::Render()
@@ -181,6 +151,7 @@ void Game::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	m_defaultShader->Bind();
+	m_defaultShader->UpdateUniforms(*m_camera, this);
     rock->Bind(0);
     rock_n->Bind(1);
     glBindVertexArray(gVAO);
@@ -193,11 +164,13 @@ void Game::Render()
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDepthMask(GL_FALSE);
 		glDepthFunc(GL_EQUAL);
+
+		m_activeLight = m_lights[i];
+
+		Shader* shader = m_activeLight->GetShader();
         
-        if (i == 0)
-            shader.Bind();
-        else
-            shader2.Bind();
+		shader->Bind();
+		shader->UpdateUniforms(*m_camera, this);
         
         rock->Bind(0);
         rock_n->Bind(1);
@@ -205,10 +178,7 @@ void Game::Render()
         glBindVertexArray(gVAO);
         glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
         
-        if (i == 0)
-            shader.UnBind();
-        else
-            shader2.UnBind();
+		shader->UnBind();
 
 		glDepthMask(GL_TRUE);
 		glDepthFunc(GL_LESS);

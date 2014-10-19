@@ -19,39 +19,49 @@
  */
 
 #include "entity.h"
+#include "util.h"
 
 class Light : public Entity
 {
 public:
-	Light() :
+	Light(Shader* shader) :
 		m_lightColor(Vector3f(1.0f, 1.0f, 1.0f)),
 		m_lightIntensity(1.0f),
 		m_ambientColor(Vector3f(0.2f, 0.2f, 0.2f)),
 		m_ambientIntensity(0.2f),
 		m_falloff(Vector3f(0.4f, 3.0f, 20.0f)),
+		m_shader(shader),
 		Entity(Vector3f(0.5f, 0.5f, 0.075f)) {}
 
-	Light(const Vector3f& pos, const Vector3f& lightCol, float lightIntensity, const Vector3f& ambientCol, float ambientIntensity, const Vector3f& falloff) :
+	Light(Shader* shader, const Vector3f& pos, 
+		const Vector3f& lightCol, float lightIntensity, 
+		const Vector3f& ambientCol, float ambientIntensity, const Vector3f& falloff) :
 		m_lightColor(lightCol),
 		m_lightIntensity(lightIntensity),
 		m_ambientColor(ambientCol),
 		m_ambientIntensity(ambientIntensity),
 		m_falloff(falloff),
+		m_shader(shader),
 		Entity(pos) {}
 
-	virtual ~Light() {}
+	virtual ~Light() 
+	{ 
+		Util::SafeDelete(m_shader); 
+	}
 
 	inline const Vector3f& GetLightColor()		const { return m_lightColor; }
 	inline float GetLightIntensity()			const { return m_lightIntensity; }
 	inline const Vector3f& GetAmbientColor()	const { return m_ambientColor; }
 	inline float GetAmbientIntensity()			const { return m_ambientIntensity; }
 	inline const Vector3f& GetFalloff()			const { return m_falloff; }
+	inline Shader* GetShader()					const { return m_shader; }
 	
 	inline void SetLightColor(const Vector3f& lightCol)		{ m_lightColor = lightCol; }
 	inline void SetLightIntensity(float lightIntensity)		{ m_lightIntensity = lightIntensity; }
 	inline void SetAmbientColor(const Vector3f& ambientCol)	{ m_ambientColor = ambientCol; }
 	inline void SetAmbientIntensity(float ambientIntensity)	{ m_ambientIntensity = ambientIntensity; }
 	inline void SetFalloff(const Vector3f& falloff)			{ m_falloff = falloff; }
+	inline void SetShader(Shader* shader)					{ Util::SafeDelete(m_shader); m_shader = shader; }
 
 private:
 	Vector3f	m_lightColor;
@@ -59,4 +69,6 @@ private:
 	Vector3f	m_ambientColor;
 	float		m_ambientIntensity;
 	Vector3f	m_falloff;
+
+	Shader*		m_shader;
 };
