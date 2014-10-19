@@ -18,17 +18,38 @@
  * limitations under the License.
  */
 
-#version 150
+#include "entity.h"
 
-in vec2 vTexCoord;
+#define DEFAULT_TILE_SIZE 32
 
-out vec4 fragColor;
-
-uniform sampler2D u_diffuse;
-
-uniform vec4 L_AmbientColor;
-
-void main() 
+class Tile : public RenderEntity
 {
-	fragColor = texture(u_diffuse, vTexCoord) * L_AmbientColor;
-}
+public:
+	Tile(const Texture& texture, const Texture& normalMap, const Vector2f texCoords[4],
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
+		m_tileSize(DEFAULT_TILE_SIZE),
+		RenderEntity(texture, normalMap, texCoords, pos, rot, scale) {}
+
+	virtual ~Tile();
+
+protected:
+private:
+	Tile(Tile const&) = delete;
+	Tile& operator=(Tile const&) = delete;
+
+	int m_tileSize;
+};
+
+class TileMap
+{
+public:
+	TileMap();
+	virtual ~TileMap();
+
+	void Update(float delta);
+
+protected:
+private:
+	TileMap(TileMap const&) = delete;
+	TileMap& operator=(TileMap const&) = delete;
+};

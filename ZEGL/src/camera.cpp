@@ -33,7 +33,7 @@ Camera::Camera(const Window* window) :
 	RecreateTransform(window);
 }
 
-Matrix4f Camera::GetTransform(const Window* window)
+const Matrix4f& Camera::GetTransform(const Window* window)
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||

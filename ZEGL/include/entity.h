@@ -22,61 +22,88 @@
 #define ENTITY_H
 
 #include "mymath.h"
+#include "texture.h"
+#include "util.h"
 
 class Camera;
 class Core;
 class Input;
 class Shader;
-class Texture;
+
+struct EntityData
+{
+	Vector3f	m_pos;			// 12 bytes
+	float		m_rot;			// 4 bytes	- offset 12
+	float		m_scale;		// 4 bytes	- offset 16
+	Vector2f	m_texCoords[4];	// 32 bytes - offset 20|28|36|42
+};
 
 class Entity
 {
 public:
-	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_texture(nullptr),
-		m_normalMap(nullptr)
+	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f)
 	{
-		data.m_pos = pos;
-		data.m_rot = rot;
-		data.m_scale = scale;
+		m_data.m_pos		= pos;
+		m_data.m_rot		= rot;
+		m_data.m_scale		= scale;
+	}
+
+	Entity(const Vector2f texCoords[4], const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f)
+	{
+		m_data.m_pos = pos;
+		m_data.m_rot = rot;
+		m_data.m_scale = scale;for (unsigned int i = 0; i < 4; i++)
+		{
+			
+		m_data.m_texCoords[i] = texCoords[i];
+		}
 	}
 		
 	virtual ~Entity() {}
 
 	void ProcessInput(const Input& input, float delta) {}
 	void Update(float delta) {}
-	void Render(Shader* shader, Game* game) const {}
+	void Render() const {}
 
-	inline Vector3f	GetPos()	const { return data.m_pos; }
-	inline float	GetRot()	const { return data.m_rot; }
-	inline float	GetScale()	const { return data.m_scale; }
+	inline Vector3f*		GetPos()				{ return &m_data.m_pos; }
+	inline const Vector3f&	GetPos()		const	{ return m_data.m_pos; }
+	inline float			GetRot()		const	{ return m_data.m_rot; }
+	inline float			GetScale()		const	{ return m_data.m_scale; }
 
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ data.m_pos.SetX(x); data.m_pos.SetY(y); }
-	inline void	SetPos(Vector3f& pos)						{ data.m_pos = pos; }
-	inline void	SetRot(float rot)							{ data.m_rot = rot; }
-	inline void	SetScale(float scale)						{ data.m_scale = scale; }
-
-	inline void	SetTextureRow(int row)						{ data.m_texRow = row; }
-	inline void	SetTextureCol(int col)						{ data.m_texCol = col; }
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.SetX(x); m_data.m_pos.SetY(y); }
+	inline void	SetPos(Vector3f& pos)						{ m_data.m_pos = pos; }
+	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
+	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
 
 protected:
-	struct EntityData
-	{
-		Vector3f	m_pos;			// 12 bytes
-		float		m_rot;			// 4 bytes	- offset 12
-		float		m_scale;		// 4 bytes	- offset 16
-		int			m_texRow;		// 4 bytes	- offset 20
-		int			m_texCol;		// 4 bytes	- offset 24
-	};
-
-	EntityData	data;
-
-	Texture*	m_texture;
-	Texture*	m_normalMap;
+	EntityData	m_data;
 
 private:
 	Entity(Entity const&) = delete;
 	Entity& operator=(Entity const&) = delete;
+};
+
+class RenderEntity : public Entity
+{
+public:
+	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f texCoords[4],
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
+		m_texture(texture),
+		m_normalMap(normalMap),
+		Entity(texCoords, pos, rot, scale) {}
+
+	virtual ~RenderEntity() {}
+
+	inline const Texture&	GetTexture()	const	{ return m_texture; }
+	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
+	
+protected:
+	Texture	m_texture;
+	Texture	m_normalMap;
+
+private:
+	RenderEntity(RenderEntity const&) = delete;
+	RenderEntity& operator=(RenderEntity const&) = delete;
 };
 
 #endif

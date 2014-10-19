@@ -20,6 +20,7 @@
 
 #include "core.h"
 #include "game.h"
+#include "logfile.h"
 #include "window.h"
 
 #ifdef __APPLE__
@@ -48,11 +49,15 @@ int main(int argc, char *argv[])
 #endif
     // ----------------------------------------------------------------------------
     
-	Game game;
+	LOG_INIT("ZEGL");
+
 	Window window(800, 600, "ZEGL");
+	Game game;
 
 	Core engine(60, &window, &game);
 	engine.Start();
+
+	LOG_CLEANUP();
 
 	return 0;
 }

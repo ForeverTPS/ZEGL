@@ -115,7 +115,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\entity.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\input.h" />
-    <ClInclude Include="include\lighting.h" />
+    <ClInclude Include="include\light.h" />
     <ClInclude Include="include\logfile.h" />
     <ClInclude Include="include\mymath.h" />
     <ClInclude Include="include\referencecounter.h" />
@@ -125,6 +125,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\timing.h" />
     <ClInclude Include="include\util.h" />
     <ClInclude Include="include\window.h" />
+    <ClInclude Include="tilemap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\ambient_shader_fs.glsl" />

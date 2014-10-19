@@ -31,7 +31,7 @@ public:
 	Camera(const Window* window = nullptr);
 	virtual ~Camera() {};
 
-	Matrix4f		GetTransform(const Window* window);
+	const Matrix4f& GetTransform(const Window* window);
 
 	inline Vector2f*		GetOrigin()			{ return &m_origin; }
 	inline const Vector2f&	GetOrigin()	const	{ return m_origin; }
@@ -49,7 +49,7 @@ public:
 
 protected:
 private:
-	Camera(Camera const&) = delete;
+	//Camera(Camera const&) = delete;
 	Camera& operator=(Camera const&) = delete;
 
 	struct Transformation

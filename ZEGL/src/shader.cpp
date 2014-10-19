@@ -21,7 +21,7 @@
 #include "shader.h"
 #include "camera.h"
 #include "game.h"
-#include "lighting.h"
+#include "light.h"
 #include "logfile.h"
 #include "util.h"
 #include "window.h"
@@ -65,7 +65,8 @@ static void CheckShaderError(int shader, int flag, bool isProgram, const std::st
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 		}
 
-		fprintf(stderr, "%s: '%s'\n", errorMessage.c_str(), error);
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s: '%s'", errorMessage.c_str(), error);
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
 	}
 }
 
@@ -99,7 +100,9 @@ ShaderData::ShaderData(const std::string& fileName)
 
 	if (m_program == 0)
 	{
-		fprintf(stderr, "Error creating shader program\n");
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader program - %s", fileName);
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_CLEANUP();
 		exit(1);
 	}
 
@@ -142,7 +145,9 @@ ShaderData::ShaderData(const std::string& fileName)
 		}
 		else
 		{
-			fprintf(stderr, "Error: OpenGL Version %d.%d does not support shaders.\n", majorVersion, minorVersion);
+			snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error: OpenGL Version %d.%d does not support shaders.", majorVersion, minorVersion);
+			LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+			LOG_CLEANUP();
 			exit(1);
 		}
 	}
@@ -177,7 +182,9 @@ void ShaderData::AddProgram(const std::string& text, int type)
 
 	if (shader == 0)
 	{
-		fprintf(stderr, "Error creating shader type %d\n", type);
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader type %d", type);
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_CLEANUP();
 		exit(1);
 	}
 
@@ -196,8 +203,9 @@ void ShaderData::AddProgram(const std::string& text, int type)
 		GLchar InfoLog[1024];
 
 		glGetShaderInfoLog(shader, 1024, NULL, InfoLog);
-		fprintf(stderr, "Error compiling shader type %d: '%s'\n", shader, InfoLog);
-
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error compiling shader type %d: '%s'", shader, InfoLog);
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_CLEANUP();
 		exit(1);
 	}
 
@@ -231,6 +239,12 @@ void ShaderData::AddAllAttributes(const std::string& vertexShaderText)
 
 			begin = attributeLine.find(" ");
 			std::string attributeName = attributeLine.substr(begin + 1);
+
+			size_t arrayBrackets = attributeName.find("[");
+			if (arrayBrackets != std::string::npos)
+			{
+				attributeName = attributeName.substr(0, arrayBrackets);
+			}
 
 			glBindAttribLocation(m_program, currentAttribLocation, attributeName.c_str());
 			currentAttribLocation++;
@@ -344,21 +358,27 @@ void Shader::UnBind() const
 	glUseProgram(0);
 }
 
-void Shader::UpdateUniforms(Camera& camera, Game* game) const
+void Shader::UpdateUniforms(Game* game) const
 {
+	Camera camera = game->GetCamera();
+	const Light* light = game->GetActiveLight();
+
 	for (unsigned int i = 0; i < m_shaderData->GetUniformNames().size(); i++)
 	{
 		std::string uniformName = m_shaderData->GetUniformNames()[i];
 		std::string uniformType = m_shaderData->GetUniformTypes()[i];
 
-		if (uniformType == "sampler2D")
+		if (uniformName == "u_diffuse")
 		{
-			continue;
+			SetUniformi("u_diffuse", 0);
+		}
+		else if (uniformName == "u_normals")
+		{
+			SetUniformi("u_normals", 1);
 		}
 		else if (uniformName.substr(0, 2) == "L_")
 		{
-			std::string unprefixedName = uniformName.substr(2, uniformName.length());
-			Light* light = game->GetActiveLight();
+			std::string unprefixedName = uniformName.substr(2, uniformName.length());	
 
 			if (unprefixedName == "AmbientColor")
 			{

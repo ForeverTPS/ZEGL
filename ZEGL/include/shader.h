@@ -83,7 +83,7 @@ public:
 	void SetUniformVector4f(const std::string& uniformName, const Vector4f& value) const;
 	void SetUniformMatrix4f(const std::string& uniformName, const Matrix4f& value) const;
 
-	void UpdateUniforms(Camera& camera, Game* game) const;
+	void UpdateUniforms(Game* game) const;
 
 protected:
 private:
