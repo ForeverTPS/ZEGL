@@ -45,7 +45,7 @@ public:
 
 	void ProcessInput(const Input& input, float delta) {}
 	void Update(float delta) {}
-	void Render(const Shader& shader, const Camera& camera) const {}
+	void Render(Shader* shader, Game* game) const {}
 
 	inline Vector3f	GetPos()	const { return data.m_pos; }
 	inline float	GetRot()	const { return data.m_rot; }

@@ -22,6 +22,7 @@
 #define SHADER_H
 
 #include "mymath.h"
+#include "referencecounter.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -29,10 +30,45 @@
 class Camera;
 class Game;
 
+class ShaderData : public ReferenceCounter
+{
+public:
+	ShaderData(const std::string& fileName);
+	virtual ~ShaderData();
+
+	inline int GetProgram()                                           const { return m_program; }
+	inline const std::vector<int>& GetShaders()                       const { return m_shaders; }
+	inline const std::vector<std::string>& GetUniformNames()          const { return m_uniformNames; }
+	inline const std::vector<std::string>& GetUniformTypes()          const { return m_uniformTypes; }
+	inline const std::map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
+
+protected:
+private:
+	ShaderData(ShaderData const&) = delete;
+	ShaderData& operator=(ShaderData const&) = delete;
+
+	void AddProgram(const std::string& text, int type);
+
+	void AddAllAttributes(const std::string& vertexShaderText);
+	void AddAllUniforms(const std::string& shaderText);
+	void AddUniform(const std::string& uniformName, const std::string& uniformType);
+
+	void CompileShader() const;
+
+	static int							s_supportedOpenGLLevel;
+	static std::string					s_glslVersion;
+	int									m_program;
+	std::vector<int>                    m_shaders;
+	std::vector<std::string>            m_uniformNames;
+	std::vector<std::string>            m_uniformTypes;
+	std::map<std::string, unsigned int> m_uniformMap;
+};
+
 class Shader
 {
 public:
-	Shader(const std::string& fileName = "");
+	Shader(const std::string& fileName = "basic_shader");
+	Shader(const Shader& other);
 	virtual ~Shader();
 
 	void Load(const std::string& fileName);
@@ -51,23 +87,13 @@ public:
 
 protected:
 private:
-	Shader(const Shader& other) = delete;
+	//Shader(const Shader& other) = delete;
 	Shader& operator=(Shader const&) = delete;
 
-	void AddProgram(const std::string& text, int type);
+	static std::map<std::string, ShaderData*> s_resourceMap;
 
-	void AddAllAttributes(const std::string& vertexShaderText);
-	void AddAllUniforms(const std::string& shaderText);
-	void AddUniform(const std::string& uniformName, const std::string& uniformType);
-	
-	void CompileShader() const;
-
-	std::string							m_fileName;
-	int									m_program;
-	std::vector<int>					m_shaders;
-	std::vector<std::string>			m_uniformNames;
-	std::vector<std::string>            m_uniformTypes;
-	std::map<std::string, unsigned int> m_uniformMap;
+	ShaderData* m_shaderData;
+	std::string	m_fileName;
 };
 
 #endif

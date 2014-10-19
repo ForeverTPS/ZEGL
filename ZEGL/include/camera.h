@@ -33,17 +33,19 @@ public:
 
 	Matrix4f		GetTransform(const Window* window);
 
-	inline Vector2f	GetOrigin() const { return m_origin; }
-	inline Vector2f	GetPos()	const { return m_pos; }
-	inline float	GetRot()	const { return m_rot; }
-	inline float	GetZoom()	const { return m_zoom; }
+	inline Vector2f*		GetOrigin()			{ return &m_origin; }
+	inline const Vector2f&	GetOrigin()	const	{ return m_origin; }
+	inline Vector2f*		GetPos()			{ return &m_pos; }
+	inline const Vector2f&	GetPos()	const	{ return m_pos; }
+	inline float			GetRot()	const	{ return m_rot; }
+	inline float			GetZoom()	const	{ return m_zoom; }
 
-	inline void	SetOrigin(float x, float y) { m_origin.SetX(x); m_origin.SetY(y); }
-	inline void	SetOrigin(Vector2f& origin)	{ m_origin = origin; }
-	inline void	SetPos(float x, float y)	{ m_pos.SetX(x); m_pos.SetY(y); }
-	inline void	SetPos(Vector2f& pos)		{ m_pos = pos; }
-	inline void	SetRot(float rot)			{ m_rot = rot; }
-	inline void	SetZoom(float zoom)			{ m_zoom = zoom; }
+	inline void	SetOrigin(float x, float y)			{ m_origin.SetX(x); m_origin.SetY(y); }
+	inline void	SetOrigin(const Vector2f& origin)	{ m_origin = origin; }
+	inline void	SetPos(float x, float y)			{ m_pos.SetX(x); m_pos.SetY(y); }
+	inline void	SetPos(const Vector2f& pos)			{ m_pos = pos; }
+	inline void	SetRot(float rot)					{ m_rot = rot; }
+	inline void	SetZoom(float zoom)					{ m_zoom = zoom; }
 
 protected:
 private:
@@ -58,7 +60,7 @@ private:
 		float		m_lastZoom;
 		Vector2f	m_lastOrigin;
 
-		void Update(const Vector2f& p, const Vector2f& origin, const float zoom, const float rotation)
+		void Update(const Vector2f& p, const Vector2f& origin, float zoom, float rotation)
 		{ 
 			m_lastPos = p; m_lastOrigin = origin; m_lastZoom = zoom; m_lastRot = rotation;
 		}

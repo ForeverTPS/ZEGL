@@ -83,15 +83,15 @@ void Game::Init(const Window& window)
     
     rock = new Texture("rock.png");
     rock_n = new Texture("rock_n.png");
-    
-	Shader* shader = new Shader("point_light");
-    shader->Bind();
-	shader->SetUniformi("u_diffuse", 0);
-	shader->SetUniformi("u_normals", 1);
-	shader->UnBind();
 
-	light = new Light(shader);
+	light = new Light(Shader("point_light"));
 	m_lights.push_back(light);
+
+	Shader shader = light->GetShader();
+	shader.Bind();
+	shader.SetUniformi("u_diffuse", 0);
+	shader.SetUniformi("u_normals", 1);
+	shader.UnBind();
     
     GLfloat vertexData[] =
     {
@@ -167,10 +167,10 @@ void Game::Render()
 
 		m_activeLight = m_lights[i];
 
-		Shader* shader = m_activeLight->GetShader();
+		Shader shader = m_activeLight->GetShader();
         
-		shader->Bind();
-		shader->UpdateUniforms(*m_camera, this);
+		shader.Bind();
+		shader.UpdateUniforms(*m_camera, this);
         
         rock->Bind(0);
         rock_n->Bind(1);
@@ -178,7 +178,7 @@ void Game::Render()
         glBindVertexArray(gVAO);
         glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
         
-		shader->UnBind();
+		shader.UnBind();
 
 		glDepthMask(GL_TRUE);
 		glDepthFunc(GL_LESS);
