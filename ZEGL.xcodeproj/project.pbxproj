@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		744FDAC019F5455B00D40A41 /* libGLEW.1.11.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 744FDABF19F5455B00D40A41 /* libGLEW.1.11.0.dylib */; };
-		74841B0219ED460F0096AF82 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B0119ED460F0096AF82 /* main.cpp */; };
 		74841B2719ED47050096AF82 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 74841B1C19ED47050096AF82 /* stb_image.c */; };
 		74841B2819ED47050096AF82 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B1D19ED47050096AF82 /* camera.cpp */; };
 		74841B2919ED47050096AF82 /* core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B1E19ED47050096AF82 /* core.cpp */; };
@@ -35,6 +34,8 @@
 		74841B6119ED6A300096AF82 /* white.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74841B4019ED48E40096AF82 /* white.png */; };
 		74841B6219ED72F50096AF82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74841AFC19ED460F0096AF82 /* Cocoa.framework */; };
 		7491858319F46EF900DDB9EC /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7491858219F46EF900DDB9EC /* SDL2.framework */; };
+		74C98A1419F56B69006ED472 /* ZEGL-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74C98A1319F56B69006ED472 /* ZEGL-Info.plist */; };
+		74C98A1619F56D1E006ED472 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C98A1519F56D1E006ED472 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,7 +83,6 @@
 		744FDABF19F5455B00D40A41 /* libGLEW.1.11.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.11.0.dylib; path = ZEGL/lib/libGLEW.1.11.0.dylib; sourceTree = "<group>"; };
 		74841AF919ED460F0096AF82 /* ZEGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZEGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74841AFC19ED460F0096AF82 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		74841B0119ED460F0096AF82 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		74841B0D19ED46EF0096AF82 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = camera.h; path = include/camera.h; sourceTree = "<group>"; };
 		74841B0E19ED46EF0096AF82 /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = core.h; path = include/core.h; sourceTree = "<group>"; };
 		74841B0F19ED46EF0096AF82 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity.h; path = include/entity.h; sourceTree = "<group>"; };
@@ -123,6 +123,9 @@
 		74841B4D19ED5B870096AF82 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		7491858119F4500F00DDB9EC /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = light.h; path = include/light.h; sourceTree = "<group>"; };
 		7491858219F46EF900DDB9EC /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ZEGL/include/SDL2.framework; sourceTree = "<group>"; };
+		74C98A1319F56B69006ED472 /* ZEGL-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ZEGL-Info.plist"; sourceTree = "<group>"; };
+		74C98A1519F56D1E006ED472 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		74C98A1719F56D36006ED472 /* tilemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tilemap.h; path = include/tilemap.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,8 +174,8 @@
 		74841B0019ED460F0096AF82 /* ZEGL */ = {
 			isa = PBXGroup;
 			children = (
+				74C98A1219F56B4B006ED472 /* Supporting Files */,
 				74841B3219ED48E40096AF82 /* res */,
-				74841B0119ED460F0096AF82 /* main.cpp */,
 				74841B0319ED460F0096AF82 /* include */,
 				74841B0519ED460F0096AF82 /* src */,
 			);
@@ -182,6 +185,7 @@
 		74841B0319ED460F0096AF82 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				74C98A1719F56D36006ED472 /* tilemap.h */,
 				7491858119F4500F00DDB9EC /* light.h */,
 				74841B0D19ED46EF0096AF82 /* camera.h */,
 				74841B0E19ED46EF0096AF82 /* core.h */,
@@ -204,6 +208,7 @@
 		74841B0519ED460F0096AF82 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				74C98A1519F56D1E006ED472 /* main.cpp */,
 				74841B1C19ED47050096AF82 /* stb_image.c */,
 				74841B1D19ED47050096AF82 /* camera.cpp */,
 				74841B1E19ED47050096AF82 /* core.cpp */,
@@ -252,6 +257,14 @@
 				74841B4019ED48E40096AF82 /* white.png */,
 			);
 			path = textures;
+			sourceTree = "<group>";
+		};
+		74C98A1219F56B4B006ED472 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				74C98A1319F56B69006ED472 /* ZEGL-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74C98A1419F56B69006ED472 /* ZEGL-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,9 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74841B0219ED460F0096AF82 /* main.cpp in Sources */,
 				74841B2819ED47050096AF82 /* camera.cpp in Sources */,
 				74841B2D19ED47050096AF82 /* shader.cpp in Sources */,
+				74C98A1619F56D1E006ED472 /* main.cpp in Sources */,
 				74841B3119ED47050096AF82 /* window.cpp in Sources */,
 				74841B2F19ED47050096AF82 /* timing.cpp in Sources */,
 				74841B3019ED47050096AF82 /* util.cpp in Sources */,
@@ -431,6 +445,7 @@
 					/usr/include,
 					/usr/local/include,
 				);
+				INFOPLIST_FILE = "ZEGL/ZEGL-info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
@@ -456,6 +471,7 @@
 					/usr/include,
 					/usr/local/include,
 				);
+				INFOPLIST_FILE = "ZEGL/ZEGL-info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
