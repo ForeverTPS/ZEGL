@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		744FDAC019F5455B00D40A41 /* libGLEW.1.11.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 744FDABF19F5455B00D40A41 /* libGLEW.1.11.0.dylib */; };
 		74841B0219ED460F0096AF82 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B0119ED460F0096AF82 /* main.cpp */; };
 		74841B2719ED47050096AF82 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 74841B1C19ED47050096AF82 /* stb_image.c */; };
 		74841B2819ED47050096AF82 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B1D19ED47050096AF82 /* camera.cpp */; };
@@ -19,9 +20,7 @@
 		74841B2F19ED47050096AF82 /* timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B2419ED47050096AF82 /* timing.cpp */; };
 		74841B3019ED47050096AF82 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B2519ED47050096AF82 /* util.cpp */; };
 		74841B3119ED47050096AF82 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74841B2619ED47050096AF82 /* window.cpp */; };
-		74841B5019ED662E0096AF82 /* libGLEW.1.11.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 74841B4F19ED662E0096AF82 /* libGLEW.1.11.0.dylib */; };
 		74841B5119ED66470096AF82 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74841B4D19ED5B870096AF82 /* OpenGL.framework */; };
-		74841B5219ED69D80096AF82 /* libGLEW.1.11.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74841B4F19ED662E0096AF82 /* libGLEW.1.11.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		74841B5519ED6A150096AF82 /* ambient_shader_fs.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74841B3419ED48E40096AF82 /* ambient_shader_fs.glsl */; };
 		74841B5619ED6A150096AF82 /* ambient_shader_vs.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74841B3519ED48E40096AF82 /* ambient_shader_vs.glsl */; };
 		74841B5719ED6A150096AF82 /* basic_shader_fs.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74841B3619ED48E40096AF82 /* basic_shader_fs.glsl */; };
@@ -44,7 +43,6 @@
 			buildActionMask = 2147483647;
 			dstSubfolderSpec = 10;
 			files = (
-				74841B5219ED69D80096AF82 /* libGLEW.1.11.0.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -81,6 +79,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		744FDABF19F5455B00D40A41 /* libGLEW.1.11.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.11.0.dylib; path = ZEGL/lib/libGLEW.1.11.0.dylib; sourceTree = "<group>"; };
 		74841AF919ED460F0096AF82 /* ZEGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZEGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74841AFC19ED460F0096AF82 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		74841B0119ED460F0096AF82 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		74841B3F19ED48E40096AF82 /* rock_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock_n.png; sourceTree = "<group>"; };
 		74841B4019ED48E40096AF82 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		74841B4D19ED5B870096AF82 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		74841B4F19ED662E0096AF82 /* libGLEW.1.11.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.11.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.11.0/lib/libGLEW.1.11.0.dylib; sourceTree = "<group>"; };
 		7491858119F4500F00DDB9EC /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = light.h; path = include/light.h; sourceTree = "<group>"; };
 		7491858219F46EF900DDB9EC /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ZEGL/include/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,10 +130,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744FDAC019F5455B00D40A41 /* libGLEW.1.11.0.dylib in Frameworks */,
 				74841B6219ED72F50096AF82 /* Cocoa.framework in Frameworks */,
 				74841B5119ED66470096AF82 /* OpenGL.framework in Frameworks */,
 				7491858319F46EF900DDB9EC /* SDL2.framework in Frameworks */,
-				74841B5019ED662E0096AF82 /* libGLEW.1.11.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +160,8 @@
 		74841AFB19ED460F0096AF82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				744FDABF19F5455B00D40A41 /* libGLEW.1.11.0.dylib */,
 				7491858219F46EF900DDB9EC /* SDL2.framework */,
-				74841B4F19ED662E0096AF82 /* libGLEW.1.11.0.dylib */,
 				74841B4D19ED5B870096AF82 /* OpenGL.framework */,
 				74841AFC19ED460F0096AF82 /* Cocoa.framework */,
 			);
@@ -437,6 +435,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/Cellar/glew/1.11.0/lib,
+					"$(PROJECT_DIR)/ZEGL/lib",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -461,6 +460,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/Cellar/glew/1.11.0/lib,
+					"$(PROJECT_DIR)/ZEGL/lib",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
