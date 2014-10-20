@@ -292,8 +292,8 @@ local.properties
 
 # User-specific dirs
 ZEGL.html
-!lib/*
-!dll/*
+!ZEGL/lib/*
+!ZEGL/dll/*
 
 ### CMake ###
 CMakeCache.txt

@@ -44,6 +44,7 @@
 				if (! (condition)) { \
 					std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \
 					<< " line " << __LINE__ << ": " << message << std::endl; \
+					LOG_CLEANUP(); \
 					std::exit(EXIT_FAILURE); \
 				} \
 			} while (false)

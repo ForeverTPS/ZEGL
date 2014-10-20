@@ -19,6 +19,8 @@
  */
 
 #include "window.h"
+#include "logfile.h"
+#include "util.h"
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
@@ -52,7 +54,8 @@ Window::Window(int width, int height, const std::string& title) :
 	error = glewInit();
 	if (error != GLEW_OK)
 	{
-		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(error));
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error: '%s'", glewGetErrorString(error));
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
 	}
 
 	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
