@@ -23,6 +23,7 @@
 
 #include "mymath.h"
 #include "texture.h"
+#include "textureatlas.h"
 #include "util.h"
 
 class Camera;
@@ -93,6 +94,8 @@ public:
 		Entity(texCoords, pos, rot, scale) {}
 
 	virtual ~RenderEntity() {}
+
+	void GenerateTexCoords(const TextureRegion& textureRegion);
 
 	inline const Texture&	GetTexture()	const	{ return m_texture; }
 	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }

@@ -96,16 +96,17 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\timing.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp" />
     <ClCompile Include="src\util.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
@@ -122,10 +123,12 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\texture.h" />
+    <ClInclude Include="include\textureatlas.h" />
+    <ClInclude Include="include\tilemap.h" />
     <ClInclude Include="include\timing.h" />
+    <ClInclude Include="include\tinyxml2.h" />
     <ClInclude Include="include\util.h" />
     <ClInclude Include="include\window.h" />
-    <ClInclude Include="tilemap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\ambient_shader_fs.glsl" />
