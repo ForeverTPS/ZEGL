@@ -25,16 +25,37 @@ struct TextureRegion
 	float x, y, w, h;
 };
 
+class TextureAtlasData : public ReferenceCounter
+{
+public:
+	TextureAtlasData(const std::string& fileName);
+	virtual ~TextureAtlasData();
+
+protected:
+private:
+	TextureAtlasData(TextureAtlasData const&) = delete;
+	TextureAtlasData& operator=(TextureAtlasData const&) = delete;
+
+	std::map<std::string, TextureRegion> m_textureRegions;
+
+	Texture* m_texture;
+};
+
 class TextureAtlas
 {
 public:
 	TextureAtlas(const std::string& fileName);
-	virtual ~TextureAtlas() {}
+	virtual ~TextureAtlas();
+
+	const TextureRegion& GetRegion(const std::string& regionName) const;
 
 protected:
 private:
 	TextureAtlas(TextureAtlas const&) = delete;
 	TextureAtlas& operator=(TextureAtlas const&) = delete;
 
-	std::map<std::string, TextureRegion> m_textureRegions;
+	static std::map<std::string, TextureAtlasData*> s_resourceMap;
+
+	TextureAtlasData*	m_textureAtlasData;
+	std::string			m_fileName;
 };

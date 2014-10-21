@@ -234,10 +234,7 @@ Texture::~Texture()
 			s_resourceMap.erase(m_fileName);
 		}
 
-		if (m_textureData)
-		{
-			delete m_textureData;
-		}
+		Util::SafeDelete(m_textureData);
 	}
 }
 
