@@ -19,18 +19,65 @@
  */
 
 #include "textureatlas.h"
+#include "logfile.h"
+#include "tinyxml2.h"
 #include "util.h"
+
+using namespace tinyxml2;
 
 std::map<std::string, TextureAtlasData*> TextureAtlas::s_resourceMap;
 
 TextureAtlasData::TextureAtlasData(const std::string& fileName)
 {
-
+	ParseTextureAtlas(fileName);
 }
 
-TextureAtlasData::~TextureAtlasData()
+void TextureAtlasData::ParseTextureAtlas(const std::string& fileName)
 {
-	Util::SafeDelete(m_texture);
+	bool success = true;
+	std::string error;
+
+	XMLDocument doc;
+	if (doc.LoadFile(("./res/textures/" + fileName).c_str()) != XML_NO_ERROR)
+	{
+		success = false;
+		error = "Failed loading TextureAtlas: " + fileName;
+	}
+	else
+	{
+		XMLElement* region = doc.FirstChildElement("Region");
+		if (region == nullptr)
+		{
+			success = false;
+			error = "No REGION nodes defined.";
+		}
+		else
+		{
+			while (region != nullptr)
+			{
+				std::string regionName;
+				TextureRegion textureRegion;
+
+				regionName = region->Attribute("name");
+				region->QueryFloatAttribute("x", &textureRegion.x);
+				region->QueryFloatAttribute("y", &textureRegion.y);
+				region->QueryFloatAttribute("w", &textureRegion.w);
+				region->QueryFloatAttribute("h", &textureRegion.h);
+
+				m_textureRegions.insert(std::pair<std::string, TextureRegion>(regionName, textureRegion));
+
+				region = region->NextSiblingElement();
+			}
+		}
+	}
+
+	if (!success)
+	{
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s", error.c_str());
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_CLEANUP();
+		exit(1);
+	}
 }
 
 TextureAtlas::TextureAtlas(const std::string& fileName)
@@ -64,7 +111,18 @@ TextureAtlas::~TextureAtlas()
 	}
 }
 
-//const TextureRegion& TextureAtlas::GetRegion(const std::string& regionName) const
-//{
-//
-//}
+const TextureRegion& TextureAtlas::GetRegion(const std::string& regionName) const
+{
+	TextureRegion result = { 0.0f, 0.0f, 0.0f, 0.0f };
+	std::map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(m_fileName);
+	if (it != s_resourceMap.end())
+	{
+		std::map<std::string, TextureRegion>::const_iterator it2 = it->second->GetRegions().find(regionName);
+		if (it2 != it->second->GetRegions().end())
+		{
+			result = it2->second;
+		}
+	}
+
+	return result;
+}

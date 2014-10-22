@@ -144,9 +144,6 @@
     <Image Include="res\textures\black.png">
       <Filter>res\textures</Filter>
     </Image>
-    <Image Include="res\textures\default_normal.jpg">
-      <Filter>res\textures</Filter>
-    </Image>
     <Image Include="res\textures\white.png">
       <Filter>res\textures</Filter>
     </Image>
@@ -156,8 +153,16 @@
     <Image Include="res\textures\rock_n.png">
       <Filter>res\textures</Filter>
     </Image>
-    <Image Include="res\textures\defaultTexture.png">
+    <Image Include="res\textures\default.png">
       <Filter>res\textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\textures\test_atlas.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
+    <Xml Include="res\textures\default_atlas.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

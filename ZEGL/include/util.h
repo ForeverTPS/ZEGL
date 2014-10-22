@@ -21,6 +21,9 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <iostream>
+#include <string>
+#include <sstream>
 #include <vector>
 
 #ifndef WIN32
@@ -58,10 +61,18 @@ namespace Util
 
 	std::vector<std::string> Split(const std::string &s, char delim);
 
-	template<class T> void SafeDelete(T*& pVal)
+	template<class T>
+	void SafeDelete(T*& pVal)
 	{
 		delete pVal;
 		pVal = NULL;
+	}
+
+	template <class T>
+	bool StringToNumber(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
+	{
+		std::istringstream iss(s);
+		return !(iss >> f >> t).fail();
 	}
 };
 

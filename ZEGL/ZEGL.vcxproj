@@ -141,11 +141,16 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\black.png" />
-    <Image Include="res\textures\defaultTexture.png" />
-    <Image Include="res\textures\default_normal.jpg" />
+    <Image Include="res\textures\default.png" />
     <Image Include="res\textures\rock.png" />
     <Image Include="res\textures\rock_n.png" />
     <Image Include="res\textures\white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\textures\default_atlas.xml" />
+    <Xml Include="res\textures\test_atlas.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

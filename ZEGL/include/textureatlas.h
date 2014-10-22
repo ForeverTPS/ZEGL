@@ -18,7 +18,8 @@
  * limitations under the License.
  */
 
-#include "texture.h"
+#include "referencecounter.h"
+#include <map>
 
 struct TextureRegion
 {
@@ -29,29 +30,32 @@ class TextureAtlasData : public ReferenceCounter
 {
 public:
 	TextureAtlasData(const std::string& fileName);
-	virtual ~TextureAtlasData();
+	virtual ~TextureAtlasData() {}
+
+	inline const std::map<std::string, TextureRegion>& GetRegions() const { return m_textureRegions; }
 
 protected:
 private:
 	TextureAtlasData(TextureAtlasData const&) = delete;
 	TextureAtlasData& operator=(TextureAtlasData const&) = delete;
 
-	std::map<std::string, TextureRegion> m_textureRegions;
+	void ParseTextureAtlas(const std::string& fileName);
 
-	Texture* m_texture;
+	std::map<std::string, TextureRegion> m_textureRegions;
 };
 
 class TextureAtlas
 {
 public:
-	TextureAtlas(const std::string& fileName);
+	TextureAtlas(const std::string& fileName = "default_atlas.xml");
+	TextureAtlas(TextureAtlas const&);
 	virtual ~TextureAtlas();
 
 	const TextureRegion& GetRegion(const std::string& regionName) const;
 
 protected:
 private:
-	TextureAtlas(TextureAtlas const&) = delete;
+	//TextureAtlas(TextureAtlas const&) = delete;
 	TextureAtlas& operator=(TextureAtlas const&) = delete;
 
 	static std::map<std::string, TextureAtlasData*> s_resourceMap;

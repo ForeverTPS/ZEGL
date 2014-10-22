@@ -48,17 +48,6 @@ public:
 		m_data.m_rot		= rot;
 		m_data.m_scale		= scale;
 	}
-
-	Entity(const Vector2f texCoords[4], const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f)
-	{
-		m_data.m_pos = pos;
-		m_data.m_rot = rot;
-		m_data.m_scale = scale;for (unsigned int i = 0; i < 4; i++)
-		{
-			
-		m_data.m_texCoords[i] = texCoords[i];
-		}
-	}
 		
 	virtual ~Entity() {}
 
@@ -87,22 +76,40 @@ private:
 class RenderEntity : public Entity
 {
 public:
-	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f texCoords[4],
+	RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
+		m_textureAtlas(textureAtlas),
+		m_texture(texture),
+		m_normalMap(normalMap),
+		m_hasTextureAtlas(true),
+		Entity(pos, rot, scale) 
+	{
+	}
+
+	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
 		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
 		m_texture(texture),
 		m_normalMap(normalMap),
-		Entity(texCoords, pos, rot, scale) {}
+		m_hasTextureAtlas(false),
+		Entity(pos, rot, scale) 
+	{
+		for (unsigned int i = 0; i < 4; i++)
+		{
+			m_data.m_texCoords[i] = textureCoords[i];
+		}
+	}
 
 	virtual ~RenderEntity() {}
-
-	void GenerateTexCoords(const TextureRegion& textureRegion);
 
 	inline const Texture&	GetTexture()	const	{ return m_texture; }
 	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
 	
 protected:
-	Texture	m_texture;
-	Texture	m_normalMap;
+	TextureAtlas	m_textureAtlas;
+	Texture			m_texture;
+	Texture			m_normalMap;
+
+	bool			m_hasTextureAtlas;
 
 private:
 	RenderEntity(RenderEntity const&) = delete;
