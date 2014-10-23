@@ -67,20 +67,11 @@ void Game::Init(const Window& window)
     glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     
-	RenderEntity newEntity(Texture("rock.png"), Texture("rock_n.png"), TextureAtlas("test_atlas.xml"), Vector3f(100.0f, 100.0f, 0.0f), 0.0f, 100.0f);
-	entity = &newEntity;
+	entity = new RenderEntity(Texture("rock.png"), Texture("rock_n.png"), TextureAtlas("test_atlas.xml"), Vector3f(100.0f, 100.0f, 0.0f), 0.0f, 100.0f);
+	entity->CalcTextureCoords("rock");
 
 	light = new Light(Shader("point_light"));
 	m_lights.push_back(light);
-    
-	//EntityData entity;
-	//entity.m_pos = Vector3f(100.0f, 100.0f, 0.0f);
-	//entity.m_rot = 0.0f;
-	//entity.m_scale = 100.0f;
-	//entity.m_texCoords[0] = Vector2f(0.0f, 0.0f);
-	//entity.m_texCoords[1] = Vector2f(0.0f, 1.0f);
-	//entity.m_texCoords[2] = Vector2f(1.0f, 0.0f);
-	//entity.m_texCoords[3] = Vector2f(1.0f, 1.0f);
     
     glGenVertexArrays(1, &gVAO);
     glBindVertexArray(gVAO);

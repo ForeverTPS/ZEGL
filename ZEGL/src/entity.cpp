@@ -69,10 +69,10 @@ bool RenderEntity::CalcTextureCoords(const std::string regionName)
 	float w = region.w / textureWidth;
 	float h = region.h / textureHeight;
 
-	m_data.m_texCoords[0] = Vector2f(x, y);
-	m_data.m_texCoords[1] = Vector2f(x, y);
-	m_data.m_texCoords[2] = Vector2f(x, y);
-	m_data.m_texCoords[3] = Vector2f(x, y);
+	m_data.m_texCoords[0] = Vector2f(x,     y    );
+	m_data.m_texCoords[1] = Vector2f(x,     y + h);
+	m_data.m_texCoords[2] = Vector2f(x + w, y    );
+	m_data.m_texCoords[3] = Vector2f(x + w, y + h);
 
 	return true;
 }
