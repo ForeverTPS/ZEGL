@@ -27,6 +27,17 @@ Entity::Entity(const Vector3f& pos, float rot, float scale)
 	m_data.m_scale = scale;
 }
 
+Entity::Entity(const Entity& entity) :
+	m_data(entity.m_data) {}
+
+void Entity::operator=(Entity entity)
+{
+	char* temp[sizeof(Entity) / sizeof(char)];
+	memcpy(temp, (void*)this, sizeof(Entity));
+	memcpy((void*)this, (void*)&entity, sizeof(Entity));
+	memcpy((void*)&entity, temp, sizeof(Entity));
+}
+
 RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
 	const Vector3f& pos, float rot, float scale) :
 	m_textureAtlas(textureAtlas),
@@ -46,6 +57,21 @@ RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, con
 	{
 		m_data.m_texCoords[i] = textureCoords[i];
 	}
+}
+
+RenderEntity::RenderEntity(const RenderEntity& renderEntity) :
+	m_textureAtlas(renderEntity.m_textureAtlas),
+	m_texture(renderEntity.m_texture),
+	m_normalMap(renderEntity.m_normalMap),
+	m_hasTextureAtlas(renderEntity.m_hasTextureAtlas),
+	Entity(renderEntity) {}
+
+void RenderEntity::operator=(RenderEntity renderEntity)
+{
+	char* temp[sizeof(RenderEntity) / sizeof(char)];
+	memcpy(temp, (void*)this, sizeof(RenderEntity));
+	memcpy((void*)this, (void*)&renderEntity, sizeof(RenderEntity));
+	memcpy((void*)&renderEntity, temp, sizeof(RenderEntity));
 }
 
 bool RenderEntity::CalcTextureCoords(const std::string regionName)

@@ -107,6 +107,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\textureatlas.cpp" />
+    <ClCompile Include="src\tilemap.cpp" />
     <ClCompile Include="src\timing.cpp" />
     <ClCompile Include="src\tinyxml2.cpp" />
     <ClCompile Include="src\util.cpp" />

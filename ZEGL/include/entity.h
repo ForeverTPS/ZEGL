@@ -43,6 +43,8 @@ class Entity
 {
 public:
 	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
+	Entity(const Entity& entity);
+	void operator=(Entity entity);
 	virtual ~Entity() {}
 
 	void ProcessInput(const Input& input, float delta) {}
@@ -65,8 +67,8 @@ protected:
 	EntityData	m_data;
 
 private:
-	Entity(Entity const&) = delete;
-	Entity& operator=(Entity const&) = delete;
+	//Entity(Entity const&) = delete;
+	//Entity& operator=(Entity const&) = delete;
 };
 
 class RenderEntity : public Entity
@@ -77,6 +79,9 @@ public:
 
 	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
 		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
+
+	RenderEntity(const RenderEntity& renderEntity);
+	void operator=(RenderEntity renderEntity);
 
 	virtual ~RenderEntity() {}
 
@@ -93,8 +98,8 @@ protected:
 	bool			m_hasTextureAtlas;
 
 private:
-	RenderEntity(RenderEntity const&) = delete;
-	RenderEntity& operator=(RenderEntity const&) = delete;
+	//RenderEntity(RenderEntity const&) = delete;
+	//RenderEntity& operator=(RenderEntity const&) = delete;
 };
 
 #endif

@@ -55,6 +55,23 @@
 	#define ASSERT(condition, message) do { } while (false)
 #endif
 
+template<class T>
+class ZEGLSingleton
+{
+public:
+	static T* GetSingletonPtr()
+	{
+		static T s_instance;
+		return &s_instance;
+	}
+
+private:
+	ZEGLSingleton();
+	~ZEGLSingleton();
+	ZEGLSingleton(ZEGLSingleton const&);
+	ZEGLSingleton& operator=(ZEGLSingleton const&);
+};
+
 namespace Util
 {
 	void Sleep(int milliseconds);

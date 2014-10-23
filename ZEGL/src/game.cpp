@@ -23,6 +23,7 @@
 #include "light.h"
 #include "shader.h"
 #include "texture.h"
+#include "tilemap.h"
 #include "util.h"
 #include "window.h"
 #include <GL/glew.h>
@@ -33,7 +34,7 @@ GLuint gVAB;
 Light* light;
 Vector2f mouse_x;
 float mouse_y;
-RenderEntity *entity;
+TileMap* tileMap;
 
 Game::Game() :
 	m_camera(nullptr),
@@ -52,7 +53,7 @@ Game::~Game()
 		Util::SafeDelete(m_lights[i]);
 	}
 
-	Util::SafeDelete(entity);
+	Util::SafeDelete(tileMap);
 }
 
 void Game::Init(const Window& window)
@@ -67,8 +68,7 @@ void Game::Init(const Window& window)
     glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     
-	entity = new RenderEntity(Texture("rock.png"), Texture("rock_n.png"), TextureAtlas("test_atlas.xml"), Vector3f(100.0f, 100.0f, 0.0f), 0.0f, 100.0f);
-	entity->CalcTextureCoords("rock");
+	tileMap = new TileMap();
 
 	light = new Light(Shader("point_light"));
 	m_lights.push_back(light);
@@ -86,14 +86,14 @@ void Game::Init(const Window& window)
 	glEnableVertexAttribArray(4); // texCoords2
 	glEnableVertexAttribArray(5); // texCoords3
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(EntityData), &entity->GetData(), GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0], GL_STREAM_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)16);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)20);
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)28);
-	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)36);
-	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)42);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)28);
+	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)36);
+	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)42);
 
 	glVertexAttribDivisor(0, 1);
 	glVertexAttribDivisor(1, 1);
@@ -120,15 +120,15 @@ void Game::Render()
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	Texture texture = entity->GetTexture();
-	Texture normalMap = entity->GetNormalMap();
+	Texture texture = tileMap->GetActiveTiles()[0].GetTexture();
+	Texture normalMap = tileMap->GetActiveTiles()[0].GetNormalMap();
 
 	m_defaultShader.Bind();
 	m_defaultShader.UpdateUniforms(this);
 	texture.Bind(0);
 	normalMap.Bind(1);
     glBindVertexArray(gVAO);
-	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, 1);
+	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
 	m_defaultShader.UnBind();
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
@@ -149,7 +149,7 @@ void Game::Render()
 		normalMap.Bind(1);
         
         glBindVertexArray(gVAO);
-		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, 1);
+		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
         
 		shader.UnBind();
 

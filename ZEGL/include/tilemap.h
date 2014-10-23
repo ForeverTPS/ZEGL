@@ -19,37 +19,51 @@
  */
 
 #include "entity.h"
+#include <vector>
 
-#define DEFAULT_TILE_SIZE 32
+const float DEFAULT_TILE_SIZE = 32.0f;
 
 class Tile : public RenderEntity
 {
 public:
-	Tile(const Texture& texture, const Texture& normalMap, const Vector2f texCoords[4],
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_tileSize(DEFAULT_TILE_SIZE),
-		RenderEntity(texture, normalMap, texCoords, pos, rot, scale) {}
+	Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
 
-	virtual ~Tile();
+	Tile(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+
+	Tile(const Tile& tile);
+
+	virtual ~Tile() {}
 
 protected:
 private:
-	Tile(Tile const&) = delete;
+	//Tile(Tile const&) = delete;
 	Tile& operator=(Tile const&) = delete;
 
-	int m_tileSize;
+	float m_tileSize;
 };
 
 class TileMap
 {
 public:
-	TileMap();
-	virtual ~TileMap();
+	TileMap(const std::string& fileName = "");
+	virtual ~TileMap() {}
 
-	void Update(float delta);
+	void Load(const std::string& fileName);
+
+	void Update(float delta) {}
+	void UpdateActiveTiles(const Vector2f& cameraPos) {}
+
+	inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
+	inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }
 
 protected:
 private:
 	TileMap(TileMap const&) = delete;
 	TileMap& operator=(TileMap const&) = delete;
+
+	std::vector<Tile>		m_map;
+	std::vector<Tile>		m_activeTiles;
+	std::vector<EntityData>	m_activeTilesData;
 };

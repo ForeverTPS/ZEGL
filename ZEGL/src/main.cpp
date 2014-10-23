@@ -21,6 +21,7 @@
 #include "core.h"
 #include "game.h"
 #include "logfile.h"
+#include "util.h"
 #include "window.h"
 
 #ifdef __APPLE__
@@ -52,9 +53,9 @@ int main(int argc, char *argv[])
 	LOG_INIT("ZEGL");
 
 	Window window(800, 600, "ZEGL");
-	Game game;
+	Game* game = ZEGLSingleton<Game>::GetSingletonPtr();
 
-	Core engine(60, &window, &game);
+	Core engine(60, &window, game);
 	engine.Start();
 
 	LOG_CLEANUP();
