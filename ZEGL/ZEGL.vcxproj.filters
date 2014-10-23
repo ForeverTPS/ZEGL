@@ -63,6 +63,9 @@
     <ClCompile Include="src\textureatlas.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\game.h">

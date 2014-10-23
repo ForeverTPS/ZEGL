@@ -42,13 +42,7 @@ struct EntityData
 class Entity
 {
 public:
-	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f)
-	{
-		m_data.m_pos		= pos;
-		m_data.m_rot		= rot;
-		m_data.m_scale		= scale;
-	}
-		
+	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
 	virtual ~Entity() {}
 
 	void ProcessInput(const Input& input, float delta) {}
@@ -65,6 +59,8 @@ public:
 	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
 	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
 
+	inline const EntityData& GetData() const { return m_data; }
+
 protected:
 	EntityData	m_data;
 
@@ -77,29 +73,14 @@ class RenderEntity : public Entity
 {
 public:
 	RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_textureAtlas(textureAtlas),
-		m_texture(texture),
-		m_normalMap(normalMap),
-		m_hasTextureAtlas(true),
-		Entity(pos, rot, scale) 
-	{
-	}
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
 
 	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f) :
-		m_texture(texture),
-		m_normalMap(normalMap),
-		m_hasTextureAtlas(false),
-		Entity(pos, rot, scale) 
-	{
-		for (unsigned int i = 0; i < 4; i++)
-		{
-			m_data.m_texCoords[i] = textureCoords[i];
-		}
-	}
+		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
 
 	virtual ~RenderEntity() {}
+
+	bool CalcTextureCoords(const std::string regionName);
 
 	inline const Texture&	GetTexture()	const	{ return m_texture; }
 	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }

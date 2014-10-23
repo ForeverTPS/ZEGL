@@ -51,7 +51,7 @@ public:
 	TextureAtlas(TextureAtlas const&);
 	virtual ~TextureAtlas();
 
-	const TextureRegion& GetRegion(const std::string& regionName) const;
+	TextureRegion GetRegion(const std::string& regionName) const;
 
 protected:
 private:

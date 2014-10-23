@@ -98,6 +98,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   <ItemGroup>
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
+    <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />

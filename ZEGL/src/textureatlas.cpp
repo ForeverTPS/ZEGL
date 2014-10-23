@@ -98,6 +98,13 @@ TextureAtlas::TextureAtlas(const std::string& fileName)
 	}
 }
 
+TextureAtlas::TextureAtlas(const TextureAtlas& textureAtlas) :
+	m_textureAtlasData(textureAtlas.m_textureAtlasData),
+	m_fileName(textureAtlas.m_fileName)
+{
+	m_textureAtlasData->AddReference();
+}
+
 TextureAtlas::~TextureAtlas()
 {
 	if (m_textureAtlasData && m_textureAtlasData->RemoveReference())
@@ -111,7 +118,7 @@ TextureAtlas::~TextureAtlas()
 	}
 }
 
-const TextureRegion& TextureAtlas::GetRegion(const std::string& regionName) const
+TextureRegion TextureAtlas::GetRegion(const std::string& regionName) const
 {
 	TextureRegion result = { 0.0f, 0.0f, 0.0f, 0.0f };
 	std::map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(m_fileName);
