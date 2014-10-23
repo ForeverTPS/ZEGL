@@ -19,6 +19,7 @@
  */
 
 #include "referencecounter.h"
+#include <string>
 #include <map>
 
 struct TextureRegion
