@@ -23,6 +23,14 @@
 
 const float DEFAULT_TILE_SIZE = 32.0f;
 
+struct TileDefinition
+{
+	std::string tilename;
+	std::string textureName;
+	std::string normalMapName;
+	std::string textureAtlasName;
+};
+
 class Tile : public RenderEntity
 {
 public:
@@ -47,13 +55,11 @@ private:
 class TileMap
 {
 public:
-	TileMap(const std::string& fileName = "");
+	TileMap(const std::string& fileName);
 	virtual ~TileMap() {}
 
-	void Load(const std::string& fileName);
-
 	void Update(float delta) {}
-	void UpdateActiveTiles(const Vector2f& cameraPos) {}
+	void UpdateActiveTiles(const Vector2f& cameraPos);
 
 	inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
 	inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }
@@ -62,6 +68,8 @@ protected:
 private:
 	TileMap(TileMap const&) = delete;
 	TileMap& operator=(TileMap const&) = delete;
+
+	void Load(const std::string& fileName);
 
 	std::vector<Tile>		m_map;
 	std::vector<Tile>		m_activeTiles;

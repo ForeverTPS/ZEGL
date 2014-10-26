@@ -33,12 +33,10 @@ public:
 
 	const Matrix4f& GetTransform(const Window* window);
 
-	inline Vector2f*		GetOrigin()			{ return &m_origin; }
-	inline const Vector2f&	GetOrigin()	const	{ return m_origin; }
-	inline Vector2f*		GetPos()			{ return &m_pos; }
-	inline const Vector2f&	GetPos()	const	{ return m_pos; }
-	inline float			GetRot()	const	{ return m_rot; }
-	inline float			GetZoom()	const	{ return m_zoom; }
+	inline Vector2f	GetOrigin()	const	{ return m_origin; }
+	inline Vector2f	GetPos()	const	{ return m_pos; }
+	inline float	GetRot()	const	{ return m_rot; }
+	inline float	GetZoom()	const	{ return m_zoom; }
 
 	inline void	SetOrigin(float x, float y)			{ m_origin.SetX(x); m_origin.SetY(y); }
 	inline void	SetOrigin(const Vector2f& origin)	{ m_origin = origin; }

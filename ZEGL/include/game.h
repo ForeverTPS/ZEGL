@@ -55,7 +55,7 @@ private:
 	Game(Game const&) = delete;
 	Game& operator=(Game const&) = delete;
 
-	const Camera*		m_camera;
+	Camera*				m_camera;
 	const Window*		m_window;
 
 	Vector3f			m_ambientColor;

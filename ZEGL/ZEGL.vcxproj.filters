@@ -19,6 +19,9 @@
     <Filter Include="res\textures">
       <UniqueIdentifier>{b78ba35d-b7d3-42b3-9ab7-eec8358d8906}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\levels">
+      <UniqueIdentifier>{2b6ce50b-9958-4898-90d0-9d4893d9f515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game.cpp">
@@ -144,6 +147,12 @@
     </None>
     <None Include="res\shaders\ambient_shader_vs.glsl">
       <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\levels\test_level.ldf.tdef">
+      <Filter>res\levels</Filter>
+    </None>
+    <None Include="res\levels\test_level.ldf">
+      <Filter>res\levels</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

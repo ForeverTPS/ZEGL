@@ -19,6 +19,14 @@
  */
 
 #include "tilemap.h"
+#include "game.h"
+#include "logfile.h"
+#include "tinyxml2.h"
+#include "window.h"
+#include <fstream>
+#include <iostream>
+
+using namespace tinyxml2;
 
 Tile::Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
 	const Vector3f& pos, float rot, float scale) :
@@ -40,28 +48,127 @@ Tile::Tile(const Tile& tile) :
 
 TileMap::TileMap(const std::string& fileName)
 {
-	if (fileName != "")
-	{
-		Load(fileName);
-	}
-
-	Texture texture("rock.png");
-	Texture textureNormal("rock_n.png");
-	TextureAtlas textureAtlas("test_atlas.xml");
-
-	m_map.push_back(Tile(texture, textureNormal, textureAtlas, Vector3f(100.0f, 100.0f, 100.0f), 0.0f, 100.0f));
-	m_map.push_back(Tile(texture, textureNormal, textureAtlas, Vector3f(300.0f, 100.0f, 100.0f), 0.0f, 100.0f));
-	m_map.push_back(Tile(texture, textureNormal, textureAtlas, Vector3f(500.0f, 100.0f, 100.0f), 0.0f, 100.0f));
-
-	for (unsigned int i = 0; i < m_map.size(); i++)
-	{
-		m_map[i].CalcTextureCoords("rock");
-		m_activeTiles.push_back(m_map[i]);
-		m_activeTilesData.push_back(m_map[i].GetData());
-	}
+	Load(fileName);
 }
 
 void TileMap::Load(const std::string& fileName)
 {
+	bool success = true;
+	std::string error;
 
+	XMLDocument doc;
+	if (doc.LoadFile(("./res/levels/" + fileName + ".tdef").c_str()) != XML_NO_ERROR)
+	{
+		success = false;
+		error = "Failed loading tile definitions: " + fileName + ".tdef";
+	}
+	else
+	{
+		XMLElement* tileElement = doc.FirstChildElement("Tile");
+		if (tileElement == nullptr)
+		{
+			success = false;
+			error = "No Tiles defined.";
+		}
+		else
+		{
+			std::map<std::string, TileDefinition> m_tileDefs;
+
+			while (tileElement != nullptr)
+			{
+				std::string tileId;
+				TileDefinition tileDef;
+
+				tileId = tileElement->Attribute("id");
+				tileDef.tilename = tileElement->Attribute("name");
+				tileDef.textureName = tileElement->Attribute("texture");
+				tileDef.normalMapName = tileElement->Attribute("normalMap");
+				tileDef.textureAtlasName = tileElement->Attribute("textureAtlas");
+
+				m_tileDefs.insert(std::pair<std::string, TileDefinition>(tileId, tileDef));
+
+				tileElement = tileElement->NextSiblingElement();
+			}
+
+			std::ifstream file;
+			file.open(("./res/levels/" + fileName).c_str());
+
+			std::string line;
+
+			if (file.is_open())
+			{
+				float x = DEFAULT_TILE_SIZE / 2;
+				float y = x;
+
+				while (file.good())
+				{
+					getline(file, line);
+				
+					std::vector<std::string> tiles = Util::Split(line, ',');
+					for (unsigned int i = 0; i < tiles.size(); i++)
+					{
+						std::map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
+						if (it != m_tileDefs.end())
+						{
+							Texture texture(it->second.textureName);
+							Texture textureNormal(it->second.normalMapName);
+							TextureAtlas textureAtlas(it->second.textureAtlasName);
+
+							m_map.push_back(Tile(texture, textureNormal, textureAtlas, Vector3f(x, y, 0.0f), 0.0f, DEFAULT_TILE_SIZE));
+							m_map[m_map.size() - 1].CalcTextureCoords(tiles[i]);
+
+							x += DEFAULT_TILE_SIZE;
+						}
+						else
+						{
+							//TODO: Handle error
+						}
+					}
+
+					x = DEFAULT_TILE_SIZE / 2;
+					y += DEFAULT_TILE_SIZE;
+				}
+
+				for (unsigned int i = 0; i < m_map.size(); i++)
+				{
+					m_map[i].CalcTextureCoords("rock");
+					m_activeTiles.push_back(m_map[i]);
+					m_activeTilesData.push_back(m_map[i].GetData());
+				}
+			}
+			else
+			{
+				std::cerr << "Unable to load tile map: " << fileName << std::endl;
+			}
+		}
+	}
+
+	if (!success)
+	{
+		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s", error.c_str());
+		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_CLEANUP();
+		exit(1);
+	}
+}
+
+void TileMap::UpdateActiveTiles(const Vector2f& cameraPos)
+{
+	m_activeTiles.clear();
+	m_activeTilesData.clear();
+
+	Game* game = ZEGLSingleton<Game>::GetSingletonPtr();
+	const Window* window = game->GetWindow();
+	
+	for (unsigned int i = 0; i < m_map.size(); i++)
+	{
+		Vector3f pos = m_map[i].GetPos();
+
+		if (pos.GetX() > cameraPos.GetX() - DEFAULT_TILE_SIZE && pos.GetX() < cameraPos.GetX() + (float)window->GetWidth() + DEFAULT_TILE_SIZE &&
+			pos.GetY() > cameraPos.GetY() - DEFAULT_TILE_SIZE && pos.GetY() < cameraPos.GetY() + (float)window->GetHeight() + DEFAULT_TILE_SIZE)
+		{
+			m_activeTiles.push_back(m_map[i]);
+			m_activeTilesData.push_back(m_map[i].GetData());
+		}
+	}
 }

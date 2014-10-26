@@ -51,10 +51,9 @@ public:
 	void Update(float delta) {}
 	void Render() const {}
 
-	inline Vector3f*		GetPos()				{ return &m_data.m_pos; }
-	inline const Vector3f&	GetPos()		const	{ return m_data.m_pos; }
-	inline float			GetRot()		const	{ return m_data.m_rot; }
-	inline float			GetScale()		const	{ return m_data.m_scale; }
+	inline Vector3f	GetPos()	const	{ return m_data.m_pos; }
+	inline float	GetRot()	const	{ return m_data.m_rot; }
+	inline float	GetScale()	const	{ return m_data.m_scale; }
 
 	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.SetX(x); m_data.m_pos.SetY(y); }
 	inline void	SetPos(Vector3f& pos)						{ m_data.m_pos = pos; }

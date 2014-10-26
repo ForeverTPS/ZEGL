@@ -134,6 +134,8 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\levels\test_level.ldf" />
+    <None Include="res\levels\test_level.ldf.tdef" />
     <None Include="res\shaders\ambient_shader_fs.glsl" />
     <None Include="res\shaders\ambient_shader_vs.glsl" />
     <None Include="res\shaders\basic_shader_fs.glsl" />
@@ -149,7 +151,9 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <Image Include="res\textures\white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\default_atlas.xml" />
+    <Xml Include="res\textures\default_atlas.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="res\textures\test_atlas.xml">
       <SubType>Designer</SubType>
     </Xml>

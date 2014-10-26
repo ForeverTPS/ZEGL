@@ -68,7 +68,7 @@ void Game::Init(const Window& window)
     glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     
-	tileMap = new TileMap();
+	tileMap = new TileMap("test_level.ldf");
 
 	light = new Light(Shader("point_light"));
 	m_lights.push_back(light);
@@ -111,7 +111,9 @@ void Game::ProcessInput(const Input& input, float delta)
 
 void Game::Update(float delta)
 {
+	tileMap->UpdateActiveTiles(m_camera->GetPos());
 
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0]);
 }
 
 void Game::Render()
