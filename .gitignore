@@ -294,6 +294,7 @@ local.properties
 ZEGL.html
 !ZEGL/lib/*
 !ZEGL/dll/*
+!ZEGL/res/levels/*
 
 ### CMake ###
 CMakeCache.txt
