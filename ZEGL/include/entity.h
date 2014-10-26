@@ -21,10 +21,10 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "mymath.h"
 #include "texture.h"
 #include "textureatlas.h"
 #include "util.h"
+#include "glm/glm.hpp"
 
 class Camera;
 class Core;
@@ -33,16 +33,16 @@ class Shader;
 
 struct EntityData
 {
-	Vector3f	m_pos;			// 12 bytes
+	glm::vec3	m_pos;			// 12 bytes
 	float		m_rot;			// 4 bytes	- offset 12
 	float		m_scale;		// 4 bytes	- offset 16
-	Vector2f	m_texCoords[4];	// 32 bytes - offset 20|28|36|42
+	glm::vec2	m_texCoords[4];	// 32 bytes - offset 20|28|36|42
 };
 
 class Entity
 {
 public:
-	Entity(const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
+	Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
 	Entity(const Entity& entity);
 	void operator=(Entity entity);
 	virtual ~Entity() {}
@@ -51,12 +51,12 @@ public:
 	void Update(float delta) {}
 	void Render() const {}
 
-	inline Vector3f	GetPos()	const	{ return m_data.m_pos; }
-	inline float	GetRot()	const	{ return m_data.m_rot; }
-	inline float	GetScale()	const	{ return m_data.m_scale; }
+	inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
+	inline float		GetRot()	const	{ return m_data.m_rot; }
+	inline float		GetScale()	const	{ return m_data.m_scale; }
 
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.SetX(x); m_data.m_pos.SetY(y); }
-	inline void	SetPos(Vector3f& pos)						{ m_data.m_pos = pos; }
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
+	inline void	SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
 	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
 	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
 
@@ -74,10 +74,10 @@ class RenderEntity : public Entity
 {
 public:
 	RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
 
-	RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = 1.0f);
+	RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
 
 	RenderEntity(const RenderEntity& renderEntity);
 	void operator=(RenderEntity renderEntity);

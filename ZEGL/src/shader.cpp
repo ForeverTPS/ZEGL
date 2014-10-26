@@ -382,7 +382,7 @@ void Shader::UpdateUniforms(Game* game) const
 
 			if (unprefixedName == "AmbientColor")
 			{
-				Vector3f color;
+				glm::vec3 color;
 				float intensity;
 				if (light)
 				{
@@ -395,11 +395,11 @@ void Shader::UpdateUniforms(Game* game) const
 					intensity = game->GetAmbientIntensity();
 				}
 				
-				SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
+				SetUniformVector4f(uniformName, glm::vec4(color, intensity));
 			}
 			else if (unprefixedName == "Resolution")
 			{
-				SetUniformVector2f(uniformName, Vector2f((float)game->GetWindow()->GetWidth(), (float)game->GetWindow()->GetHeight()));
+				SetUniformVector2f(uniformName, glm::vec2((float)game->GetWindow()->GetWidth(), (float)game->GetWindow()->GetHeight()));
 			}
 			else if (unprefixedName == "LightPos")
 			{
@@ -416,22 +416,9 @@ void Shader::UpdateUniforms(Game* game) const
 			{
 				if (light)
 				{
-					Vector3f color = light->GetLightColor();
+					glm::vec3 color = light->GetLightColor();
 					float intensity = light->GetLightIntensity();
-					SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
-				}
-				else
-				{
-					throw "No active light";
-				}
-			}
-			else if (unprefixedName == "LightColor")
-			{
-				if (light)
-				{
-					Vector3f color = light->GetLightColor();
-					float intensity = light->GetLightIntensity();
-					SetUniformVector4f(uniformName, Vector4f(color.GetX(), color.GetY(), color.GetZ(), intensity));
+					SetUniformVector4f(uniformName, glm::vec4(color, intensity));
 				}
 				else
 				{
@@ -475,22 +462,22 @@ void Shader::SetUniformf(const std::string& uniformName, float value) const
 	glUniform1f(m_shaderData->GetUniformMap().at(uniformName), value);
 }
 
-void Shader::SetUniformVector2f(const std::string& uniformName, const Vector2f& value) const
+void Shader::SetUniformVector2f(const std::string& uniformName, const glm::vec2& value) const
 {
-	glUniform2f(m_shaderData->GetUniformMap().at(uniformName), value.GetX(), value.GetY());
+	glUniform2f(m_shaderData->GetUniformMap().at(uniformName), value.x, value.y);
 }
 
-void Shader::SetUniformVector3f(const std::string& uniformName, const Vector3f& value) const
+void Shader::SetUniformVector3f(const std::string& uniformName, const glm::vec3& value) const
 {
-	glUniform3f(m_shaderData->GetUniformMap().at(uniformName), value.GetX(), value.GetY(), value.GetZ());
+	glUniform3f(m_shaderData->GetUniformMap().at(uniformName), value.x, value.y, value.z);
 }
 
-void Shader::SetUniformVector4f(const std::string& uniformName, const Vector4f& value) const
+void Shader::SetUniformVector4f(const std::string& uniformName, const glm::vec4& value) const
 {
-	glUniform4f(m_shaderData->GetUniformMap().at(uniformName), value.GetX(), value.GetY(), value.GetZ(), value.GetW());
+	glUniform4f(m_shaderData->GetUniformMap().at(uniformName), value.x, value.y, value.z, value.w);
 }
 
-void Shader::SetUniformMatrix4f(const std::string& uniformName, const Matrix4f& value) const
+void Shader::SetUniformMatrix4f(const std::string& uniformName, const glm::mat4& value) const
 {
 	glUniformMatrix4fv(m_shaderData->GetUniformMap().at(uniformName), 1, GL_FALSE, &(value[0][0]));
 }

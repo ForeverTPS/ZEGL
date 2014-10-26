@@ -35,10 +35,10 @@ class Tile : public RenderEntity
 {
 public:
 	Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
 
-	Tile(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
-		const Vector3f& pos = Vector3f(0.0f, 0.0f, 0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+	Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
 
 	Tile(const Tile& tile);
 
@@ -59,7 +59,7 @@ public:
 	virtual ~TileMap() {}
 
 	void Update(float delta) {}
-	void UpdateActiveTiles(const Vector2f& cameraPos);
+	void UpdateActiveTiles(const glm::vec3& cameraPos);
 
 	inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
 	inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }

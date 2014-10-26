@@ -121,7 +121,6 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\input.h" />
     <ClInclude Include="include\light.h" />
     <ClInclude Include="include\logfile.h" />
-    <ClInclude Include="include\mymath.h" />
     <ClInclude Include="include\referencecounter.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\stb_image.h" />

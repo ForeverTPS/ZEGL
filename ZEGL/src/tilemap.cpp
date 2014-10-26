@@ -29,14 +29,14 @@
 using namespace tinyxml2;
 
 Tile::Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-	const Vector3f& pos, float rot, float scale) :
+	const glm::vec3& pos, float rot, float scale) :
 	m_tileSize(scale),
 	RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale)
 {
 }
 
-Tile::Tile(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
-	const Vector3f& pos, float rot, float scale) :
+Tile::Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+	const glm::vec3& pos, float rot, float scale) :
 	m_tileSize(scale),
 	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale)
 {
@@ -114,7 +114,7 @@ void TileMap::Load(const std::string& fileName)
 							Texture textureNormal(it->second.normalMapName);
 							TextureAtlas textureAtlas(it->second.textureAtlasName);
 
-							m_map.push_back(Tile(texture, textureNormal, textureAtlas, Vector3f(x, y, 0.0f), 0.0f, DEFAULT_TILE_SIZE));
+							m_map.push_back(Tile(texture, textureNormal, textureAtlas, glm::vec3(x, y, 0.0f), 0.0f, DEFAULT_TILE_SIZE));
 							m_map[m_map.size() - 1].CalcTextureCoords(tiles[i]);
 
 							x += DEFAULT_TILE_SIZE;
@@ -152,7 +152,7 @@ void TileMap::Load(const std::string& fileName)
 	}
 }
 
-void TileMap::UpdateActiveTiles(const Vector2f& cameraPos)
+void TileMap::UpdateActiveTiles(const glm::vec3& cameraPos)
 {
 	m_activeTiles.clear();
 	m_activeTilesData.clear();
@@ -162,10 +162,10 @@ void TileMap::UpdateActiveTiles(const Vector2f& cameraPos)
 	
 	for (unsigned int i = 0; i < m_map.size(); i++)
 	{
-		Vector3f pos = m_map[i].GetPos();
+		glm::vec3 pos = m_map[i].GetPos();
 
-		if (pos.GetX() > cameraPos.GetX() - DEFAULT_TILE_SIZE && pos.GetX() < cameraPos.GetX() + (float)window->GetWidth() + DEFAULT_TILE_SIZE &&
-			pos.GetY() > cameraPos.GetY() - DEFAULT_TILE_SIZE && pos.GetY() < cameraPos.GetY() + (float)window->GetHeight() + DEFAULT_TILE_SIZE)
+		if (pos.x > cameraPos.x - DEFAULT_TILE_SIZE && pos.x < cameraPos.x + (float)window->GetWidth() + DEFAULT_TILE_SIZE &&
+			pos.y > cameraPos.y - DEFAULT_TILE_SIZE && pos.y < cameraPos.y + (float)window->GetHeight() + DEFAULT_TILE_SIZE)
 		{
 			m_activeTiles.push_back(m_map[i]);
 			m_activeTilesData.push_back(m_map[i].GetData());

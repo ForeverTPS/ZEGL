@@ -20,7 +20,6 @@
 
 #include "texture.h"
 #include "logfile.h"
-#include "mymath.h"
 #include "stb_image.h"
 #include "util.h"
 #include <iostream>
@@ -90,7 +89,7 @@ void TextureData::InitTextures(unsigned char** data, GLfloat* filters, GLenum* i
 			glGenerateMipmap(m_textureTarget);
 			GLfloat maxAnisotropy;
 			glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
-			glTexParameterf(m_textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, Clamp(0.0f, 8.0f, maxAnisotropy));
+			glTexParameterf(m_textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, Util::Clamp(0.0f, 8.0f, maxAnisotropy));
 		}
 		else
 		{

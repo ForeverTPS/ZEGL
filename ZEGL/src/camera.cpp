@@ -20,24 +20,23 @@
 
 #include "camera.h"
 #include "window.h"
+#include "glm/gtc/matrix_transform.hpp"
 #include <GL/glew.h>
 
 Camera::Camera(const Window* window) :
 	m_zoom(1.0f),
-	m_pos(Vector2f(0.0f, 0.0f)),
-	m_rot(0.0f),
-	m_origin(Vector2f(0.0f, 0.0f))
+	m_pos(glm::vec3(0.0f)),
+	m_rot(0.0f)
 {
-	m_transform.Update(m_pos, m_origin, m_zoom, m_rot);
+	m_transform.Update(m_pos, m_rot, m_zoom);
 
 	RecreateTransform(window);
 }
 
-const Matrix4f& Camera::GetTransform(const Window* window)
+const glm::mat4& Camera::GetTransform(const Window* window)
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||
-		m_transform.m_lastOrigin != m_origin ||
 		m_transform.m_lastZoom != m_zoom)
 	{
 		RecreateTransform(window);
@@ -48,23 +47,17 @@ const Matrix4f& Camera::GetTransform(const Window* window)
 
 void Camera::RecreateTransform(const Window* window)
 {
-	m_transform.Update(m_pos, m_origin, m_zoom, m_rot);
+	m_transform.Update(m_pos, m_rot, m_zoom);
 
-	Matrix4f reverseTransMat, scaleMat, rotMat, transMat;
-	reverseTransMat.InitTranslation(Vector3f(-m_pos.GetX(), -m_pos.GetY(), 0.0f));
-	scaleMat.InitScale(Vector3f(m_zoom, m_zoom, 1.0f));
-	rotMat.InitRotationEuler(0.0f, 0.0f, m_rot);
-	transMat.InitTranslation(Vector3f(m_origin.GetX(), m_origin.GetY(), 0.0f));
+	glm::mat4 reverseTransMat = glm::translate(glm::mat4(1.0f), glm::vec3(-m_pos.x, -m_pos.y, 0.0f));
+	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(m_zoom, m_zoom, 1.0f));
+	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
 
-	Matrix4f ortho;
+	glm::mat4 ortho(1.0f);
 	if (window)
 	{
-		ortho.InitOrthographic(0.0f, (float)window->GetWidth(), 0.0f, (float)window->GetHeight(), -1.0f, 1.0f);
-	}
-	else
-	{
-		ortho.InitIdentity();
+		ortho = glm::ortho(0.0f, (float)window->GetWidth(), 0.0f, (float)window->GetHeight(), -1.0f, 1.0f);
 	}
 
-	m_transform.m_matrix = ortho * reverseTransMat * rotMat * scaleMat * transMat;
+	m_transform.m_matrix = ortho * reverseTransMat * rotMat * scaleMat;
 }

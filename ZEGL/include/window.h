@@ -40,7 +40,7 @@ public:
 	inline int GetHeight()                  const { return m_height; }
 	inline float GetAspect()                const { return (float)m_width / (float)m_height; }
 	inline const std::string& GetTitle()    const { return m_title; }
-	inline Vector2f GetCenter()             const { return Vector2f((float)m_width / 2.0f, (float)m_height / 2.0f); }
+	inline glm::vec2 GetCenter()			const { return glm::vec2((float)m_width / 2.0f, (float)m_height / 2.0f); }
 	inline SDL_Window* GetSDLWindow()             { return m_window; }
 	inline const Input& GetInput()          const { return m_input; }
 

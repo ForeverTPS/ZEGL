@@ -21,7 +21,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "mymath.h"
+#include "glm/glm.hpp"
 
 class Window;
 
@@ -343,16 +343,16 @@ public:
 
 	Input(Window* window);
 
-	inline bool GetKey(int keyCode)            const { return m_inputs[keyCode]; }
-	inline bool GetKeyDown(int keyCode)        const { return m_downKeys[keyCode]; }
-	inline bool GetKeyUp(int keyCode)          const { return m_upKeys[keyCode]; }
-	inline bool GetMouse(int keyCode)          const { return m_mouseInput[keyCode]; }
-	inline bool GetMouseDown(int keyCode)      const { return m_downMouse[keyCode]; }
-	inline bool GetMouseUp(int keyCode)        const { return m_upMouse[keyCode]; }
-	inline Vector2f GetMousePosition()         const { return Vector2f((float)m_mouseX, (float)m_mouseY); }
+	inline bool			GetKey(int keyCode)				const { return m_inputs[keyCode]; }
+	inline bool			GetKeyDown(int keyCode)			const { return m_downKeys[keyCode]; }
+	inline bool			GetKeyUp(int keyCode)			const { return m_upKeys[keyCode]; }
+	inline bool			GetMouse(int keyCode)			const { return m_mouseInput[keyCode]; }
+	inline bool			GetMouseDown(int keyCode)		const { return m_downMouse[keyCode]; }
+	inline bool			GetMouseUp(int keyCode)			const { return m_upMouse[keyCode]; }
+	inline glm::vec2	GetMousePosition()				const { return glm::vec2((float)m_mouseX, (float)m_mouseY); }
 
-	void SetCursor(bool value)                 const;
-	void SetMousePosition(const Vector2f& pos) const;
+	void SetCursor(bool value)					const;
+	void SetMousePosition(const glm::vec2& pos)	const;
 
 	inline void SetKey(int keyCode, bool value)       { m_inputs[keyCode] = value; }
 	inline void SetKeyDown(int keyCode, bool value)   { m_downKeys[keyCode] = value; }

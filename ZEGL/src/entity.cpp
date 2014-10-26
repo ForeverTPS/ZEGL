@@ -20,7 +20,7 @@
 
 #include "entity.h"
 
-Entity::Entity(const Vector3f& pos, float rot, float scale)
+Entity::Entity(const glm::vec3& pos, float rot, float scale)
 {
 	m_data.m_pos = pos;
 	m_data.m_rot = rot;
@@ -39,15 +39,15 @@ void Entity::operator=(Entity entity)
 }
 
 RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-	const Vector3f& pos, float rot, float scale) :
+	const glm::vec3& pos, float rot, float scale) :
 	m_textureAtlas(textureAtlas),
 	m_texture(texture),
 	m_normalMap(normalMap),
 	m_hasTextureAtlas(true),
 	Entity(pos, rot, scale) {}
 
-RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const Vector2f textureCoords[4],
-	const Vector3f& pos, float rot, float scale) :
+RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+	const glm::vec3& pos, float rot, float scale) :
 	m_texture(texture),
 	m_normalMap(normalMap),
 	m_hasTextureAtlas(false),
@@ -95,10 +95,10 @@ bool RenderEntity::CalcTextureCoords(const std::string regionName)
 	float w = region.w / textureWidth;
 	float h = region.h / textureHeight;
 
-	m_data.m_texCoords[0] = Vector2f(x,     y    );
-	m_data.m_texCoords[1] = Vector2f(x,     y + h);
-	m_data.m_texCoords[2] = Vector2f(x + w, y    );
-	m_data.m_texCoords[3] = Vector2f(x + w, y + h);
+	m_data.m_texCoords[0] = glm::vec2(x, y);
+	m_data.m_texCoords[1] = glm::vec2(x, y + h);
+	m_data.m_texCoords[2] = glm::vec2(x + w, y);
+	m_data.m_texCoords[3] = glm::vec2(x + w, y + h);
 
 	return true;
 }

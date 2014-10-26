@@ -21,7 +21,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "mymath.h"
 #include "shader.h"
 #include <vector>
 
@@ -42,13 +41,13 @@ public:
 	void Update(float delta);
 	void Render();
 
-	inline const Light*		GetActiveLight()	const	{ return m_activeLight; }
-	inline const Camera&	GetCamera()			const	{ return *m_camera; }
+	inline const Light*		GetActiveLight()		const { return m_activeLight; }
+	inline const Camera&	GetCamera()				const { return *m_camera; }
 
-	inline Vector3f	GetAmbientColor()		const { return m_ambientColor; }
-	inline float	GetAmbientIntensity()	const { return m_ambientIntensity; }
+	inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
+	inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
 
-	inline const Window* GetWindow()	{ return m_window; }
+	inline const Window*	GetWindow()					  { return m_window; }
 
 protected:
 private:
@@ -58,7 +57,7 @@ private:
 	Camera*				m_camera;
 	const Window*		m_window;
 
-	Vector3f			m_ambientColor;
+	glm::vec3			m_ambientColor;
 	float				m_ambientIntensity;
 
 	Shader				m_defaultShader;

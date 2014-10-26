@@ -21,7 +21,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "mymath.h"
+#include "glm/glm.hpp"
 
 class Window;
 
@@ -31,19 +31,16 @@ public:
 	Camera(const Window* window = nullptr);
 	virtual ~Camera() {};
 
-	const Matrix4f& GetTransform(const Window* window);
+	const glm::mat4& GetTransform(const Window* window);
 
-	inline Vector2f	GetOrigin()	const	{ return m_origin; }
-	inline Vector2f	GetPos()	const	{ return m_pos; }
-	inline float	GetRot()	const	{ return m_rot; }
-	inline float	GetZoom()	const	{ return m_zoom; }
+	inline glm::vec3	GetPos()	const	{ return m_pos; }
+	inline float		GetRot()	const	{ return m_rot; }
+	inline float		GetZoom()	const	{ return m_zoom; }
 
-	inline void	SetOrigin(float x, float y)			{ m_origin.SetX(x); m_origin.SetY(y); }
-	inline void	SetOrigin(const Vector2f& origin)	{ m_origin = origin; }
-	inline void	SetPos(float x, float y)			{ m_pos.SetX(x); m_pos.SetY(y); }
-	inline void	SetPos(const Vector2f& pos)			{ m_pos = pos; }
-	inline void	SetRot(float rot)					{ m_rot = rot; }
-	inline void	SetZoom(float zoom)					{ m_zoom = zoom; }
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
+	inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
+	inline void	SetRot(float rot)							{ m_rot = rot; }
+	inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
 
 protected:
 private:
@@ -52,23 +49,21 @@ private:
 
 	struct Transformation
 	{
-		Matrix4f	m_matrix;
-		Vector2f	m_lastPos;
+		glm::mat4	m_matrix;
+		glm::vec3	m_lastPos;
 		float		m_lastRot;
 		float		m_lastZoom;
-		Vector2f	m_lastOrigin;
 
-		void Update(const Vector2f& p, const Vector2f& origin, float zoom, float rotation)
+		void Update(const glm::vec3& pos, float rot, float zoom)
 		{ 
-			m_lastPos = p; m_lastOrigin = origin; m_lastZoom = zoom; m_lastRot = rotation;
+			m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
 		}
 	};
 
 	void RecreateTransform(const Window* window);
 
-	Vector2f		m_pos;
+	glm::vec3		m_pos;
 	float			m_rot;
-	Vector2f		m_origin;
 	float			m_zoom;
 	Transformation	m_transform;
 };

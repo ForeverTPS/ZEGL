@@ -20,6 +20,7 @@
 
 #include "input.h"
 #include "window.h"
+#include "glm/glm.hpp"
 #include <SDL2/SDL.h>
 #include <cstring>
 
@@ -51,7 +52,7 @@ void Input::SetCursor(bool visible) const
 	}
 }
 
-void Input::SetMousePosition(const Vector2f& pos) const
+void Input::SetMousePosition(const glm::vec2& pos) const
 {
-	SDL_WarpMouseInWindow(m_window->GetSDLWindow(), (int)pos.GetX(), (int)pos.GetY());
+	SDL_WarpMouseInWindow(m_window->GetSDLWindow(), (int)pos.x, (int)pos.y);
 }

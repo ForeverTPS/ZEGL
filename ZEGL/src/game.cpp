@@ -32,15 +32,13 @@
 GLuint gVAO;
 GLuint gVAB;
 Light* light;
-Vector2f mouse_x;
-float mouse_y;
 TileMap* tileMap;
 
 Game::Game() :
 	m_camera(nullptr),
     m_window(nullptr),
 	m_defaultShader(Shader("ambient_shader")),
-	m_ambientColor(Vector3f(0.2f, 0.2f, 0.2f)),
+	m_ambientColor(glm::vec3(0.2f)),
 	m_ambientIntensity(1.0f),
     m_activeLight(nullptr) {}
 
@@ -105,8 +103,8 @@ void Game::Init(const Window& window)
 
 void Game::ProcessInput(const Input& input, float delta)
 {
-    Vector2f mousePos = input.GetMousePosition();
-    light->SetPos((mousePos.GetX() / m_window->GetWidth()), (1.0f - mousePos.GetY() / m_window->GetHeight()));
+	glm::vec2 mousePos = input.GetMousePosition();
+	light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), light->GetPos().z);
 }
 
 void Game::Update(float delta)

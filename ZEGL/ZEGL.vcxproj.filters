@@ -89,9 +89,6 @@
     <ClInclude Include="include\core.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\mymath.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\shader.h">
       <Filter>include</Filter>
     </ClInclude>

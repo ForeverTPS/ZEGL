@@ -21,8 +21,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "mymath.h"
 #include "referencecounter.h"
+#include "glm/glm.hpp"
 #include <string>
 #include <vector>
 #include <map>
@@ -78,10 +78,10 @@ public:
 
 	void SetUniformi(const std::string& uniformName, int value) const;
 	void SetUniformf(const std::string& uniformName, float value) const;
-	void SetUniformVector2f(const std::string& uniformName, const Vector2f& value) const;
-	void SetUniformVector3f(const std::string& uniformName, const Vector3f& value) const;
-	void SetUniformVector4f(const std::string& uniformName, const Vector4f& value) const;
-	void SetUniformMatrix4f(const std::string& uniformName, const Matrix4f& value) const;
+	void SetUniformVector2f(const std::string& uniformName, const glm::vec2& value) const;
+	void SetUniformVector3f(const std::string& uniformName, const glm::vec3& value) const;
+	void SetUniformVector4f(const std::string& uniformName, const glm::vec4& value) const;
+	void SetUniformMatrix4f(const std::string& uniformName, const glm::mat4& value) const;
 
 	void UpdateUniforms(Game* game) const;
 
