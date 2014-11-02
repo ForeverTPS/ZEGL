@@ -54,9 +54,6 @@
     <ClCompile Include="src\logfile.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\util.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -66,10 +63,13 @@
     <ClCompile Include="src\textureatlas.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\entity.cpp">
+    <ClCompile Include="src\tilemap.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\tilemap.cpp">
+    <ClCompile Include="src\sprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,18 +125,18 @@
     <ClInclude Include="include\tinyxml2.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\sprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mappedvalues.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic_shader_vs.glsl">
       <Filter>res\shaders</Filter>
     </None>
     <None Include="res\shaders\basic_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\point_light_fs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\point_light_vs.glsl">
       <Filter>res\shaders</Filter>
     </None>
     <None Include="res\shaders\ambient_shader_fs.glsl">
@@ -171,9 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\textures\test_atlas.xml">
-      <Filter>res\textures</Filter>
-    </Xml>
-    <Xml Include="res\textures\default_atlas.xml">
       <Filter>res\textures</Filter>
     </Xml>
   </ItemGroup>

@@ -21,7 +21,7 @@
 #ifndef LOGFILE_H
 #define LOGFILE_H
 
-#define LOG_INIT(fname)             LogFile::Init(fname)
+#define LOG_INIT(fileName)          LogFile::Init(fileName)
 #define LOG_CLEANUP()               LogFile::Cleanup()
 #define LOG_ENTRY(text, logType)    LogFile::AddEntry(text, logType)
 #define LOG_SET_ACTIVE(active)		LogFile::SetLogActive(active)
@@ -45,28 +45,28 @@ public:
 
 	static const int MAX_ERROR_LEN = 256;
 
-	static bool Init(const std::string& fname = "ZEGL");
+	static char	s_errorMsg[MAX_ERROR_LEN];
+
+	static bool Init(const std::string& fileName = "ZEGL");
 	static void Cleanup();
 
 	static void AddEntry(const std::string& text, int logType);
 
 	static void SetLogLevel(int level);
-	static inline void SetLogActive(bool active) { m_isActive = active; }
-
-	static char s_errorMsg[MAX_ERROR_LEN];
+	static inline void SetLogActive(bool active) { s_isActive = active; }
 
 protected:
 private:
 	static const std::string CurrentDateTime();
 
-	static std::string m_fileName;
+	static std::string	s_fileName;
 
-	static unsigned int m_numWarnings;
-	static unsigned int m_numErrors;
+	static unsigned int s_numWarnings;
+	static unsigned int s_numErrors;
 
-	static int m_logLevel;
+	static int			s_logLevel;
 
-	static bool m_isActive;
+	static bool			s_isActive;
 };
 
 #endif

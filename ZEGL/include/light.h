@@ -18,54 +18,50 @@
  * limitations under the License.
  */
 
-#include "entity.h"
-#include "shader.h"
-#include "util.h"
+#ifndef LIGHT_H
+#define LIGHT_H
 
-class Light : public Entity
+class Light
 {
 public:
-	Light(const Shader& shader) :
-		m_lightColor(glm::vec3(1.0f)),
-		m_lightIntensity(1.0f),
-		m_ambientColor(glm::vec3(0.2f)),
-		m_ambientIntensity(0.2f),
-		m_falloff(glm::vec3(0.4f, 3.0f, 20.0f)),
-		m_shader(shader),
-		Entity(glm::vec3(0.5f, 0.5f, 0.075f)) {}
+	Light() :
+		m_pos(glm::vec3(0.0f)),
+		m_color(glm::vec3(1.0f)),
+		m_radius(100.0f),
+		m_falloff(glm::vec3(0.4f, 3.0f, 20.0f)) {}
 
-	Light(const Shader& shader, const glm::vec3& pos,
-		const glm::vec3& lightCol, float lightIntensity,
-		const glm::vec3& ambientCol, float ambientIntensity, const glm::vec3& falloff) :
-		m_lightColor(lightCol),
-		m_lightIntensity(lightIntensity),
-		m_ambientColor(ambientCol),
-		m_ambientIntensity(ambientIntensity),
-		m_falloff(falloff),
-		m_shader(shader),
-		Entity(pos) {}
+	Light(const glm::vec3& pos, const glm::vec3& color, float radius, const glm::vec3& falloff) :
+		m_pos(pos),
+		m_color(color),
+		m_radius(radius),
+		m_falloff(falloff) {}
 
 	virtual ~Light() {}
 
-	inline const glm::vec3& GetLightColor()		const { return m_lightColor; }
-	inline const float GetLightIntensity()		const { return m_lightIntensity; }
-	inline const glm::vec3& GetAmbientColor()	const { return m_ambientColor; }
-	inline const float GetAmbientIntensity()	const { return m_ambientIntensity; }
-	inline const glm::vec3& GetFalloff()		const { return m_falloff; }
-	inline const Shader& GetShader()			const { return m_shader; }
+	float GetIntensityAt(const glm::vec2& other) const
+	{
+		glm::vec2 mp(m_pos.x, m_pos.y);
+		float distance = glm::distance(mp, other);
+		float nd = glm::min(distance / m_radius, 1.0f);
+
+		return 1.0f / (m_falloff.x + (nd * m_falloff.y) + (nd * nd * m_falloff.z));
+	}
+
+	inline const glm::vec3	GetPos()		const { return m_pos; }
+	inline const glm::vec3& GetColor()		const { return m_color; }
+	inline const float GetRadius()			const { return m_radius; }
+	inline const glm::vec3& GetFalloff()	const { return m_falloff; }
 	
-	inline void SetLightColor(const glm::vec3& lightCol)		{ m_lightColor = lightCol; }
-	inline void SetLightIntensity(float lightIntensity)			{ m_lightIntensity = lightIntensity; }
-	inline void SetAmbientColor(const glm::vec3& ambientCol)	{ m_ambientColor = ambientCol; }
-	inline void SetAmbientIntensity(float ambientIntensity)		{ m_ambientIntensity = ambientIntensity; }
-	inline void SetFalloff(const glm::vec3& falloff)			{ m_falloff = falloff; }
+	inline void SetPos(const glm::vec3& pos)			{ m_pos = pos; }
+	inline void SetLightColor(const glm::vec3& color)	{ m_color = color; }
+	inline void SetRadius(float radius)					{ m_radius = radius; }
+	inline void SetFalloff(const glm::vec3& falloff)	{ m_falloff = falloff; }
 
 private:
-	glm::vec3	m_lightColor;
-	float		m_lightIntensity;
-	glm::vec3	m_ambientColor;
-	float		m_ambientIntensity;
-	glm::vec3	m_falloff;
-
-	Shader		m_shader;
+	glm::vec3	m_pos;
+	glm::vec3	m_color;
+	float		m_radius;
+	glm::vec3	m_falloff;		// constant | linear | quadratic
 };
+
+#endif

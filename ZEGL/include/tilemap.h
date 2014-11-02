@@ -18,10 +18,13 @@
  * limitations under the License.
  */
 
-#include "entity.h"
+#ifndef TILEMAP_H
+#define TILEMAP_H
+
+#include "sprite.h"
 #include <vector>
 
-const float DEFAULT_TILE_SIZE = 32.0f;
+class Window;
 
 struct TileDefinition
 {
@@ -29,49 +32,55 @@ struct TileDefinition
 	std::string textureName;
 	std::string normalMapName;
 	std::string textureAtlasName;
+	bool		occluder;
 };
 
-class Tile : public RenderEntity
+class Tile : public Sprite
 {
 public:
-	Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+	Tile(const std::string& texture, const std::string& normalMap, const std::string& textureAtlas,
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, bool occluder = false) :
+		Sprite(texture, normalMap, textureAtlas, pos, rot, DEFAULT_ENTITY_SIZE, occluder) {}
 
-	Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
-
-	Tile(const Tile& tile);
+	Tile(const std::string& texture, const std::string& normalMap, const glm::vec2 textureCoords[4],
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, bool occluder = false) :
+		Sprite(texture, normalMap, textureCoords, pos, rot, DEFAULT_ENTITY_SIZE, occluder) {}
 
 	virtual ~Tile() {}
 
 protected:
 private:
-	//Tile(Tile const&) = delete;
+	Tile(Tile const&) = delete;
 	Tile& operator=(Tile const&) = delete;
-
-	float m_tileSize;
 };
 
 class TileMap
 {
 public:
-	TileMap(const std::string& fileName);
-	virtual ~TileMap() {}
+	TileMap() {}
+	virtual ~TileMap();
 
-	void Update(float delta) {}
-	void UpdateActiveTiles(const glm::vec3& cameraPos);
+	void LoadResources(const std::string& fileName);
 
-	inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
-	inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }
+	void Update(float delta);
+
+	inline const std::vector<Tile*>			GetActiveTiles()				const { return m_activeTiles; }
+	inline const std::vector<EntityData>&	GetActiveTilesData()			const { return m_activeTilesData; }
+	inline const std::vector<Tile*>			GetActiveOccluderTiles()		const { return m_activeOccluderTiles; }
+	inline const std::vector<EntityData>&	GetActiveOccluderTilesData()	const { return m_activeOccluderTilesData; }
 
 protected:
 private:
 	TileMap(TileMap const&) = delete;
 	TileMap& operator=(TileMap const&) = delete;
 
-	void Load(const std::string& fileName);
+	void UpdateActiveTiles();
 
-	std::vector<Tile>		m_map;
-	std::vector<Tile>		m_activeTiles;
+	std::vector<Tile*>		m_map;
+	std::vector<Tile*>		m_activeTiles;
 	std::vector<EntityData>	m_activeTilesData;
+	std::vector<Tile*>		m_activeOccluderTiles;
+	std::vector<EntityData>	m_activeOccluderTilesData;
 };
+
+#endif

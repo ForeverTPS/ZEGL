@@ -29,7 +29,6 @@ attribute vec2 texCoord1;
 attribute vec2 texCoord2;
 attribute vec2 texCoord3;
 
-out vec4 vCol;
 out vec2 vTexCoord;
 
 uniform mat4 MVP;
@@ -52,6 +51,6 @@ void main()
   
 	gl_Position = MVP * vec4(pos.x + (offset.x * size),
 							 pos.y + (offset.y * size), 
-							 0, 
+							 pos.z, 
 							 1);
 }

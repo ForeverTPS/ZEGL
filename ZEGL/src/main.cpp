@@ -24,38 +24,18 @@
 #include "util.h"
 #include "window.h"
 
-#ifdef __APPLE__
-#include "CoreFoundation/CoreFoundation.h"
-#endif
-
-#if defined(_DEBUG) && defined(_MSC_FULL_VER)
-#include "vld.h"
+#ifdef _DEBUG
+//#include "vld.h"
 #endif
 
 int main(int argc, char *argv[])
-{
-    // ----------------------------------------------------------------------------
-    // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
-#ifdef __APPLE__
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-    char path[PATH_MAX];
-    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
-    {
-        // error!
-    }
-    CFRelease(resourcesURL);
-    
-    chdir(path);
-#endif
-    // ----------------------------------------------------------------------------
-    
+{   
 	LOG_INIT("ZEGL");
 
 	Window window(800, 600, "ZEGL");
-	Game* game = ZEGLSingleton<Game>::GetSingletonPtr();
+	Game game;
 
-	Core engine(60, &window, game);
+	Core engine(60, &window, &game);
 	engine.Start();
 
 	LOG_CLEANUP();

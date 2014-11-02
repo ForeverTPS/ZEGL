@@ -23,12 +23,13 @@
 in vec2 vTexCoord;
 
 out vec4 fragColor;
+out vec4 normalColor;
 
 uniform sampler2D u_diffuse;
-
-uniform vec4 L_AmbientColor;
+uniform sampler2D u_normal;
 
 void main() 
 {
-	fragColor = texture(u_diffuse, vTexCoord) * L_AmbientColor;
+	normalColor = texture(u_normal, vTexCoord);
+	fragColor = texture(u_diffuse, vTexCoord);
 }
