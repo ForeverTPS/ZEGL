@@ -69,7 +69,7 @@ public:
 			return false;
 		}
 
-		Texture t = GetTexture("u_diffuse");
+		Texture t = GetTexture("uDiffuse");
 
 		int textureWidth = t.GetWidth();
 		int textureHeight = t.GetHeight();

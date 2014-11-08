@@ -92,16 +92,7 @@ namespace Shaders
 		return output;
 	}
 
-	void CompileShader(GLuint program) 
-	{
-		glLinkProgram(program);
-		CheckShader(program, GL_LINK_STATUS, true, "Error linking shader program");
-
-		glValidateProgram(program);
-		CheckShader(program, GL_VALIDATE_STATUS, true, "Invalid shader program");
-	}
-
-	static void CheckShader(int shader, int flag, bool isProgram, const std::string& errorMessage)
+	void CheckShader(int shader, int flag, bool isProgram, const std::string& errorMessage)
 	{
 		GLint success = 0;
 		GLchar error[1024] = { 0 };

@@ -21,6 +21,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "glm/glm.hpp"
 #include <GL/glew.h>
 #include <string>
 #include <vector>
@@ -47,8 +48,68 @@ public:
 		glDeleteProgram(m_program);
 	}
 
-	inline void SetProgram(GLuint program)	{ m_program = program; }
-	inline void AddShader(GLuint shader)	{ m_shaders.push_back(shader); }
+	inline void Bind() { glUseProgram(m_program); }
+
+	inline GLuint	GetProgram() const			{ return m_program; }
+	inline void		SetProgram(GLuint program)	{ m_program = program; }
+
+	inline void AddShader(GLuint shader)	
+	{ 
+		glAttachShader(m_program, shader); 
+		m_shaders.push_back(shader); 
+	}
+
+	inline void CompileShader()
+	{
+		glLinkProgram(m_program);
+		Shaders::CheckShader(m_program, GL_LINK_STATUS, true, "Error linking shader program");
+
+		glValidateProgram(m_program);
+		Shaders::CheckShader(m_program, GL_VALIDATE_STATUS, true, "Invalid shader program");
+	}
+
+	inline void BindTexture(const std::string& loc, GLuint active, const GLuint tex) const 
+	{
+		GLuint location = glGetUniformLocation(m_program, loc.c_str());
+		glActiveTexture(GL_TEXTURE0 + active);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glUniform1i(location, active);
+	}
+
+	inline void BindValue(const std::string& loc, const float f) const
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniform1f(ul, f);
+	}
+
+	inline void BindValue(const std::string& loc, const bool b) const 
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniform1i(ul, b);
+	}
+
+	inline void BindValue(const std::string& loc, const glm::vec2& v) const 
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniform2f(ul, v.x, v.y);
+	}
+
+	inline void BindValue(const std::string& loc, const glm::vec3& v) const 
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniform3f(ul, v.x, v.y, v.z);
+	}
+
+	inline void BindValue(const std::string& loc, const glm::mat4& m) const 
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniformMatrix4fv(ul, 1, GL_FALSE, &m[0][0]);
+	}
+
+	inline void Draw(const size_t count) const 
+	{
+		glDrawArrays(GL_TRIANGLES, 0, count);
+	}
 
 protected:
 private:

@@ -34,8 +34,10 @@ public:
 
 	virtual ~TextureData();
 
-	void Bind(int textureNum) const;
+	void Bind(unsigned int textureNum) const;
 	void BindAsRenderTarget() const;
+
+	inline GLuint GetTextureID(unsigned int textureNum) const { return m_textureID[textureNum]; }
 
 	inline int GetWidth()  const { return m_width; }
 	inline int GetHeight() const { return m_height; }
@@ -68,6 +70,8 @@ public:
 
 	void Bind(unsigned int unit = 0) const;
 	void BindAsRenderTarget() const;
+
+	inline GLuint GetTextureID(unsigned int textureNum = 0) const{ return m_textureData->GetTextureID(textureNum); }
 
 	inline int GetWidth()  const { return m_textureData->GetWidth(); }
 	inline int GetHeight() const { return m_textureData->GetHeight(); }

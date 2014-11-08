@@ -162,7 +162,7 @@ void TextureData::InitRenderTargets(GLenum* attachments)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void TextureData::Bind(int textureNum) const
+void TextureData::Bind(unsigned int textureNum) const
 {
 	glBindTexture(m_textureTarget, m_textureID[textureNum]);
 }

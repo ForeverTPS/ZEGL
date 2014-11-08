@@ -133,23 +133,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\basic_shader_vs.glsl">
-      <Filter>res\shaders</Filter>
+    <None Include="res\levels\test_level.ldf.tdef">
+      <Filter>res\levels</Filter>
     </None>
-    <None Include="res\shaders\basic_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
+    <None Include="res\levels\test_level.ldf">
+      <Filter>res\levels</Filter>
     </None>
     <None Include="res\shaders\ambient_shader_fs.glsl">
       <Filter>res\shaders</Filter>
     </None>
     <None Include="res\shaders\ambient_shader_vs.glsl">
       <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\levels\test_level.ldf.tdef">
-      <Filter>res\levels</Filter>
-    </None>
-    <None Include="res\levels\test_level.ldf">
-      <Filter>res\levels</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

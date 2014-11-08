@@ -20,18 +20,16 @@
 
 #version 150
 
-#define attribute in
-
-attribute vec3 pos;
-attribute float size;
-attribute vec2 texCoord0;
-attribute vec2 texCoord1;
-attribute vec2 texCoord2;
-attribute vec2 texCoord3;
+in vec3 aPos;
+in float aSize;
+in vec2 aTexCoord0;
+in vec2 aTexCoord1;
+in vec2 aTexCoord2;
+in vec2 aTexCoord3;
 
 out vec2 vTexCoord;
 
-uniform mat4 MVP;
+uniform mat4 uMVP;
 
 const vec2 quadpos[] = vec2[4] (
   vec2(-0.5,  0.5),
@@ -44,13 +42,13 @@ void main()
 { 
 	vec2 offset = quadpos[gl_VertexID];
 
-	if (gl_VertexID == 0)		vTexCoord = texCoord0;
-	else if (gl_VertexID == 1)	vTexCoord = texCoord1;
-	else if (gl_VertexID == 2)	vTexCoord = texCoord2;
-	else						vTexCoord = texCoord3;
+	if (gl_VertexID == 0)		vTexCoord = aTexCoord0;
+	else if (gl_VertexID == 1)	vTexCoord = aTexCoord1;
+	else if (gl_VertexID == 2)	vTexCoord = aTexCoord2;
+	else						vTexCoord = aTexCoord3;
   
-	gl_Position = MVP * vec4(pos.x + (offset.x * size),
-							 pos.y + (offset.y * size), 
-							 pos.z, 
-							 1);
+	gl_Position = uMVP * vec4(aPos.x + (offset.x * aSize),
+					    	  aPos.y + (offset.y * aSize), 
+							  aPos.z, 
+							  1);
 }

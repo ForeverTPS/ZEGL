@@ -61,8 +61,9 @@ Window::Window(int width, int height, const std::string& title) :
 	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 	SDL_GL_SetSwapInterval(1);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	glViewport(0, 0, width, height);
 

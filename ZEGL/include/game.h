@@ -61,30 +61,26 @@ private:
 	enum
 	{
 		STD_TILE_VB,
-		OCCLUDER_TILE_VB,
 
 		NUM_BUFFERS
 	};
 
 	void InitShaders();
+	void InitFrameBuffers();
 
 	static Game*		s_game;
 
 	Camera*				m_camera;
 	const Window*		m_window;
 
-	GLuint				m_VAO;
-	GLuint				m_VAB[NUM_BUFFERS];
-	size_t				m_bytesAllocated[NUM_BUFFERS];
-
 	Shader				m_ambientShader;
-	Shader				m_blendShader;
-	Shader				m_lightPassShader;
-	Shader				m_lightAccumShader;
-	Shader				m_shadowShader;
 
 	const Light*		m_activeLight;
 	std::vector<Light*>	m_lights;
+
+	GLuint				m_VAO;
+	GLuint				m_VAB[NUM_BUFFERS];
+	size_t				m_bytesAllocated[NUM_BUFFERS];
 };
 
 #endif

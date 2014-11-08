@@ -24,8 +24,8 @@ Sprite::Sprite(const std::string& texture, const std::string& normalMap, const s
 	const glm::vec3& pos, float rot, float scale, bool occluder) :
 	Entity(pos, rot, scale, occluder) 
 {
-	SetResourcePath("u_diffuse", texture);
-	SetResourcePath("u_normal", normalMap);
+	SetResourcePath("uDiffuse", texture);
+	SetResourcePath("uNormal", normalMap);
 	SetResourcePath("textureAtlas", textureAtlas);
 }
 
@@ -33,8 +33,8 @@ Sprite::Sprite(const std::string& texture, const std::string& normalMap, const g
 	const glm::vec3& pos, float rot, float scale, bool occluder) :
 	Entity(pos, rot, scale, occluder)
 {
-	SetResourcePath("u_diffuse", texture);
-	SetResourcePath("u_normal", normalMap);
+	SetResourcePath("uDiffuse", texture);
+	SetResourcePath("uNormal", normalMap);
 
 	for (unsigned int i = 0; i < 4; i++)
 	{
@@ -44,8 +44,8 @@ Sprite::Sprite(const std::string& texture, const std::string& normalMap, const g
 
 void Sprite::LoadResources()
 {	
-	SetTexture("u_diffuse", Texture(GetResourcePath("u_diffuse")));
-	SetTexture("u_normal", Texture(GetResourcePath("u_normal")));
+	SetTexture("uDiffuse", Texture(GetResourcePath("uDiffuse")));
+	SetTexture("uNormal", Texture(GetResourcePath("uNormal")));
 
 	std::string fileName = GetResourcePath("textureAtlas");
 	if (fileName.length() > 0)
