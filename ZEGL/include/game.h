@@ -22,9 +22,7 @@
 #define GAME_H
 
 #include "shader.h"
-#include <GL/glew.h>
 #include <vector>
-#include <algorithm>
 
 class Camera;
 class Input;
@@ -37,52 +35,32 @@ public:
 	Game();
 	virtual ~Game();
 
-	static inline void	SetInstance(Game* game) { s_game = game; }
-	static inline Game* GetInstance()			{ return s_game; }
-
 	void Init(const Window& window);
-	void LoadResources();
 
 	void ProcessInput(const Input& input, float delta);
 	void Update(float delta);
-
 	void Render();
 
-	inline const Light*		GetActiveLight()	const { return m_activeLight; }
-	inline const Camera&	GetCamera()			const { return *m_camera; }
+	inline const Light*		GetActiveLight()		const { return m_activeLight; }
+	inline const Camera&	GetCamera()				const { return *m_camera; }
 
-	inline const Window*	GetWindow()			const { return m_window; }
+	inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
+	inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
+
+	inline const Window*	GetWindow()					  { return m_window; }
 
 protected:
 private:
 	Game(Game const&) = delete;
 	Game& operator=(Game const&) = delete;
 
-	enum
-	{
-		STD_TILE_VB,
-		OCCLUDER_TILE_VB,
-
-		NUM_BUFFERS
-	};
-
-	void InitShaders();
-
-	static Game*		s_game;
-
 	Camera*				m_camera;
 	const Window*		m_window;
 
-	GLuint				m_VAO;
-	GLuint				m_VAB[NUM_BUFFERS];
-	size_t				m_bytesAllocated[NUM_BUFFERS];
+	glm::vec3			m_ambientColor;
+	float				m_ambientIntensity;
 
-	Shader				m_ambientShader;
-	Shader				m_blendShader;
-	Shader				m_lightPassShader;
-	Shader				m_lightAccumShader;
-	Shader				m_shadowShader;
-
+	Shader				m_defaultShader;
 	const Light*		m_activeLight;
 	std::vector<Light*>	m_lights;
 };

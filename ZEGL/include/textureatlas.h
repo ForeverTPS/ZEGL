@@ -18,9 +18,6 @@
  * limitations under the License.
  */
 
-#ifndef TEXTUREATLAS_H
-#define TEXTUREATLAS_H
-
 #include "referencecounter.h"
 #include <string>
 #include <map>
@@ -51,7 +48,7 @@ private:
 class TextureAtlas
 {
 public:
-	TextureAtlas(const std::string& fileName);
+	TextureAtlas(const std::string& fileName = "default_atlas.xml");
 	TextureAtlas(TextureAtlas const&);
 	virtual ~TextureAtlas();
 
@@ -67,5 +64,3 @@ private:
 	TextureAtlasData*	m_textureAtlasData;
 	std::string			m_fileName;
 };
-
-#endif

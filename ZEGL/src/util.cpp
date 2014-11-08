@@ -19,40 +19,38 @@
  */
 
 #include "util.h"
+#include <string>
 #include <SDL2/SDL.h>
 
-namespace Util
+void Util::Sleep(int milliseconds)
 {
-	void Sleep(int milliseconds)
+	SDL_Delay(milliseconds);
+}
+
+std::vector<std::string> Util::Split(const std::string &s, char delim)
+{
+	std::vector<std::string> elems;
+
+	const char* cstr = s.c_str();
+	unsigned int strLength = (unsigned int)s.length();
+	unsigned int start = 0;
+	unsigned int end = 0;
+
+	while (end <= strLength)
 	{
-		SDL_Delay(milliseconds);
-	}
-
-	std::vector<std::string> Split(const std::string &s, char delim)
-	{
-		std::vector<std::string> elems;
-
-		const char* cstr = s.c_str();
-		unsigned int strLength = (unsigned int)s.length();
-		unsigned int start = 0;
-		unsigned int end = 0;
-
 		while (end <= strLength)
 		{
-			while (end <= strLength)
+			if (cstr[end] == delim)
 			{
-				if (cstr[end] == delim)
-				{
-					break;
-				}
-				end++;
+				break;
 			}
-
-			elems.push_back(s.substr(start, end - start));
-			start = end + 1;
-			end = start;
+			end++;
 		}
 
-		return elems;
+		elems.push_back(s.substr(start, end - start));
+		start = end + 1;
+		end = start;
 	}
+
+	return elems;
 }

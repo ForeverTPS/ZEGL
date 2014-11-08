@@ -21,12 +21,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "mappedvalues.h"
+#include "texture.h"
+#include "textureatlas.h"
+#include "util.h"
 #include "glm/glm.hpp"
 
-const float DEFAULT_ENTITY_SIZE = 64.0f;
-
+class Camera;
+class Core;
 class Input;
+class Shader;
 
 struct EntityData
 {
@@ -36,58 +39,17 @@ struct EntityData
 	glm::vec2	m_texCoords[4];	// 32 bytes - offset 20|28|36|42
 };
 
-class Entity : public MappedValues
+class Entity
 {
 public:
-	Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = DEFAULT_ENTITY_SIZE, bool occluder = false)
-	{
-		m_data.m_pos = pos;
-		m_data.m_rot = rot;
-		m_data.m_scale = scale;
-		m_occluder = occluder;
-	}
-
+	Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+	Entity(const Entity& entity);
+	void operator=(Entity entity);
 	virtual ~Entity() {}
 
-	virtual void Init() = 0;
-	virtual void LoadResources() = 0;
-
-	virtual void Update(float delta) = 0;
-	virtual void ProcessInput(const Input& input, float delta) = 0;
-
-	inline bool CalcTextureCoords(const std::string& regionName)
-	{
-		const TextureAtlas* textureAtlas = GetTextureAtlas();
-		if (textureAtlas == nullptr)
-		{
-			return false;
-		}
-
-		TextureRegion region = textureAtlas->GetRegion(regionName);
-		if (region.w == 0)
-		{
-			return false;
-		}
-
-		Texture t = GetTexture("u_diffuse");
-
-		int textureWidth = t.GetWidth();
-		int textureHeight = t.GetHeight();
-
-		float x = region.x / textureWidth;
-		float y = region.y / textureHeight;
-		float w = region.w / textureWidth;
-		float h = region.h / textureHeight;
-
-		m_data.m_texCoords[0] = glm::vec2(x, y);
-		m_data.m_texCoords[1] = glm::vec2(x, y + h);
-		m_data.m_texCoords[2] = glm::vec2(x + w, y);
-		m_data.m_texCoords[3] = glm::vec2(x + w, y + h);
-
-		return true;
-	}
-
-	inline const EntityData& GetData() const { return m_data; }
+	void ProcessInput(const Input& input, float delta) {}
+	void Update(float delta) {}
+	void Render() const {}
 
 	inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
 	inline float		GetRot()	const	{ return m_data.m_rot; }
@@ -98,17 +60,45 @@ public:
 	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
 	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
 
-	inline bool	IsOccluder() const { return m_occluder; }
-	inline void SetOcculder(bool occludes = true) { m_occluder = occludes; }
+	inline const EntityData& GetData() const { return m_data; }
 
 protected:
 	EntityData	m_data;
 
-	bool m_occluder;
+private:
+	//Entity(Entity const&) = delete;
+	//Entity& operator=(Entity const&) = delete;
+};
+
+class RenderEntity : public Entity
+{
+public:
+	RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+
+	RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+
+	RenderEntity(const RenderEntity& renderEntity);
+	void operator=(RenderEntity renderEntity);
+
+	virtual ~RenderEntity() {}
+
+	bool CalcTextureCoords(const std::string regionName);
+
+	inline const Texture&	GetTexture()	const	{ return m_texture; }
+	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
+	
+protected:
+	TextureAtlas	m_textureAtlas;
+	Texture			m_texture;
+	Texture			m_normalMap;
+
+	bool			m_hasTextureAtlas;
 
 private:
-	Entity(Entity const&) = delete;
-	Entity& operator=(Entity const&) = delete;
+	//RenderEntity(RenderEntity const&) = delete;
+	//RenderEntity& operator=(RenderEntity const&) = delete;
 };
 
 #endif

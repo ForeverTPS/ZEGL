@@ -51,7 +51,7 @@ void Camera::RecreateTransform(const Window* window)
 
 	glm::mat4 reverseTransMat = glm::translate(glm::mat4(1.0f), glm::vec3(-m_pos.x, -m_pos.y, 0.0f));
 	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(m_zoom, m_zoom, 1.0f));
-	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	glm::radians(m_rot), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
 
 	glm::mat4 ortho(1.0f);
 	if (window)

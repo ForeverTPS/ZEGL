@@ -21,39 +21,79 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <GL/glew.h>
+#include "referencecounter.h"
+#include "glm/glm.hpp"
 #include <string>
 #include <vector>
+#include <map>
 
-namespace Shaders
+class Camera;
+class Game;
+
+class ShaderData : public ReferenceCounter
 {
-	GLuint		CreateShader(const std::string& fileName, GLenum type);
+public:
+	ShaderData(const std::string& fileName);
+	virtual ~ShaderData();
 
-	std::string	LoadShader(const std::string& fileName);
-	void		CheckShader(int shader, int flag, bool isProgram, const std::string& errorMessage);
-}
+	inline int GetProgram()                                           const { return m_program; }
+	inline const std::vector<int>& GetShaders()                       const { return m_shaders; }
+	inline const std::vector<std::string>& GetUniformNames()          const { return m_uniformNames; }
+	inline const std::vector<std::string>& GetUniformTypes()          const { return m_uniformTypes; }
+	inline const std::map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
+
+protected:
+private:
+	ShaderData(ShaderData const&) = delete;
+	ShaderData& operator=(ShaderData const&) = delete;
+
+	void AddProgram(const std::string& text, int type);
+
+	void AddAllAttributes(const std::string& vertexShaderText);
+	void AddAllUniforms(const std::string& shaderText);
+	void AddUniform(const std::string& uniformName, const std::string& uniformType);
+
+	void CompileShader() const;
+
+	static int							s_supportedOpenGLLevel;
+	static std::string					s_glslVersion;
+	int									m_program;
+	std::vector<int>                    m_shaders;
+	std::vector<std::string>            m_uniformNames;
+	std::vector<std::string>            m_uniformTypes;
+	std::map<std::string, unsigned int> m_uniformMap;
+};
 
 class Shader
 {
 public:
-	Shader() : m_program(-1) {}
-	virtual ~Shader()
-	{
-		for (std::vector<GLuint>::iterator it = m_shaders.begin(); it != m_shaders.end(); ++it)
-		{
-			glDetachShader(m_program, *it);
-			glDeleteShader(*it);
-		}
-		glDeleteProgram(m_program);
-	}
+	Shader(const std::string& fileName = "basic_shader");
+	Shader(const Shader& other);
+	virtual ~Shader();
 
-	inline void SetProgram(GLuint program)	{ m_program = program; }
-	inline void AddShader(GLuint shader)	{ m_shaders.push_back(shader); }
+	void Load(const std::string& fileName);
+
+	void Bind() const;
+	void UnBind() const;
+
+	void SetUniformi(const std::string& uniformName, int value) const;
+	void SetUniformf(const std::string& uniformName, float value) const;
+	void SetUniformVector2f(const std::string& uniformName, const glm::vec2& value) const;
+	void SetUniformVector3f(const std::string& uniformName, const glm::vec3& value) const;
+	void SetUniformVector4f(const std::string& uniformName, const glm::vec4& value) const;
+	void SetUniformMatrix4f(const std::string& uniformName, const glm::mat4& value) const;
+
+	void UpdateUniforms(Game* game) const;
 
 protected:
 private:
-	GLuint				m_program;
-	std::vector<GLuint> m_shaders;
+	//Shader(const Shader& other) = delete;
+	Shader& operator=(Shader const&) = delete;
+
+	static std::map<std::string, ShaderData*> s_resourceMap;
+
+	ShaderData* m_shaderData;
+	std::string	m_fileName;
 };
 
 #endif

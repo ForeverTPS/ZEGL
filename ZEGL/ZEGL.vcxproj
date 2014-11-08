@@ -55,7 +55,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>GLM_FORCE_RADIANS;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -78,7 +78,7 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>GLM_FORCE_RADIANS;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -98,11 +98,11 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   <ItemGroup>
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
+    <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\texture.cpp" />
@@ -121,10 +121,8 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\input.h" />
     <ClInclude Include="include\light.h" />
     <ClInclude Include="include\logfile.h" />
-    <ClInclude Include="include\mappedvalues.h" />
     <ClInclude Include="include\referencecounter.h" />
     <ClInclude Include="include\shader.h" />
-    <ClInclude Include="include\sprite.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\texture.h" />
     <ClInclude Include="include\textureatlas.h" />
@@ -141,6 +139,8 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <None Include="res\shaders\ambient_shader_vs.glsl" />
     <None Include="res\shaders\basic_shader_fs.glsl" />
     <None Include="res\shaders\basic_shader_vs.glsl" />
+    <None Include="res\shaders\point_light_fs.glsl" />
+    <None Include="res\shaders\point_light_vs.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\black.png" />
@@ -150,6 +150,9 @@ xcopy /Y /d /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <Image Include="res\textures\white.png" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="res\textures\default_atlas.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="res\textures\test_atlas.xml">
       <SubType>Designer</SubType>
     </Xml>
