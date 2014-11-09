@@ -139,10 +139,31 @@
     <None Include="res\levels\test_level.ldf">
       <Filter>res\levels</Filter>
     </None>
-    <None Include="res\shaders\ambient_shader_fs.glsl">
+    <None Include="res\shaders\sprite_shader_vs.glsl">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\ambient_shader_vs.glsl">
+    <None Include="res\shaders\sprite_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\lightgen_shader_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\lightgen_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\shadowgen_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\shadowgen_shader_gs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\texturedquad_shader_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\combineshadow_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\finalblend_shader_fs.glsl">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>

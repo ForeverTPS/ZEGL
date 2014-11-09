@@ -48,7 +48,7 @@ public:
 		glDeleteProgram(m_program);
 	}
 
-	inline void Bind() { glUseProgram(m_program); }
+	inline void		Bind() { glUseProgram(m_program); }
 
 	inline GLuint	GetProgram() const			{ return m_program; }
 	inline void		SetProgram(GLuint program)	{ m_program = program; }
@@ -66,6 +66,14 @@ public:
 
 		glValidateProgram(m_program);
 		Shaders::CheckShader(m_program, GL_VALIDATE_STATUS, true, "Invalid shader program");
+	}
+
+	inline void BindVertices(GLuint buffer) const
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, buffer);
+		GLuint location = glGetAttribLocation(m_program, "aVertex");
+		glEnableVertexAttribArray(location);
+		glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	}
 
 	inline void BindTexture(const std::string& loc, GLuint active, const GLuint tex) const 

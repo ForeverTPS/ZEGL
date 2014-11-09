@@ -51,11 +51,17 @@ public:
 	inline const glm::vec3& GetColor()		const { return m_color; }
 	inline const float GetRadius()			const { return m_radius; }
 	inline const glm::vec3& GetFalloff()	const { return m_falloff; }
+	inline const float GetConstant()		const { return m_falloff.x; }
+	inline const float GetLinear()			const { return m_falloff.y; }
+	inline const float GetQuadratic()		const { return m_falloff.z; }
 	
 	inline void SetPos(const glm::vec3& pos)			{ m_pos = pos; }
 	inline void SetLightColor(const glm::vec3& color)	{ m_color = color; }
 	inline void SetRadius(float radius)					{ m_radius = radius; }
 	inline void SetFalloff(const glm::vec3& falloff)	{ m_falloff = falloff; }
+	inline void GetConstant(float constant)				{ m_falloff.x = constant; }
+	inline void GetLinear(float linear)					{ m_falloff.y = linear; }
+	inline void GetQuadratic(float quadratic)			{ m_falloff.z = quadratic; }
 
 private:
 	glm::vec3	m_pos;

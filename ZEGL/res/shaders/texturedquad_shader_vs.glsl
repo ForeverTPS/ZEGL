@@ -18,15 +18,14 @@
  * limitations under the License.
  */
 
-#version 150
+#version 150 compatibility
 
-in vec2 vTexCoord;
+in vec3 aPos;
 
-out vec4 fragColor;
-
-uniform sampler2D uDiffuse;
+out vec2 vTexCoords;
 
 void main() 
 {
-	fragColor = texture(uDiffuse, vTexCoord);
+    vTexCoords = ((aPos + 1) / 2).xy;
+    gl_Position = vec4(aPos.xy, 0, 1);
 }

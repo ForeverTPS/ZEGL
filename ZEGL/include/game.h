@@ -61,6 +61,7 @@ private:
 	enum
 	{
 		STD_TILE_VB,
+		OCCLUDER_TILE_VB,
 
 		NUM_BUFFERS
 	};
@@ -68,12 +69,19 @@ private:
 	void InitShaders();
 	void InitFrameBuffers();
 
+	void BindTileData();
+	void BindOccluderTileData();
+
 	static Game*		s_game;
 
 	Camera*				m_camera;
 	const Window*		m_window;
 
-	Shader				m_ambientShader;
+	Shader				m_spriteShader;
+	Shader				m_lightPassShader;
+	Shader				m_shadowShader;
+	Shader				m_lightAccumShader;
+	Shader				m_blendShader;
 
 	const Light*		m_activeLight;
 	std::vector<Light*>	m_lights;
@@ -81,6 +89,24 @@ private:
 	GLuint				m_VAO;
 	GLuint				m_VAB[NUM_BUFFERS];
 	size_t				m_bytesAllocated[NUM_BUFFERS];
+
+	GLuint				m_quadVAO;
+	GLuint				m_quadVAB;
+	size_t				m_quadVAB_size;
+
+	GLuint				m_spriteFBO;
+	GLuint				m_spriteFBO_color;
+	GLuint				m_spriteFBO_render;
+	GLuint				m_spriteFBO_normal;
+
+	GLuint				m_lightAccumFBO;
+	GLuint				m_lightAccumFBO_tex;
+
+	GLuint				m_lightPassFBO;
+	GLuint				m_lightPassFBO_tex;
+
+	GLuint				m_lightPassMaskFBO;
+	GLuint				m_lightPassMaskFBO_tex;
 };
 
 #endif
