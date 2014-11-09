@@ -21,11 +21,13 @@
 #version 330
 
 in vec2 vTexCoord;
+in vec2 vPositionUnits;
 
 layout(location=0) out vec4 fragColor;
 layout(location=1) out vec4 normalColor;
 
 uniform sampler2D uDiffuse, uNormal;
+uniform vec2 uCamPos;
 
 void main() 
 {

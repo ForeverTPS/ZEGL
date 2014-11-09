@@ -28,8 +28,10 @@ in vec2 aTexCoord2;
 in vec2 aTexCoord3;
 
 out vec2 vTexCoord;
+out vec2 vPositionUnits;
 
-uniform mat4 uMVP;
+uniform vec2 uCameraPos;
+uniform mat3 uMVP;
 
 const vec2 quadpos[] = vec2[4] (
   vec2(-0.5,  0.5),
@@ -46,9 +48,12 @@ void main()
 	else if (gl_VertexID == 1)	vTexCoord = aTexCoord1;
 	else if (gl_VertexID == 2)	vTexCoord = aTexCoord2;
 	else						vTexCoord = aTexCoord3;
+
+	vec3 pxPos = vec3(aPos.x + (offset.x * aSize),
+					  aPos.y + (offset.y * aSize), 
+					  aPos.z);
+
+	vPositionUnits = pxPos.xy;
   
-	gl_Position = uMVP * vec4(aPos.x + (offset.x * aSize),
-					    	  aPos.y + (offset.y * aSize), 
-							  aPos.z, 
-							  1);
+	gl_Position = vec4((uMVP * pxPos).xy, aPos.z, 1);
 }

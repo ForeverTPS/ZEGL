@@ -61,7 +61,7 @@ private:
 	enum
 	{
 		STD_TILE_VB,
-		OCCLUDER_TILE_VB,
+		//OCCLUDER_TILE_VB,
 
 		NUM_BUFFERS
 	};
@@ -69,8 +69,8 @@ private:
 	void InitShaders();
 	void InitFrameBuffers();
 
-	void BindTileData();
-	void BindOccluderTileData();
+	void DrawTiles();
+	void DrawOccluderTiles();
 
 	static Game*		s_game;
 
