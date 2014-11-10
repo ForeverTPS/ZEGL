@@ -25,7 +25,7 @@ uniform mat3 uMVP;
 uniform bool uUnmask;
 
 layout(triangles) in;
-layout(triangle_strip, max_vertices=18) out;
+layout(triangle_strip, max_vertices=15) out;
 
 //For now we'll just assume framebuffer's 800x600...
 

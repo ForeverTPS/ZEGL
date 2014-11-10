@@ -61,7 +61,7 @@ private:
 	enum
 	{
 		STD_TILE_VB,
-		//OCCLUDER_TILE_VB,
+		OCCLUDER_TILE_VB,
 
 		NUM_BUFFERS
 	};
@@ -86,7 +86,7 @@ private:
 	const Light*		m_activeLight;
 	std::vector<Light*>	m_lights;
 
-	GLuint				m_VAO;
+	GLuint				m_VAO[NUM_BUFFERS];
 	GLuint				m_VAB[NUM_BUFFERS];
 	size_t				m_bytesAllocated[NUM_BUFFERS];
 

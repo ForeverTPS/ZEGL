@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-#version 150 compatibility
+#version 150
 
 in vec2 vTexCoords;
 
@@ -31,5 +31,5 @@ void main()
 {
     //FIXME: Ambient component should be set as a uniform.
     
-    fragColor = ((1 - texture(uMask, vTexCoords, 0).r) * texture2D(uIntensity, vTexCoords, 0));
+    fragColor = ((1 - texture(uMask, vTexCoords, 0).r) * texture(uIntensity, vTexCoords, 0));
 }

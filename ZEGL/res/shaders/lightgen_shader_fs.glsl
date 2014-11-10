@@ -41,7 +41,7 @@ void main()
 
     float intensity = 1 / (uConstant + (dn * uLinear) + (dn * dn * uQuadratic));
 
-    vec3 nm = texture2D(uNormal, vTexCoords, 0).rgb;
+    vec3 nm = texture(uNormal, vTexCoords, 0).rgb;
 
     vec3 n = normalize((2 * nm) - 1);
     vec3 l = normalize(uLightPos - vp);

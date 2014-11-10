@@ -53,7 +53,7 @@ Game::~Game()
 	Util::SafeDelete(tileMap);
 
 	glDeleteBuffers(NUM_BUFFERS, m_VAB);
-	glDeleteVertexArrays(1, &m_VAO);
+	glDeleteVertexArrays(NUM_BUFFERS, m_VAO);
 
 	glDeleteBuffers(1, &m_quadVAB);
 	glDeleteVertexArrays(1, &m_quadVAO);
@@ -78,9 +78,10 @@ void Game::Init(const Window& window)
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
 	//glFrontFace(GL_CW);
-	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -89,12 +90,12 @@ void Game::Init(const Window& window)
 
 	//Make fullscreen quad vbo.
 	glm::vec3 verts[6] = {
-		glm::vec3(-1, -1, 1),
-		glm::vec3(1, -1, 1),
-		glm::vec3(-1, 1, 1),
-		glm::vec3(1, -1, 1),
-		glm::vec3(-1, 1, 1),
-		glm::vec3(1, 1, 1)
+		glm::vec3(-1, -1, 0),
+		glm::vec3(1, -1, 0),
+		glm::vec3(-1, 1, 0),
+		glm::vec3(1, -1, 0),
+		glm::vec3(-1, 1, 0),
+		glm::vec3(1, 1, 0)
 	};
 
 	size_t m_quadVBO_size = sizeof(verts);
@@ -104,7 +105,7 @@ void Game::Init(const Window& window)
 	glBufferData(GL_ARRAY_BUFFER, m_quadVBO_size, &verts[0], GL_STATIC_DRAW);
 
 	InitShaders();
-	//InitFrameBuffers();
+	InitFrameBuffers();
 
 	tileMap = new TileMap();
 	
@@ -120,7 +121,7 @@ void Game::InitShaders()
 
 	glm::mat3 displayTransform(2.0f / vw, 0, 0,
 		0, 2.0f / -vh, 0,
-		-1, 1, 1);
+		-1, -1, 0);
 	//////////////////////////////////////////////////////////////////////////
 
 	GLuint sprite_vs = Shaders::CreateShader("sprite_shader_vs.glsl", GL_VERTEX_SHADER);
@@ -254,11 +255,11 @@ void Game::LoadResources()
 {
 	tileMap->LoadResources("test_level.ldf");
 
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
+	glGenVertexArrays(NUM_BUFFERS, m_VAO);
 
-	glGenBuffers(NUM_BUFFERS, m_VAB);
-
+	// 1. Normal tile vertex buffer
+	glBindVertexArray(m_VAO[STD_TILE_VB]);
+	glGenBuffers(1, &m_VAB[STD_TILE_VB]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VAB[STD_TILE_VB]);
 
 	glEnableVertexAttribArray(0); // pos
@@ -286,32 +287,35 @@ void Game::LoadResources()
 	glVertexAttribDivisor(4, 1);
 	glVertexAttribDivisor(5, 1);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, m_VAB[OCCLUDER_TILE_VB]);
+	// 2. Tiles which case shadows vertex buffer
+	glBindVertexArray(m_VAO[OCCLUDER_TILE_VB]);
+	glGenBuffers(1, &m_VAB[OCCLUDER_TILE_VB]);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VAB[OCCLUDER_TILE_VB]);
 
-	//glEnableVertexAttribArray(0); // pos
-	//glEnableVertexAttribArray(1); // size
-	//glEnableVertexAttribArray(2); // texCoords0
-	//glEnableVertexAttribArray(3); // texCoords1
-	//glEnableVertexAttribArray(4); // texCoords2
-	//glEnableVertexAttribArray(5); // texCoords3
+	glEnableVertexAttribArray(0); // pos
+	glEnableVertexAttribArray(1); // size
+	glEnableVertexAttribArray(2); // texCoords0
+	glEnableVertexAttribArray(3); // texCoords1
+	glEnableVertexAttribArray(4); // texCoords2
+	glEnableVertexAttribArray(5); // texCoords3
 
-	//m_bytesAllocated[OCCLUDER_TILE_VB] = sizeof(EntityData)* tileMap->GetActiveOccluderTilesData().size();
+	m_bytesAllocated[OCCLUDER_TILE_VB] = sizeof(EntityData)* tileMap->GetActiveOccluderTilesData().size();
 
-	//glBufferData(GL_ARRAY_BUFFER, m_bytesAllocated[OCCLUDER_TILE_VB], &tileMap->GetActiveOccluderTilesData()[0], GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, m_bytesAllocated[OCCLUDER_TILE_VB], &tileMap->GetActiveOccluderTilesData()[0], GL_STREAM_DRAW);
 
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)0);
-	//glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
-	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
-	//glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)28);
-	//glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)36);
-	//glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)42);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)28);
+	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)36);
+	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)42);
 
-	//glVertexAttribDivisor(0, 1);
-	//glVertexAttribDivisor(1, 1);
-	//glVertexAttribDivisor(2, 1);
-	//glVertexAttribDivisor(3, 1);
-	//glVertexAttribDivisor(4, 1);
-	//glVertexAttribDivisor(5, 1);
+	glVertexAttribDivisor(0, 1);
+	glVertexAttribDivisor(1, 1);
+	glVertexAttribDivisor(2, 1);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribDivisor(4, 1);
+	glVertexAttribDivisor(5, 1);
 }
 
 void Game::ProcessInput(const Input& input, float delta)
@@ -327,40 +331,35 @@ void Game::Update(float delta)
 
 void Game::Render()
 {
-	m_window->BindAsRenderTarget();
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	//glBindVertexArray(m_quadVAO);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glBindVertexArray(m_VAO);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//glBindFramebuffer(GL_FRAMEBUFFER, m_lightAccumFBO);
+	//m_window->BindAsRenderTarget();
 	//glClear(GL_COLOR_BUFFER_BIT);
 
-	//glBindFramebuffer(GL_FRAMEBUFFER, m_spriteFBO);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_lightAccumFBO);
+	glClear(GL_COLOR_BUFFER_BIT);
 
-	m_spriteShader.Bind();
-	//glEnable(GL_DEPTH_TEST);
-	//glDisable(GL_BLEND);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_spriteFBO);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glDisable(GL_BLEND);
 
 	Texture texture = tileMap->GetActiveTiles()[0]->GetTexture("uDiffuse");
 	Texture normal = tileMap->GetActiveTiles()[0]->GetTexture("uNormal");
 
+	m_spriteShader.Bind();
 	m_spriteShader.BindTexture("uDiffuse", 0, texture.GetTextureID(0));
 	m_spriteShader.BindTexture("uNormal", 1, texture.GetTextureID(0));
 
+	glBindVertexArray(m_VAO[STD_TILE_VB]);
 	DrawTiles();
-	//DrawOccluderTiles();
 
-	//glDisable(GL_DEPTH_TEST);
+	glBindVertexArray(m_VAO[OCCLUDER_TILE_VB]);
+	m_spriteShader.Bind();
 
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	DrawOccluderTiles();
 
-	/*
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
 		m_activeLight = m_lights[i];
@@ -383,7 +382,7 @@ void Game::Render()
 
 		m_lightPassShader.Draw(6);
 
-		glBindVertexArray(m_VAO);
+		glBindVertexArray(m_VAO[OCCLUDER_TILE_VB]);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_lightPassMaskFBO);
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -391,7 +390,6 @@ void Game::Render()
 
 		// DRAW SHADOWING
 		m_shadowShader.Bind();
-		BindOccluderTileData();
 		m_shadowShader.BindValue("uLightPos", m_activeLight->GetPos());
 		m_shadowShader.BindValue("uUnmask", false);
 		DrawOccluderTiles();
@@ -401,8 +399,8 @@ void Game::Render()
 		// DO BLURRING
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		glBindVertexArray(m_quadVAO);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_lightAccumFBO);
+		glBindVertexArray(m_quadVAO);
 
 		m_lightAccumShader.Bind();
 		m_lightAccumShader.BindVertices(m_quadVAB);
@@ -412,16 +410,16 @@ void Game::Render()
 	}
 
 	// DRAW FULLSCREEN QUAD
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	m_window->BindAsRenderTarget();
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	m_blendShader.Bind();
+	glBindVertexArray(m_quadVAO);
 	m_blendShader.BindVertices(m_quadVAB);
 	m_blendShader.BindTexture("uColor", 0, m_spriteFBO_color);
 	m_blendShader.BindTexture("uIntensity", 1, m_lightAccumFBO_tex);
 	
 	m_blendShader.Draw(6);
-	*/
 
 	m_activeLight = nullptr;
 }
@@ -429,8 +427,6 @@ void Game::Render()
 void Game::DrawTiles()
 {
 	size_t bytesNeeded;
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_VAB[STD_TILE_VB]);
 
 	bytesNeeded = sizeof(EntityData)* tileMap->GetActiveTilesData().size();
 	if (bytesNeeded > m_bytesAllocated[STD_TILE_VB])
@@ -448,18 +444,18 @@ void Game::DrawTiles()
 
 void Game::DrawOccluderTiles()
 {
-	//size_t bytesNeeded;
+	size_t bytesNeeded;
 
-	//glBindBuffer(GL_ARRAY_BUFFER, m_VAB[OCCLUDER_TILE_VB]);
+	bytesNeeded = sizeof(EntityData)* tileMap->GetActiveOccluderTilesData().size();
+	if (bytesNeeded > m_bytesAllocated[OCCLUDER_TILE_VB])
+	{
+		glBufferData(GL_ARRAY_BUFFER, bytesNeeded, &tileMap->GetActiveOccluderTilesData()[0], GL_STREAM_DRAW);
+		m_bytesAllocated[OCCLUDER_TILE_VB] = bytesNeeded;
+	}
+	else
+	{
+		glBufferSubData(GL_ARRAY_BUFFER, 0, bytesNeeded, &tileMap->GetActiveOccluderTilesData()[0]);
+	}
 
-	//bytesNeeded = sizeof(EntityData)* tileMap->GetActiveOccluderTilesData().size();
-	//if (bytesNeeded > m_bytesAllocated[OCCLUDER_TILE_VB])
-	//{
-	//	glBufferData(GL_ARRAY_BUFFER, bytesNeeded, &tileMap->GetActiveOccluderTilesData()[0], GL_STREAM_DRAW);
-	//	m_bytesAllocated[OCCLUDER_TILE_VB] = bytesNeeded;
-	//}
-	//else
-	//{
-	//	glBufferSubData(GL_ARRAY_BUFFER, 0, bytesNeeded, &tileMap->GetActiveOccluderTilesData()[0]);
-	//}
+	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveOccluderTilesData().size());
 }

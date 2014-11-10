@@ -20,7 +20,7 @@
 
 #version 150
 
-in vec3 aPos;
+in vec3 aVertex;
 
 out vec2 vPositionUnits;
 out vec2 vTexCoords;
@@ -32,14 +32,14 @@ void main()
 {
     vec2 size = textureSize(uNormal, 0);
 
-    vec2 pxClip = aPos.xy;
+    vec2 pxClip = aVertex.xy;
     vec2 vPositionUnits = ((pxClip + 1) / 2) * size;
 
     vPositionUnits -= uCamPos;
 
     vTexCoords = (pxClip + 1) / 2;
 
-    gl_Position.xy = aPos.xy;
+    gl_Position.xy = aVertex.xy;
     gl_Position.z = 0; //Should setting depth values be allowed?
     gl_Position.w = 1;
 }

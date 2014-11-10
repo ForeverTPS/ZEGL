@@ -20,12 +20,12 @@
 
 #version 150 compatibility
 
-in vec3 aPos;
+in vec3 aVertex;
 
 out vec2 vTexCoords;
 
 void main() 
 {
-    vTexCoords = ((aPos + 1) / 2).xy;
-    gl_Position = vec4(aPos.xy, 0, 1);
+    vTexCoords = ((aVertex + 1) / 2).xy;
+    gl_Position = vec4(aVertex.xy, 0, 1);
 }

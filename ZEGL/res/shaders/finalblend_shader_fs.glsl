@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-#version 150 compatibility
+#version 150
 
 in vec2 vTexCoords;
 
@@ -28,6 +28,6 @@ uniform sampler2D uColor, uIntensity;
 
 void main() 
 {
-    fragColor.rgb = texture(uColor, vTexCoords, 0).rgb * (vec3(0.01,0.02,0.05) + texture2D(uIntensity, vTexCoords, 0).rgb);
-    fragColor.a = 1;
+	//fragColor = texture(uColor, vTexCoords, 0).rgb * (vec3(0.01,0.02,0.05) + texture(uIntensity, vTexCoords, 0).rgb);
+    fragColor = vec4((texture(uColor, vTexCoords, 0).rgb * (vec3(0.01,0.02,0.05) + texture(uIntensity, vTexCoords, 0).rgb)),1);
 }
