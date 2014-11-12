@@ -28,10 +28,14 @@ class Window;
 class Camera
 {
 public:
-	Camera(const Window* window = nullptr);
+	Camera(const Window* window);
 	virtual ~Camera() {};
 
-	const glm::mat4& GetTransform(const Window* window);
+	void RevertToLast();
+
+	const glm::mat4& GetTransform(bool skipUpdate = false);
+
+	inline void	Translate(const glm::vec3& v) { m_pos += v; }
 
 	inline glm::vec3	GetPos()	const	{ return m_pos; }
 	inline float		GetRot()	const	{ return m_rot; }
@@ -41,6 +45,9 @@ public:
 	inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
 	inline void	SetRot(float rot)							{ m_rot = rot; }
 	inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
+
+	void SetOrtho(float left, float right, float bottom, float top, float near_z = -1.0f, float far_z = 1.0f);
+	void SetOrthoToWindow(float near_z = -1.0f, float far_z = 1.0f);
 
 protected:
 private:
@@ -60,11 +67,16 @@ private:
 		}
 	};
 
-	void RecreateTransform(const Window* window);
+	void RecreateTransform(bool skipUpdate = false);
+
+	const Window*	m_window;
 
 	glm::vec3		m_pos;
 	float			m_rot;
 	float			m_zoom;
+
+	glm::mat4		m_ortho;
+
 	Transformation	m_transform;
 };
 

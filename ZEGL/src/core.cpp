@@ -18,12 +18,13 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "core.h"
 #include "game.h"
 #include "timing.h"
 #include "util.h"
 #include "window.h"
-#include <stdio.h>
 
 Core::Core(double frameRate, Window* window, Game* game) :
 	m_isRunning(false),
@@ -51,7 +52,7 @@ void Core::Start()
 
 	while (m_isRunning)
 	{
-		bool render = false;						//Whether or not the game needs to be re-rendered.
+		bool draw = false;						//Whether or not the game needs to be re-rendered.
 
 		double startTime = Time::GetTime();			//Current time at the start of the frame.
 		double passedTime = startTime - lastTime;	//Amount of passed time since last frame.
@@ -95,14 +96,14 @@ void Core::Start()
 
 			//Since any updates can put on-screen objects in a new place, the flag
 			//must be set to re-render the scene.
-			render = true;
+			draw = true;
 
 			unprocessedTime -= m_frameTime;
 		}
 
-		if (render)
+		if (draw)
 		{
-			m_game->Render();
+			m_game->Draw();
 
 			//The newly rendered image will be in the window's back buffer,
 			//so the buffers must be swapped to display the new image.

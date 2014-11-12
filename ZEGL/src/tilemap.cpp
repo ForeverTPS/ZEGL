@@ -18,16 +18,41 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "tilemap.h"
 #include "camera.h"
 #include "game.h"
 #include "logfile.h"
-#include "tinyxml2.h"
+//#include "tinyxml2.h"
 #include "window.h"
-#include <fstream>
-#include <iostream>
 
 using namespace tinyxml2;
+
+void Tile::Draw(const Shader& shader)
+{
+	shader.BindVertices(m_VAB);
+	shader.BindValue("uPos", m_pos);
+
+	shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
+	shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
+
+	shader.Draw(6);
+}
+
+void Tile::DrawOcclusion(const Shader& shader)
+{
+	if (IsOccluder())
+	{
+		shader.BindVertices(m_VAB);
+		shader.BindValue("uPos", m_pos);
+
+		shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
+		shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
+
+		shader.Draw(6);
+	}
+}
 
 TileMap::~TileMap()
 {
@@ -42,7 +67,7 @@ void TileMap::LoadResources(const std::string& fileName)
 	bool success = true;
 	std::string error;
 
-	XMLDocument doc;
+	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(("./res/levels/" + fileName + ".tdef").c_str()) != XML_NO_ERROR)
 	{
 		success = false;
@@ -66,10 +91,8 @@ void TileMap::LoadResources(const std::string& fileName)
 				TileDefinition tileDef;
 
 				tileId = tileElement->Attribute("id");
-				tileDef.tilename = tileElement->Attribute("name");
 				tileDef.textureName = tileElement->Attribute("texture");
 				tileDef.normalMapName = tileElement->Attribute("normalMap");
-				tileDef.textureAtlasName = tileElement->Attribute("textureAtlas");
 				tileElement->QueryBoolAttribute("occluder", &tileDef.occluder);
 
 				m_tileDefs.insert(std::pair<std::string, TileDefinition>(tileId, tileDef));
@@ -84,8 +107,8 @@ void TileMap::LoadResources(const std::string& fileName)
 
 			if (file.is_open())
 			{
-				float x = DEFAULT_ENTITY_SIZE / 2;
-				float y = x;
+				float x = 0.0f;
+				float y = 0.0f;
 
 				while (file.good())
 				{
@@ -97,7 +120,7 @@ void TileMap::LoadResources(const std::string& fileName)
 						std::map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
 						if (it != m_tileDefs.end())
 						{
-							Tile* t = new Tile(it->second.textureName, it->second.normalMapName, it->second.textureAtlasName, glm::vec3(x, y, 0.0f), 0.0f, it->second.occluder);
+							Tile* t = new Tile(it->second.textureName, it->second.normalMapName, glm::vec3(x, y, 0.0f), it->second.occluder);
 							t->LoadResources();
 							m_map.push_back(t);
 
@@ -112,23 +135,13 @@ void TileMap::LoadResources(const std::string& fileName)
 						}
 					}
 
-					x = DEFAULT_ENTITY_SIZE / 2;
+					x = 0.0f;
 					y += DEFAULT_ENTITY_SIZE;
 				}
 
 				for (unsigned int i = 0; i < m_map.size(); i++)
 				{
-					m_map[i]->CalcTextureCoords("rock");
-					if (m_map[i]->IsOccluder())
-					{
-						m_activeOccluderTiles.push_back(m_map[i]);
-						m_activeOccluderTilesData.push_back(m_map[i]->GetData());
-					}
-					else
-					{
-						m_activeTiles.push_back(m_map[i]);
-						m_activeTilesData.push_back(m_map[i]->GetData());
-					}
+					m_activeTiles.push_back(m_map[i]);
 				}
 			}
 			else
@@ -159,9 +172,6 @@ void TileMap::UpdateActiveTiles()
 	const Window* window = game->GetWindow();
 
 	m_activeTiles.clear();
-	m_activeTilesData.clear();
-	m_activeOccluderTiles.clear();
-	m_activeOccluderTilesData.clear();
 	
 	for (unsigned int i = 0; i < m_map.size(); i++)
 	{
@@ -170,16 +180,27 @@ void TileMap::UpdateActiveTiles()
 		if (pos.x > cameraPos.x - DEFAULT_ENTITY_SIZE && pos.x < cameraPos.x + (float)window->GetWidth() + DEFAULT_ENTITY_SIZE &&
 			pos.y > cameraPos.y - DEFAULT_ENTITY_SIZE && pos.y < cameraPos.y + (float)window->GetHeight() + DEFAULT_ENTITY_SIZE)
 		{
-			if (m_map[i]->IsOccluder())
-			{
-				m_activeOccluderTiles.push_back(m_map[i]);
-				m_activeOccluderTilesData.push_back(m_map[i]->GetData());
-			}
-			else
-			{
-				m_activeTiles.push_back(m_map[i]);
-				m_activeTilesData.push_back(m_map[i]->GetData());
-			}
+			m_activeTiles.push_back(m_map[i]);
 		}
 	}
+}
+
+void TileMap::Draw(const Shader& shader) 
+{
+	for (auto iter = m_activeTiles.begin(); iter != m_activeTiles.end(); iter++)
+	{
+		auto obj = (*iter);
+		obj->Draw(shader);
+	}
+}
+
+void TileMap::DrawShadowLayer(const Shader& shader)
+{
+
+	for (auto iter = m_activeTiles.begin(); iter != m_activeTiles.end(); iter++) 
+	{
+		auto obj = (*iter);
+		obj->DrawOcclusion(shader);
+	}
+
 }

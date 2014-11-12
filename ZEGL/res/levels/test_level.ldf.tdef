@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Tile id="1" name="rock" texture="rock.png" normalMap="rock_n.png" textureAtlas="test_atlas.xml" occluder="false" />
-<Tile id="2" name="rock" texture="rock.png" normalMap="rock_n.png" textureAtlas="test_atlas.xml" occluder="true" />
+<Tile id="1" texture="rock.png" normalMap="rock_n.png" occluder="false" />
+<Tile id="2" texture="rock2.png" normalMap="rock2_n.png" occluder="true" />

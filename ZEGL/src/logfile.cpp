@@ -18,21 +18,12 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "logfile.h"
 #include "util.h"
-#include <fstream>
-#include <time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-
-#ifdef WIN32
-#include <direct.h>
-#include <iostream>
-#include <shlobj.h>
-#include <stdlib.h>
 
 #pragma comment(lib, "shell32.lib")
-#endif
 
 unsigned int    LogFile::s_numWarnings = 0u;
 unsigned int    LogFile::s_numErrors = 0u;

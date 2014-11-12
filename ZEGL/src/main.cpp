@@ -18,6 +18,8 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "core.h"
 #include "game.h"
 #include "logfile.h"
@@ -25,7 +27,7 @@
 #include "window.h"
 
 #ifdef _DEBUG
-//#include "vld.h"
+#include "vld.h"
 #endif
 
 int main(int argc, char *argv[])

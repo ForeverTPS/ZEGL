@@ -18,28 +18,30 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "sprite.h"
 
-Sprite::Sprite(const std::string& texture, const std::string& normalMap, const std::string& textureAtlas,
-	const glm::vec3& pos, float rot, float scale, bool occluder) :
-	Entity(pos, rot, scale, occluder) 
+const glm::vec3 Sprite::s_vertices[6] = {
+	glm::vec3(0, 0, 0),
+	glm::vec3(0, 1, 0),
+	glm::vec3(1, 0, 0),
+	glm::vec3(0, 1, 0),
+	glm::vec3(1, 1, 0),
+	glm::vec3(1, 0, 0)
+};
+
+Sprite::Sprite(const std::string& texture, const std::string& normalMap, const glm::vec3& pos, bool occluder) :
+	m_occluder(occluder),
+	Entity(pos)
 {
 	SetResourcePath("uDiffuse", texture);
 	SetResourcePath("uNormal", normalMap);
-	SetResourcePath("textureAtlas", textureAtlas);
 }
 
-Sprite::Sprite(const std::string& texture, const std::string& normalMap, const glm::vec2 textureCoords[4],
-	const glm::vec3& pos, float rot, float scale, bool occluder) :
-	Entity(pos, rot, scale, occluder)
+Sprite::~Sprite()
 {
-	SetResourcePath("uDiffuse", texture);
-	SetResourcePath("uNormal", normalMap);
-
-	for (unsigned int i = 0; i < 4; i++)
-	{
-		m_data.m_texCoords[i] = textureCoords[i];
-	}
+	glDeleteBuffers(1, &m_VAB);
 }
 
 void Sprite::LoadResources()
@@ -47,9 +49,32 @@ void Sprite::LoadResources()
 	SetTexture("uDiffuse", Texture(GetResourcePath("uDiffuse")));
 	SetTexture("uNormal", Texture(GetResourcePath("uNormal")));
 
-	std::string fileName = GetResourcePath("textureAtlas");
-	if (fileName.length() > 0)
+	glGenBuffers(1, &m_VAB);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VAB);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(s_vertices), s_vertices, GL_STATIC_DRAW);
+}
+
+void Sprite::Draw(const Shader& shader) 
+{
+	shader.BindVertices(m_VAB);
+	shader.BindValue("uPos", m_pos);
+
+	shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
+	shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
+
+	shader.Draw(6);
+}
+
+void Sprite::DrawOcclusion(const Shader& shader) 
+{
+	if (IsOccluder())
 	{
-		SetTextureAtlas(new TextureAtlas(fileName));
+		shader.BindVertices(m_VAB);
+		shader.BindValue("uPos", m_pos);
+
+		shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
+		shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
+
+		shader.Draw(6);
 	}
 }

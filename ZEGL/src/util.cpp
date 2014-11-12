@@ -18,8 +18,9 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "util.h"
-#include <SDL2/SDL.h>
 
 namespace Util
 {

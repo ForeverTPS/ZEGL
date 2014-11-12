@@ -18,15 +18,11 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "shader.h"
 #include "logfile.h"
 #include "util.h"
-#include <GL/glew.h>
-#include <fstream>
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <sstream>
 
 namespace Shaders
 {

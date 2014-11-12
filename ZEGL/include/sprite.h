@@ -22,17 +22,13 @@
 #define SPRITE_H
 
 #include "entity.h"
+#include "shader.h"
 
 class Sprite : public Entity
 {
 public:
-	Sprite(const std::string& texture, const std::string& normalMap, const std::string& textureAtlas,
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = DEFAULT_ENTITY_SIZE, bool occluder = false);
-
-	Sprite(const std::string& texture, const std::string& normalMap, const glm::vec2 textureCoords[4],
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = DEFAULT_ENTITY_SIZE, bool occluder = false);
-
-	virtual ~Sprite() {}
+	Sprite(const std::string& texture, const std::string& normalMap, const glm::vec3& pos = glm::vec3(0.0f), bool occluder = false);
+	virtual ~Sprite();
 
 	virtual void Init() {}
 	virtual void LoadResources();
@@ -40,7 +36,17 @@ public:
 	virtual void Update(float delta) {}
 	virtual void ProcessInput(const Input& input, float delta) {}
 
+	virtual void Draw(const Shader& shader);
+	virtual void DrawOcclusion(const Shader& shader);
+
+	inline bool	IsOccluder() const					{ return m_occluder; }
+	inline void SetOcculder(bool occludes = true)	{ m_occluder = occludes; }
+
 protected:
+	static const glm::vec3 s_vertices[6];
+
+	GLuint		m_VAB;
+	bool		m_occluder;
 
 private:
 	Sprite(Sprite const&) = delete;

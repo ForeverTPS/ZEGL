@@ -22,31 +22,17 @@
 #define ENTITY_H
 
 #include "mappedvalues.h"
+#include "shader.h"
 #include "glm/glm.hpp"
 
 const float DEFAULT_ENTITY_SIZE = 64.0f;
 
 class Input;
 
-struct EntityData
-{
-	glm::vec3	m_pos;			// 12 bytes
-	float		m_rot;			// 4 bytes	- offset 12
-	float		m_scale;		// 4 bytes	- offset 16
-	glm::vec2	m_texCoords[4];	// 32 bytes - offset 20|28|36|42
-};
-
 class Entity : public MappedValues
 {
 public:
-	Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = DEFAULT_ENTITY_SIZE, bool occluder = false)
-	{
-		m_data.m_pos = pos;
-		m_data.m_rot = rot;
-		m_data.m_scale = scale;
-		m_occluder = occluder;
-	}
-
+	Entity(const glm::vec3& pos) : m_pos(pos) {}
 	virtual ~Entity() {}
 
 	virtual void Init() = 0;
@@ -55,56 +41,16 @@ public:
 	virtual void Update(float delta) = 0;
 	virtual void ProcessInput(const Input& input, float delta) = 0;
 
-	inline bool CalcTextureCoords(const std::string& regionName)
-	{
-		const TextureAtlas* textureAtlas = GetTextureAtlas();
-		if (textureAtlas == nullptr)
-		{
-			return false;
-		}
+	virtual void Draw(const Shader& shader) = 0;
+	virtual void DrawOcclusion(const Shader& shader) = 0;
 
-		TextureRegion region = textureAtlas->GetRegion(regionName);
-		if (region.w == 0)
-		{
-			return false;
-		}
+	inline glm::vec3 GetPos() const	{ return m_pos; }
 
-		Texture t = GetTexture("uDiffuse");
-
-		int textureWidth = t.GetWidth();
-		int textureHeight = t.GetHeight();
-
-		float x = region.x / textureWidth;
-		float y = region.y / textureHeight;
-		float w = region.w / textureWidth;
-		float h = region.h / textureHeight;
-
-		m_data.m_texCoords[0] = glm::vec2(x, y);
-		m_data.m_texCoords[1] = glm::vec2(x, y + h);
-		m_data.m_texCoords[2] = glm::vec2(x + w, y);
-		m_data.m_texCoords[3] = glm::vec2(x + w, y + h);
-
-		return true;
-	}
-
-	inline const EntityData& GetData() const { return m_data; }
-
-	inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
-	inline float		GetRot()	const	{ return m_data.m_rot; }
-	inline float		GetScale()	const	{ return m_data.m_scale; }
-
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
-	inline void	SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
-	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
-	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
-
-	inline bool	IsOccluder() const { return m_occluder; }
-	inline void SetOcculder(bool occludes = true) { m_occluder = occludes; }
+	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
+	inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
 
 protected:
-	EntityData	m_data;
-
-	bool m_occluder;
+	glm::vec3 m_pos;
 
 private:
 	Entity(Entity const&) = delete;

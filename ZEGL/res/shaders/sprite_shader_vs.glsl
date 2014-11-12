@@ -20,40 +20,19 @@
 
 #version 150
 
-in vec3 aPos;
-in float aSize;
-in vec2 aTexCoord0;
-in vec2 aTexCoord1;
-in vec2 aTexCoord2;
-in vec2 aTexCoord3;
+in vec3 aVertex;
 
-out vec2 vTexCoord;
-out vec2 vPositionUnits;
+uniform vec3 uPos;
+uniform vec2 uSize;
+uniform mat4 uMVP;
 
-uniform vec2 uCameraPos;
-uniform mat3 uMVP;
-
-const vec2 quadpos[] = vec2[4] (
-  vec2(-0.5,  0.5),
-  vec2( 0.5,  0.5),
-  vec2(-0.5, -0.5),
-  vec2( 0.5, -0.5)
-);
+out vec2 vTexCoords;
 
 void main() 
-{ 
-	vec2 offset = quadpos[gl_VertexID];
-
-	if (gl_VertexID == 0)		vTexCoord = aTexCoord0;
-	else if (gl_VertexID == 1)	vTexCoord = aTexCoord1;
-	else if (gl_VertexID == 2)	vTexCoord = aTexCoord2;
-	else						vTexCoord = aTexCoord3;
-
-	vec3 pxPos = vec3(aPos.x + (offset.x * aSize),
-					  aPos.y + (offset.y * aSize), 
-					  aPos.z);
-
-	vPositionUnits = pxPos.xy;
-  
-	gl_Position = vec4((uMVP * pxPos).xy, aPos.z, 1);
+{
+    vTexCoords = aVertex.xy;
+	gl_Position = uMVP * vec4(uSize.x * aVertex.x + uPos.x,
+							  uSize.y * aVertex.y + uPos.y, 
+							  uPos.z,
+							  1);
 }

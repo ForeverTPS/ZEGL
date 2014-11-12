@@ -18,14 +18,8 @@
  * limitations under the License.
  */
 
-#version 150 compatibility
+// stdafx.cpp : source file that includes just the standard includes
+// ConsoleApplication1.pch will be the pre-compiled header
+// stdafx.obj will contain the pre-compiled type information
 
-in vec3 aVertex;
-
-out vec2 vTexCoords;
-
-void main() 
-{
-    vTexCoords = ((aVertex + 1) / 2).xy;
-    gl_Position = vec4(aVertex.xy, 0, 1);
-}
+#include "stdafx.h"

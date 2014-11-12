@@ -18,9 +18,11 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "textureatlas.h"
 #include "logfile.h"
-#include "tinyxml2.h"
+//#include "tinyxml2.h"
 #include "util.h"
 
 using namespace tinyxml2;
@@ -37,7 +39,7 @@ void TextureAtlasData::ParseTextureAtlas(const std::string& fileName)
 	bool success = true;
 	std::string error;
 
-	XMLDocument doc;
+	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(("./res/textures/" + fileName).c_str()) != XML_NO_ERROR)
 	{
 		success = false;

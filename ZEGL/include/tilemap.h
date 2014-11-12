@@ -28,25 +28,21 @@ class Window;
 
 struct TileDefinition
 {
-	std::string tilename;
 	std::string textureName;
 	std::string normalMapName;
-	std::string textureAtlasName;
 	bool		occluder;
 };
 
 class Tile : public Sprite
 {
 public:
-	Tile(const std::string& texture, const std::string& normalMap, const std::string& textureAtlas,
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, bool occluder = false) :
-		Sprite(texture, normalMap, textureAtlas, pos, rot, DEFAULT_ENTITY_SIZE, occluder) {}
-
-	Tile(const std::string& texture, const std::string& normalMap, const glm::vec2 textureCoords[4],
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, bool occluder = false) :
-		Sprite(texture, normalMap, textureCoords, pos, rot, DEFAULT_ENTITY_SIZE, occluder) {}
+	Tile(const std::string& texture, const std::string& normalMap, const glm::vec3& pos = glm::vec3(0.0f), bool occluder = false) :
+		Sprite(texture, normalMap, pos, occluder) {}
 
 	virtual ~Tile() {}
+
+	virtual void Draw(const Shader& shader);
+	virtual void DrawOcclusion(const Shader& shader);
 
 protected:
 private:
@@ -64,10 +60,10 @@ public:
 
 	void Update(float delta);
 
-	inline const std::vector<Tile*>			GetActiveTiles()				const { return m_activeTiles; }
-	inline const std::vector<EntityData>&	GetActiveTilesData()			const { return m_activeTilesData; }
-	inline const std::vector<Tile*>			GetActiveOccluderTiles()		const { return m_activeOccluderTiles; }
-	inline const std::vector<EntityData>&	GetActiveOccluderTilesData()	const { return m_activeOccluderTilesData; }
+	void Draw(const Shader& shader);
+	void DrawShadowLayer(const Shader& shader);
+
+	inline const std::vector<Tile*>	GetActiveTiles() const { return m_activeTiles; }
 
 protected:
 private:
@@ -78,9 +74,6 @@ private:
 
 	std::vector<Tile*>		m_map;
 	std::vector<Tile*>		m_activeTiles;
-	std::vector<EntityData>	m_activeTilesData;
-	std::vector<Tile*>		m_activeOccluderTiles;
-	std::vector<EntityData>	m_activeOccluderTilesData;
 };
 
 #endif

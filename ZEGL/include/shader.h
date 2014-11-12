@@ -108,6 +108,18 @@ public:
 		glUniform3f(ul, v.x, v.y, v.z);
 	}
 
+	inline void BindValue(const std::string& loc, const glm::vec4& v) const
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniform4f(ul, v.r, v.g, v.b, v.a);
+	}
+
+	inline void BindValue(const std::string& loc, const glm::mat3& m) const
+	{
+		GLint ul = glGetUniformLocation(m_program, loc.c_str());
+		glUniformMatrix3fv(ul, 1, GL_FALSE, &m[0][0]);
+	}
+
 	inline void BindValue(const std::string& loc, const glm::mat4& m) const 
 	{
 		GLint ul = glGetUniformLocation(m_program, loc.c_str());

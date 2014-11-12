@@ -18,11 +18,10 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "input.h"
 #include "window.h"
-#include "glm/glm.hpp"
-#include <SDL2/SDL.h>
-#include <cstring>
 
 Input::Input(Window* window) :
 	m_mouseX(0),

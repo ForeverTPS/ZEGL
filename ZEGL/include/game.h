@@ -46,7 +46,8 @@ public:
 	void ProcessInput(const Input& input, float delta);
 	void Update(float delta);
 
-	void Render();
+	void Draw();
+	void DrawLight();
 
 	inline const Light*		GetActiveLight()	const { return m_activeLight; }
 	inline const Camera&	GetCamera()			const { return *m_camera; }
@@ -58,19 +59,8 @@ private:
 	Game(Game const&) = delete;
 	Game& operator=(Game const&) = delete;
 
-	enum
-	{
-		STD_TILE_VB,
-		OCCLUDER_TILE_VB,
-
-		NUM_BUFFERS
-	};
-
 	void InitShaders();
 	void InitFrameBuffers();
-
-	void DrawTiles();
-	void DrawOccluderTiles();
 
 	static Game*		s_game;
 
@@ -78,35 +68,21 @@ private:
 	const Window*		m_window;
 
 	Shader				m_spriteShader;
-	Shader				m_lightPassShader;
-	Shader				m_shadowShader;
-	Shader				m_lightAccumShader;
-	Shader				m_blendShader;
+	Shader				m_shadowMapShader;
+	Shader				m_shadowRenderShader;
 
 	const Light*		m_activeLight;
 	std::vector<Light*>	m_lights;
 
-	GLuint				m_VAO[NUM_BUFFERS];
-	GLuint				m_VAB[NUM_BUFFERS];
-	size_t				m_bytesAllocated[NUM_BUFFERS];
+	GLuint				m_VAO;
+	GLuint				m_VBO;
+	size_t				m_VBO_size;
 
-	GLuint				m_quadVAO;
-	GLuint				m_quadVAB;
-	size_t				m_quadVAB_size;
+	GLuint				m_occlusionFBO;
+	GLuint				m_occlusionFBO_tex;
 
-	GLuint				m_spriteFBO;
-	GLuint				m_spriteFBO_color;
-	GLuint				m_spriteFBO_render;
-	GLuint				m_spriteFBO_normal;
-
-	GLuint				m_lightAccumFBO;
-	GLuint				m_lightAccumFBO_tex;
-
-	GLuint				m_lightPassFBO;
-	GLuint				m_lightPassFBO_tex;
-
-	GLuint				m_lightPassMaskFBO;
-	GLuint				m_lightPassMaskFBO_tex;
+	GLuint				m_shadowMapFBO;
+	GLuint				m_shadowMapFBO_tex;
 };
 
 #endif

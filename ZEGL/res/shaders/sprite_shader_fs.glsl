@@ -20,20 +20,16 @@
 
 #version 330
 
-in vec2 vTexCoord;
-in vec2 vPositionUnits;
+in vec2 vTexCoords;
 
 layout(location=0) out vec4 fragColor;
 layout(location=1) out vec4 normalColor;
 
+uniform vec4 uAmbient;
 uniform sampler2D uDiffuse, uNormal;
-uniform vec2 uCamPos;
 
 void main() 
 {
-    normalColor.rgb = texture2D(uNormal, vTexCoord).rgb;
-    normalColor.a = 1;
-
-    fragColor.rgb = texture2D(uDiffuse, vTexCoord).rgb;
-    fragColor.a = 1;
+    normalColor = texture(uNormal, vTexCoords, 0);
+    fragColor = texture(uDiffuse, vTexCoords, 0) * uAmbient;
 }

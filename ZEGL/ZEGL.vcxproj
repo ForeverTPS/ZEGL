@@ -51,8 +51,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLM_FORCE_RADIANS;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -74,8 +73,7 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -106,12 +104,22 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\shader.cpp" />
-    <ClCompile Include="src\stb_image.c" />
+    <ClCompile Include="src\stb_image.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\textureatlas.cpp" />
     <ClCompile Include="src\tilemap.cpp" />
     <ClCompile Include="src\timing.cpp" />
-    <ClCompile Include="src\tinyxml2.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\util.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
@@ -128,6 +136,7 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\sprite.h" />
     <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\texture.h" />
     <ClInclude Include="include\textureatlas.h" />
     <ClInclude Include="include\tilemap.h" />
@@ -139,20 +148,17 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
   <ItemGroup>
     <None Include="res\levels\test_level.ldf" />
     <None Include="res\levels\test_level.ldf.tdef" />
-    <None Include="res\shaders\combineshadow_shader_fs.glsl" />
-    <None Include="res\shaders\finalblend_shader_fs.glsl" />
-    <None Include="res\shaders\lightgen_shader_fs.glsl" />
-    <None Include="res\shaders\lightgen_shader_vs.glsl" />
-    <None Include="res\shaders\shadowgen_shader_fs.glsl" />
-    <None Include="res\shaders\shadowgen_shader_gs.glsl" />
+    <None Include="res\shaders\shadowRender_shader_fs.glsl" />
+    <None Include="res\shaders\shadowMap_shader_fs.glsl" />
     <None Include="res\shaders\sprite_shader_fs.glsl" />
     <None Include="res\shaders\sprite_shader_vs.glsl" />
-    <None Include="res\shaders\texturedquad_shader_vs.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\black.png" />
     <Image Include="res\textures\default.png" />
     <Image Include="res\textures\rock.png" />
+    <Image Include="res\textures\rock2.png" />
+    <Image Include="res\textures\rock2_n.png" />
     <Image Include="res\textures\rock_n.png" />
     <Image Include="res\textures\white.png" />
   </ItemGroup>
