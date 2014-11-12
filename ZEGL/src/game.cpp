@@ -28,6 +28,8 @@
 #include "util.h"
 #include "window.h"
 
+const float lightSize = 300.0f;
+
 TileMap* tileMap;
 
 Game* Game::s_game = nullptr;
@@ -63,6 +65,8 @@ Game::~Game()
 
 void Game::Init(const Window& window)
 {
+	srand(clock());
+
 	m_window = &window;
 	m_camera = new Camera(m_window);
     
@@ -97,8 +101,7 @@ void Game::Init(const Window& window)
 
 	tileMap = new TileMap();
 	
-	Light* light = new Light(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f), 800.0f, glm::vec3(0.3f, 3.0f, 20.0f));
-	m_lights.push_back(light);
+	AddLight(new Light(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f), 800.0f, glm::vec3(0.3f, 3.0f, 20.0f)));
 }
 
 void Game::LoadResources()
@@ -140,7 +143,7 @@ void Game::InitFrameBuffers()
 
 	glGenTextures(1, &m_occlusionFBO_tex);
 	glBindTexture(GL_TEXTURE_2D, m_occlusionFBO_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)lightSize, (int)lightSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
@@ -154,7 +157,7 @@ void Game::InitFrameBuffers()
 
 	glGenTextures(1, &m_shadowMapFBO_tex);
 	glBindTexture(GL_TEXTURE_2D, m_shadowMapFBO_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)lightSize, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
@@ -167,7 +170,12 @@ void Game::InitFrameBuffers()
 void Game::ProcessInput(const Input& input, float delta)
 {
 	glm::vec2 mousePos = input.GetMousePosition();
-	m_lights[0]->SetPos(glm::vec3(mousePos, 0.0f));
+	m_lights[m_lights.size()-1]->SetPos(glm::vec3(mousePos, 0.0f));
+
+	if (input.GetMouseDown(Input::MOUSE_LEFT_BUTTON))
+	{
+		AddLight(new Light(glm::vec3(mousePos, 0.0f), glm::vec3(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX, rand() / (float)RAND_MAX), 800.0f, glm::vec3(0.3f, 3.0f, 20.0f)));
+	}
 }
 
 void Game::Update(float delta)
@@ -196,13 +204,13 @@ void Game::Draw()
 	m_spriteShader.Bind();
 	m_spriteShader.BindVertices(m_VBO);
 	m_spriteShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_spriteShader.BindValue("uPos", glm::vec3(800.0f - 256.0f, 0.0f, 0.0f));
-	m_spriteShader.BindValue("uSize", glm::vec2(256.0f, 256.0f));
+	m_spriteShader.BindValue("uPos", glm::vec3(m_window->GetWidth() - lightSize, 0.0f, 0.0f));
+	m_spriteShader.BindValue("uSize", glm::vec2(lightSize, lightSize));
 	m_spriteShader.BindTexture("uDiffuse", 0, m_occlusionFBO_tex);
 	m_spriteShader.Draw(6);
 	m_spriteShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_spriteShader.BindValue("uPos", glm::vec3(800.0f - 256.0f, 260.0f, 0.0f));
-	m_spriteShader.BindValue("uSize", glm::vec2(256.0f, 10.0f));
+	m_spriteShader.BindValue("uPos", glm::vec3(m_window->GetWidth() - lightSize, lightSize + 5.0f, 0.0f));
+	m_spriteShader.BindValue("uSize", glm::vec2(lightSize, 5.0f));
 	m_spriteShader.BindTexture("uDiffuse", 0, m_shadowMapFBO_tex);
 	m_spriteShader.Draw(6);
 	//////////////////////////////////////////////////////////////////////////
@@ -230,7 +238,7 @@ void Game::DrawLight()
 	glBindFramebuffer(GL_FRAMEBUFFER, m_occlusionFBO);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	m_camera->SetPos(glm::vec3(mx - 128.0f, my - 128.0f, 0.0f));
+	m_camera->SetPos(glm::vec3(mx - lightSize / 2.0f, my - lightSize / 2.0f, 0.0f));
 	//m_camera->SetOrtho(0.0f, 256.0f, 0.0f, 256.0f);
 
 	m_spriteShader.Bind();
@@ -252,8 +260,8 @@ void Game::DrawLight()
 	m_shadowMapShader.BindVertices(m_VBO);
 	m_shadowMapShader.BindValue("uMVP", m_camera->GetTransform(true));
 	m_shadowMapShader.BindValue("uPos", glm::vec3(0.0f, 0.0f, 0.0f));
-	m_shadowMapShader.BindValue("uSize", glm::vec2(256.0f, 1.0f));
-	m_shadowMapShader.BindValue("uResolution", glm::vec2(256.0f, 256.0f));
+	m_shadowMapShader.BindValue("uSize", glm::vec2(lightSize, 1.0f));
+	m_shadowMapShader.BindValue("uResolution", glm::vec2(lightSize, lightSize));
 	m_shadowMapShader.BindTexture("uDiffuse", 0, m_occlusionFBO_tex);
 	m_shadowMapShader.Draw(6);
 
@@ -266,11 +274,11 @@ void Game::DrawLight()
 	m_shadowRenderShader.Bind();
 	m_shadowRenderShader.BindVertices(m_VBO);
 	m_shadowRenderShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_shadowRenderShader.BindValue("uPos", glm::vec3(mx - 128.0f, my - 128.0f, 0.0f));
-	m_shadowRenderShader.BindValue("uSize", glm::vec2(256.0f, 256.0f));
-	m_shadowRenderShader.BindValue("uResolution", glm::vec2(256.0f, 256.0f));
+	m_shadowRenderShader.BindValue("uPos", glm::vec3(mx - lightSize / 2.0f, my - lightSize / 2.0f, 0.0f));
+	m_shadowRenderShader.BindValue("uSize", glm::vec2(lightSize, lightSize));
+	m_shadowRenderShader.BindValue("uResolution", glm::vec2(lightSize, lightSize));
 	m_shadowRenderShader.BindValue("uSoftShadows", 1.0f);
-	m_shadowRenderShader.BindValue("uColor", glm::vec4(m_activeLight->GetColor(), 0.5f));
+	m_shadowRenderShader.BindValue("uColor", glm::vec4(m_activeLight->GetColor(), 0.7f));
 	m_shadowRenderShader.BindTexture("uDiffuse", 0, m_shadowMapFBO_tex);
 	m_shadowRenderShader.Draw(6);
 }

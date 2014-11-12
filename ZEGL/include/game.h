@@ -49,6 +49,8 @@ public:
 	void Draw();
 	void DrawLight();
 
+	inline void AddLight(Light* light) { m_lights.push_back(light); }
+
 	inline const Light*		GetActiveLight()	const { return m_activeLight; }
 	inline const Camera&	GetCamera()			const { return *m_camera; }
 

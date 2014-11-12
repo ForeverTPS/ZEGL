@@ -57,6 +57,7 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/random.hpp"
 #include "tinyxml2.h"
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
