@@ -198,7 +198,6 @@ void Game::Draw()
 	m_spriteShader.BindValue("uSize", glm::vec2(64.0f, 64.0f));
 
 	tileMap->Draw(m_spriteShader);
-	//tileMap->DrawShadowLayer(m_spriteShader);
 
 	//////////////////////////////////////////////////////////////////////////
 	m_spriteShader.Bind();
