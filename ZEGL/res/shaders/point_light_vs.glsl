@@ -18,39 +18,40 @@
  * limitations under the License.
  */
 
-#include "util.h"
-#include <string>
-#include <SDL2/SDL.h>
+#version 150
 
-void Util::Sleep(int milliseconds)
-{
-	SDL_Delay(milliseconds);
-}
+#define attribute in
 
-std::vector<std::string> Util::Split(const std::string &s, char delim)
-{
-	std::vector<std::string> elems;
+attribute vec3 pos;
+attribute float size;
+attribute vec2 texCoord0;
+attribute vec2 texCoord1;
+attribute vec2 texCoord2;
+attribute vec2 texCoord3;
 
-	const char* cstr = s.c_str();
-	unsigned int strLength = (unsigned int)s.length();
-	unsigned int start = 0;
-	unsigned int end = 0;
+out vec4 vCol;
+out vec2 vTexCoord;
 
-	while (end <= strLength)
-	{
-		while (end <= strLength)
-		{
-			if (cstr[end] == delim)
-			{
-				break;
-			}
-			end++;
-		}
+uniform mat4 MVP;
 
-		elems.push_back(s.substr(start, end - start));
-		start = end + 1;
-		end = start;
-	}
+const vec2 quadpos[] = vec2[4] (
+	vec2(-0.5,  0.5),
+	vec2(-0.5, -0.5),
+	vec2(0.5,   0.5),
+	vec2(0.5,  -0.5)
+);
 
-	return elems;
+void main() 
+{ 
+	vec2 offset = quadpos[gl_VertexID];
+
+	if (gl_VertexID == 0)		vTexCoord = texCoord0;
+	else if (gl_VertexID == 1)	vTexCoord = texCoord1;
+	else if (gl_VertexID == 2)	vTexCoord = texCoord2;
+	else						vTexCoord = texCoord3;
+  
+	gl_Position = MVP * vec4(pos.x + (offset.x * size),
+							 pos.y + (offset.y * size), 
+							 0, 
+							 1);
 }

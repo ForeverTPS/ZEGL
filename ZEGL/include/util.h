@@ -21,7 +21,6 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -33,9 +32,7 @@
 
 #if _MSC_VER
 	#define WIN32_LEAN_AND_MEAN
-	#define fopen		fopen_s
 	#define snprintf	_snprintf_s
-	#define strcpy		strcpy_s
 	#define vsprintf	vsprintf_s
 	#define vsnprintf	vsnprintf_s
 	#define	getenv		_dupenv_s
@@ -58,6 +55,23 @@
 	#define ASSERT(condition, message) do { } while (false)
 #endif
 
+template<class T>
+class ZEGLSingleton
+{
+public:
+	static T* GetSingletonPtr()
+	{
+		static T s_instance;
+		return &s_instance;
+	}
+
+private:
+	ZEGLSingleton();
+	~ZEGLSingleton();
+	ZEGLSingleton(ZEGLSingleton const&);
+	ZEGLSingleton& operator=(ZEGLSingleton const&);
+};
+
 #define MATH_PI 3.1415926535897932384626433832795
 #define ToRadians(x) (float)(((x) * MATH_PI / 180.0f))
 #define ToDegrees(x) (float)(((x) * 180.0f / MATH_PI))
@@ -75,30 +89,11 @@ namespace Util
 		pVal = NULL;
 	}
 
-	inline int StringToNumber(const char* str)
-	{
-		int val = 0;
-		while (*str)
-		{
-			val = val * 10 + (*str++ - '0');
-		}
-		return val;
-	}
-	
 	template <class T>
-	inline bool StringToNumber(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
+	bool StringToNumber(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
 	{
 		std::istringstream iss(s);
 		return !(iss >> f >> t).fail();
-	}
-
-	template <typename T>
-	inline std::string NumberToString(T num)
-	{
-		std::ostringstream ostr;
-		ostr << num;
-
-		return ostr.str();
 	}
 
 	template<typename T>

@@ -18,29 +18,29 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "game.h"
 #include "camera.h"
 #include "light.h"
+#include "shader.h"
 #include "texture.h"
 #include "tilemap.h"
 #include "util.h"
 #include "window.h"
+#include <GL/glew.h>
+#include <iostream>
 
-const float lightSize = 300.0f;
-
+GLuint gVAO;
+GLuint gVAB;
+Light* light;
 TileMap* tileMap;
-
-Game* Game::s_game = nullptr;
 
 Game::Game() :
 	m_camera(nullptr),
     m_window(nullptr),
-	m_activeLight(nullptr) 
-{
-	Game::SetInstance(this);
-}
+	m_defaultShader(Shader("ambient_shader")),
+	m_ambientColor(glm::vec3(0.1f)),
+	m_ambientIntensity(1.0f),
+    m_activeLight(nullptr) {}
 
 Game::~Game()
 {
@@ -52,232 +52,111 @@ Game::~Game()
 	}
 
 	Util::SafeDelete(tileMap);
-
-	glDeleteBuffers(1, &m_VBO);
-	glDeleteVertexArrays(1, &m_VAO);
-
-	glDeleteTextures(1, &m_occlusionFBO_tex);
-	glDeleteTextures(1, &m_shadowMapFBO_tex);
-
-	glDeleteFramebuffers(1, &m_occlusionFBO);
-	glDeleteFramebuffers(1, &m_shadowMapFBO);
 }
 
 void Game::Init(const Window& window)
 {
-	srand(clock());
-
 	m_window = &window;
 	m_camera = new Camera(m_window);
     
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
+    
+	tileMap = new TileMap("test_level.ldf");
 
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
+	light = new Light(Shader("point_light"));
+	m_lights.push_back(light);
+    
+    glGenVertexArrays(1, &gVAO);
+    glBindVertexArray(gVAO);
+    
+    glGenBuffers(1, &gVAB);
+    glBindBuffer(GL_ARRAY_BUFFER, gVAB);
 
-	//Make fullscreen quad vbo.
-	glm::vec3 verts[6] = {
-		glm::vec3(0, 0, 0),
-		glm::vec3(0, 1, 0),
-		glm::vec3(1, 0, 0),
-		glm::vec3(0, 1, 0),
-		glm::vec3(1, 1, 0),
-		glm::vec3(1, 0, 0)
-	};
+	glEnableVertexAttribArray(0); // pos
+	glEnableVertexAttribArray(1); // size
+	glEnableVertexAttribArray(2); // texCoords0
+	glEnableVertexAttribArray(3); // texCoords1
+	glEnableVertexAttribArray(4); // texCoords2
+	glEnableVertexAttribArray(5); // texCoords3
 
-	m_VBO_size = sizeof(verts);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0], GL_STREAM_DRAW);
 
-	glGenBuffers(1, &m_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_VBO_size, &verts[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)28);
+	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)36);
+	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)44);
 
-	InitShaders();
-	InitFrameBuffers();
-
-	tileMap = new TileMap();
-	
-	AddLight(new Light(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f), 800.0f, glm::vec3(0.3f, 3.0f, 20.0f)));
-}
-
-void Game::LoadResources()
-{
-	tileMap->LoadResources("test_level.ldf");
-}
-
-void Game::InitShaders()
-{
-	GLuint sprite_vs = Shaders::CreateShader("sprite_shader_vs.glsl", GL_VERTEX_SHADER);
-	GLuint sprite_fs = Shaders::CreateShader("sprite_shader_fs.glsl", GL_FRAGMENT_SHADER);
-	m_spriteShader.SetProgram(glCreateProgram());
-	m_spriteShader.AddShader(sprite_vs);
-	m_spriteShader.AddShader(sprite_fs);
-	m_spriteShader.CompileShader();
-
-	m_spriteShader.Bind();
-	m_spriteShader.BindValue("uAmbient", glm::vec4(0.3f, 0.3f, 0.3f, 1.0f));
-
-	GLuint shadowMap_vs = Shaders::CreateShader("sprite_shader_vs.glsl", GL_VERTEX_SHADER);
-	GLuint shadowMap_fs = Shaders::CreateShader("shadowmap_shader_fs.glsl", GL_FRAGMENT_SHADER);
-	m_shadowMapShader.SetProgram(glCreateProgram());
-	m_shadowMapShader.AddShader(shadowMap_vs);
-	m_shadowMapShader.AddShader(shadowMap_fs);
-	m_shadowMapShader.CompileShader();
-
-	GLuint shadowRender_vs = Shaders::CreateShader("sprite_shader_vs.glsl", GL_VERTEX_SHADER);
-	GLuint shadowRender_fs = Shaders::CreateShader("shadowrender_shader_fs.glsl", GL_FRAGMENT_SHADER);
-	m_shadowRenderShader.SetProgram(glCreateProgram());
-	m_shadowRenderShader.AddShader(shadowRender_vs);
-	m_shadowRenderShader.AddShader(shadowRender_fs);
-	m_shadowRenderShader.CompileShader();
-}
-
-void Game::InitFrameBuffers() 
-{
-	glGenFramebuffers(1, &m_occlusionFBO);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_occlusionFBO);
-
-	glGenTextures(1, &m_occlusionFBO_tex);
-	glBindTexture(GL_TEXTURE_2D, m_occlusionFBO_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)lightSize, (int)lightSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_occlusionFBO_tex, 0);
-
-	GLenum occlusionDrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, occlusionDrawBuffers);
-
-	glGenFramebuffers(1, &m_shadowMapFBO);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_shadowMapFBO);
-
-	glGenTextures(1, &m_shadowMapFBO_tex);
-	glBindTexture(GL_TEXTURE_2D, m_shadowMapFBO_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)lightSize, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_shadowMapFBO_tex, 0);
-	
-	GLenum shadowMapDrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, shadowMapDrawBuffers);
+	glVertexAttribDivisor(0, 1);
+	glVertexAttribDivisor(1, 1);
+	glVertexAttribDivisor(2, 1);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribDivisor(4, 1);
+	glVertexAttribDivisor(5, 1);
 }
 
 void Game::ProcessInput(const Input& input, float delta)
 {
 	glm::vec2 mousePos = input.GetMousePosition();
-	m_lights[m_lights.size()-1]->SetPos(glm::vec3(mousePos, 0.0f));
-
-	if (input.GetMouseDown(Input::MOUSE_LEFT_BUTTON))
-	{
-		AddLight(new Light(glm::vec3(mousePos, 0.0f), glm::vec3(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX, rand() / (float)RAND_MAX), 800.0f, glm::vec3(0.3f, 3.0f, 20.0f)));
-	}
+	light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), light->GetPos().z);
 }
 
 void Game::Update(float delta)
 {
-	tileMap->Update(delta);
+	tileMap->UpdateActiveTiles(m_camera->GetPos());
+
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0]);
 }
 
-void Game::Draw()
+void Game::Render()
 {
-	glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
-
 	m_window->BindAsRenderTarget();
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	Texture texture = tileMap->GetActiveTiles()[0].GetTexture();
+	Texture normalMap = tileMap->GetActiveTiles()[0].GetNormalMap();
 
-	// 1 - Render sprites in full color
-	m_spriteShader.Bind();
-	m_spriteShader.BindValue("uMVP", m_camera->GetTransform());
-	m_spriteShader.BindValue("uSize", glm::vec2(64.0f, 64.0f));
-
-	tileMap->Draw(m_spriteShader);
-
-	//////////////////////////////////////////////////////////////////////////
-	m_spriteShader.Bind();
-	m_spriteShader.BindVertices(m_VBO);
-	m_spriteShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_spriteShader.BindValue("uPos", glm::vec3(m_window->GetWidth() - lightSize, 0.0f, 0.0f));
-	m_spriteShader.BindValue("uSize", glm::vec2(lightSize, lightSize));
-	m_spriteShader.BindTexture("uDiffuse", 0, m_occlusionFBO_tex);
-	m_spriteShader.Draw(6);
-	m_spriteShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_spriteShader.BindValue("uPos", glm::vec3(m_window->GetWidth() - lightSize, lightSize + 5.0f, 0.0f));
-	m_spriteShader.BindValue("uSize", glm::vec2(lightSize, 5.0f));
-	m_spriteShader.BindTexture("uDiffuse", 0, m_shadowMapFBO_tex);
-	m_spriteShader.Draw(6);
-	//////////////////////////////////////////////////////////////////////////
-
-	glBindVertexArray(m_VAO);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	m_defaultShader.Bind();
+	m_defaultShader.UpdateUniforms(this);
+	texture.Bind(0);
+	normalMap.Bind(1);
+    glBindVertexArray(gVAO);
+	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
+	m_defaultShader.UnBind();
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+		glDepthMask(GL_FALSE);
+		glDepthFunc(GL_EQUAL);
+
 		m_activeLight = m_lights[i];
-		DrawLight();
+
+		Shader shader = m_activeLight->GetShader();
+        
+		shader.Bind();
+		shader.UpdateUniforms(this);
+        
+		texture.Bind(0);
+		normalMap.Bind(1);
+        
+        glBindVertexArray(gVAO);
+		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
+        
+		shader.UnBind();
+
+		glDepthMask(GL_TRUE);
+		glDepthFunc(GL_LESS);
+		glDisable(GL_BLEND);
 	}
-
-	m_activeLight = nullptr;
-}
-
-void Game::DrawLight()
-{
-	float mx = m_activeLight->GetPos().x;
-	float my = (float)m_window->GetHeight() - m_activeLight->GetPos().y;
-
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-	// 2 - Render light region to occlusion FBO
-	glBindFramebuffer(GL_FRAMEBUFFER, m_occlusionFBO);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	m_camera->SetPos(glm::vec3(mx - lightSize / 2.0f, my - lightSize / 2.0f, 0.0f));
-	//m_camera->SetOrtho(0.0f, 256.0f, 0.0f, 256.0f);
-
-	m_spriteShader.Bind();
-	m_spriteShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_spriteShader.BindValue("uSize", glm::vec2(64.0f, 64.0f));
-
-	tileMap->DrawShadowLayer(m_spriteShader);
-	
-	//m_camera->SetOrthoToWindow();
-	m_camera->RevertToLast();
-
-	// 3 - Build a 1D shadow map from occlusion FBO
-	glBindFramebuffer(GL_FRAMEBUFFER, m_shadowMapFBO);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	//m_camera->SetOrtho(0.0f, 256.0f, 0.0f, 1.0f);
-
-	m_shadowMapShader.Bind();
-	m_shadowMapShader.BindVertices(m_VBO);
-	m_shadowMapShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_shadowMapShader.BindValue("uPos", glm::vec3(0.0f, 0.0f, 0.0f));
-	m_shadowMapShader.BindValue("uSize", glm::vec2(lightSize, 1.0f));
-	m_shadowMapShader.BindValue("uResolution", glm::vec2(lightSize, lightSize));
-	m_shadowMapShader.BindTexture("uDiffuse", 0, m_occlusionFBO_tex);
-	m_shadowMapShader.Draw(6);
-
-	m_camera->SetOrthoToWindow();
-
-	// 4 - Render the blurred shadows
-	m_window->BindAsRenderTarget();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
-	m_shadowRenderShader.Bind();
-	m_shadowRenderShader.BindVertices(m_VBO);
-	m_shadowRenderShader.BindValue("uMVP", m_camera->GetTransform(true));
-	m_shadowRenderShader.BindValue("uPos", glm::vec3(mx - lightSize / 2.0f, my - lightSize / 2.0f, 0.0f));
-	m_shadowRenderShader.BindValue("uSize", glm::vec2(lightSize, lightSize));
-	m_shadowRenderShader.BindValue("uResolution", glm::vec2(lightSize, lightSize));
-	m_shadowRenderShader.BindValue("uSoftShadows", 1.0f);
-	m_shadowRenderShader.BindValue("uColor", glm::vec4(m_activeLight->GetColor(), 0.7f));
-	m_shadowRenderShader.BindTexture("uDiffuse", 0, m_shadowMapFBO_tex);
-	m_shadowRenderShader.Draw(6);
+    
+    m_activeLight = nullptr;
 }

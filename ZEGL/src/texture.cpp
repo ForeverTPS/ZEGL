@@ -18,12 +18,13 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "texture.h"
 #include "logfile.h"
 #include "stb_image.h"
 #include "util.h"
+#include <iostream>
+#include <cstring>
+#include <cassert>
 
 std::map<std::string, TextureData*> Texture::s_resourceMap;
 
@@ -161,7 +162,7 @@ void TextureData::InitRenderTargets(GLenum* attachments)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void TextureData::Bind(unsigned int textureNum) const
+void TextureData::Bind(int textureNum) const
 {
 	glBindTexture(m_textureTarget, m_textureID[textureNum]);
 }

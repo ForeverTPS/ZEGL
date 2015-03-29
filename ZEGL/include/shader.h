@@ -21,120 +21,79 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "referencecounter.h"
 #include "glm/glm.hpp"
-#include <GL/glew.h>
 #include <string>
 #include <vector>
+#include <map>
 
-namespace Shaders
+class Camera;
+class Game;
+
+class ShaderData : public ReferenceCounter
 {
-	GLuint		CreateShader(const std::string& fileName, GLenum type);
+public:
+	ShaderData(const std::string& fileName);
+	virtual ~ShaderData();
 
-	std::string	LoadShader(const std::string& fileName);
-	void		CheckShader(int shader, int flag, bool isProgram, const std::string& errorMessage);
-}
+	inline int GetProgram()                                           const { return m_program; }
+	inline const std::vector<int>& GetShaders()                       const { return m_shaders; }
+	inline const std::vector<std::string>& GetUniformNames()          const { return m_uniformNames; }
+	inline const std::vector<std::string>& GetUniformTypes()          const { return m_uniformTypes; }
+	inline const std::map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
+
+protected:
+private:
+	ShaderData(ShaderData const&) = delete;
+	ShaderData& operator=(ShaderData const&) = delete;
+
+	void AddProgram(const std::string& text, int type);
+
+	void AddAllAttributes(const std::string& vertexShaderText);
+	void AddAllUniforms(const std::string& shaderText);
+	void AddUniform(const std::string& uniformName, const std::string& uniformType);
+
+	void CompileShader() const;
+
+	static int							s_supportedOpenGLLevel;
+	static std::string					s_glslVersion;
+	int									m_program;
+	std::vector<int>                    m_shaders;
+	std::vector<std::string>            m_uniformNames;
+	std::vector<std::string>            m_uniformTypes;
+	std::map<std::string, unsigned int> m_uniformMap;
+};
 
 class Shader
 {
 public:
-	Shader() : m_program(-1) {}
-	virtual ~Shader()
-	{
-		for (std::vector<GLuint>::iterator it = m_shaders.begin(); it != m_shaders.end(); ++it)
-		{
-			glDetachShader(m_program, *it);
-			glDeleteShader(*it);
-		}
-		glDeleteProgram(m_program);
-	}
+	Shader(const std::string& fileName = "basic_shader");
+	Shader(const Shader& other);
+	virtual ~Shader();
 
-	inline void		Bind() { glUseProgram(m_program); }
+	void Load(const std::string& fileName);
 
-	inline GLuint	GetProgram() const			{ return m_program; }
-	inline void		SetProgram(GLuint program)	{ m_program = program; }
+	void Bind() const;
+	void UnBind() const;
 
-	inline void AddShader(GLuint shader)	
-	{ 
-		glAttachShader(m_program, shader); 
-		m_shaders.push_back(shader); 
-	}
+	void SetUniformi(const std::string& uniformName, int value) const;
+	void SetUniformf(const std::string& uniformName, float value) const;
+	void SetUniformVector2f(const std::string& uniformName, const glm::vec2& value) const;
+	void SetUniformVector3f(const std::string& uniformName, const glm::vec3& value) const;
+	void SetUniformVector4f(const std::string& uniformName, const glm::vec4& value) const;
+	void SetUniformMatrix4f(const std::string& uniformName, const glm::mat4& value) const;
 
-	inline void CompileShader()
-	{
-		glLinkProgram(m_program);
-		Shaders::CheckShader(m_program, GL_LINK_STATUS, true, "Error linking shader program");
-
-		glValidateProgram(m_program);
-		Shaders::CheckShader(m_program, GL_VALIDATE_STATUS, true, "Invalid shader program");
-	}
-
-	inline void BindVertices(GLuint buffer) const
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		GLuint location = glGetAttribLocation(m_program, "aVertex");
-		glEnableVertexAttribArray(location);
-		glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	}
-
-	inline void BindTexture(const std::string& loc, GLuint active, const GLuint tex) const 
-	{
-		GLuint location = glGetUniformLocation(m_program, loc.c_str());
-		glActiveTexture(GL_TEXTURE0 + active);
-		glBindTexture(GL_TEXTURE_2D, tex);
-		glUniform1i(location, active);
-	}
-
-	inline void BindValue(const std::string& loc, const float f) const
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniform1f(ul, f);
-	}
-
-	inline void BindValue(const std::string& loc, const bool b) const 
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniform1i(ul, b);
-	}
-
-	inline void BindValue(const std::string& loc, const glm::vec2& v) const 
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniform2f(ul, v.x, v.y);
-	}
-
-	inline void BindValue(const std::string& loc, const glm::vec3& v) const 
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniform3f(ul, v.x, v.y, v.z);
-	}
-
-	inline void BindValue(const std::string& loc, const glm::vec4& v) const
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniform4f(ul, v.r, v.g, v.b, v.a);
-	}
-
-	inline void BindValue(const std::string& loc, const glm::mat3& m) const
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniformMatrix3fv(ul, 1, GL_FALSE, &m[0][0]);
-	}
-
-	inline void BindValue(const std::string& loc, const glm::mat4& m) const 
-	{
-		GLint ul = glGetUniformLocation(m_program, loc.c_str());
-		glUniformMatrix4fv(ul, 1, GL_FALSE, &m[0][0]);
-	}
-
-	inline void Draw(const size_t count) const 
-	{
-		glDrawArrays(GL_TRIANGLES, 0, count);
-	}
+	void UpdateUniforms(Game* game) const;
 
 protected:
 private:
-	GLuint				m_program;
-	std::vector<GLuint> m_shaders;
+	//Shader(const Shader& other) = delete;
+	Shader& operator=(Shader const&) = delete;
+
+	static std::map<std::string, ShaderData*> s_resourceMap;
+
+	ShaderData* m_shaderData;
+	std::string	m_fileName;
 };
 
 #endif

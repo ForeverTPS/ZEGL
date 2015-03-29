@@ -54,6 +54,9 @@
     <ClCompile Include="src\logfile.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\util.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -63,16 +66,10 @@
     <ClCompile Include="src\textureatlas.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\tilemap.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sprite.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,34 +125,31 @@
     <ClInclude Include="include\tinyxml2.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\sprite.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mappedvalues.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\stdafx.h">
-      <Filter>include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\basic_shader_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\basic_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\point_light_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\point_light_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\ambient_shader_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\ambient_shader_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
     <None Include="res\levels\test_level.ldf.tdef">
       <Filter>res\levels</Filter>
     </None>
     <None Include="res\levels\test_level.ldf">
       <Filter>res\levels</Filter>
-    </None>
-    <None Include="res\shaders\sprite_shader_vs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\sprite_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\shadowMap_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\shadowRender_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -174,15 +168,12 @@
     <Image Include="res\textures\default.png">
       <Filter>res\textures</Filter>
     </Image>
-    <Image Include="res\textures\rock2.png">
-      <Filter>res\textures</Filter>
-    </Image>
-    <Image Include="res\textures\rock2_n.png">
-      <Filter>res\textures</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\textures\test_atlas.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
+    <Xml Include="res\textures\default_atlas.xml">
       <Filter>res\textures</Filter>
     </Xml>
   </ItemGroup>

@@ -18,56 +18,45 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "tilemap.h"
-#include "camera.h"
 #include "game.h"
 #include "logfile.h"
-//#include "tinyxml2.h"
+#include "tinyxml2.h"
 #include "window.h"
+#include <fstream>
+#include <iostream>
 
 using namespace tinyxml2;
 
-void Tile::Draw(const Shader& shader)
+Tile::Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+	const glm::vec3& pos, float rot, float scale) :
+	m_tileSize(scale),
+	RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale)
 {
-	shader.BindVertices(m_VAB);
-	shader.BindValue("uPos", m_pos);
-
-	shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
-	shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
-
-	shader.Draw(6);
 }
 
-void Tile::DrawOcclusion(const Shader& shader)
+Tile::Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+	const glm::vec3& pos, float rot, float scale) :
+	m_tileSize(scale),
+	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale)
 {
-	if (IsOccluder())
-	{
-		shader.BindVertices(m_VAB);
-		shader.BindValue("uPos", m_pos);
-
-		shader.BindTexture("uDiffuse", 0, GetTexture("uDiffuse").GetTextureID());
-		shader.BindTexture("uNormal", 1, GetTexture("uNormal").GetTextureID());
-
-		shader.Draw(6);
-	}
 }
 
-TileMap::~TileMap()
+Tile::Tile(const Tile& tile) :
+	m_tileSize(tile.m_tileSize),
+	RenderEntity(tile) {}
+
+TileMap::TileMap(const std::string& fileName)
 {
-	for (unsigned int i = 0; i < m_map.size(); i++)
-	{
-		Util::SafeDelete(m_map[i]);
-	}
+	Load(fileName);
 }
 
-void TileMap::LoadResources(const std::string& fileName)
+void TileMap::Load(const std::string& fileName)
 {
 	bool success = true;
 	std::string error;
 
-	tinyxml2::XMLDocument doc;
+	XMLDocument doc;
 	if (doc.LoadFile(("./res/levels/" + fileName + ".tdef").c_str()) != XML_NO_ERROR)
 	{
 		success = false;
@@ -91,9 +80,10 @@ void TileMap::LoadResources(const std::string& fileName)
 				TileDefinition tileDef;
 
 				tileId = tileElement->Attribute("id");
+				tileDef.tilename = tileElement->Attribute("name");
 				tileDef.textureName = tileElement->Attribute("texture");
 				tileDef.normalMapName = tileElement->Attribute("normalMap");
-				tileElement->QueryBoolAttribute("occluder", &tileDef.occluder);
+				tileDef.textureAtlasName = tileElement->Attribute("textureAtlas");
 
 				m_tileDefs.insert(std::pair<std::string, TileDefinition>(tileId, tileDef));
 
@@ -107,8 +97,8 @@ void TileMap::LoadResources(const std::string& fileName)
 
 			if (file.is_open())
 			{
-				float x = 0.0f;
-				float y = 0.0f;
+				float x = DEFAULT_TILE_SIZE / 2;
+				float y = x;
 
 				while (file.good())
 				{
@@ -120,28 +110,30 @@ void TileMap::LoadResources(const std::string& fileName)
 						std::map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
 						if (it != m_tileDefs.end())
 						{
-							Tile* t = new Tile(it->second.textureName, it->second.normalMapName, glm::vec3(x, y, 0.0f), it->second.occluder);
-							t->LoadResources();
-							m_map.push_back(t);
+							Texture texture(it->second.textureName);
+							Texture textureNormal(it->second.normalMapName);
+							TextureAtlas textureAtlas(it->second.textureAtlasName);
 
-							x += DEFAULT_ENTITY_SIZE;
+							m_map.push_back(Tile(texture, textureNormal, textureAtlas, glm::vec3(x, y, 0.0f), 0.0f, DEFAULT_TILE_SIZE));
+							m_map[m_map.size() - 1].CalcTextureCoords(tiles[i]);
+
+							x += DEFAULT_TILE_SIZE;
 						}
 						else
 						{
-							snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "No tile definition found for: %s", tiles[i]);
-							LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-							LOG_CLEANUP();
-							exit(1);
+							//TODO: Handle error
 						}
 					}
 
-					x = 0.0f;
-					y += DEFAULT_ENTITY_SIZE;
+					x = DEFAULT_TILE_SIZE / 2;
+					y += DEFAULT_TILE_SIZE;
 				}
 
 				for (unsigned int i = 0; i < m_map.size(); i++)
 				{
+					m_map[i].CalcTextureCoords("rock");
 					m_activeTiles.push_back(m_map[i]);
+					m_activeTilesData.push_back(m_map[i].GetData());
 				}
 			}
 			else
@@ -160,47 +152,23 @@ void TileMap::LoadResources(const std::string& fileName)
 	}
 }
 
-void TileMap::Update(float delta)
+void TileMap::UpdateActiveTiles(const glm::vec3& cameraPos)
 {
-	UpdateActiveTiles();
-}
-
-void TileMap::UpdateActiveTiles()
-{
-	Game* game = Game::GetInstance();
-	glm::vec3 cameraPos = game->GetCamera().GetPos();
-	const Window* window = game->GetWindow();
-
 	m_activeTiles.clear();
+	m_activeTilesData.clear();
+
+	Game* game = ZEGLSingleton<Game>::GetSingletonPtr();
+	const Window* window = game->GetWindow();
 	
 	for (unsigned int i = 0; i < m_map.size(); i++)
 	{
-		glm::vec3 pos = m_map[i]->GetPos();
+		glm::vec3 pos = m_map[i].GetPos();
 
-		if (pos.x > cameraPos.x - DEFAULT_ENTITY_SIZE && pos.x < cameraPos.x + (float)window->GetWidth() + DEFAULT_ENTITY_SIZE &&
-			pos.y > cameraPos.y - DEFAULT_ENTITY_SIZE && pos.y < cameraPos.y + (float)window->GetHeight() + DEFAULT_ENTITY_SIZE)
+		if (pos.x > cameraPos.x - DEFAULT_TILE_SIZE && pos.x < cameraPos.x + (float)window->GetWidth() + DEFAULT_TILE_SIZE &&
+			pos.y > cameraPos.y - DEFAULT_TILE_SIZE && pos.y < cameraPos.y + (float)window->GetHeight() + DEFAULT_TILE_SIZE)
 		{
 			m_activeTiles.push_back(m_map[i]);
+			m_activeTilesData.push_back(m_map[i].GetData());
 		}
 	}
-}
-
-void TileMap::Draw(const Shader& shader) 
-{
-	for (auto iter = m_activeTiles.begin(); iter != m_activeTiles.end(); iter++)
-	{
-		auto obj = (*iter);
-		obj->Draw(shader);
-	}
-}
-
-void TileMap::DrawShadowLayer(const Shader& shader)
-{
-
-	for (auto iter = m_activeTiles.begin(); iter != m_activeTiles.end(); iter++) 
-	{
-		auto obj = (*iter);
-		obj->DrawOcclusion(shader);
-	}
-
 }

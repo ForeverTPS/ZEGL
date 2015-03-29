@@ -18,11 +18,11 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "window.h"
 #include "logfile.h"
 #include "util.h"
+#include <SDL2/SDL.h>
+#include <GL/glew.h>
 
 Window::Window(int width, int height, const std::string& title) :
 	m_width(width),
@@ -31,7 +31,7 @@ Window::Window(int width, int height, const std::string& title) :
 	m_input(this),
 	m_isCloseRequested(false)
 {
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
+	SDL_Init(SDL_INIT_EVERYTHING);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -45,7 +45,7 @@ Window::Window(int width, int height, const std::string& title) :
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
-	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL|SDL_WINDOW_ALLOW_HIGHDPI);
 	m_glContext = SDL_GL_CreateContext(m_window);
 
 	glewExperimental = GL_TRUE;
@@ -61,9 +61,8 @@ Window::Window(int width, int height, const std::string& title) :
 	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 	SDL_GL_SetSwapInterval(1);
 
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glViewport(0, 0, width, height);
 

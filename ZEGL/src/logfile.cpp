@@ -18,22 +18,31 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "logfile.h"
 #include "util.h"
+#include <fstream>
+#include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#ifdef WIN32
+#include <direct.h>
+#include <iostream>
+#include <shlobj.h>
+#include <stdlib.h>
 
 #pragma comment(lib, "shell32.lib")
+#endif
 
-unsigned int    LogFile::s_numWarnings = 0u;
-unsigned int    LogFile::s_numErrors = 0u;
-std::string		LogFile::s_fileName = "";
-bool			LogFile::s_isActive = false;
+unsigned int    LogFile::m_numWarnings = 0u;
+unsigned int    LogFile::m_numErrors = 0u;
+std::string		LogFile::m_fileName = "";
+bool			LogFile::m_isActive = false;
 
 #ifndef NDEBUG
-int             LogFile::s_logLevel = LOG_INFO;
+int             LogFile::m_logLevel = LOG_INFO;
 #else
-int             LogFile::s_logLevel = LOG_ERROR;
+int             LogFile::m_logLevel = LOG_ERROR;
 #endif
 
 char LogFile::s_errorMsg[LogFile::MAX_ERROR_LEN];
@@ -68,13 +77,13 @@ bool LogFile::Init(const std::string& fname)
     }
 #endif
 
-	s_fileName = filepath;
+	m_fileName = filepath;
 
-	std::ofstream logfile(s_fileName, std::ios_base::out);
+	std::ofstream logfile(m_fileName, std::ios_base::out);
 
 	if (logfile.is_open())
 	{
-		s_isActive = true;
+		m_isActive = true;
 
 		logfile << fname << std::endl;
 		logfile << "<br /><br />" << std::endl;
@@ -86,8 +95,8 @@ bool LogFile::Init(const std::string& fname)
 	}
 	else
 	{
-		s_fileName = "";
-		s_isActive = false;
+		m_fileName = "";
+		m_isActive = false;
 		success = false;
 	}
 
@@ -96,7 +105,7 @@ bool LogFile::Init(const std::string& fname)
 
 void LogFile::Cleanup() 
 {
-	std::ofstream logfile(s_fileName, std::ios_base::out | std::ios_base::app);
+	std::ofstream logfile(m_fileName, std::ios_base::out | std::ios_base::app);
 
 	if (logfile.is_open()) 
 	{
@@ -104,9 +113,9 @@ void LogFile::Cleanup()
 		logfile << "<hr / >" << std::endl;
 		logfile << "Log stopped at " + CurrentDateTime() << std::endl;
 		logfile << "<br /><br />" << std::endl;
-		logfile << "Number of warnings: " << s_numWarnings << std::endl;
+		logfile << "Number of warnings: " << m_numWarnings << std::endl;
 		logfile << "<br />" << std::endl;
-		logfile << "Number of errors: " << s_numErrors << std::endl << std::endl;	
+		logfile << "Number of errors: " << m_numErrors << std::endl << std::endl;	
 
 		logfile.close();
 	}
@@ -114,12 +123,12 @@ void LogFile::Cleanup()
 
 void LogFile::AddEntry(const std::string& text, int logType) 
 {
-	if (!s_isActive || s_fileName.empty() || logType > s_logLevel) 
+	if (!m_isActive || m_fileName.empty() || logType > m_logLevel) 
 	{
 		return;
 	}
 
-	std::ofstream logfile(s_fileName, std::ios_base::out | std::ios_base::app);
+	std::ofstream logfile(m_fileName, std::ios_base::out | std::ios_base::app);
 
 	if (logfile.is_open())
 	{
@@ -127,12 +136,12 @@ void LogFile::AddEntry(const std::string& text, int logType)
 		{
 			case LOG_ERROR:
 				logfile << "<span style=""color:#AA0000;"">" << CurrentDateTime() << " : [ERROR]: ";
-				s_numErrors++;
+				m_numErrors++;
 				break;
 
 			case LOG_WARNING:
 				logfile << "<span style=""color:#EAC117;"">" << CurrentDateTime() << " : [WARNING]: ";
-				s_numWarnings++;
+				m_numWarnings++;
 				break;
 
 			default: //[LOG_INFO]
@@ -150,7 +159,7 @@ void LogFile::SetLogLevel(int level)
 {
 	if (level >= LOG_ERROR && level <= LOG_INFO) 
 	{
-		s_logLevel = level;
+		m_logLevel = level;
 	}
 }
 

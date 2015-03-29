@@ -18,39 +18,17 @@
  * limitations under the License.
  */
 
-#include "util.h"
-#include <string>
-#include <SDL2/SDL.h>
+#version 150
 
-void Util::Sleep(int milliseconds)
+in vec2 vTexCoord;
+
+out vec4 fragColor;
+
+uniform sampler2D u_diffuse;
+
+uniform vec4 L_AmbientColor;
+
+void main() 
 {
-	SDL_Delay(milliseconds);
-}
-
-std::vector<std::string> Util::Split(const std::string &s, char delim)
-{
-	std::vector<std::string> elems;
-
-	const char* cstr = s.c_str();
-	unsigned int strLength = (unsigned int)s.length();
-	unsigned int start = 0;
-	unsigned int end = 0;
-
-	while (end <= strLength)
-	{
-		while (end <= strLength)
-		{
-			if (cstr[end] == delim)
-			{
-				break;
-			}
-			end++;
-		}
-
-		elems.push_back(s.substr(start, end - start));
-		start = end + 1;
-		end = start;
-	}
-
-	return elems;
+	fragColor = texture(u_diffuse, vTexCoord) * L_AmbientColor;
 }

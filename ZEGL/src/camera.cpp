@@ -18,67 +18,46 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
-
 #include "camera.h"
 #include "window.h"
+#include "glm/gtc/matrix_transform.hpp"
+#include <GL/glew.h>
 
 Camera::Camera(const Window* window) :
 	m_zoom(1.0f),
 	m_pos(glm::vec3(0.0f)),
-	m_rot(0.0f),
-	m_ortho(glm::mat4(1.0f)),
-	m_window(window)
+	m_rot(0.0f)
 {
 	m_transform.Update(m_pos, m_rot, m_zoom);
-	SetOrthoToWindow();
+
+	RecreateTransform(window);
 }
 
-void Camera::RevertToLast()
-{
-	m_pos = m_transform.m_lastPos;
-	m_rot = m_transform.m_lastRot;
-	m_zoom = m_transform.m_lastZoom;
-
-	RecreateTransform(true);
-}
-
-void Camera::SetOrtho(float left, float right, float bottom, float top, float near_z, float far_z)
-{
-	m_ortho = glm::ortho(left, right, bottom, top, near_z, far_z);
-
-	RecreateTransform(true);
-}
-
-void Camera::SetOrthoToWindow(float near_z, float far_z)
-{
-	m_ortho = glm::ortho(0.0f, (float)m_window->GetWidth(), 0.0f, (float)m_window->GetHeight());
-
-	RecreateTransform(true);
-}
-
-const glm::mat4& Camera::GetTransform(bool skipUpdate)
+const glm::mat4& Camera::GetTransform(const Window* window)
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||
 		m_transform.m_lastZoom != m_zoom)
 	{
-		RecreateTransform(skipUpdate);
+		RecreateTransform(window);
 	}
 
 	return m_transform.m_matrix;
 }
 
-void Camera::RecreateTransform(bool skipUpdate)
+void Camera::RecreateTransform(const Window* window)
 {
-	if (!skipUpdate)
-	{
-		m_transform.Update(m_pos, m_rot, m_zoom);
-	}
+	m_transform.Update(m_pos, m_rot, m_zoom);
 
 	glm::mat4 reverseTransMat = glm::translate(glm::mat4(1.0f), glm::vec3(-m_pos.x, -m_pos.y, 0.0f));
 	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(m_zoom, m_zoom, 1.0f));
-	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	glm::radians(m_rot), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
 
-	m_transform.m_matrix = m_ortho * reverseTransMat * rotMat * scaleMat;
+	glm::mat4 ortho(1.0f);
+	if (window)
+	{
+		ortho = glm::ortho(0.0f, (float)window->GetWidth(), 0.0f, (float)window->GetHeight(), -1.0f, 1.0f);
+	}
+
+	m_transform.m_matrix = ortho * reverseTransMat * rotMat * scaleMat;
 }

@@ -18,39 +18,20 @@
  * limitations under the License.
  */
 
-#include "util.h"
-#include <string>
-#include <SDL2/SDL.h>
+#version 150
 
-void Util::Sleep(int milliseconds)
-{
-	SDL_Delay(milliseconds);
-}
+#define attribute in
 
-std::vector<std::string> Util::Split(const std::string &s, char delim)
-{
-	std::vector<std::string> elems;
+attribute vec2 pos;
+attribute vec2 texCoord;
 
-	const char* cstr = s.c_str();
-	unsigned int strLength = (unsigned int)s.length();
-	unsigned int start = 0;
-	unsigned int end = 0;
+out vec4 vCol;
+out vec2 vTexCoord;
 
-	while (end <= strLength)
-	{
-		while (end <= strLength)
-		{
-			if (cstr[end] == delim)
-			{
-				break;
-			}
-			end++;
-		}
+uniform mat4 MVP;
 
-		elems.push_back(s.substr(start, end - start));
-		start = end + 1;
-		end = start;
-	}
-
-	return elems;
+void main() 
+{ 
+	vTexCoord = texCoord;  
+	gl_Position = MVP * vec4(pos.x, pos.y, 0, 1);
 }
