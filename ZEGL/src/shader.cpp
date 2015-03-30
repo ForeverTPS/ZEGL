@@ -33,12 +33,15 @@
 #include <cstring>
 #include <sstream>
 
+using namespace ZEGL;
+
 static void			CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage);
 static std::string	LoadShader(const std::string& fileName);
 
-std::map<std::string, ShaderData*>	Shader::s_resourceMap;
-int									ShaderData::s_supportedOpenGLLevel = 0;
-std::string							ShaderData::s_glslVersion = "";
+std::unordered_map<std::string, ShaderData*> Shader::s_resourceMap;
+
+int			ShaderData::s_supportedOpenGLLevel = 0;
+std::string	ShaderData::s_glslVersion = "";
 
 static void CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage)
 {
@@ -315,7 +318,7 @@ Shader::Shader(const std::string& fileName)
 {
 	m_fileName = fileName;
 
-	std::map<std::string, ShaderData*>::const_iterator it = s_resourceMap.find(fileName);
+	std::unordered_map<std::string, ShaderData*>::const_iterator it = s_resourceMap.find(fileName);
 	if (it != s_resourceMap.end())
 	{
 		m_shaderData = it->second;

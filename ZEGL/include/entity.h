@@ -18,87 +18,87 @@
  * limitations under the License.
  */
 
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once
 
 #include "texture.h"
 #include "textureatlas.h"
 #include "util.h"
-#include "glm/glm.hpp"
+#include "glm.hpp"
 
-class Camera;
-class Core;
-class Input;
-class Shader;
-
-struct EntityData
+namespace ZEGL
 {
-	glm::vec3	m_pos;			// 12 bytes
-	float		m_rot;			// 4 bytes	- offset 12
-	float		m_scale;		// 4 bytes	- offset 16
-	glm::vec2	m_texCoords[4];	// 32 bytes - offset 20|28|36|44
-};
+	class Camera;
+	class Core;
+	class Input;
+	class Shader;
 
-class Entity
-{
-public:
-	Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
-	Entity(const Entity& entity);
-	void operator=(Entity entity);
-	virtual ~Entity() {}
+	struct EntityData
+	{
+		glm::vec3	m_pos;			// 12 bytes
+		float		m_rot;			// 4 bytes	- offset 12
+		float		m_scale;		// 4 bytes	- offset 16
+		glm::vec2	m_texCoords[4];	// 32 bytes - offset 20|28|36|44
+	};
 
-	void ProcessInput(const Input& input, float delta) {}
-	void Update(float delta) {}
-	void Render() const {}
+	class Entity
+	{
+	public:
+		Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+		Entity(const Entity& entity);
+		void operator=(Entity entity);
+		virtual ~Entity() {}
 
-	inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
-	inline float		GetRot()	const	{ return m_data.m_rot; }
-	inline float		GetScale()	const	{ return m_data.m_scale; }
+		void ProcessInput(const Input& input, float delta) {}
+		void Update(float delta) {}
+		void Render() const {}
 
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
-	inline void	SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
-	inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
-	inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
+		inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
+		inline float		GetRot()	const	{ return m_data.m_rot; }
+		inline float		GetScale()	const	{ return m_data.m_scale; }
 
-	inline const EntityData& GetData() const { return m_data; }
+		inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
+		inline void	SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
+		inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
+		inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
 
-protected:
-	EntityData	m_data;
+		inline const EntityData& GetData() const { return m_data; }
 
-private:
-	//Entity(Entity const&) = delete;
-	//Entity& operator=(Entity const&) = delete;
-};
+	protected:
+		EntityData	m_data;
 
-class RenderEntity : public Entity
-{
-public:
-	RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+	private:
+		//Entity(Entity const&) = delete;
+		//Entity& operator=(Entity const&) = delete;
+	};
 
-	RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+	class RenderEntity : public Entity
+	{
+	public:
+		RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
 
-	RenderEntity(const RenderEntity& renderEntity);
-	void operator=(RenderEntity renderEntity);
+		RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
 
-	virtual ~RenderEntity() {}
+		RenderEntity(const RenderEntity& renderEntity);
+		void operator=(RenderEntity renderEntity);
 
-	bool CalcTextureCoords(const std::string regionName);
+		virtual ~RenderEntity() {}
 
-	inline const Texture&	GetTexture()	const	{ return m_texture; }
-	inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
-	
-protected:
-	TextureAtlas	m_textureAtlas;
-	Texture			m_texture;
-	Texture			m_normalMap;
+		bool CalcTextureCoords(const std::string regionName);
 
-	bool			m_hasTextureAtlas;
+		inline const Texture&	GetTexture()	const	{ return m_texture; }
+		inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
 
-private:
-	//RenderEntity(RenderEntity const&) = delete;
-	//RenderEntity& operator=(RenderEntity const&) = delete;
-};
+	protected:
+		TextureAtlas	m_textureAtlas;
+		Texture			m_texture;
+		Texture			m_normalMap;
 
-#endif
+		bool			m_hasTextureAtlas;
+
+	private:
+		//RenderEntity(RenderEntity const&) = delete;
+		//RenderEntity& operator=(RenderEntity const&) = delete;
+	};
+}

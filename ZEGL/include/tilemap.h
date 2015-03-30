@@ -18,60 +18,66 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include "entity.h"
 #include <vector>
 
-const float DEFAULT_TILE_SIZE = 512.0f;
-
-struct TileDefinition
+namespace ZEGL
 {
-	std::string tilename;
-	std::string textureName;
-	std::string normalMapName;
-	std::string textureAtlasName;
-};
+	const float DEFAULT_TILE_SIZE = 512.0f;
 
-class Tile : public RenderEntity
-{
-public:
-	Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+	class Window;
 
-	Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-		const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
+	struct TileDefinition
+	{
+		std::string tilename;
+		std::string textureName;
+		std::string normalMapName;
+		std::string textureAtlasName;
+	};
 
-	Tile(const Tile& tile);
+	class Tile : public RenderEntity
+	{
+	public:
+		Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
+			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
 
-	virtual ~Tile() {}
+		Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
+			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
 
-protected:
-private:
-	//Tile(Tile const&) = delete;
-	Tile& operator=(Tile const&) = delete;
+		Tile(const Tile& tile);
 
-	float m_tileSize;
-};
+		virtual ~Tile() {}
 
-class TileMap
-{
-public:
-	TileMap(const std::string& fileName);
-	virtual ~TileMap() {}
+	protected:
+	private:
+		Tile& operator=(Tile const&) = delete;
 
-	void Update(float delta) {}
-	void UpdateActiveTiles(const glm::vec3& cameraPos);
+		float m_tileSize;
+	};
 
-	inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
-	inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }
+	class TileMap
+	{
+	public:
+		TileMap(const std::string& fileName);
+		virtual ~TileMap() {}
 
-protected:
-private:
-	TileMap(TileMap const&) = delete;
-	TileMap& operator=(TileMap const&) = delete;
+		void Update(float delta) {}
+		void UpdateActiveTiles(const Window* window, const glm::vec3& cameraPos);
 
-	void Load(const std::string& fileName);
+		inline const std::vector<Tile>&			GetActiveTiles()		const { return m_activeTiles; }
+		inline const std::vector<EntityData>&	GetActiveTilesData()	const { return m_activeTilesData; }
 
-	std::vector<Tile>		m_map;
-	std::vector<Tile>		m_activeTiles;
-	std::vector<EntityData>	m_activeTilesData;
-};
+	protected:
+	private:
+		TileMap(TileMap const&) = delete;
+		TileMap& operator=(TileMap const&) = delete;
+
+		void Load(const std::string& fileName);
+
+		std::vector<Tile>		m_map;
+		std::vector<Tile>		m_activeTiles;
+		std::vector<EntityData>	m_activeTilesData;
+	};
+}

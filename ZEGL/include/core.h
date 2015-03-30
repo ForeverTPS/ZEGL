@@ -18,32 +18,32 @@
  * limitations under the License.
  */
 
-#ifndef CORE_H
-#define CORE_H
+#pragma once
 
 #include <string>
 
-class Game;
-class Window;
-
-class Core
+namespace ZEGL
 {
-public:
-	Core(double frameRate, Window* window, Game* game);
-	virtual ~Core() {};
+	class Game;
+	class Window;
 
-	void Start();
-	void Stop();
+	class Core
+	{
+	public:
+		Core(double frameRate, Window* window, Game* game);
+		virtual ~Core() {};
 
-protected:
-private:
-	Core(Core const&) = delete;
-	Core& operator=(Core const&) = delete;
-	
-	Window*		m_window;
-	Game*		m_game;
-	bool		m_isRunning;
-	double		m_frameTime;	
-};
+		void Start();
+		void Stop();
 
-#endif
+	protected:
+	private:
+		Core(Core const&) = delete;
+		Core& operator=(Core const&) = delete;
+
+		Window*		m_window;
+		Game*		m_game;
+		bool		m_isRunning;
+		double		m_frameTime;
+	};
+}

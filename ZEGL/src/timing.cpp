@@ -36,8 +36,12 @@
 	#include <iostream>
 	static double g_freq;
 	static bool g_timerInitialized = false;
+#elif defined(OS_LINUX)
+	#include <sys/time.h>
+	static const long NANOSECONDS_PER_SECOND = 1000000000L;
 #else
-    #include <SDL2/SDL.h>
+	#include <chrono>
+	static std::chrono::system_clock::time_point m_epoch = std::chrono::high_resolution_clock::now();
 #endif
 
 double Time::GetTime()
@@ -62,7 +66,14 @@ double Time::GetTime()
 		}
 		
 		return double(li.QuadPart)/g_freq;
+
+	#elif defined(OS_LINUX)
+		timespec ts;
+		clock_gettime(CLOCK_REALTIME, &ts);
+		return (double)(((long)ts.tv_sec * NANOSECONDS_PER_SECOND) + ts.tv_nsec) / ((double)(NANOSECONDS_PER_SECOND));
+
 	#else
-        return (double)SDL_GetTicks()/1000.0;
+		return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - m_epoch).count() / 1000000000.0;
+
 	#endif
 }

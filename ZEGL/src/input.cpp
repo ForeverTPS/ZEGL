@@ -24,6 +24,8 @@
 #include <SDL2/SDL.h>
 #include <cstring>
 
+using namespace ZEGL;
+
 Input::Input(Window* window) :
 	m_mouseX(0),
 	m_mouseY(0),

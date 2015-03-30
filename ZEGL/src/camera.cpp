@@ -23,6 +23,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <GL/glew.h>
 
+using namespace ZEGL;
+
 Camera::Camera(const Window* window) :
 	m_zoom(1.0f),
 	m_pos(glm::vec3(0.0f)),

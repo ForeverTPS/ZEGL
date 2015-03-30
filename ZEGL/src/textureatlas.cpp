@@ -24,8 +24,9 @@
 #include "util.h"
 
 using namespace tinyxml2;
+using namespace ZEGL;
 
-std::map<std::string, TextureAtlasData*> TextureAtlas::s_resourceMap;
+std::unordered_map<std::string, TextureAtlasData*> TextureAtlas::s_resourceMap;
 
 TextureAtlasData::TextureAtlasData(const std::string& fileName)
 {
@@ -75,7 +76,6 @@ void TextureAtlasData::ParseTextureAtlas(const std::string& fileName)
 	{
 		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s", error.c_str());
 		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		LOG_CLEANUP();
 		exit(1);
 	}
 }
@@ -84,7 +84,7 @@ TextureAtlas::TextureAtlas(const std::string& fileName)
 {
 	m_fileName = fileName;
 
-	std::map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(fileName);
+	std::unordered_map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(fileName);
 	if (it != s_resourceMap.end())
 	{
 		m_textureAtlasData = it->second;
@@ -121,10 +121,10 @@ TextureAtlas::~TextureAtlas()
 TextureRegion TextureAtlas::GetRegion(const std::string& regionName) const
 {
 	TextureRegion result = { 0.0f, 0.0f, 0.0f, 0.0f };
-	std::map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(m_fileName);
+	std::unordered_map<std::string, TextureAtlasData*>::const_iterator it = s_resourceMap.find(m_fileName);
 	if (it != s_resourceMap.end())
 	{
-		std::map<std::string, TextureRegion>::const_iterator it2 = it->second->GetRegions().find(regionName);
+		std::unordered_map<std::string, TextureRegion>::const_iterator it2 = it->second->GetRegions().find(regionName);
 		if (it2 != it->second->GetRegions().end())
 		{
 			result = it2->second;

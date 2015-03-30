@@ -18,12 +18,9 @@
  * limitations under the License.
  */
 
-#ifndef TIME_H
-#define TIME_H
+#pragma once
 
 namespace Time
 {
 	double GetTime();
 };
-
-#endif

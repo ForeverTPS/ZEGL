@@ -22,8 +22,7 @@ must not be misrepresented as being the original software.
 distribution.
 */
 
-#ifndef TINYXML2_INCLUDED
-#define TINYXML2_INCLUDED
+#pragma once
 
 #if defined(ANDROID_NDK) || defined(__BORLANDC__)
 #   include <ctype.h>
@@ -2075,5 +2074,3 @@ private:
 #if defined(_MSC_VER)
 #   pragma warning(pop)
 #endif
-
-#endif // TINYXML2_INCLUDED

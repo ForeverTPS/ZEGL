@@ -18,54 +18,59 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include "entity.h"
 #include "shader.h"
 #include "util.h"
 
-class Light : public Entity
+namespace ZEGL
 {
-public:
-	Light(const Shader& shader) :
-		m_lightColor(glm::vec3(1.0f)),
-		m_lightIntensity(1.0f),
-		m_ambientColor(glm::vec3(0.2f)),
-		m_ambientIntensity(0.2f),
-		m_falloff(glm::vec3(0.4f, 3.0f, 20.0f)),
-		m_shader(shader),
-		Entity(glm::vec3(0.5f, 0.5f, 0.05f)) {}
+	class Light : public Entity
+	{
+	public:
+		Light(const Shader& shader) :
+			m_lightColor(glm::vec3(1.0f)),
+			m_lightIntensity(1.0f),
+			m_ambientColor(glm::vec3(0.2f)),
+			m_ambientIntensity(0.2f),
+			m_falloff(glm::vec3(0.4f, 3.0f, 20.0f)),
+			m_shader(shader),
+			Entity(glm::vec3(0.5f, 0.5f, 0.05f)) {}
 
-	Light(const Shader& shader, const glm::vec3& pos,
-		const glm::vec3& lightCol, float lightIntensity,
-		const glm::vec3& ambientCol, float ambientIntensity, const glm::vec3& falloff) :
-		m_lightColor(lightCol),
-		m_lightIntensity(lightIntensity),
-		m_ambientColor(ambientCol),
-		m_ambientIntensity(ambientIntensity),
-		m_falloff(falloff),
-		m_shader(shader),
-		Entity(pos) {}
+		Light(const Shader& shader, const glm::vec3& pos,
+			const glm::vec3& lightCol, float lightIntensity,
+			const glm::vec3& ambientCol, float ambientIntensity, const glm::vec3& falloff) :
+			m_lightColor(lightCol),
+			m_lightIntensity(lightIntensity),
+			m_ambientColor(ambientCol),
+			m_ambientIntensity(ambientIntensity),
+			m_falloff(falloff),
+			m_shader(shader),
+			Entity(pos) {}
 
-	virtual ~Light() {}
+		virtual ~Light() {}
 
-	inline const glm::vec3& GetLightColor()		const { return m_lightColor; }
-	inline const float GetLightIntensity()		const { return m_lightIntensity; }
-	inline const glm::vec3& GetAmbientColor()	const { return m_ambientColor; }
-	inline const float GetAmbientIntensity()	const { return m_ambientIntensity; }
-	inline const glm::vec3& GetFalloff()		const { return m_falloff; }
-	inline const Shader& GetShader()			const { return m_shader; }
-	
-	inline void SetLightColor(const glm::vec3& lightCol)		{ m_lightColor = lightCol; }
-	inline void SetLightIntensity(float lightIntensity)			{ m_lightIntensity = lightIntensity; }
-	inline void SetAmbientColor(const glm::vec3& ambientCol)	{ m_ambientColor = ambientCol; }
-	inline void SetAmbientIntensity(float ambientIntensity)		{ m_ambientIntensity = ambientIntensity; }
-	inline void SetFalloff(const glm::vec3& falloff)			{ m_falloff = falloff; }
+		inline const glm::vec3& GetLightColor()		const { return m_lightColor; }
+		inline const float GetLightIntensity()		const { return m_lightIntensity; }
+		inline const glm::vec3& GetAmbientColor()	const { return m_ambientColor; }
+		inline const float GetAmbientIntensity()	const { return m_ambientIntensity; }
+		inline const glm::vec3& GetFalloff()		const { return m_falloff; }
+		inline const Shader& GetShader()			const { return m_shader; }
 
-private:
-	glm::vec3	m_lightColor;
-	float		m_lightIntensity;
-	glm::vec3	m_ambientColor;
-	float		m_ambientIntensity;
-	glm::vec3	m_falloff;
+		inline void SetLightColor(const glm::vec3& lightCol)		{ m_lightColor = lightCol; }
+		inline void SetLightIntensity(float lightIntensity)			{ m_lightIntensity = lightIntensity; }
+		inline void SetAmbientColor(const glm::vec3& ambientCol)	{ m_ambientColor = ambientCol; }
+		inline void SetAmbientIntensity(float ambientIntensity)		{ m_ambientIntensity = ambientIntensity; }
+		inline void SetFalloff(const glm::vec3& falloff)			{ m_falloff = falloff; }
 
-	Shader		m_shader;
-};
+	private:
+		glm::vec3	m_lightColor;
+		float		m_lightIntensity;
+		glm::vec3	m_ambientColor;
+		float		m_ambientIntensity;
+		glm::vec3	m_falloff;
+
+		Shader		m_shader;
+	};
+}

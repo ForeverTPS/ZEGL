@@ -26,7 +26,9 @@
 #include <cstring>
 #include <cassert>
 
-std::map<std::string, TextureData*> Texture::s_resourceMap;
+using namespace ZEGL;
+
+std::unordered_map<std::string, TextureData*> Texture::s_resourceMap;
 
 TextureData::TextureData(GLenum textureTarget, int width, int height, int numTextures, unsigned char** data, 
 	GLfloat* filters, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachments) :
@@ -178,7 +180,7 @@ Texture::Texture(const std::string& fileName, GLenum textureTarget, GLfloat filt
 {
 	m_fileName = fileName;
 
-	std::map<std::string, TextureData*>::const_iterator it = s_resourceMap.find(fileName);
+	std::unordered_map<std::string, TextureData*>::const_iterator it = s_resourceMap.find(fileName);
 	if (it != s_resourceMap.end())
 	{
 		m_textureData = it->second;

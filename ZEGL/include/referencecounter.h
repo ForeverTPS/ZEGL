@@ -18,28 +18,28 @@
  * limitations under the License.
  */
 
-#ifndef REFERENCECOUNTER_H
-#define REFERENCECOUNTER_H
+#pragma once
 
-class ReferenceCounter
+namespace ZEGL
 {
-public:
-	ReferenceCounter() : 
-		m_refCount(1) {}
+	class ReferenceCounter
+	{
+	public:
+		ReferenceCounter() :
+			m_refCount(1) {}
 
-	virtual ~ReferenceCounter() {}
-	
-	inline void AddReference()		{ m_refCount++; }
-	inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
+		virtual ~ReferenceCounter() {}
 
-	inline int GetReferenceCount()	{ return m_refCount; }
+		inline void AddReference()		{ m_refCount++; }
+		inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
 
-protected:
-private:
-	ReferenceCounter(ReferenceCounter const&) = delete;
-	ReferenceCounter& operator=(ReferenceCounter const&) = delete;
+		inline int GetReferenceCount()	{ return m_refCount; }
 
-	int m_refCount;
-};
+	protected:
+	private:
+		ReferenceCounter(ReferenceCounter const&) = delete;
+		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
 
-#endif
+		int m_refCount;
+	};
+}

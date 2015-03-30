@@ -27,6 +27,7 @@
 #include <iostream>
 
 using namespace tinyxml2;
+using namespace ZEGL;
 
 Tile::Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
 	const glm::vec3& pos, float rot, float scale) :
@@ -72,7 +73,7 @@ void TileMap::Load(const std::string& fileName)
 		}
 		else
 		{
-			std::map<std::string, TileDefinition> m_tileDefs;
+			std::unordered_map<std::string, TileDefinition> m_tileDefs;
 
 			while (tileElement != nullptr)
 			{
@@ -104,10 +105,10 @@ void TileMap::Load(const std::string& fileName)
 				{
 					getline(file, line);
 				
-					std::vector<std::string> tiles = Util::Split(line, ',');
+					std::vector<std::string> tiles = Util::SplitString(line, ',');
 					for (unsigned int i = 0; i < tiles.size(); i++)
 					{
-						std::map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
+						std::unordered_map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
 						if (it != m_tileDefs.end())
 						{
 							Texture texture(it->second.textureName);
@@ -152,13 +153,10 @@ void TileMap::Load(const std::string& fileName)
 	}
 }
 
-void TileMap::UpdateActiveTiles(const glm::vec3& cameraPos)
+void TileMap::UpdateActiveTiles(const Window* window, const glm::vec3& cameraPos)
 {
 	m_activeTiles.clear();
 	m_activeTilesData.clear();
-
-	Game* game = ZEGLSingleton<Game>::GetSingletonPtr();
-	const Window* window = game->GetWindow();
 	
 	for (unsigned int i = 0; i < m_map.size(); i++)
 	{

@@ -18,54 +18,54 @@
  * limitations under the License.
  */
 
-#ifndef CAMERA_H
-#define CAMERA_H
+#pragma once
 
-#include "glm/glm.hpp"
+#include "glm.hpp"
 
-class Window;
-
-class Camera
+namespace ZEGL
 {
-public:
-	Camera(const Window* window = nullptr);
-	virtual ~Camera() {};
+	class Window;
 
-	const glm::mat4& GetTransform(const Window* window);
-
-	inline glm::vec3	GetPos()	const	{ return m_pos; }
-	inline float		GetRot()	const	{ return m_rot; }
-	inline float		GetZoom()	const	{ return m_zoom; }
-
-	inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
-	inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
-	inline void	SetRot(float rot)							{ m_rot = rot; }
-	inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
-
-protected:
-private:
-	//Camera(Camera const&) = delete;
-	Camera& operator=(Camera const&) = delete;
-
-	struct Transformation
+	class Camera
 	{
-		glm::mat4	m_matrix;
-		glm::vec3	m_lastPos;
-		float		m_lastRot;
-		float		m_lastZoom;
+	public:
+		Camera(const Window* window = nullptr);
+		virtual ~Camera() {};
 
-		void Update(const glm::vec3& pos, float rot, float zoom)
-		{ 
-			m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
-		}
+		const glm::mat4& GetTransform(const Window* window);
+
+		inline glm::vec3	GetPos()	const	{ return m_pos; }
+		inline float		GetRot()	const	{ return m_rot; }
+		inline float		GetZoom()	const	{ return m_zoom; }
+
+		inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
+		inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
+		inline void	SetRot(float rot)							{ m_rot = rot; }
+		inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
+
+	protected:
+	private:
+		//Camera(Camera const&) = delete;
+		Camera& operator=(Camera const&) = delete;
+
+		struct Transformation
+		{
+			glm::mat4	m_matrix;
+			glm::vec3	m_lastPos;
+			float		m_lastRot;
+			float		m_lastZoom;
+
+			void Update(const glm::vec3& pos, float rot, float zoom)
+			{
+				m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
+			}
+		};
+
+		void RecreateTransform(const Window* window);
+
+		glm::vec3		m_pos;
+		float			m_rot;
+		float			m_zoom;
+		Transformation	m_transform;
 	};
-
-	void RecreateTransform(const Window* window);
-
-	glm::vec3		m_pos;
-	float			m_rot;
-	float			m_zoom;
-	Transformation	m_transform;
-};
-
-#endif
+}

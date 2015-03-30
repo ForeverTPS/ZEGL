@@ -20,6 +20,8 @@
 
 #include "entity.h"
 
+using namespace ZEGL;
+
 Entity::Entity(const glm::vec3& pos, float rot, float scale)
 {
 	m_data.m_pos = pos;

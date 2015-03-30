@@ -18,49 +18,53 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include "referencecounter.h"
 #include <string>
-#include <map>
+#include <unordered_map>
 
-struct TextureRegion
+namespace ZEGL
 {
-	float x, y, w, h;
-};
+	struct TextureRegion
+	{
+		float x, y, w, h;
+	};
 
-class TextureAtlasData : public ReferenceCounter
-{
-public:
-	TextureAtlasData(const std::string& fileName);
-	virtual ~TextureAtlasData() {}
+	class TextureAtlasData : public ReferenceCounter
+	{
+	public:
+		TextureAtlasData(const std::string& fileName);
+		virtual ~TextureAtlasData() {}
 
-	inline const std::map<std::string, TextureRegion>& GetRegions() const { return m_textureRegions; }
+		inline const std::unordered_map<std::string, TextureRegion>& GetRegions() const { return m_textureRegions; }
 
-protected:
-private:
-	TextureAtlasData(TextureAtlasData const&) = delete;
-	TextureAtlasData& operator=(TextureAtlasData const&) = delete;
+	protected:
+	private:
+		TextureAtlasData(TextureAtlasData const&) = delete;
+		TextureAtlasData& operator=(TextureAtlasData const&) = delete;
 
-	void ParseTextureAtlas(const std::string& fileName);
+		void ParseTextureAtlas(const std::string& fileName);
 
-	std::map<std::string, TextureRegion> m_textureRegions;
-};
+		std::unordered_map<std::string, TextureRegion> m_textureRegions;
+	};
 
-class TextureAtlas
-{
-public:
-	TextureAtlas(const std::string& fileName = "default_atlas.xml");
-	TextureAtlas(TextureAtlas const&);
-	virtual ~TextureAtlas();
+	class TextureAtlas
+	{
+	public:
+		TextureAtlas(const std::string& fileName = "default_atlas.xml");
+		TextureAtlas(TextureAtlas const&);
+		virtual ~TextureAtlas();
 
-	TextureRegion GetRegion(const std::string& regionName) const;
+		TextureRegion GetRegion(const std::string& regionName) const;
 
-protected:
-private:
-	//TextureAtlas(TextureAtlas const&) = delete;
-	TextureAtlas& operator=(TextureAtlas const&) = delete;
+	protected:
+	private:
+		TextureAtlas& operator=(TextureAtlas const&) = delete;
 
-	static std::map<std::string, TextureAtlasData*> s_resourceMap;
+		static std::unordered_map<std::string, TextureAtlasData*> s_resourceMap;
 
-	TextureAtlasData*	m_textureAtlasData;
-	std::string			m_fileName;
-};
+		TextureAtlasData*	m_textureAtlasData;
+		std::string			m_fileName;
+	};
+}

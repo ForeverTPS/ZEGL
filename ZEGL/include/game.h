@@ -18,51 +18,51 @@
  * limitations under the License.
  */
 
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "shader.h"
 #include <vector>
 
-class Camera;
-class Input;
-class Light;
-class Window;
-
-class Game
+namespace ZEGL
 {
-public:
-	Game();
-	virtual ~Game();
+	class Camera;
+	class Input;
+	class Light;
+	class Window;
 
-	void Init(const Window& window);
+	class Game
+	{
+	public:
+		Game();
+		virtual ~Game();
 
-	void ProcessInput(const Input& input, float delta);
-	void Update(float delta);
-	void Render();
+		void Init(const Window& window);
 
-	inline const Light*		GetActiveLight()		const { return m_activeLight; }
-	inline const Camera&	GetCamera()				const { return *m_camera; }
+		void ProcessInput(const Input& input, float delta);
+		void Update(float delta);
+		void Render();
 
-	inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
-	inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
+		inline const Light*		GetActiveLight()		const { return m_activeLight; }
+		inline const Camera&	GetCamera()				const { return *m_camera; }
 
-	inline const Window*	GetWindow()					  { return m_window; }
+		inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
+		inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
 
-protected:
-private:
-	Game(Game const&) = delete;
-	Game& operator=(Game const&) = delete;
+		inline const Window*	GetWindow()					  { return m_window; }
 
-	Camera*				m_camera;
-	const Window*		m_window;
+	protected:
+	private:
+		Game(Game const&) = delete;
+		Game& operator=(Game const&) = delete;
 
-	glm::vec3			m_ambientColor;
-	float				m_ambientIntensity;
+		Camera*				m_camera;
+		const Window*		m_window;
 
-	Shader				m_defaultShader;
-	const Light*		m_activeLight;
-	std::vector<Light*>	m_lights;
-};
+		glm::vec3			m_ambientColor;
+		float				m_ambientIntensity;
 
-#endif
+		Shader				m_defaultShader;
+		const Light*		m_activeLight;
+		std::vector<Light*>	m_lights;
+	};
+}

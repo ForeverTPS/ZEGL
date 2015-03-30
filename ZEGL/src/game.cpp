@@ -29,6 +29,8 @@
 #include <GL/glew.h>
 #include <iostream>
 
+using namespace ZEGL;
+
 GLuint gVAO;
 GLuint gVAB;
 Light* light;
@@ -109,7 +111,7 @@ void Game::ProcessInput(const Input& input, float delta)
 
 void Game::Update(float delta)
 {
-	tileMap->UpdateActiveTiles(m_camera->GetPos());
+	tileMap->UpdateActiveTiles(m_window, m_camera->GetPos());
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0]);
 }

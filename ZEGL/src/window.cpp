@@ -24,6 +24,8 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
+using namespace ZEGL;
+
 Window::Window(int width, int height, const std::string& title) :
 	m_width(width),
 	m_height(height),
