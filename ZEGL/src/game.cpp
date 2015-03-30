@@ -21,8 +21,6 @@
 #include "game.h"
 #include "camera.h"
 #include "light.h"
-#include "shader.h"
-#include "texture.h"
 #include "tilemap.h"
 #include "util.h"
 #include "window.h"
@@ -71,6 +69,9 @@ void Game::Init(const Window* window)
 	tileMap = new TileMap("test_level.ldf");
 
 	light = new Light(Shader("point_light"));
+	m_lights.push_back(light);
+	light = new Light(Shader("point_light"));
+	light->SetLightColor(glm::vec3(1.0f, 0.0f, 0.0f));
 	m_lights.push_back(light);
     
     glGenVertexArrays(1, &gVAO);

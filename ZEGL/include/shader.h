@@ -21,7 +21,7 @@
 #pragma once
 
 #include "referencecounter.h"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <string>
 #include <vector>
 #include <unordered_map>

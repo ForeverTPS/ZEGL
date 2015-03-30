@@ -22,8 +22,7 @@
 
 #include "texture.h"
 #include "textureatlas.h"
-#include "util.h"
-#include "glm.hpp"
+#include <glm/glm.hpp>
 
 namespace ZEGL
 {
@@ -48,20 +47,20 @@ namespace ZEGL
 		void operator=(Entity entity);
 		virtual ~Entity() {}
 
-		void ProcessInput(const Input& input, float delta) {}
-		void Update(float delta) {}
-		void Render() const {}
+		void						ProcessInput(const Input& input, float delta) {}
+		void						Update(float delta) {}
+		void						Render() const {}
 
-		inline glm::vec3	GetPos()	const	{ return m_data.m_pos; }
-		inline float		GetRot()	const	{ return m_data.m_rot; }
-		inline float		GetScale()	const	{ return m_data.m_scale; }
+		inline glm::vec3			GetPos()	const { return m_data.m_pos; }
+		inline float				GetRot()	const { return m_data.m_rot; }
+		inline float				GetScale()	const { return m_data.m_scale; }
 
-		inline void	SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
-		inline void	SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
-		inline void	SetRot(float rot)							{ m_data.m_rot = rot; }
-		inline void	SetScale(float scale)						{ m_data.m_scale = scale; }
+		inline void					SetPos(float x, float y, float z = 0.0f)	{ m_data.m_pos.x = x; m_data.m_pos.y = y; m_data.m_pos.z = z; }
+		inline void					SetPos(const glm::vec3& pos)				{ m_data.m_pos = pos; }
+		inline void					SetRot(float rot)							{ m_data.m_rot = rot; }
+		inline void					SetScale(float scale)						{ m_data.m_scale = scale; }
 
-		inline const EntityData& GetData() const { return m_data; }
+		inline const EntityData&	GetData() const { return m_data; }
 
 	protected:
 		EntityData	m_data;
@@ -70,27 +69,34 @@ namespace ZEGL
 	class RenderEntity : public Entity
 	{
 	public:
-		RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+		RenderEntity(const Texture& texture, 
+					 const Texture& normalMap, 
+					 const TextureAtlas& textureAtlas,
+					 const glm::vec3& pos = glm::vec3(0.0f), 
+					 float rot = 0.0f, 
+					 float scale = 1.0f);
 
-		RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f);
+		RenderEntity(const Texture& texture, 
+					 const Texture& normalMap, 
+					 const glm::vec2 textureCoords[4], 
+					 const glm::vec3& pos = glm::vec3(0.0f), 
+					 float rot = 0.0f, 
+					 float scale = 1.0f);
 
 		RenderEntity(const RenderEntity& renderEntity);
 		void operator=(RenderEntity renderEntity);
-
 		virtual ~RenderEntity() {}
 
-		bool CalcTextureCoords(const std::string regionName);
+		bool					CalcTextureCoords(const std::string regionName);
 
-		inline const Texture&	GetTexture()	const	{ return m_texture; }
-		inline const Texture&	GetNormalMap()	const	{ return m_normalMap; }
+		inline const Texture&	GetTexture()	const { return m_texture; }
+		inline const Texture&	GetNormalMap()	const { return m_normalMap; }
 
 	protected:
-		TextureAtlas	m_textureAtlas;
-		Texture			m_texture;
-		Texture			m_normalMap;
+		TextureAtlas			m_textureAtlas;
+		Texture					m_texture;
+		Texture					m_normalMap;
 
-		bool			m_hasTextureAtlas;
+		bool					m_hasTextureAtlas;
 	};
 }

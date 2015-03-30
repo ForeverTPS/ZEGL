@@ -20,9 +20,7 @@
 
 #pragma once
 
-//#define GLM_FORCE_RADIANS
-
-#include "glm.hpp"
+#include <glm/glm.hpp>
 
 namespace ZEGL
 {
@@ -35,17 +33,17 @@ namespace ZEGL
 
 		const glm::mat4& GetTransform(const Window* window);
 
-		inline glm::vec3	GetPos()	const	{ return m_pos; }
-		inline float		GetRot()	const	{ return m_rot; }
-		inline float		GetZoom()	const	{ return m_zoom; }
+		inline glm::vec3	GetPos()	const { return m_pos; }
+		inline float		GetRot()	const { return m_rot; }
+		inline float		GetZoom()	const { return m_zoom; }
 
-		inline void	SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
-		inline void	SetPos(const glm::vec3& pos)				{ m_pos = pos; }
-		inline void	SetRot(float rot)							{ m_rot = rot; }
-		inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
+		inline void			SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
+		inline void			SetPos(const glm::vec3& pos)				{ m_pos = pos; }
+		inline void			SetRot(float rot)							{ m_rot = rot; }
+		inline void			SetZoom(float zoom)							{ m_zoom = zoom; }
 
-		void*	operator new(size_t i)		{ return _mm_malloc(i, 16); }
-		void	operator delete(void* p)	{ _mm_free(p); }
+		void*				operator new(size_t i)		{ return _mm_malloc(i, 16); }
+		void				operator delete(void* p)	{ _mm_free(p); }
 
 	protected:
 	private:

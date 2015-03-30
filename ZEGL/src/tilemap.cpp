@@ -22,6 +22,7 @@
 #include "game.h"
 #include "logfile.h"
 #include "tinyxml2.h"
+#include "util.h"
 #include "window.h"
 #include <fstream>
 #include <iostream>

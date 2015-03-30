@@ -38,3 +38,10 @@ std::vector<std::string> Util::SplitString(const std::string& s, char delim)
 	SplitString(s, delim, elems);
 	return elems;
 }
+
+bool Util::IsNumber(const std::string& s)
+{
+	std::string::const_iterator it = s.begin();
+	while (it != s.end() && std::isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
+}

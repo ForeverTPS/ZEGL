@@ -23,7 +23,6 @@
 #include "stb_image.h"
 #include "util.h"
 #include <iostream>
-#include <cstring>
 #include <cassert>
 
 using namespace ZEGL;

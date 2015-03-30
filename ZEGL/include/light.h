@@ -22,7 +22,6 @@
 
 #include "entity.h"
 #include "shader.h"
-#include "util.h"
 
 namespace ZEGL
 {

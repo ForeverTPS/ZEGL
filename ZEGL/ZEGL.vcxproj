@@ -57,7 +57,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;$(ProjectDir)include\glm;$(ProjectDir)include\GL;$(ProjectDir)include\SDL2;$(ProjectDir)include\glm;$(ProjectDir)include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,7 +80,7 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;$(ProjectDir)include\glm;$(ProjectDir)include\GL;$(ProjectDir)include\SDL2;$(ProjectDir)include\glm;$(ProjectDir)include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,6 +103,7 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logfile.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\random.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\texture.cpp" />
@@ -122,6 +123,7 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
     <ClInclude Include="include\light.h" />
     <ClInclude Include="include\logfile.h" />
     <ClInclude Include="include\platform.h" />
+    <ClInclude Include="include\random.h" />
     <ClInclude Include="include\referencecounter.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\stb_image.h" />

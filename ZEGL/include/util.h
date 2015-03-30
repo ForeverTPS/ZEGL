@@ -24,7 +24,6 @@
 #include <cctype>
 #include <string>
 #include <sstream>
-#include <unordered_map>
 #include <vector>
 
 #ifndef WIN32
@@ -65,23 +64,25 @@ namespace Util
 	const float DEG2RAD = 0.01745329251994329576923690768f;
 	const float RAD2DEG = 57.2957795130823208767981548141f;
 
-	inline float ToRadian(const float Degree) { return (Degree * DEG2RAD); }
-	inline float ToDegree(const float Radian) { return (Radian * RAD2DEG); }
+	inline float	ToRadian(const float Degree)	{ return (Degree * DEG2RAD); }
+	inline float	ToDegree(const float Radian)	{ return (Radian * RAD2DEG); }
 
-	inline void Sleep(int milliseconds) { SDL_Delay(milliseconds); }
+	inline void		Sleep(int milliseconds)			{ SDL_Delay(milliseconds); }
 
 	std::vector<std::string>&	SplitString(const std::string& s, char delim, std::vector<std::string>& elems);
 	std::vector<std::string>	SplitString(const std::string& s, char delim);
 
+	bool IsNumber(const std::string& s);
+
 	template<typename T>
-	void SafeDelete(T*& pVal)
+	inline void SafeDelete(T*& pVal)
 	{
 		delete pVal;
 		pVal = NULL;
 	}
 
 	template <typename T>
-	T StringToNumber(const std::string& s)
+	inline T StringToNumber(const std::string& s)
 	{
 		stringstream ss(s);
 		T result;
@@ -89,23 +90,11 @@ namespace Util
 	}
 
 	template <typename T>
-	std::string NumberToString(T number)
+	inline std::string NumberToString(T number)
 	{
 		std::stringstream ss;
 		ss << number;
 		return ss.str();
-	}
-
-	inline bool IsNumber(const std::string& s)
-	{
-		std::string::const_iterator it = s.begin();
-		while (it != s.end() && std::isdigit(*it)) ++it;
-		return !s.empty() && it == s.end();
-	}
-
-	inline bool ContainsFlag(int flags, int flag)
-	{
-		return ((flags & flag) == flag);
 	}
 
 	template<typename T>
@@ -125,7 +114,7 @@ namespace Util
 		}
 	}
 
-	template<class T>
+	template <typename T>
 	class MySingleton
 	{
 	public:

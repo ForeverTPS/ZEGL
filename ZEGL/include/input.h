@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "glm.hpp"
+#include <glm/glm.hpp>
 
 namespace ZEGL
 {

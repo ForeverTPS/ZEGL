@@ -10,7 +10,7 @@
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,27 +20,15 @@
 
 #pragma once
 
-namespace ZEGL
+namespace Random
 {
-	class Game;
-	class Window;
+	void	Init();
 
-	class Core
-	{
-	public:
-		Core(double frameRate, Window* window, Game* game);
+	int		RandInt(int max);
+	int		RandInt(int min, int max);
 
-		void Start();
-		void Stop();
+	float	RandFloat(float max);
+	float	RandFloat(float min, float max);
 
-	protected:
-	private:
-		Core(Core const&) = delete;
-		Core& operator=(Core const&) = delete;
-
-		Window*		m_window;
-		Game*		m_game;
-		bool		m_isRunning;
-		double		m_frameTime;
-	};
+	bool	RandBool();
 }

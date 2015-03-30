@@ -20,9 +20,8 @@
 
 #include "input.h"
 #include "window.h"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <SDL2/SDL.h>
-#include <cstring>
 
 using namespace ZEGL;
 

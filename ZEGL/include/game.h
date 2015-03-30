@@ -48,7 +48,7 @@ namespace ZEGL
 		inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
 		inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
 
-		inline const Window*	GetWindow()					  { return m_window; }
+		inline const Window*	GetWindow()	{ return m_window; }
 
 	protected:
 	private:

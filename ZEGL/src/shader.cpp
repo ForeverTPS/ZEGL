@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 
-#include "shader.h"
 #include "camera.h"
 #include "game.h"
 #include "light.h"

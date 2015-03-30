@@ -41,27 +41,27 @@ namespace ZEGL
 
 		static const int MAX_ERROR_LEN = 256;
 
-		static bool Init(const std::string& fname = "ZEGL");
-		static void Cleanup();
+		static bool			Init(const std::string& fname = "ZEGL");
+		static void			Cleanup();
 
-		static void AddEntry(const std::string& text, int logType);
+		static void			AddEntry(const std::string& text, int logType);
 
-		static void SetLogLevel(int level);
-		static inline void SetLogActive(bool active) { m_isActive = active; }
+		static void			SetLogLevel(int level);
+		static inline void	SetLogActive(bool active) { m_isActive = active; }
 
-		static char s_errorMsg[MAX_ERROR_LEN];
+		static char			s_errorMsg[MAX_ERROR_LEN];
 
 	protected:
 	private:
 		static const std::string CurrentDateTime();
 
-		static std::string m_fileName;
+		static std::string	m_fileName;
 
 		static unsigned int m_numWarnings;
 		static unsigned int m_numErrors;
 
-		static int m_logLevel;
+		static int			m_logLevel;
 
-		static bool m_isActive;
+		static bool			m_isActive;
 	};
 }
