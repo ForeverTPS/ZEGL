@@ -56,9 +56,9 @@ Game::~Game()
 	Util::SafeDelete(tileMap);
 }
 
-void Game::Init(const Window& window)
+void Game::Init(const Window* window)
 {
-	m_window = &window;
+	m_window = window;
 	m_camera = new Camera(m_window);
     
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

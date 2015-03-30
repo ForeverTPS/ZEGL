@@ -20,17 +20,18 @@
 
 #pragma once
 
+//#define GLM_FORCE_RADIANS
+
 #include "glm.hpp"
 
 namespace ZEGL
 {
 	class Window;
 
-	class Camera
+	__declspec(align(16)) class Camera
 	{
 	public:
 		Camera(const Window* window = nullptr);
-		virtual ~Camera() {};
 
 		const glm::mat4& GetTransform(const Window* window);
 
@@ -43,11 +44,11 @@ namespace ZEGL
 		inline void	SetRot(float rot)							{ m_rot = rot; }
 		inline void	SetZoom(float zoom)							{ m_zoom = zoom; }
 
+		void*	operator new(size_t i)		{ return _mm_malloc(i, 16); }
+		void	operator delete(void* p)	{ _mm_free(p); }
+
 	protected:
 	private:
-		//Camera(Camera const&) = delete;
-		Camera& operator=(Camera const&) = delete;
-
 		struct Transformation
 		{
 			glm::mat4	m_matrix;

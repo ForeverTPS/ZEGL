@@ -65,10 +65,6 @@ namespace ZEGL
 
 	protected:
 		EntityData	m_data;
-
-	private:
-		//Entity(Entity const&) = delete;
-		//Entity& operator=(Entity const&) = delete;
 	};
 
 	class RenderEntity : public Entity
@@ -96,9 +92,5 @@ namespace ZEGL
 		Texture			m_normalMap;
 
 		bool			m_hasTextureAtlas;
-
-	private:
-		//RenderEntity(RenderEntity const&) = delete;
-		//RenderEntity& operator=(RenderEntity const&) = delete;
 	};
 }

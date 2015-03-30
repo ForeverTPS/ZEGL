@@ -36,7 +36,7 @@ namespace ZEGL
 		Game();
 		virtual ~Game();
 
-		void Init(const Window& window);
+		void Init(const Window* window);
 
 		void ProcessInput(const Input& input, float delta);
 		void Update(float delta);

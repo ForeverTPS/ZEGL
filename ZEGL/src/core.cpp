@@ -33,7 +33,7 @@ Core::Core(double frameRate, Window* window, Game* game) :
 	m_window(window),
 	m_game(game)
 {
-	m_game->Init(*m_window);
+	m_game->Init(m_window);
 }
 
 void Core::Start()

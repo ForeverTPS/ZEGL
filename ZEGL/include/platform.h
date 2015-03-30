@@ -32,15 +32,9 @@
 #elif defined(__unix__) || defined(__unix)
 	#define OS_UNIX
 #elif defined(__APPLE__) || defined(__MACH__)
-	#include "TargetConditionals.h"
+	#define OS_APPLE
+	
 	#include "CoreFoundation/CoreFoundation.h"
-	#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-		#define OS_IOS
-	#elif TARGET_OS_MAC
-		#define OS_MAC
-	#else
-		#define OS_APPLE_UNKNOWN
-	#endif
 
 	CFBundleRef mainBundle = CFBundleGetMainBundle();
 	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
@@ -53,27 +47,6 @@
 
 	chdir(path);
 
-#elif defined(__ANDROID__) || defined(__ANDROID_API__) || defined(ANDROID) || defined(TARGET_OS_ANDROID)
-	#define OS_ANDROID
-#elif defined(__FreeBSD__)
-	#define OS_FREEBSD
-#elif  defined(__posix__) || defined(__posix)
-	#define OS_POSIX
 #else
 	#define OS_OTHER
-#endif
-
-// Define Debug or Release
-#ifdef _MSC_VER
-	#if defined(_DEBUG)
-		#define DEBUG_MODE
-	#else
-		#define RELEASE_MODE
-	#endif
-#else
-	#if !defined(NDEBUG) && !defined(_NDEBUG)
-		#define DEBUG_MODE
-	#else
-		#define RELEASE_MODE
-	#endif
 #endif

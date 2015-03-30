@@ -34,12 +34,14 @@
 #pragma comment(lib, "shell32.lib")
 #endif
 
+using namespace ZEGL;
+
 unsigned int    LogFile::m_numWarnings = 0u;
 unsigned int    LogFile::m_numErrors = 0u;
 std::string		LogFile::m_fileName = "";
 bool			LogFile::m_isActive = false;
 
-#ifndef NDEBUG
+#ifdef NDEBUG
 int             LogFile::m_logLevel = LOG_INFO;
 #else
 int             LogFile::m_logLevel = LOG_ERROR;
