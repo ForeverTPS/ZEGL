@@ -19,17 +19,8 @@
  */
 
 #include "timing.h"
+#include "platform.h"
 #include <ctime>
-
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(WIN64)
-	#define OS_WINDOWS
-#elif defined(__APPLE__) || defined(__MACH__)
-    #define OS_MACOSX
-#elif defined(__linux__)
-	#define OS_LINUX
-#else
-	#define OS_OTHER
-#endif
 
 #ifdef OS_WINDOWS
 	#include <Windows.h>

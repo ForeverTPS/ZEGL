@@ -70,9 +70,6 @@ void Game::Init(const Window* window)
 
 	light = new Light(Shader("point_light"));
 	m_lights.push_back(light);
-	light = new Light(Shader("point_light"));
-	light->SetLightColor(glm::vec3(1.0f, 0.0f, 0.0f));
-	m_lights.push_back(light);
     
     glGenVertexArrays(1, &gVAO);
     glBindVertexArray(gVAO);

@@ -40,16 +40,26 @@ void Entity::operator=(Entity entity)
 	memcpy((void*)&entity, temp, sizeof(Entity));
 }
 
-RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-	const glm::vec3& pos, float rot, float scale) :
+RenderEntity::RenderEntity(const Texture& texture, 
+						   const Texture& normalMap, 
+						   const TextureAtlas& textureAtlas,
+						   const glm::vec3& pos, 
+						   float rot, 
+						   float scale) :
 	m_textureAtlas(textureAtlas),
 	m_texture(texture),
 	m_normalMap(normalMap),
 	m_hasTextureAtlas(true),
-	Entity(pos, rot, scale) {}
+	Entity(pos, rot, scale) 
+{
+}
 
-RenderEntity::RenderEntity(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-	const glm::vec3& pos, float rot, float scale) :
+RenderEntity::RenderEntity(const Texture& texture, 
+						   const Texture& normalMap, 
+						   const glm::vec2 textureCoords[4],
+						   const glm::vec3& pos, 
+						   float rot, 
+						   float scale) :
 	m_texture(texture),
 	m_normalMap(normalMap),
 	m_hasTextureAtlas(false),
@@ -66,7 +76,9 @@ RenderEntity::RenderEntity(const RenderEntity& renderEntity) :
 	m_texture(renderEntity.m_texture),
 	m_normalMap(renderEntity.m_normalMap),
 	m_hasTextureAtlas(renderEntity.m_hasTextureAtlas),
-	Entity(renderEntity) {}
+	Entity(renderEntity) 
+{
+}
 
 void RenderEntity::operator=(RenderEntity renderEntity)
 {
