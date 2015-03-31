@@ -20,7 +20,7 @@
 
 #include "tilemap.h"
 #include "game.h"
-#include "logfile.h"
+#include "logger.h"
 #include "tinyxml2.h"
 #include "util.h"
 #include "window.h"
@@ -147,9 +147,8 @@ void TileMap::Load(const std::string& fileName)
 
 	if (!success)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s", error.c_str());
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		LOG_CLEANUP();
+		LOG_ERROR(error.c_str())
+		LOG_CLOSE();
 		exit(1);
 	}
 }

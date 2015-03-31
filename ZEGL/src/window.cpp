@@ -19,9 +19,9 @@
  */
 
 #include "window.h"
-#include "logfile.h"
+#include "logger.h"
 #include "util.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <GL/glew.h>
 
 using namespace ZEGL;
@@ -33,8 +33,6 @@ Window::Window(int width, int height, const std::string& title) :
 	m_input(this),
 	m_isCloseRequested(false)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -56,8 +54,7 @@ Window::Window(int width, int height, const std::string& title) :
 	error = glewInit();
 	if (error != GLEW_OK)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error: '%s'", glewGetErrorString(error));
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_ERROR("Error: " << glewGetErrorString(error));
 	}
 
 	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
@@ -75,7 +72,6 @@ Window::~Window()
 {
 	SDL_GL_DeleteContext(m_glContext);
 	SDL_DestroyWindow(m_window);
-	SDL_Quit();
 }
 
 void Window::Update()

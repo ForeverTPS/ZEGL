@@ -20,6 +20,7 @@
 
 #include "core.h"
 #include "game.h"
+#include "random.h"
 #include "timing.h"
 #include "util.h"
 #include "window.h"
@@ -33,6 +34,7 @@ Core::Core(double frameRate, Window* window, Game* game) :
 	m_window(window),
 	m_game(game)
 {
+	Random::Init();
 	m_game->Init(m_window);
 }
 

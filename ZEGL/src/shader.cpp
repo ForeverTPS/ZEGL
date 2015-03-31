@@ -21,7 +21,7 @@
 #include "camera.h"
 #include "game.h"
 #include "light.h"
-#include "logfile.h"
+#include "logger.h"
 #include "util.h"
 #include "window.h"
 #include <GL/glew.h>
@@ -67,8 +67,7 @@ static void CheckShaderError(int shader, int flag, bool isProgram, const std::st
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 		}
 
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "%s: '%s'", errorMessage.c_str(), error);
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_ERROR(errorMessage.c_str() << ": " << error);
 	}
 }
 
@@ -102,9 +101,8 @@ ShaderData::ShaderData(const std::string& fileName)
 
 	if (m_program == 0)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader program - %s", fileName.c_str());
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		LOG_CLEANUP();
+		LOG_ERROR("Error creating shader program - " << fileName);
+		LOG_CLOSE();
 		exit(1);
 	}
 
@@ -147,9 +145,8 @@ ShaderData::ShaderData(const std::string& fileName)
 		}
 		else
 		{
-			snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error: OpenGL Version %d.%d does not support shaders.", majorVersion, minorVersion);
-			LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-			LOG_CLEANUP();
+			LOG_ERROR("Error: OpenGL Version " << majorVersion << "." << minorVersion << " does not support shaders.");
+			LOG_CLOSE();
 			exit(1);
 		}
 	}
@@ -184,9 +181,8 @@ void ShaderData::AddProgram(const std::string& text, int type)
 
 	if (shader == 0)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error creating shader type %d", type);
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		LOG_CLEANUP();
+		LOG_ERROR("Error creating shader type " << type);
+		LOG_CLOSE();
 		exit(1);
 	}
 
@@ -202,12 +198,10 @@ void ShaderData::AddProgram(const std::string& text, int type)
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		GLchar InfoLog[1024];
-
-		glGetShaderInfoLog(shader, 1024, NULL, InfoLog);
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Error compiling shader type %d: '%s'", shader, InfoLog);
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		LOG_CLEANUP();
+		GLchar infoLog[1024];
+		glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+		LOG_ERROR("Error compiling shader type " << shader << ": " << infoLog);
+		LOG_CLOSE();
 		exit(1);
 	}
 
@@ -296,9 +290,8 @@ void ShaderData::AddUniform(const std::string& uniformName, const std::string& u
 
 	if (location == 0xFFFFFFFF)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Invalid uniform location -  %s", uniformName.c_str());
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		ASSERT(0 != 0, LogFile::s_errorMsg);
+		LOG_ERROR("Invalid uniform location - " << uniformName);
+		ASSERT(0 != 0, "Invalid uniform location");
 	}
 
 	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));

@@ -19,7 +19,7 @@
  */
 
 #include "texture.h"
-#include "logfile.h"
+#include "logger.h"
 #include "stb_image.h"
 #include "util.h"
 #include <iostream>
@@ -109,8 +109,8 @@ void TextureData::InitRenderTargets(GLenum* attachments)
 
 	if (m_numTextures > 32)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Too many textures (Max is 32) - %d", m_numTextures);
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
+		LOG_ERROR("Too many textures (Max is 32) - " << m_numTextures);
+		LOG_CLOSE();
 		ASSERT(m_numTextures < 33, "Too many textures (Max is 32)!");
 	}
 
@@ -155,10 +155,12 @@ void TextureData::InitRenderTargets(GLenum* attachments)
 	}
 
 	glDrawBuffers(m_numTextures, drawBuffers);
-
-	snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Framebuffer creation failed!");
-	LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-	ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer creation failed!");
+	
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		LOG_ERROR("Framebuffer creation failed!");
+		ASSERT(0 != 0, "Framebuffer creation failed!");
+	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -192,9 +194,8 @@ Texture::Texture(const std::string& fileName, GLenum textureTarget, GLfloat filt
 
 		if (data == nullptr)
 		{
-			snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Unable to load texture - %s", fileName.c_str());
-			LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-			ASSERT(0 != 0, LogFile::s_errorMsg);
+			LOG_ERROR("Unable to load texture - " << fileName)
+			ASSERT(0 != 0, "Unable to load texture");
 		}
 
 		m_textureData = new TextureData(textureTarget, x, y, 1, &data, &filter, &internalFormat, &format, clamp, &attachment);
@@ -242,9 +243,8 @@ void Texture::Bind(unsigned int unit) const
 {
 	if (unit > 31)
 	{
-		snprintf(LogFile::s_errorMsg, sizeof(LogFile::s_errorMsg), "Attempting to bind to invalid texture index (Should be 0 - 32) - %d", unit);
-		LOG_ENTRY(LogFile::s_errorMsg, LogFile::LOG_ERROR);
-		ASSERT(0 != 0, LogFile::s_errorMsg);
+		LOG_ERROR("Attempting to bind to invalid texture index (Should be 0 - 32) - " << unit);
+		ASSERT(0 != 0, "Attempting to bind to invalid texture index (Should be 0 - 32)");
 	}
 	glActiveTexture(GL_TEXTURE0 + unit);
 	m_textureData->Bind(0);

@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <cctype>
 #include <string>
 #include <sstream>
@@ -46,7 +46,7 @@ namespace ZEGL
 				if (!(condition)) {	\
 					std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \
 					<< " line " << __LINE__ << ": " << message << std::endl; \
-					LOG_CLEANUP(); \
+					LOG_CLOSE(); \
 					std::exit(EXIT_FAILURE); \
 				} \
 			} while (false)
