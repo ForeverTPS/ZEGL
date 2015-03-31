@@ -27,6 +27,8 @@ namespace Logger
 	void Init(const std::string& fname = "ZEGL");
 	void Close();
 
+	void NewLine();
+
 	void LogInfo(const std::string& msg);
 	void LogWarning(const std::string& msg);
 	void LogError(const std::string& msg);
@@ -34,6 +36,7 @@ namespace Logger
 
 #define LOG_INIT(fname)     Logger::Init(fname);
 #define LOG_CLOSE()         Logger::Close();
+#define LOG_NEWLINE()		Logger::NewLine();
 #define LOG_INFO(msg)		Logger::LogInfo(static_cast<std::ostringstream&>(std::ostringstream().flush() << msg).str());
 #define LOG_WARNING(msg)	Logger::LogWarning(static_cast<std::ostringstream&>(std::ostringstream().flush() << msg).str());
 #define LOG_ERROR(msg)		Logger::LogError(static_cast<std::ostringstream&>(std::ostringstream().flush() << msg << " " << __FUNCTION__ << "() " << __FILE__ << " line " << __LINE__).str());

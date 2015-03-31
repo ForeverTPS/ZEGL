@@ -117,11 +117,19 @@ namespace Logger
 		}
 	}
 
+	void NewLine()
+	{
+		if (m_logfile.is_open())
+		{
+			m_logfile << "<br />" << std::endl;
+		}
+	}
+
 	void LogInfo(const std::string& msg)
 	{
 		if (m_logfile.is_open())
 		{
-			m_logfile << "<span style = ""color:#008080; "">" << CurrentDateTime() << "[INFO] " << msg << "</span><br />" << std::endl;
+			m_logfile << "<span style = ""color:#008080; "">" << CurrentDateTime() << " : [INFo] : " << msg << "</span><br />" << std::endl;
 		}
 	}
 
@@ -129,7 +137,7 @@ namespace Logger
 	{
 		if (m_logfile.is_open())
 		{
-			m_logfile << "<span style = ""color:#EAC117; "">" << CurrentDateTime() << "[INFO] " << msg << "</span><br />" << std::endl;
+			m_logfile << "<span style = ""color:#EAC117; "">" << CurrentDateTime() << " : [WARN] : " << msg << "</span><br />" << std::endl;
 			m_numWarnings++;
 		}
 	}
@@ -138,7 +146,7 @@ namespace Logger
 	{
 		if (m_logfile.is_open())
 		{
-			m_logfile << "<span style = ""color:#AA0000; "">" << CurrentDateTime() << "[INFO] " << msg << "</span><br />" << std::endl;
+			m_logfile << "<span style = ""color:#AA0000; "">" << CurrentDateTime() << " : [ERROR] : " << msg << "</span><br />" << std::endl;
 			m_numErrors++;
 		}
 	}

@@ -32,5 +32,6 @@ namespace ZEGL
 	void LogSubSystemInfo(SDL_Window* window);
 	void LogOSInfo();
 
+	SDL_Window* CreateAndLogWindow(const char* title, int w, int h, Uint32 flags);
 	SDL_Window* CreateAndLogWindow(const char* title, int x, int y, int w, int h, Uint32 flags);
 }
