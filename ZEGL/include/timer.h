@@ -20,32 +20,50 @@
 
 #pragma once
 
-#if defined(_WIN64)
-	#define OS_WINDOWS
-	#define OS_WINDOWS_64
-#elif defined(_WIN32)
-	#define OS_WINDOWS
-	#define OS_WINDOWS_32
-#elif defined(__linux__) || defined(__linux)
-	#define OS_LINUX
-#elif defined(__unix__) || defined(__unix)
-	#define OS_UNIX
-#elif defined(__APPLE__) || defined(__MACH__)
-	#define OS_APPLE
-	
-	#include "CoreFoundation/CoreFoundation.h"
+#include "time.h"
 
-	CFBundleRef mainBundle = CFBundleGetMainBundle();
-	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-	char path[PATH_MAX];
-	if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+namespace ZEGL
+{
+	class Timer
 	{
-		// error!
-	}
-	CFRelease(resourcesURL);
+	public:
+		Timer() : m_started(false), m_startTime(0) {}
 
-	chdir(path);
+		void Start()
+		{
+			if (!m_started)
+			{
+				m_started = true;
+				m_startTime = Time::GetTime();
+			}
+		}
 
-#else
-	#define OS_OTHER
-#endif
+		double Stop()
+		{
+			double lastTime = 0;
+			if (m_started)
+			{
+				lastTime = GetTicks();
+				m_started = false;
+			}
+
+			return lastTime;
+		}
+
+		void Restart()
+		{
+			Stop();
+			Start();
+		}
+
+		double GetTicks()
+		{
+			return m_started ? Time::GetTime() - m_startTime : 0;
+		}
+
+	protected:
+	private:
+		bool	m_started;
+		double	m_startTime;
+	};
+}

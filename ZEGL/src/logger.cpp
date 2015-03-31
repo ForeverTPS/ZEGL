@@ -129,7 +129,7 @@ namespace Logger
 	{
 		if (m_logfile.is_open())
 		{
-			m_logfile << "<span style = ""color:#008080; "">" << CurrentDateTime() << " : [INFo] : " << msg << "</span><br />" << std::endl;
+			m_logfile << "<span style = ""color:#008080; "">" << CurrentDateTime() << " : [INFO] : " << msg << "</span><br />" << std::endl;
 		}
 	}
 

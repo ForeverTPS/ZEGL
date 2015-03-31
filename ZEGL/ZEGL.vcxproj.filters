@@ -54,9 +54,6 @@
     <ClCompile Include="src\input.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\timing.cpp">
-      <Filter>src\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\tinyxml2.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
@@ -88,6 +85,9 @@
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\logger.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\timing.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,9 +125,6 @@
     <ClInclude Include="include\referencecounter.h">
       <Filter>include\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\timing.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\tinyxml2.h">
       <Filter>include\core</Filter>
     </ClInclude>
@@ -150,6 +147,12 @@
       <Filter>include\core</Filter>
     </ClInclude>
     <ClInclude Include="include\logger.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\timer.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\timing.h">
       <Filter>include\core</Filter>
     </ClInclude>
   </ItemGroup>
