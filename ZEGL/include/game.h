@@ -20,6 +20,14 @@
 
 #pragma once
 
+#include <stdio.h>
+#include <string.h>
+#define FONTSTASH_IMPLEMENTATION
+#include "fontstash/fontstash.h"
+#include <GL/glew.h>
+#define GLFONTSTASH_IMPLEMENTATION
+#include "fontstash/glfontstash.h"
+
 #include "shader.h"
 #include <vector>
 
@@ -64,5 +72,7 @@ namespace ZEGL
 		Shader				m_defaultShader;
 		const Light*		m_activeLight;
 		std::vector<Light*>	m_lights;
+
+		FONScontext*		m_fontContext;
 	};
 }

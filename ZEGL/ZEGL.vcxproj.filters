@@ -66,9 +66,6 @@
     <ClCompile Include="src\shader.cpp">
       <Filter>src\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\stb_image.c">
-      <Filter>src\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\texture.cpp">
       <Filter>src\graphics</Filter>
     </ClCompile>
@@ -89,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="src\timing.cpp">
       <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stb_image.c">
+      <Filter>src\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,6 @@
     <ClInclude Include="include\light.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\stb_image.h">
-      <Filter>include\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="include\random.h">
       <Filter>include\core</Filter>
     </ClInclude>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="include\timing.h">
       <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb_image.h">
+      <Filter>include\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

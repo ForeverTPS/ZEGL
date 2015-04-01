@@ -24,13 +24,10 @@
 #include "logger.h"
 #include "util.h"
 #include "window.h"
-#include <GL/glew.h>
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
-#include <sstream>
 
 using namespace ZEGL;
 

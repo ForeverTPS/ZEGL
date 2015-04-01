@@ -40,7 +40,8 @@ Game::Game() :
 	m_defaultShader(Shader("ambient_shader")),
 	m_ambientColor(glm::vec3(0.1f)),
 	m_ambientIntensity(1.0f),
-    m_activeLight(nullptr) 
+    m_activeLight(nullptr),
+	m_fontContext(nullptr)
 {
 }
 
@@ -54,6 +55,8 @@ Game::~Game()
 	}
 
 	Util::SafeDelete(tileMap);
+
+	glfonsDelete(m_fontContext);
 }
 
 void Game::Init(const Window* window)

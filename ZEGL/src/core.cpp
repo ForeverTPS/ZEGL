@@ -24,7 +24,6 @@
 #include "timing.h"
 #include "util.h"
 #include "window.h"
-#include <stdio.h>
 
 using namespace ZEGL;
 
