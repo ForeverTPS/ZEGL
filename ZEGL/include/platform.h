@@ -23,9 +23,11 @@
 #if defined(_WIN64)
 	#define OS_WINDOWS
 	#define OS_WINDOWS_64
+	#define WIN32_LEAN_AND_MEAN
 #elif defined(_WIN32)
 	#define OS_WINDOWS
 	#define OS_WINDOWS_32
+	#define WIN32_LEAN_AND_MEAN
 #elif defined(__linux__) || defined(__linux)
 	#define OS_LINUX
 #elif defined(__unix__) || defined(__unix)

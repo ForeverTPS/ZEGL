@@ -18,13 +18,20 @@
  * limitations under the License.
  */
 
+#include <stdio.h>
+#include <string.h>
+#define FONTSTASH_IMPLEMENTATION
+#include "fontstash/fontstash.h"
+#include <GL/glew.h>
+#define GLFONTSTASH_IMPLEMENTATION
+#include "fontstash/gl3fontstash.h"
+
 #include "game.h"
 #include "camera.h"
 #include "light.h"
 #include "tilemap.h"
 #include "util.h"
 #include "window.h"
-#include <GL/glew.h>
 #include <iostream>
 
 using namespace ZEGL;
@@ -33,6 +40,7 @@ GLuint gVAO;
 GLuint gVAB;
 Light* light;
 TileMap* tileMap;
+int testFont = FONS_INVALID;
 
 Game::Game() :
 	m_camera(nullptr),
@@ -56,7 +64,7 @@ Game::~Game()
 
 	Util::SafeDelete(tileMap);
 
-	glfonsDelete(m_fontContext);
+	gl3fonsDelete(m_fontContext);
 }
 
 void Game::Init(const Window* window)
@@ -68,8 +76,11 @@ void Game::Init(const Window* window)
     
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
-    glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
+
+	m_fontContext = gl3fonsCreate(512, 512, FONS_ZERO_TOPLEFT);
+	testFont = fonsAddFont(m_fontContext, "sans", "./res/fonts/DroidSerif-Regular.ttf");
     
 	tileMap = new TileMap("test_level.ldf");
 
@@ -158,10 +169,29 @@ void Game::Render()
         
 		shader.UnBind();
 
-		glDepthMask(GL_TRUE);
-		glDepthFunc(GL_LESS);
+		//glDepthMask(GL_TRUE);
+		//glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
 	}
     
     m_activeLight = nullptr;
+
+	gl3fonsProjection(m_fontContext, (GLfloat*)&(m_camera->GetTransform(m_window)[0][0]), m_window->GetWidth(), m_window->GetHeight());
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	fonsClearState(m_fontContext);
+	fonsSetSize(m_fontContext, 16.0f);
+	fonsSetFont(m_fontContext, testFont);
+	fonsSetColor(m_fontContext, gl3fonsRGBA(255,255,255,255));
+	fonsSetAlign(m_fontContext, FONS_ALIGN_LEFT | FONS_ALIGN_TOP);
+	fonsDrawText(m_fontContext, 5, 5, m_fps, NULL);
+
+	glDisable(GL_BLEND);
+}
+
+void Game::SetFPSDisplay(int frames)
+{
+	snprintf(m_fps, sizeof(m_fps), "FPS: %d", frames);
 }

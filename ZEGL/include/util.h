@@ -33,11 +33,10 @@
 namespace ZEGL
 {
 	#if _MSC_VER
-		#define WIN32_LEAN_AND_MEAN
 		#define snprintf	_snprintf_s
-		#define vsprintf	vsprintf_s
-		#define vsnprintf	vsnprintf_s
-		#define	getenv		_dupenv_s
+//		#define vsprintf	vsprintf_s
+//		#define vsnprintf	vsnprintf_s
+//		#define	getenv		_dupenv_s
 	#endif
 
 	#ifndef NDEBUG
@@ -64,8 +63,8 @@ namespace Util
 	const float DEG2RAD = 0.01745329251994329576923690768f;
 	const float RAD2DEG = 57.2957795130823208767981548141f;
 
-	inline float	ToRadian(const float Degree)	{ return (Degree * DEG2RAD); }
-	inline float	ToDegree(const float Radian)	{ return (Radian * RAD2DEG); }
+	inline float	ToRadian(const float deg)	{ return (deg * DEG2RAD); }
+	inline float	ToDegree(const float rad)	{ return (rad * RAD2DEG); }
 
 	inline void		Sleep(int milliseconds)			{ SDL_Delay(milliseconds); }
 

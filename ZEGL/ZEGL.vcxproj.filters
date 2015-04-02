@@ -34,6 +34,9 @@
     <Filter Include="include\core">
       <UniqueIdentifier>{58c3f604-9933-441b-a27f-2463120358fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\fonts">
+      <UniqueIdentifier>{bba54172-4ea2-42df-9bb2-242e23a614f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -206,5 +209,10 @@
     <Xml Include="res\textures\default_atlas.xml">
       <Filter>res\textures</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\DroidSerif-Regular.ttf">
+      <Filter>res\fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

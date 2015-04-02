@@ -67,6 +67,8 @@ void Core::Start()
 			// The frame counter code here is a temporary, basic profiling tool.
 			printf("FPS: %i | %f ms\n", frames, 1000.0 / ((double)frames));
 
+			m_game->SetFPSDisplay(frames);
+
 			frames = 0;
 			frameCounter = 0;
 		}

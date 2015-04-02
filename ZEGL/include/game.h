@@ -20,16 +20,10 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <string.h>
-#define FONTSTASH_IMPLEMENTATION
-#include "fontstash/fontstash.h"
-#include <GL/glew.h>
-#define GLFONTSTASH_IMPLEMENTATION
-#include "fontstash/glfontstash.h"
-
 #include "shader.h"
 #include <vector>
+
+struct FONScontext;
 
 namespace ZEGL
 {
@@ -49,6 +43,8 @@ namespace ZEGL
 		void ProcessInput(const Input& input, float delta);
 		void Update(float delta);
 		void Render();
+
+		void SetFPSDisplay(int frames);
 
 		inline const Light*		GetActiveLight()		const { return m_activeLight; }
 		inline const Camera&	GetCamera()				const { return *m_camera; }
@@ -74,5 +70,7 @@ namespace ZEGL
 		std::vector<Light*>	m_lights;
 
 		FONScontext*		m_fontContext;
+
+		char				m_fps[16];
 	};
 }

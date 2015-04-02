@@ -163,6 +163,9 @@ xcopy /Y /s "$(ProjectDir)res" "$(OutDir)res"</Command>
       <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\DroidSerif-Regular.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
