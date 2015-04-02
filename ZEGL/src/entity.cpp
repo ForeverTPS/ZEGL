@@ -110,8 +110,8 @@ bool RenderEntity::CalcTextureCoords(const std::string regionName)
 	float h = region.h / textureHeight;
 
 	m_data.m_texCoords[0] = glm::vec2(x, y + h);
-	m_data.m_texCoords[1] = glm::vec2(x, y);
-	m_data.m_texCoords[2] = glm::vec2(x + w, y + h);
+	m_data.m_texCoords[1] = glm::vec2(x + w, y + h);
+	m_data.m_texCoords[2] = glm::vec2(x, y);
 	m_data.m_texCoords[3] = glm::vec2(x + w, y);
 
 	return true;

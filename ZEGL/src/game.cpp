@@ -46,8 +46,7 @@ Game::Game() :
 	m_camera(nullptr),
     m_window(nullptr),
 	m_defaultShader(Shader("ambient_shader")),
-	m_ambientColor(glm::vec3(0.1f)),
-	m_ambientIntensity(1.0f),
+	m_ambientColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.2f)),
     m_activeLight(nullptr),
 	m_fontContext(nullptr)
 {
@@ -76,7 +75,7 @@ void Game::Init(const Window* window)
     
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
 
 	m_fontContext = gl3fonsCreate(512, 512, FONS_ZERO_TOPLEFT);
@@ -85,6 +84,8 @@ void Game::Init(const Window* window)
 	tileMap = new TileMap("test_level.ldf");
 
 	light = new Light(Shader("point_light"));
+	light->SetLightColor(glm::vec4(1.0f, 0.8f, 0.6f, 1.0f));
+	light->SetAmbientColor(glm::vec4(0.6f, 0.6f, 1.0f, 0.2f));
 	m_lights.push_back(light);
     
     glGenVertexArrays(1, &gVAO);
@@ -139,13 +140,13 @@ void Game::Render()
 	Texture texture = tileMap->GetActiveTiles()[0].GetTexture();
 	Texture normalMap = tileMap->GetActiveTiles()[0].GetNormalMap();
 
-	m_defaultShader.Bind();
-	m_defaultShader.UpdateUniforms(this);
-	texture.Bind(0);
-	normalMap.Bind(1);
-    glBindVertexArray(gVAO);
-	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
-	m_defaultShader.UnBind();
+	//m_defaultShader.Bind();
+	//m_defaultShader.UpdateUniforms(this);
+	//texture.Bind(0);
+	//normalMap.Bind(1);
+	//glBindVertexArray(gVAO);
+	//glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
+	//m_defaultShader.UnBind();
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
@@ -169,8 +170,6 @@ void Game::Render()
         
 		shader.UnBind();
 
-		//glDepthMask(GL_TRUE);
-		//glDepthFunc(GL_LESS);
 		glDisable(GL_BLEND);
 	}
     

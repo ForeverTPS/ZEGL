@@ -36,8 +36,8 @@ uniform mat4 MVP;
 
 const vec2 quadpos[] = vec2[4] (
 	vec2(-0.5,  0.5),
-	vec2(-0.5, -0.5),
 	vec2(0.5,   0.5),
+	vec2(-0.5, -0.5),
 	vec2(0.5,  -0.5)
 );
 

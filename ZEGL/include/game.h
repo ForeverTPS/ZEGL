@@ -49,8 +49,8 @@ namespace ZEGL
 		inline const Light*		GetActiveLight()		const { return m_activeLight; }
 		inline const Camera&	GetCamera()				const { return *m_camera; }
 
-		inline const glm::vec3&	GetAmbientColor()		const { return m_ambientColor; }
-		inline float			GetAmbientIntensity()	const { return m_ambientIntensity; }
+		inline const glm::vec4&	GetAmbientColor()		const { return m_ambientColor; }
+		inline float			GetAmbientIntensity()	const { return m_ambientColor.a; }
 
 		inline const Window*	GetWindow()	{ return m_window; }
 
@@ -62,8 +62,7 @@ namespace ZEGL
 		Camera*				m_camera;
 		const Window*		m_window;
 
-		glm::vec3			m_ambientColor;
-		float				m_ambientIntensity;
+		glm::vec4			m_ambientColor;
 
 		Shader				m_defaultShader;
 		const Light*		m_activeLight;

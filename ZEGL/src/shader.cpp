@@ -374,20 +374,8 @@ void Shader::UpdateUniforms(Game* game) const
 
 			if (unprefixedName == "AmbientColor")
 			{
-				glm::vec3 color;
-				float intensity;
-				if (light)
-				{
-					color = light->GetAmbientColor();
-					intensity = light->GetAmbientIntensity();
-				}
-				else
-				{
-					color = game->GetAmbientColor();
-					intensity = game->GetAmbientIntensity();
-				}
-				
-				SetUniformVector4f(uniformName, glm::vec4(color, intensity));
+				glm::vec4 color = light ? light->GetAmbientColor() : game->GetAmbientColor();		
+				SetUniformVector4f(uniformName, color);
 			}
 			else if (unprefixedName == "Resolution")
 			{
@@ -408,9 +396,7 @@ void Shader::UpdateUniforms(Game* game) const
 			{
 				if (light)
 				{
-					glm::vec3 color = light->GetLightColor();
-					float intensity = light->GetLightIntensity();
-					SetUniformVector4f(uniformName, glm::vec4(color, intensity));
+					SetUniformVector4f(uniformName, light->GetLightColor());
 				}
 				else
 				{
