@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "shader.h"
+#include <glm/glm.hpp>
 #include <vector>
 
 struct FONScontext;
@@ -64,7 +64,6 @@ namespace ZEGL
 
 		glm::vec4			m_ambientColor;
 
-		Shader				m_defaultShader;
 		const Light*		m_activeLight;
 		std::vector<Light*>	m_lights;
 

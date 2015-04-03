@@ -45,7 +45,6 @@ int testFont = FONS_INVALID;
 Game::Game() :
 	m_camera(nullptr),
     m_window(nullptr),
-	m_defaultShader(Shader("ambient_shader")),
 	m_ambientColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.2f)),
     m_activeLight(nullptr),
 	m_fontContext(nullptr)
@@ -139,14 +138,6 @@ void Game::Render()
 
 	Texture texture = tileMap->GetActiveTiles()[0].GetTexture();
 	Texture normalMap = tileMap->GetActiveTiles()[0].GetNormalMap();
-
-	//m_defaultShader.Bind();
-	//m_defaultShader.UpdateUniforms(this);
-	//texture.Bind(0);
-	//normalMap.Bind(1);
-	//glBindVertexArray(gVAO);
-	//glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
-	//m_defaultShader.UnBind();
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
