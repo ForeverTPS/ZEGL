@@ -1,0 +1,90 @@
+\hypertarget{class_z_e_g_l_1_1_camera}{}\section{Z\+E\+G\+L\+:\+:Camera Class Reference}
+\label{class_z_e_g_l_1_1_camera}\index{Z\+E\+G\+L\+::\+Camera@{Z\+E\+G\+L\+::\+Camera}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_z_e_g_l_1_1_camera_afe162528fc9249f540aa772c0d1c22c9}{Camera} (const \hyperlink{class_z_e_g_l_1_1_window}{Window} $\ast$window=nullptr)
+\item 
+const glm\+::mat4 \& \hyperlink{class_z_e_g_l_1_1_camera_ad39df4bd961d2debd682f87f657f9614}{Get\+Transform} (const \hyperlink{class_z_e_g_l_1_1_window}{Window} $\ast$window)
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_a0dbdf23ce58ffee1a5a7fcfe7672f1cc}{}glm\+::vec3 {\bfseries Get\+Pos} () const \label{class_z_e_g_l_1_1_camera_a0dbdf23ce58ffee1a5a7fcfe7672f1cc}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_adda8a25f5ba68c3dba29334659a66652}{}float {\bfseries Get\+Rot} () const \label{class_z_e_g_l_1_1_camera_adda8a25f5ba68c3dba29334659a66652}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_ae90bbfb4a99f096269973a524a3697d8}{}float {\bfseries Get\+Zoom} () const \label{class_z_e_g_l_1_1_camera_ae90bbfb4a99f096269973a524a3697d8}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_a3e4d6e95cf1c0357937de4b515f88b6b}{}void {\bfseries Set\+Pos} (float x, float y, float z=0.\+0f)\label{class_z_e_g_l_1_1_camera_a3e4d6e95cf1c0357937de4b515f88b6b}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_a8fc756cc489101cddbf7e6e36322895f}{}void {\bfseries Set\+Pos} (const glm\+::vec3 \&pos)\label{class_z_e_g_l_1_1_camera_a8fc756cc489101cddbf7e6e36322895f}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_a1c44b901139b76428955637d7eeb000b}{}void {\bfseries Set\+Rot} (float rot)\label{class_z_e_g_l_1_1_camera_a1c44b901139b76428955637d7eeb000b}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_ac487ced7703cdedce8d7b3041cc580d7}{}void {\bfseries Set\+Zoom} (float zoom)\label{class_z_e_g_l_1_1_camera_ac487ced7703cdedce8d7b3041cc580d7}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_a635568a1202e5f39b71b8270e747daae}{}void $\ast$ {\bfseries operator new} (size\+\_\+t i)\label{class_z_e_g_l_1_1_camera_a635568a1202e5f39b71b8270e747daae}
+
+\item 
+\hypertarget{class_z_e_g_l_1_1_camera_ab70a6518d82b2cb86163642c27cd6436}{}void {\bfseries operator delete} (void $\ast$p)\label{class_z_e_g_l_1_1_camera_ab70a6518d82b2cb86163642c27cd6436}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_z_e_g_l_1_1_camera_afe162528fc9249f540aa772c0d1c22c9}{}\index{Z\+E\+G\+L\+::\+Camera@{Z\+E\+G\+L\+::\+Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Z\+E\+G\+L\+::\+Camera@{Z\+E\+G\+L\+::\+Camera}}
+\subsubsection[{Camera}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+\item[{const {\bf Window} $\ast$}]{window = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}\label{class_z_e_g_l_1_1_camera_afe162528fc9249f540aa772c0d1c22c9}
+Constructor
+
+The constructor uses the \hyperlink{class_z_e_g_l_1_1_window}{Window} which is passed in to calculate a transformation matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em window} & Pointer to a \hyperlink{class_z_e_g_l_1_1_window}{Window} (defaults to nullptr)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+If no \hyperlink{class_z_e_g_l_1_1_window}{Window} is passed a default orthographic projection is used. This is to prevent a crash but should not be used for general purpose i.\+e. make sure you pass a \hyperlink{class_z_e_g_l_1_1_window}{Window} in order to get correct rendering
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{[}\hyperlink{class_z_e_g_l_1_1_window}{Window}\mbox{]} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_z_e_g_l_1_1_camera_ad39df4bd961d2debd682f87f657f9614}{}\index{Z\+E\+G\+L\+::\+Camera@{Z\+E\+G\+L\+::\+Camera}!Get\+Transform@{Get\+Transform}}
+\index{Get\+Transform@{Get\+Transform}!Z\+E\+G\+L\+::\+Camera@{Z\+E\+G\+L\+::\+Camera}}
+\subsubsection[{Get\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}const glm\+::mat4 \& Camera\+::\+Get\+Transform (
+\begin{DoxyParamCaption}
+\item[{const {\bf Window} $\ast$}]{window}
+\end{DoxyParamCaption}
+)}\label{class_z_e_g_l_1_1_camera_ad39df4bd961d2debd682f87f657f9614}
+Get the current transformation matrix
+
+If the last position, rotation or zoom value has changed the \hyperlink{class_z_e_g_l_1_1_camera}{Camera} uses the \hyperlink{class_z_e_g_l_1_1_window}{Window} which is passed in to re-\/calculate a transformation matrix.
+
+\begin{DoxyReturn}{Returns}
+4x4 Orthographic transformation matrix
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+If no \hyperlink{class_z_e_g_l_1_1_window}{Window} is passed a default orthographic projection is used. This is to prevent a crash but should not be used for general purpose i.\+e. make sure you pass a \hyperlink{class_z_e_g_l_1_1_window}{Window} in order to get correct rendering
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{[}\hyperlink{class_z_e_g_l_1_1_window}{Window}\mbox{]} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/camera.\+h\item 
+src/camera.\+cpp\end{DoxyCompactItemize}

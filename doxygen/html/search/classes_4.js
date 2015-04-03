@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mysingleton',['MySingleton',['../class_util_1_1_my_singleton.html',1,'Util']]]
+  ['light',['Light',['../class_z_e_g_l_1_1_light.html',1,'ZEGL']]]
 ];

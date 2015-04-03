@@ -26,8 +26,38 @@ namespace ZEGL
 	__declspec(align(16)) class Camera
 	{
 	public:
+		/**
+		* Constructor
+		*
+		* The constructor uses the Window which is passed in to calculate
+		* a transformation matrix.
+		*
+		* \param[in] window Pointer to a Window (defaults to nullptr)
+		*
+		* \warning If no Window is passed a default orthographic
+		* projection is used. This is to prevent a crash but should not be used
+		* for general purpose i.e. make sure you pass a Window in order to get
+		* correct rendering
+		*
+		* \see [Window]
+		*/
 		Camera(const Window* window = nullptr);
 
+		/**
+		* Get the current transformation matrix
+		*
+		* If the last position, rotation or zoom value has changed the Camera
+		* uses the Window which is passed in to re-calculate a transformation matrix.
+		*
+		* \return 4x4 Orthographic transformation matrix
+		*
+		* \warning If no Window is passed a default orthographic
+		* projection is used. This is to prevent a crash but should not be used
+		* for general purpose i.e. make sure you pass a Window in order to get
+		* correct rendering
+		*
+		* \see [Window]
+		*/
 		const glm::mat4& GetTransform(const Window* window);
 
 		inline glm::vec3	GetPos()	const { return m_pos; }

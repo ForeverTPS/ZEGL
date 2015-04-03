@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['texture',['Texture',['../class_z_e_g_l_1_1_texture.html',1,'ZEGL']]],
-  ['textureatlas',['TextureAtlas',['../class_z_e_g_l_1_1_texture_atlas.html',1,'ZEGL']]],
-  ['textureatlasdata',['TextureAtlasData',['../class_z_e_g_l_1_1_texture_atlas_data.html',1,'ZEGL']]],
-  ['texturedata',['TextureData',['../class_z_e_g_l_1_1_texture_data.html',1,'ZEGL']]],
-  ['textureregion',['TextureRegion',['../struct_z_e_g_l_1_1_texture_region.html',1,'ZEGL']]],
-  ['tile',['Tile',['../class_z_e_g_l_1_1_tile.html',1,'ZEGL']]],
-  ['tiledefinition',['TileDefinition',['../struct_z_e_g_l_1_1_tile_definition.html',1,'ZEGL']]],
-  ['tilemap',['TileMap',['../class_z_e_g_l_1_1_tile_map.html',1,'ZEGL']]],
-  ['timer',['Timer',['../class_z_e_g_l_1_1_timer.html',1,'ZEGL']]]
+  ['setfpsdisplay',['SetFPSDisplay',['../class_z_e_g_l_1_1_game.html#a38773e42c90201c4d8ca079ce54c4402',1,'ZEGL::Game']]],
+  ['shader',['Shader',['../class_z_e_g_l_1_1_shader.html',1,'ZEGL']]],
+  ['shaderdata',['ShaderData',['../class_z_e_g_l_1_1_shader_data.html',1,'ZEGL']]]
 ];
