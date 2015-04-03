@@ -96,13 +96,14 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="example\example.cpp" />
+    <ClCompile Include="example\main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
     <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logger.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\random.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\stb_image.c" />
@@ -116,8 +117,10 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="example\example.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\core.h" />
+    <ClInclude Include="include\doxygen.h" />
     <ClInclude Include="include\entity.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\input.h" />
@@ -139,6 +142,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClInclude Include="include\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\doxygen\default.doxyfile" />
     <None Include="res\levels\test_level.ldf" />
     <None Include="res\levels\test_level.ldf.tdef" />
     <None Include="res\shaders\ambient_shader_fs.glsl" />

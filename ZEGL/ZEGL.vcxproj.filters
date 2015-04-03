@@ -37,11 +37,14 @@
     <Filter Include="res\fonts">
       <UniqueIdentifier>{bba54172-4ea2-42df-9bb2-242e23a614f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="documentation">
+      <UniqueIdentifier>{84ae21b2-dfe5-41d5-bd60-156bfb762017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{78cd6492-69f1-4fd9-9f17-1e2c794da0db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\camera.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
@@ -92,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="src\stb_image.c">
       <Filter>src\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="example\example.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="example\main.cpp">
+      <Filter>example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +167,12 @@
     <ClInclude Include="include\stb_image.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="example\example.h">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="include\doxygen.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic_shader_vs.glsl">
@@ -183,6 +198,9 @@
     </None>
     <None Include="res\levels\test_level.ldf">
       <Filter>res\levels</Filter>
+    </None>
+    <None Include="..\doxygen\default.doxyfile">
+      <Filter>documentation</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

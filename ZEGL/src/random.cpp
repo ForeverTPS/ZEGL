@@ -1,9 +1,5 @@
-/*  ____ ____ ____ ____
-* ||Z |||E |||G |||L ||
-* ||__|||__|||__|||__||
-* |/__\|/__\|/__\|/__\|
-*
-* Copyright(c) 2014, Phil Sampson
+/**
+* Copyright(c) 2014, Phil Sampson (http://www.zamma.co.uk)
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.

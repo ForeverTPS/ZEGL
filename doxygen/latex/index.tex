@@ -1,0 +1,70 @@
+\hypertarget{index_LICENSE}{}\section{L\+I\+C\+E\+N\+S\+E}\label{index_LICENSE}
+Copyright(c) 2014, Phil Sampson
+
+\href{http://www.zamma.co.uk}{\tt http\+://www.\+zamma.\+co.\+uk}
+
+Licensed under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+\href{http://www.apache.org/licenses/LICENSE-2.0}{\tt http\+://www.\+apache.\+org/licenses/\+L\+I\+C\+E\+N\+S\+E-\/2.\+0}
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+I\+S, W\+I\+T\+H\+O\+U\+T W\+A\+R\+R\+A\+N\+T\+I\+E\+S O\+R C\+O\+N\+D\+I\+T\+I\+O\+N\+S O\+F A\+N\+Y K\+I\+N\+D, either express or implied. See the License for the specific language governing permissions and limitations under the License.\hypertarget{index_intro_sec}{}\section{Introduction}\label{index_intro_sec}
+This game engine has been developed in C++ using the following libraries / extensions
+
+
+\begin{DoxyItemize}
+\item \href{https://www.libsdl.org/index.php}{\tt S\+D\+L2}
+\item \href{https://www.opengl.org/}{\tt Open\+G\+L 3.\+x}
+\item \href{http://glm.g-truc.net/0.9.6/index.html}{\tt G\+L\+M}
+\item \href{http://glew.sourceforge.net/}{\tt G\+L\+E\+W}
+\item \href{https://github.com/nothings/stb}{\tt stb\+\_\+image -\/ From the stb project}
+\item \href{https://github.com/leethomason/tinyxml2}{\tt tinyxml2}
+\item \href{https://github.com/Zammalad/fontstash}{\tt Font\+Stash -\/ Forked and modified for my use}
+\end{DoxyItemize}
+
+All library and dll files are packaged with the source so there is no need to download them. This helps ensure that the compatibility is maintained if new versions are released.
+
+The {\ttfamily Game} class is designed to be used as a base class and inherited from to create each new game. Once implemented, your main.\+cpp file should look like this (where {\ttfamily My\+Game} is your inherited game class)
+
+An example is included with the source.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "platform.h"}
+\textcolor{preprocessor}{#include "core.h"}
+\textcolor{preprocessor}{#include "mygame.h"}
+\textcolor{preprocessor}{#include "logger.h"}
+\textcolor{preprocessor}{#include "system.h"}
+\textcolor{preprocessor}{#include "util.h"}
+\textcolor{preprocessor}{#include "window.h"}
+
+\textcolor{keyword}{using namespace }\hyperlink{namespace_z_e_g_l}{ZEGL};
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])
+\{
+  \textcolor{comment}{// Initialize the logger class and pass a filename}
+  LOG\_INIT(\textcolor{stringliteral}{"ZEGL"});
+
+  \textcolor{comment}{// Perform system initialization}
+  \textcolor{keywordflow}{if} (ZEGL::Init())
+  \{
+    \textcolor{comment}{// Create a window with width 800, height 600 and a title}
+    \hyperlink{class_z_e_g_l_1_1_window}{Window} window(800, 600, \textcolor{stringliteral}{"ZEGL"});
+    MyGame game;
+
+    \textcolor{comment}{// Create the core system passing in the desired target fps}
+    / and pointers to the window and game just created
+    \hyperlink{class_z_e_g_l_1_1_core}{Core} engine(60, &window, &game);
+    \textcolor{comment}{// Enter the game loop}
+    engine.Start();
+
+    \textcolor{comment}{// System cleanup}
+    ZEGL::Quit();
+  \}
+
+  \textcolor{comment}{// Finish logging}
+  LOG\_CLOSE();
+
+  \textcolor{keywordflow}{return} 0;
+\}
+\end{DoxyCode}
+ 
