@@ -1,5 +1,9 @@
 \hypertarget{class_z_e_g_l_1_1_game}{}\section{Z\+E\+G\+L\+:\+:Game Class Reference}
 \label{class_z_e_g_l_1_1_game}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
+
+
+{\ttfamily \#include $<$game.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,6 +45,11 @@ F\+O\+N\+Scontext $\ast$ \hyperlink{class_z_e_g_l_1_1_game_ab7239deb1a14053ae2d7
 char \hyperlink{class_z_e_g_l_1_1_game_ab290dd46ec4ff766bd56d0e3013bace1}{m\+\_\+fps} \mbox{[}16\mbox{]}
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Base game class
+
+This class is enough to run on its own and could be modified in to a full game. However, the intended use is that it is not used directly and is instead inherited from to create a new class for each project. The game class would be where all game-\/play related systems/objects reside e.\+g levels, fonts, entities. Then each can be updated and rendered in the respective \hyperlink{class_z_e_g_l_1_1_game_a6ad207394e4ce91f909d49c87802da08}{Update()} and \hyperlink{class_z_e_g_l_1_1_game_a0897730fc9fed789f6c0f11d21a0c14a}{Render()} funtions of the inherited game class. 
 
 \subsection{Member Function Documentation}
 \hypertarget{class_z_e_g_l_1_1_game_a82f5be49774c3ad1a96daac71eb0ddec}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!Get\+Active\+Light@{Get\+Active\+Light}}
@@ -193,25 +202,25 @@ Update all game objects using delta time step.
 \hypertarget{class_z_e_g_l_1_1_game_aa8ac2fd79809c3ad3477a4d723a7ae10}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+active\+Light@{m\+\_\+active\+Light}}
 \index{m\+\_\+active\+Light@{m\+\_\+active\+Light}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+active\+Light}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Light}$\ast$ Z\+E\+G\+L\+::\+Game\+::m\+\_\+active\+Light\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_aa8ac2fd79809c3ad3477a4d723a7ae10}
-Pointer to the currently active \hyperlink{class_z_e_g_l_1_1_light}{Light}. \hypertarget{class_z_e_g_l_1_1_game_a79bbd0830a4ac01cc820ba5a9bd26cd6}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+ambient\+Color@{m\+\_\+ambient\+Color}}
+Pointer to the currently active \hyperlink{class_z_e_g_l_1_1_light}{Light} \hypertarget{class_z_e_g_l_1_1_game_a79bbd0830a4ac01cc820ba5a9bd26cd6}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+ambient\+Color@{m\+\_\+ambient\+Color}}
 \index{m\+\_\+ambient\+Color@{m\+\_\+ambient\+Color}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+ambient\+Color}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec4 Z\+E\+G\+L\+::\+Game\+::m\+\_\+ambient\+Color\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_a79bbd0830a4ac01cc820ba5a9bd26cd6}
 Ambient color for the world (used if there is no \hyperlink{class_z_e_g_l_1_1_light}{Light}) \hypertarget{class_z_e_g_l_1_1_game_a75bf1aabc1dc5ad273611618c3ee05cf}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+camera@{m\+\_\+camera}}
 \index{m\+\_\+camera@{m\+\_\+camera}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera}$\ast$ Z\+E\+G\+L\+::\+Game\+::m\+\_\+camera\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_a75bf1aabc1dc5ad273611618c3ee05cf}
-The \hyperlink{class_z_e_g_l_1_1_game}{Game} \hyperlink{class_z_e_g_l_1_1_camera}{Camera}. \hypertarget{class_z_e_g_l_1_1_game_ab7239deb1a14053ae2d757994f2211d0}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+font\+Context@{m\+\_\+font\+Context}}
+The \hyperlink{class_z_e_g_l_1_1_game}{Game} \hyperlink{class_z_e_g_l_1_1_camera}{Camera} \hypertarget{class_z_e_g_l_1_1_game_ab7239deb1a14053ae2d757994f2211d0}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+font\+Context@{m\+\_\+font\+Context}}
 \index{m\+\_\+font\+Context@{m\+\_\+font\+Context}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+font\+Context}]{\setlength{\rightskip}{0pt plus 5cm}F\+O\+N\+Scontext$\ast$ Z\+E\+G\+L\+::\+Game\+::m\+\_\+font\+Context\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_ab7239deb1a14053ae2d757994f2211d0}
-Cache of all fonts loaded -\/ request by int index. \hypertarget{class_z_e_g_l_1_1_game_ab290dd46ec4ff766bd56d0e3013bace1}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+fps@{m\+\_\+fps}}
+Cache of all fonts loaded -\/ request by int index \hypertarget{class_z_e_g_l_1_1_game_ab290dd46ec4ff766bd56d0e3013bace1}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+fps@{m\+\_\+fps}}
 \index{m\+\_\+fps@{m\+\_\+fps}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+fps}]{\setlength{\rightskip}{0pt plus 5cm}char Z\+E\+G\+L\+::\+Game\+::m\+\_\+fps\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_ab290dd46ec4ff766bd56d0e3013bace1}
-char array for displaying F\+P\+S string. \hypertarget{class_z_e_g_l_1_1_game_ab301928901efd034fe40d53cdb54caf5}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+lights@{m\+\_\+lights}}
+char array for displaying F\+P\+S string \hypertarget{class_z_e_g_l_1_1_game_ab301928901efd034fe40d53cdb54caf5}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+lights@{m\+\_\+lights}}
 \index{m\+\_\+lights@{m\+\_\+lights}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+lights}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Light}$\ast$$>$ Z\+E\+G\+L\+::\+Game\+::m\+\_\+lights\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_ab301928901efd034fe40d53cdb54caf5}
-Stores all the lights for the game. \hypertarget{class_z_e_g_l_1_1_game_a72107b2460cfd896337dab847801fc1c}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+window@{m\+\_\+window}}
+Stores all the lights for the game \hypertarget{class_z_e_g_l_1_1_game_a72107b2460cfd896337dab847801fc1c}{}\index{Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}!m\+\_\+window@{m\+\_\+window}}
 \index{m\+\_\+window@{m\+\_\+window}!Z\+E\+G\+L\+::\+Game@{Z\+E\+G\+L\+::\+Game}}
 \subsubsection[{m\+\_\+window}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Window}$\ast$ Z\+E\+G\+L\+::\+Game\+::m\+\_\+window\hspace{0.3cm}{\ttfamily [protected]}}\label{class_z_e_g_l_1_1_game_a72107b2460cfd896337dab847801fc1c}
-The \hyperlink{class_z_e_g_l_1_1_window}{Window} used for rendering. 
+The \hyperlink{class_z_e_g_l_1_1_window}{Window} used for rendering 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

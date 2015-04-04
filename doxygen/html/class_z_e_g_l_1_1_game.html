@@ -95,6 +95,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ZEGL::Game Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="game_8h_source.html">game.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -136,7 +138,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ab290dd46ec4ff766bd56d0e3013bace1"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_game.html#ab290dd46ec4ff766bd56d0e3013bace1">m_fps</a> [16]</td></tr>
 <tr class="separator:ab290dd46ec4ff766bd56d0e3013bace1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base game class</p>
+<p>This class is enough to run on its own and could be modified in to a full game. However, the intended use is that it is not used directly and is instead inherited from to create a new class for each project. The game class would be where all game-play related systems/objects reside e.g levels, fonts, entities. Then each can be updated and rendered in the respective <a class="el" href="class_z_e_g_l_1_1_game.html#a6ad207394e4ce91f909d49c87802da08">Update()</a> and <a class="el" href="class_z_e_g_l_1_1_game.html#a0897730fc9fed789f6c0f11d21a0c14a">Render()</a> funtions of the inherited game class. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a82f5be49774c3ad1a96daac71eb0ddec"></a>
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +410,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Pointer to the currently active <a class="el" href="class_z_e_g_l_1_1_light.html">Light</a>. </p>
+<p>Pointer to the currently active <a class="el" href="class_z_e_g_l_1_1_light.html">Light</a> </p>
 
 </div>
 </div>
@@ -447,7 +452,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="class_z_e_g_l_1_1_game.html">Game</a> <a class="el" href="class_z_e_g_l_1_1_camera.html">Camera</a>. </p>
+<p>The <a class="el" href="class_z_e_g_l_1_1_game.html">Game</a> <a class="el" href="class_z_e_g_l_1_1_camera.html">Camera</a> </p>
 
 </div>
 </div>
@@ -468,7 +473,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Cache of all fonts loaded - request by int index. </p>
+<p>Cache of all fonts loaded - request by int index </p>
 
 </div>
 </div>
@@ -489,7 +494,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>char array for displaying FPS string. </p>
+<p>char array for displaying FPS string </p>
 
 </div>
 </div>
@@ -510,7 +515,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Stores all the lights for the game. </p>
+<p>Stores all the lights for the game </p>
 
 </div>
 </div>
@@ -531,7 +536,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> used for rendering. </p>
+<p>The <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> used for rendering </p>
 
 </div>
 </div>
@@ -542,7 +547,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 3 2015 18:41:37 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 4 2015 12:13:59 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -29,7 +29,6 @@ Core::Core(double frameRate, Window* window, Game* game) :
 	m_window(window),
 	m_game(game)
 {
-	Random::Init();
 	m_game->Init(m_window);
 }
 

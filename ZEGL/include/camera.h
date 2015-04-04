@@ -23,11 +23,16 @@ namespace ZEGL
 {
 	class Window;
 
+	/**
+	* The camera is used for moving the display around the in game world. It uses
+	* position, rotation and zoom to create an orthographic transformation matrix
+	* which in turn is used for rendering.
+	*/
 	__declspec(align(16)) class Camera
 	{
 	public:
 		/**
-		* Constructor
+		* Constructor.
 		*
 		* The constructor uses the Window which is passed in to calculate
 		* a transformation matrix.
@@ -44,54 +49,123 @@ namespace ZEGL
 		Camera(const Window* window = nullptr);
 
 		/**
-		* Get the current transformation matrix
+		* Get the current transformation matrix.
 		*
 		* If the last position, rotation or zoom value has changed the Camera
 		* uses the Window which is passed in to re-calculate a transformation matrix.
 		*
-		* \return 4x4 Orthographic transformation matrix
+		* \param[in] window Pointer to a Window (defaults to nullptr)
+		*
+		* \return glm::mat4 Orthographic transformation matrix
 		*
 		* \warning If no Window is passed a default orthographic
 		* projection is used. This is to prevent a crash but should not be used
 		* for general purpose i.e. make sure you pass a Window in order to get
-		* correct rendering
+		* correct rendering.
 		*
 		* \see [Window]
 		*/
 		const glm::mat4& GetTransform(const Window* window);
 
-		inline glm::vec3	GetPos()	const { return m_pos; }
-		inline float		GetRot()	const { return m_rot; }
-		inline float		GetZoom()	const { return m_zoom; }
+		/**
+		* Get the current position of the Camera.
+		*
+		* \return glm::vec3 representing the Camera position
+		*/
+		inline glm::vec3 GetPos() const { return m_pos; }
 
-		inline void			SetPos(float x, float y, float z = 0.0f)	{ m_pos.x = x; m_pos.y = y; m_pos.z = z; }
-		inline void			SetPos(const glm::vec3& pos)				{ m_pos = pos; }
-		inline void			SetRot(float rot)							{ m_rot = rot; }
-		inline void			SetZoom(float zoom)							{ m_zoom = zoom; }
+		/**
+		* Set the position of the Camera.
+		*
+		* \param[in] x New X position component value
+		* \param[in] y New Y position component value
+		* \param[in] z New Z position component value
+		*/
+		inline void SetPos(float x, float y, float z = 0.0f) { m_pos.x = x; m_pos.y = y; m_pos.z = z; }
 
-		void*				operator new(size_t i)		{ return _mm_malloc(i, 16); }
-		void				operator delete(void* p)	{ _mm_free(p); }
+		/**
+		* Get the current rotation of the Camera.
+		*
+		* \return Camera rotation in radians
+		*/
+		inline float GetRot() const { return m_rot; }
+
+		/**
+		* Set the Camera rotation.
+		*
+		* \param[in] rot Angle of rotation in radians
+		*/
+		inline void SetRot(float rot) { m_rot = rot; }
+
+		/**
+		* Get the current zoom factor of the Camera.
+		*
+		* \return Zoom factor for the Camera
+		*/
+		inline float GetZoom() const { return m_zoom; }
+
+		/**
+		* Set the Camera zoom factor.
+		*
+		* \param[in] zoom Level of zoom factor (scaling) to apply
+		*/
+		inline void SetZoom(float zoom) { m_zoom = zoom; }
+
+		void* operator new(size_t i)	{ return _mm_malloc(i, 16); }
+		void  operator delete(void* p)	{ _mm_free(p); }
 
 	protected:
 	private:
+		/**
+		* Stores and updates the orthographic transformation.
+		*
+		* In addition to storing the orthographic transformation matrix, this struct 
+		* stores the last known position, rotation and zoom values. This is to enable
+		* the recreation of the transformation matrix to only be required if one of those
+		* values is changed
+		*/
 		struct Transformation
 		{
-			glm::mat4	m_matrix;
-			glm::vec3	m_lastPos;
-			float		m_lastRot;
-			float		m_lastZoom;
+			glm::mat4	m_matrix;		/*!< The orthographic transformation matrix */
+			glm::vec3	m_lastPos;		/*!< The last recorded position */
+			float		m_lastRot;		/*!< The last recorded rotation (in radians) */
+			float		m_lastZoom;		/*!< The last recorded zoom factor */
 
+			/**
+			* Updates the last recorded position, rotation and zoom values
+			*
+			* \param[in] pos The Camera position
+			* \param[in] rot The Camera rotation (in radians)
+			* \param[in] zoom The Camera zoom factor
+			*/
 			void Update(const glm::vec3& pos, float rot, float zoom)
 			{
 				m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
 			}
 		};
 
+		/**
+		* Recalculate the transformation matrix.
+		*
+		* If the last position, rotation or zoom value has changed the Window which 
+		* is passed in used to re-calculate a transformation matrix.
+		*
+		* \param[in] window Pointer to a Window (defaults to nullptr)
+		*
+		* \return Description
+		*
+		* \see [Window]
+		*
+		* \warning If no Window is passed a default orthographic
+		* projection is used. This is to prevent a crash but should not be used
+		* for general purpose i.e. make sure you pass a Window in order to get
+		* correct rendering.
+		*/
 		void RecreateTransform(const Window* window);
 
-		glm::vec3		m_pos;
-		float			m_rot;
-		float			m_zoom;
-		Transformation	m_transform;
+		glm::vec3		m_pos;			/*!< The Camera position */
+		float			m_rot;			/*!< The Camera rotation (in radians) */
+		float			m_zoom;			/*!< The Camera zoom factor */
+		Transformation	m_transform;	/*!< The Transformation produced by the Camera. */
 	};
 }
