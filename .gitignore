@@ -295,6 +295,8 @@ ZEGL.html
 !ZEGL/lib/*
 !ZEGL/dll/*
 !ZEGL/res/levels/*
+doxygen/html/
+doxygen/latex/
 
 ### CMake ###
 CMakeCache.txt
