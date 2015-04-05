@@ -40,7 +40,7 @@ Window::Window(int width, int height, const std::string& title) :
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
-	m_window = ZEGL::CreateAndLogWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
+	m_window = System::CreateAndLogWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
 	m_glContext = SDL_GL_CreateContext(m_window);
 	if (m_glContext == nullptr)
 	{

@@ -16,28 +16,30 @@
 
 #include "util.h"
 
-std::vector<std::string>& Util::SplitString(const std::string& s, char delim, std::vector<std::string>& elems)
+namespace Util
 {
-	std::stringstream ss(s);
-	std::string item;
-	while (std::getline(ss, item, delim))
+	std::vector<std::string>& SplitString(const std::string& s, char delim, std::vector<std::string>& elems)
 	{
-		elems.push_back(item);
+		std::stringstream ss(s);
+		std::string item;
+		while (std::getline(ss, item, delim))
+		{
+			elems.push_back(item);
+		}
+		return elems;
 	}
-	return elems;
-}
 
+	std::vector<std::string> SplitString(const std::string& s, char delim)
+	{
+		std::vector<std::string> elems;
+		SplitString(s, delim, elems);
+		return elems;
+	}
 
-std::vector<std::string> Util::SplitString(const std::string& s, char delim)
-{
-	std::vector<std::string> elems;
-	SplitString(s, delim, elems);
-	return elems;
-}
-
-bool Util::IsNumber(const std::string& s)
-{
-	std::string::const_iterator it = s.begin();
-	while (it != s.end() && std::isdigit(*it)) ++it;
-	return !s.empty() && it == s.end();
+	bool IsNumber(const std::string& s)
+	{
+		std::string::const_iterator it = s.begin();
+		while (it != s.end() && std::isdigit(*it)) ++it;
+		return !s.empty() && it == s.end();
+	}
 }

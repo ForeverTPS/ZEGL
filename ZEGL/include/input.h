@@ -1,4 +1,4 @@
-/**
+/*
 * Copyright(c) 2014, Phil Sampson (http://www.zamma.co.uk)
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,11 +40,11 @@ namespace ZEGL
 	public:
 		enum class MouseButton
 		{
-			MOUSE_LEFT_BUTTON = SDL_BUTTON_LEFT,				/*!< . */
-			MOUSE_MIDDLE_BUTTON = SDL_BUTTON_MIDDLE,			/*!< . */
-			MOUSE_RIGHT_BUTTON = SDL_BUTTON_RIGHT,				/*!< . */
-			MOUSE_WHEEL_UP = SDL_BUTTON_X1,						/*!< . */
-			MOUSE_WHEEL_DOWN = SDL_BUTTON_X2					/*!< . */
+			MOUSE_LEFT_BUTTON = SDL_BUTTON_LEFT,				/*!< Left mouse button */
+			MOUSE_MIDDLE_BUTTON = SDL_BUTTON_MIDDLE,			/*!< Middle mouse button */
+			MOUSE_RIGHT_BUTTON = SDL_BUTTON_RIGHT,				/*!< Right mouse button */
+			MOUSE_WHEEL_UP = SDL_BUTTON_X1,						/*!< Mouse wheel up */
+			MOUSE_WHEEL_DOWN = SDL_BUTTON_X2					/*!< Mouse wheel down */
 		};
 
 		enum class KeyboardKey

@@ -66,31 +66,27 @@ void RenderEntity::operator=(RenderEntity renderEntity)
 	memcpy((void*)&renderEntity, temp, sizeof(RenderEntity));
 }
 
-bool RenderEntity::CalcTextureCoords(const std::string regionName)
+void RenderEntity::CalcTextureCoords(const std::string regionName)
 {
 	if (!m_hasTextureAtlas)
 	{
-		return false;
+		return;
 	}
 
 	TextureRegion region = m_textureAtlas.GetRegion(regionName);
-	if (region.w == 0)
+	if (region.w != 0)
 	{
-		return false;
+		int textureWidth = m_texture.GetWidth();
+		int textureHeight = m_texture.GetHeight();
+
+		float x = region.x / textureWidth;
+		float y = region.y / textureHeight;
+		float w = region.w / textureWidth;
+		float h = region.h / textureHeight;
+
+		m_data.m_texCoords[0] = glm::vec2(x, y + h);
+		m_data.m_texCoords[1] = glm::vec2(x + w, y + h);
+		m_data.m_texCoords[2] = glm::vec2(x, y);
+		m_data.m_texCoords[3] = glm::vec2(x + w, y);
 	}
-
-	int textureWidth = m_texture.GetWidth();
-	int textureHeight = m_texture.GetHeight();
-
-	float x = region.x / textureWidth;
-	float y = region.y / textureHeight;
-	float w = region.w / textureWidth;
-	float h = region.h / textureHeight;
-
-	m_data.m_texCoords[0] = glm::vec2(x, y + h);
-	m_data.m_texCoords[1] = glm::vec2(x + w, y + h);
-	m_data.m_texCoords[2] = glm::vec2(x, y);
-	m_data.m_texCoords[3] = glm::vec2(x + w, y);
-
-	return true;
 }

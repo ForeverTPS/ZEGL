@@ -1,4 +1,4 @@
-/**
+/*
 * Copyright(c) 2014, Phil Sampson (http://www.zamma.co.uk)
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,11 @@
 
 #include <SDL.h>
 
-namespace ZEGL
+/**
+* Using a namespace rather than a static class or singleton etc to provide
+* generic engine system operations
+*/
+namespace System
 {
 	bool Init();
 	void Quit();

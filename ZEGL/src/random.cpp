@@ -19,36 +19,39 @@
 
 static std::mt19937 generator;
 
-void Random::Init()
+namespace Random
 {
-	generator.seed(std::random_device()());
-}
+	void Init()
+	{
+		generator.seed(std::random_device()());
+	}
 
-int Random::RandInt(int max)
-{
-	std::uniform_int_distribution<std::mt19937::result_type> range(0, max);
-	return range(generator);
-}
+	int RandInt(int max)
+	{
+		std::uniform_int_distribution<std::mt19937::result_type> range(0, max);
+		return range(generator);
+	}
 
-int Random::RandInt(int min, int max)
-{
-	std::uniform_int_distribution<std::mt19937::result_type> range(min, max);
-	return range(generator);
-}
+	int RandInt(int min, int max)
+	{
+		std::uniform_int_distribution<std::mt19937::result_type> range(min, max);
+		return range(generator);
+	}
 
-float Random::RandFloat(float max)
-{
-	std::uniform_real_distribution<float> range(0.0f, max);
-	return range(generator);
-}
+	float RandFloat(float max)
+	{
+		std::uniform_real_distribution<float> range(0.0f, max);
+		return range(generator);
+	}
 
-float Random::RandFloat(float min, float max)
-{
-	std::uniform_real_distribution<float> range(min, max);
-	return range(generator);
-}
+	float RandFloat(float min, float max)
+	{
+		std::uniform_real_distribution<float> range(min, max);
+		return range(generator);
+	}
 
-bool Random::RandBool()
-{
-	return (generator() % 2) == 0;
+	bool RandBool()
+	{
+		return (generator() % 2) == 0;
+	}
 }

@@ -1,4 +1,4 @@
-/**
+/*
 * Copyright(c) 2014, Phil Sampson (http://www.zamma.co.uk)
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,24 +18,40 @@
 
 namespace ZEGL
 {
+	/**
+	* This class is to be inherited by any class which is intended to
+	* use shared resources e.g. textures, shader etc. It performs reference
+	* counting in order to allow the resource to know when the allocated
+	* memory can be safely released i.e. when it is no longer in use.
+	*/
 	class ReferenceCounter
 	{
 	public:
+		/**
+		* The constructor initializes the reference count to 1
+		*/
 		ReferenceCounter() :
 			m_refCount(1) {}
 
 		virtual ~ReferenceCounter() {}
 
-		inline void AddReference()		{ m_refCount++; }
-		inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
+		/**
+		* Increments the reference count by 1
+		*/
+		inline void AddReference() { m_refCount++; }
 
-		inline int	GetReferenceCount()	{ return m_refCount; }
+		/**
+		* Decrements the reference count by 1
+		*
+		* \return True if the reference count is reduced to 0 otherwise false
+		*/
+		inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
 
 	protected:
 	private:
 		ReferenceCounter(ReferenceCounter const&) = delete;
 		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
 
-		int m_refCount;
+		int m_refCount;		/*!< The number of times the object is referenced */
 	};
 }

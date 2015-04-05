@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 {  
 	LOG_INIT("ZEGL");
 
-	if (ZEGL::Init())
+	if (System::Init())
 	{
 		Window window(800, 600, "ZEGL");
 		Game game;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		Core engine(60, &window, &game);
 		engine.Start();
 
-		ZEGL::Quit();
+		System::Quit();
 	}
 
 	LOG_CLOSE();
