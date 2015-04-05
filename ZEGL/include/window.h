@@ -43,7 +43,7 @@ namespace ZEGL
 
 	protected:
 	private:
-		Window(const Window& other) : m_input(this) {}
+		Window(const Window& other) = delete;
 		void operator=(const Window& other) = delete;
 
 		int           m_width;

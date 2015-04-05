@@ -307,12 +307,8 @@ namespace ZEGL
 		*
 		* Initializes all key and button monitoring arrays to be default state
 		* which is false.
-		*
-		* \param[in] window Pointer to the Window used for the Game
-		*
-		* \see [Window]
 		*/
-		Input(Window* window);
+		Input();
 
 		/**
 		* Test if a specific key is held down.
@@ -429,23 +425,55 @@ namespace ZEGL
 		inline void SetMouseUp(int keyCode, bool value) { m_upMouse[keyCode] = value; }
 
 		/**
-		* Get the position of the cursor on screen
+		* Get the position of the cursor on screen.
 		*
 		* \return The screen coordinates of the cursor in a glm::vec2
 		*/
-		inline glm::vec2 GetMousePosition() const { return glm::vec2((float)m_mouseX, (float)m_mouseY); }
+		inline glm::vec2 GetMousePosition() const { return m_mousePos; }
 
-		void SetMousePosition(const glm::vec2& pos);
-		inline void SetMouseX(int value) { m_mouseX = value; }
-		inline void SetMouseY(int value) { m_mouseY = value; }
+		/**
+		* Set the position of the mouse cursor in the Window.
+		*
+		* \param[in] window The Window in which to position the cursor
+		* \param[in] pos A glm::vec2 representing screen x, y coordinates
+		*/
+		void SetMousePosition(Window* window, const glm::vec2& pos);
 		
+		/**
+		* Hide or display the mouse cursor.
+		*
+		* \param[in] visible Flag whether to show or hide the cursor (true/false)
+		*/
 		void SetCursorVisible(bool visible) const;
 		
+		/**
+		* Reset the array monitoring keys which have just been pressed to all be false.
+		*/
 		inline void ResetAllKeyDown() { memset(m_downKeys, 0, MAX_KEYS * sizeof(bool)); }
+
+		/**
+		* Reset the array monitoring keys which have just been released to all be false.
+		*/
 		inline void ResetAllKeyUp() { memset(m_upKeys, 0, MAX_KEYS * sizeof(bool)); }
+
+		/**
+		* Reset the array monitoring keys which are held down to all be false.
+		*/
 		inline void ResetAllKey() { memset(m_inputs, 0, MAX_KEYS * sizeof(bool)); }
+
+		/**
+		* Reset the array monitoring mouse buttons which have just been pressed to all be false.
+		*/
 		inline void ResetAllMouseButtonDown() { memset(m_downMouse, 0, MAX_MOUSE_BUTTONS * sizeof(bool)); }
+
+		/**
+		* Reset the array monitoring mouse buttons which have just been released to all be false.
+		*/
 		inline void ResetAllMouseButtonUp() { memset(m_upMouse, 0, MAX_MOUSE_BUTTONS * sizeof(bool)); }
+
+		/**
+		* Reset the array monitoring mouse buttons which are held down to all be false.
+		*/
 		inline void ResetAllMouseButton() {	memset(m_mouseInput, 0, MAX_MOUSE_BUTTONS * sizeof(bool)); }
 
 	protected:
@@ -453,14 +481,12 @@ namespace ZEGL
 		Input(Input const&) = delete;
 		Input& operator=(Input const&) = delete;
 
-		bool	m_inputs[MAX_KEYS];
-		bool	m_downKeys[MAX_KEYS];
-		bool	m_upKeys[MAX_KEYS];
-		bool	m_mouseInput[MAX_MOUSE_BUTTONS];
-		bool	m_downMouse[MAX_MOUSE_BUTTONS];
-		bool	m_upMouse[MAX_MOUSE_BUTTONS];
-		int		m_mouseX;
-		int		m_mouseY;
-		Window* m_window;
+		bool		m_inputs[MAX_KEYS];					/*!< Array to monitor keyboard key held state */
+		bool		m_downKeys[MAX_KEYS];				/*!< Array to monitor keyboard key pressed state */
+		bool		m_upKeys[MAX_KEYS];					/*!< Array to monitor keyboard key released state */
+		bool		m_mouseInput[MAX_MOUSE_BUTTONS];	/*!< Array to monitor mouse button held state */
+		bool		m_downMouse[MAX_MOUSE_BUTTONS];		/*!< Array to monitor mouse button pressed state */
+		bool		m_upMouse[MAX_MOUSE_BUTTONS];		/*!< Array to monitor mouse button released state */
+		glm::vec2	m_mousePos;							/*!< Position of the mouse cursor in screen coordinates */
 	};
 }

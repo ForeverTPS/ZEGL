@@ -26,7 +26,6 @@ Window::Window(int width, int height, const std::string& title) :
 	m_width(width),
 	m_height(height),
 	m_title(title),
-	m_input(this),
 	m_isCloseRequested(false)
 {
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -94,8 +93,7 @@ void Window::Update()
 
 		if (e.type == SDL_MOUSEMOTION)
 		{
-			m_input.SetMouseX(e.motion.x);
-			m_input.SetMouseY(e.motion.y);
+			m_input.SetMousePosition(this, glm::vec2(e.motion.x, e.motion.y));
 		}
 
 		if (e.type == SDL_KEYDOWN)
