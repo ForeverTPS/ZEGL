@@ -98,13 +98,3 @@ void Core::Start()
 	}
 }
 
-void Core::Stop()
-{
-	if (!m_isRunning)
-	{
-		return;
-	}
-		
-	m_isRunning = false;
-}
-

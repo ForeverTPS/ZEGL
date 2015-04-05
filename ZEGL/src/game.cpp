@@ -40,9 +40,9 @@ int testFont = FONS_INVALID;
 
 Game::Game() :
 	m_camera(nullptr),
-    m_window(nullptr),
+	m_window(nullptr),
 	m_ambientColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.2f)),
-    m_activeLight(nullptr),
+	m_activeLight(nullptr),
 	m_fontContext(nullptr)
 {
 }
@@ -65,29 +65,29 @@ void Game::Init(const Window* window)
 {
 	m_window = window;
 	m_camera = new Camera(m_window);
-    
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
+	
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
-    glDisable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 
 	m_fontContext = gl3fonsCreate(512, 512, FONS_ZERO_TOPLEFT);
 	testFont = fonsAddFont(m_fontContext, "sans", "./res/fonts/DroidSerif-Regular.ttf");
-    
+	
 	tileMap = new TileMap("test_level.ldf");
 
 	light = new Light(Shader("point_light"));
 	light->SetLightColor(glm::vec4(1.0f, 0.8f, 0.6f, 1.0f));
 	light->SetAmbientColor(glm::vec4(0.6f, 0.6f, 1.0f, 0.2f));
 	m_lights.push_back(light);
-    
-    glGenVertexArrays(1, &gVAO);
-    glBindVertexArray(gVAO);
-    
-    glGenBuffers(1, &gVAB);
-    glBindBuffer(GL_ARRAY_BUFFER, gVAB);
+	
+	glGenVertexArrays(1, &gVAO);
+	glBindVertexArray(gVAO);
+	
+	glGenBuffers(1, &gVAB);
+	glBindBuffer(GL_ARRAY_BUFFER, gVAB);
 
 	glEnableVertexAttribArray(0); // pos
 	glEnableVertexAttribArray(1); // size
@@ -145,22 +145,22 @@ void Game::Render()
 		m_activeLight = m_lights[i];
 
 		Shader shader = m_activeLight->GetShader();
-        
+		
 		shader.Bind();
 		shader.UpdateUniforms(this);
-        
+		
 		texture.Bind(0);
 		normalMap.Bind(1);
-        
-        glBindVertexArray(gVAO);
+		
+		glBindVertexArray(gVAO);
 		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, tileMap->GetActiveTilesData().size());
-        
+		
 		shader.UnBind();
 
 		glDisable(GL_BLEND);
 	}
-    
-    m_activeLight = nullptr;
+	
+	m_activeLight = nullptr;
 
 	gl3fonsProjection(m_fontContext, (GLfloat*)&(m_camera->GetTransform(m_window)[0][0]), m_window->GetWidth(), m_window->GetHeight());
 

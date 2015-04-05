@@ -100,7 +100,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClCompile Include="example\main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
-    <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\renderentity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logger.cpp" />
@@ -129,6 +129,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClInclude Include="include\platform.h" />
     <ClInclude Include="include\random.h" />
     <ClInclude Include="include\referencecounter.h" />
+    <ClInclude Include="include\renderentity.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\system.h" />

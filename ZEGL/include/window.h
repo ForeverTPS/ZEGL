@@ -17,8 +17,6 @@
 #pragma once
 
 #include "input.h"
-#include <SDL.h>
-#include <string>
 
 namespace ZEGL
 {

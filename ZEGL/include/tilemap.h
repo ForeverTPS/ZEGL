@@ -16,12 +16,12 @@
 
 #pragma once
 
-#include "entity.h"
+#include "renderentity.h"
 #include <vector>
 
 namespace ZEGL
 {
-	const float DEFAULT_TILE_SIZE = 512.0f;
+	const float DEFAULT_TILE_SIZE = 64.0f;
 
 	class Window;
 

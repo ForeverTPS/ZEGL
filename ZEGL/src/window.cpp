@@ -78,18 +78,12 @@ Window::~Window()
 
 void Window::Update()
 {
-	for (int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
-	{
-		m_input.SetMouseDown(i, false);
-		m_input.SetMouseUp(i, false);
-	}
-
-	for (int i = 0; i < Input::NUM_KEYS; i++)
-	{
-		m_input.SetKeyDown(i, false);
-		m_input.SetKeyUp(i, false);
-	}
-
+	m_input.ResetAllMouseButtonDown();
+	m_input.ResetAllMouseButtonUp();
+	
+	m_input.ResetAllKeyDown();
+	m_input.ResetAllKeyUp();
+	
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{

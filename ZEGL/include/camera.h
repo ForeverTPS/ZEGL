@@ -68,14 +68,14 @@ namespace ZEGL
 		const glm::mat4& GetTransform(const Window* window);
 
 		/**
-		* Get the current position of the Camera.
+		* Get the current position of the camera.
 		*
-		* \return glm::vec3 representing the Camera position
+		* \return glm::vec3 representing the camera position
 		*/
 		inline glm::vec3 GetPos() const { return m_pos; }
 
 		/**
-		* Set the position of the Camera.
+		* Set the position of the camera using individual values.
 		*
 		* \param[in] x New X position component value
 		* \param[in] y New Y position component value
@@ -84,28 +84,35 @@ namespace ZEGL
 		inline void SetPos(float x, float y, float z = 0.0f) { m_pos.x = x; m_pos.y = y; m_pos.z = z; }
 
 		/**
-		* Get the current rotation of the Camera.
+		* Set the position of the camera using an existing glm::vec3.
+		*
+		* \param[in] pos New position value
+		*/
+		inline void SetPos(glm::vec3 pos) { m_pos = pos; }
+
+		/**
+		* Get the current rotation of the camera.
 		*
 		* \return Camera rotation in radians
 		*/
 		inline float GetRot() const { return m_rot; }
 
 		/**
-		* Set the Camera rotation.
+		* Set the camera rotation.
 		*
 		* \param[in] rot Angle of rotation in radians
 		*/
 		inline void SetRot(float rot) { m_rot = rot; }
 
 		/**
-		* Get the current zoom factor of the Camera.
+		* Get the current zoom factor of the camera.
 		*
-		* \return Zoom factor for the Camera
+		* \return Zoom factor for the camera
 		*/
 		inline float GetZoom() const { return m_zoom; }
 
 		/**
-		* Set the Camera zoom factor.
+		* Set the camera zoom factor.
 		*
 		* \param[in] zoom Level of zoom factor (scaling) to apply
 		*/
@@ -134,9 +141,9 @@ namespace ZEGL
 			/**
 			* Updates the last recorded position, rotation and zoom values
 			*
-			* \param[in] pos The Camera position
-			* \param[in] rot The Camera rotation (in radians)
-			* \param[in] zoom The Camera zoom factor
+			* \param[in] pos The camera position
+			* \param[in] rot The camera rotation (in radians)
+			* \param[in] zoom The camera zoom factor
 			*/
 			void Update(const glm::vec3& pos, float rot, float zoom)
 			{
@@ -163,9 +170,9 @@ namespace ZEGL
 		*/
 		void RecreateTransform(const Window* window);
 
-		glm::vec3		m_pos;			/*!< The Camera position */
-		float			m_rot;			/*!< The Camera rotation (in radians) */
-		float			m_zoom;			/*!< The Camera zoom factor */
-		Transformation	m_transform;	/*!< The Transformation produced by the Camera. */
+		glm::vec3		m_pos;			/*!< The camera position */
+		float			m_rot;			/*!< The camera rotation (in radians) */
+		float			m_zoom;			/*!< The camera zoom factor */
+		Transformation	m_transform;	/*!< The Transformation produced by the camera. */
 	};
 }

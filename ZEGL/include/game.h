@@ -95,7 +95,7 @@ namespace ZEGL
 		inline const Light*	GetActiveLight() const { return m_activeLight; }
 
 		/**
-		* Get the Game Camera.
+		* Get the game Camera.
 		*
 		* \return The Camera being used by the game for display calculations
 		*
@@ -126,7 +126,7 @@ namespace ZEGL
 		inline const Window* GetWindow() { return m_window; }
 
 	protected:
-		Camera*				m_camera;			/*!< The Game Camera */
+		Camera*				m_camera;			/*!< The game Camera */
 		const Window*		m_window;			/*!< The Window used for rendering */
 
 		glm::vec4			m_ambientColor;		/*!< Ambient color for the world (used if there is no Light) */

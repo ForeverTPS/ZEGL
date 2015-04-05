@@ -14,27 +14,9 @@
 * limitations under the License.
 */
 
-#include "entity.h"
+#include "renderentity.h"
 
 using namespace ZEGL;
-
-Entity::Entity(const glm::vec3& pos, float rot, float scale)
-{
-	m_data.m_pos = pos;
-	m_data.m_rot = rot;
-	m_data.m_scale = scale;
-}
-
-Entity::Entity(const Entity& entity) :
-	m_data(entity.m_data) {}
-
-void Entity::operator=(Entity entity)
-{
-	char* temp[sizeof(Entity) / sizeof(char)];
-	memcpy(temp, (void*)this, sizeof(Entity));
-	memcpy((void*)this, (void*)&entity, sizeof(Entity));
-	memcpy((void*)&entity, temp, sizeof(Entity));
-}
 
 RenderEntity::RenderEntity(const Texture& texture, 
 						   const Texture& normalMap, 

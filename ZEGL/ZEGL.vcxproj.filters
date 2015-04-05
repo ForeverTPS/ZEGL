@@ -51,9 +51,6 @@
     <ClCompile Include="src\core.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\entity.cpp">
-      <Filter>src\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\game.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
@@ -101,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="example\main.cpp">
       <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderentity.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +171,9 @@
       <Filter>example</Filter>
     </ClInclude>
     <ClInclude Include="include\doxygen.h">
+      <Filter>documentation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderentity.h">
       <Filter>include\core</Filter>
     </ClInclude>
   </ItemGroup>
