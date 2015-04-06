@@ -56,8 +56,8 @@ namespace ZEGL
 		* of the entity. Defaults are used if none are passed
 		*
 		* \param[in] pos Position of the entity
-		* \param[in] pos Rotation of the entity (in radians) 
-		* \param[in] pos Scale factor of the entity
+		* \param[in] rot Rotation of the entity (in radians) 
+		* \param[in] scale Scale factor of the entity
 		*/
 		Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f)
 		{
@@ -128,6 +128,6 @@ namespace ZEGL
 		inline const EntityData& GetData() const { return m_data; }
 
 	protected:
-		EntityData	m_data;	
+		EntityData	m_data;		/*!< The EntityData for the entity */
 	};
 }

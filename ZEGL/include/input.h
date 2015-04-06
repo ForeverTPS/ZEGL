@@ -38,6 +38,9 @@ namespace ZEGL
 	class Input
 	{
 	public:
+		/**
+		* Remap of the SDL mouse button codes
+		*/
 		enum class MouseButton
 		{
 			MOUSE_LEFT_BUTTON = SDL_BUTTON_LEFT,				/*!< Left mouse button */
@@ -47,6 +50,9 @@ namespace ZEGL
 			MOUSE_WHEEL_DOWN = SDL_BUTTON_X2					/*!< Mouse wheel down */
 		};
 
+		/**
+		* Remap of the SDL key codes
+		*/
 		enum class KeyboardKey
 		{
 			KEY_UNKOWN = SDLK_UNKNOWN,							/*!< Unknown key value */

@@ -31,11 +31,10 @@ namespace ZEGL
 	/**
 	* Base game class
 	*
-	* This class is enough to run on its own and could be modified in to a full game.
-	* However, the intended use is that it is not used directly and is instead inherited 
-	* from to create a new class for each project. The game class would be where all
-	* game-play related systems/objects reside e.g levels, fonts, entities. Then each can
-	* be updated and rendered in the respective Update() and Render() funtions of the inherited
+	* This class is intended to be inherited  from to create a new class for each project. 
+	* The game class would be where all game-play related systems/objects reside e.g levels, 
+	* fonts, entities. Then each can be updated and rendered in the respective Update() and 
+	* Render() functions of the inherited
 	* game class.
 	*/
 	class Game
@@ -51,7 +50,7 @@ namespace ZEGL
 		* \param[in] window Pointer to an already created Window
 		* \see [Window]
 		*/
-		void Init(Window* window);
+		virtual void Init(Window* window);
 
 		/**
 		* Update all game objects using delta time step. Any SDL_Events are polled
@@ -59,12 +58,12 @@ namespace ZEGL
 		*
 		* \param[in] delta Delta frame time in milliseconds
 		*/
-		void Update(float delta);
+		virtual void Update(float delta);
 
 		/**
 		* Render all objects and swap the buffers to display to the screen.
 		*/
-		void Render();
+		virtual void Render();
 
 		/**
 		* Update the char array m_fps to include the passed int value.
@@ -114,18 +113,19 @@ namespace ZEGL
 		inline const Window* GetWindow() { return m_window; }
 
 	protected:
-		Camera*				m_camera;		
-		Window*				m_window;		
-		Input				m_input;		
+		Camera*				m_camera;			/*!< The Game Camera */
+		Window*				m_window;			/*!< The Window used for rendering */
+		Input				m_input;			/*!< Input handler */
 
-		glm::vec4			m_ambientColor;	
+		glm::vec4			m_ambientColor;		/*!< Ambient color for the world (used if there is no Light) */
 
-		Light*				m_activeLight;	
-		std::vector<Light*>	m_lights;		
+		Light*				m_activeLight;		/*!< Pointer to the currently active Light */
+		std::vector<Light*>	m_lights;			/*!< Stores all the lights for the game */
 
-		FONScontext*		m_fontContext;	
+		FONScontext*		m_fontContext;		/*!< Cache of all fonts loaded - request by int index */
+		int					m_debugFont;		/*!< Font to display debug info */
 
-		char				m_fps[16];		
+		char				m_fps[16];			/*!< char array for displaying FPS string */
 
 	private:
 		Game(Game const&) = delete;

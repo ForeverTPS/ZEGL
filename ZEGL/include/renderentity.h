@@ -107,9 +107,9 @@ namespace ZEGL
 		inline const Texture& GetNormalMap() const { return m_normalMap; }
 
 	protected:
-		bool			m_hasTextureAtlas;
-		TextureAtlas	m_textureAtlas;		
-		Texture			m_texture;			
-		Texture			m_normalMap;		
+		bool			m_hasTextureAtlas;	/*!< Whether the entity uses a render atlas */
+		TextureAtlas	m_textureAtlas;		/*!< The TextureAtlas for the entity */
+		Texture			m_texture;			/*!< The render Texture for the entity */
+		Texture			m_normalMap;		/*!< The normal map Texture for the entity */
 	};
 }

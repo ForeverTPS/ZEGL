@@ -13,3 +13,32 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
+#include "game.h"
+#include "tilemap.h"
+
+using namespace ZEGL;
+
+/**
+* Example of inherting the Game class to create a new game.
+*/
+class MyGame : public Game
+{
+public:
+	MyGame();
+	~MyGame();
+
+	void Init(Window* window);
+	void Update(float delta);
+	void Render();
+	
+protected:
+private:
+	MyGame(MyGame const&) = delete;
+	MyGame& operator=(MyGame const&) = delete;
+
+	GLuint		m_gVAO;
+	GLuint		m_gVAB;
+	Light*		m_light;
+	TileMap*	m_tileMap;
+};

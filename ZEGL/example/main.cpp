@@ -16,7 +16,7 @@
 
 #include "platform.h"
 #include "core.h"
-#include "game.h"
+#include "example.h"
 #include "logger.h"
 #include "system.h"
 #include "util.h"
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	if (System::Init())
 	{
 		Window window(800, 600, "ZEGL");
-		Game game;
+		MyGame game;
 
 		Core engine(60, &window, &game);
 		engine.Start();

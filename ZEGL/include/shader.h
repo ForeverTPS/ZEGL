@@ -27,6 +27,10 @@ namespace ZEGL
 	class Camera;
 	class Game;
 
+	/**
+	* Uses vertex and fragment shader code in GLSL to create a shader program
+	* for rendering the game.
+	*/
 	class Shader
 	{
 	public:
