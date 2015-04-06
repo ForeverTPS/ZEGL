@@ -55,69 +55,9 @@ Window::~Window()
 	SDL_DestroyWindow(m_window);
 }
 
-void Window::Update()
-{
-	m_input.ResetAllMouseButtonDown();
-	m_input.ResetAllMouseButtonUp();
-	
-	m_input.ResetAllKeyDown();
-	m_input.ResetAllKeyUp();
-	
-	SDL_Event e;
-	while (SDL_PollEvent(&e))
-	{
-		if (e.type == SDL_QUIT)
-		{
-			m_isCloseRequested = true;
-		}
-
-		if (e.type == SDL_MOUSEMOTION)
-		{
-			m_input.SetMouseX(e.motion.x);
-			m_input.SetMouseY(e.motion.y);
-		}
-
-		if (e.type == SDL_KEYDOWN)
-		{
-			int value = e.key.keysym.scancode;
-
-			m_input.SetKey(value, true);
-			m_input.SetKeyDown(value, true);
-		}
-		if (e.type == SDL_KEYUP)
-		{
-			int value = e.key.keysym.scancode;
-
-			m_input.SetKey(value, false);
-			m_input.SetKeyUp(value, true);
-		}
-		if (e.type == SDL_MOUSEBUTTONDOWN)
-		{
-			int value = e.button.button;
-
-			m_input.SetMouse(value, true);
-			m_input.SetMouseDown(value, true);
-		}
-		if (e.type == SDL_MOUSEBUTTONUP)
-		{
-			int value = e.button.button;
-
-			m_input.SetMouse(value, false);
-			m_input.SetMouseUp(value, true);
-		}
-	}
-}
-
 void Window::SwapBuffers()
 {
 	SDL_GL_SwapWindow(m_window);
-}
-
-void Window::BindAsRenderTarget() const
-{
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, GetWidth(), GetHeight());
 }
 
 void Window::SetFullScreen(bool value)

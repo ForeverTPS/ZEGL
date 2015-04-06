@@ -61,7 +61,7 @@ Game::~Game()
 	gl3fonsDelete(m_fontContext);
 }
 
-void Game::Init(const Window* window)
+void Game::Init(Window* window)
 {
 	m_window = window;
 	m_camera = new Camera(m_window);
@@ -113,14 +113,61 @@ void Game::Init(const Window* window)
 	glVertexAttribDivisor(5, 1);
 }
 
-void Game::ProcessInput(const Input& input, float delta)
-{
-	glm::vec2 mousePos = input.GetMousePosition();
-	light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), light->GetPos().z);
-}
-
 void Game::Update(float delta)
 {
+	m_input.ResetAllMouseButtonDown();
+	m_input.ResetAllMouseButtonUp();
+
+	m_input.ResetAllKeyDown();
+	m_input.ResetAllKeyUp();
+
+	SDL_Event e;
+	while (SDL_PollEvent(&e))
+	{
+		if (e.type == SDL_QUIT)
+		{
+			m_window->Close();
+		}
+
+		if (e.type == SDL_MOUSEMOTION)
+		{
+			m_input.SetMouseX(e.motion.x);
+			m_input.SetMouseY(e.motion.y);
+		}
+
+		if (e.type == SDL_KEYDOWN)
+		{
+			int value = e.key.keysym.scancode;
+
+			m_input.SetKey(value, true);
+			m_input.SetKeyDown(value, true);
+		}
+		if (e.type == SDL_KEYUP)
+		{
+			int value = e.key.keysym.scancode;
+
+			m_input.SetKey(value, false);
+			m_input.SetKeyUp(value, true);
+		}
+		if (e.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int value = e.button.button;
+
+			m_input.SetMouse(value, true);
+			m_input.SetMouseDown(value, true);
+		}
+		if (e.type == SDL_MOUSEBUTTONUP)
+		{
+			int value = e.button.button;
+
+			m_input.SetMouse(value, false);
+			m_input.SetMouseUp(value, true);
+		}
+	}
+
+	glm::vec2 mousePos = m_input.GetMousePosition();
+	light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), light->GetPos().z);
+
 	tileMap->UpdateActiveTiles(m_window, m_camera->GetPos());
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(EntityData)*tileMap->GetActiveTilesData().size(), &tileMap->GetActiveTilesData()[0]);
@@ -128,8 +175,6 @@ void Game::Update(float delta)
 
 void Game::Render()
 {
-	m_window->BindAsRenderTarget();
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	Texture texture = tileMap->GetActiveTiles()[0].GetTexture();

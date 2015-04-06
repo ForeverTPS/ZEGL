@@ -34,6 +34,8 @@
 * All library and dll files are packaged with the source so there is no need to download them. 
 * This helps ensure that the compatibility is maintained if new versions are released.
 *
+* Github Repo - [https://github.com/Zammalad/ZEGL](https://github.com/Zammalad/ZEGL)
+*
 * The `Game` class is designed to be used as a base class and inherited from to create
 * each new game. Once implemented, your main.cpp file should look like this (where `MyGame`
 * is your inherited game class)
@@ -57,7 +59,7 @@
 *	LOG_INIT("ZEGL");
 * 
 *	// Perform system initialization
-*	if (ZEGL::Init())
+*	if (System::Init())
 *	{
 *		// Create a window with width 800, height 600 and a title
 *		Window window(800, 600, "ZEGL");
@@ -70,7 +72,7 @@
 *		engine.Start();
 * 
 *		// System cleanup
-*		ZEGL::Quit();
+*		System::Quit();
 *	}
 * 
 *	// Finish logging

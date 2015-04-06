@@ -170,9 +170,9 @@ namespace ZEGL
 		*/
 		void RecreateTransform(const Window* window);
 
-		glm::vec3		m_pos;			/*!< The camera position */
-		float			m_rot;			/*!< The camera rotation (in radians) */
-		float			m_zoom;			/*!< The camera zoom factor */
-		Transformation	m_transform;	/*!< The Transformation produced by the camera. */
+		glm::vec3		m_pos;		
+		float			m_rot;		
+		float			m_zoom;		
+		Transformation	m_transform;
 	};
 }

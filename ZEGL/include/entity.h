@@ -128,6 +128,6 @@ namespace ZEGL
 		inline const EntityData& GetData() const { return m_data; }
 
 	protected:
-		EntityData	m_data;		/*!< Position, rotation, scale and texture coordinates */
+		EntityData	m_data;	
 	};
 }

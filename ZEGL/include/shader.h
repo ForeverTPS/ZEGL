@@ -27,16 +27,30 @@ namespace ZEGL
 	class Camera;
 	class Game;
 
+	/**
+	* This class is used to share data between the shaders. Anything which can be used by
+	* the shader is stored here and by inheriting from ReferenceCounter it is possible
+	* to keep the data in memory until no shaders are using it.
+	*
+	* \see [ReferenceCounter][Shader]
+	*/
 	class ShaderData : public ReferenceCounter
 	{
 	public:
+		/**
+		* Create the shader shared data.
+		*
+		* The file name passed in will be used to create both a vertex and fragmnent
+		* shader. It will internally append _vs.glsl and _fs.glsl to the name passed.
+		*
+		* \param[in] fileName The name of the shader with no path or extension 
+		*/
 		ShaderData(const std::string& fileName);
 		~ShaderData();
 
-		inline int GetProgram()														const { return m_program; }
-		inline const std::vector<int>& GetShaders()									const { return m_shaders; }
-		inline const std::vector<std::string>& GetUniformNames()					const { return m_uniformNames; }
-		inline const std::vector<std::string>& GetUniformTypes()					const { return m_uniformTypes; }
+		inline int GetProgram() const { return m_program; }
+		inline const std::vector<std::string>& GetUniformNames() const { return m_uniformNames; }
+		inline const std::vector<std::string>& GetUniformTypes() const { return m_uniformTypes; }
 		inline const std::unordered_map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
 
 	protected:
@@ -54,6 +68,7 @@ namespace ZEGL
 
 		static int										s_supportedOpenGLLevel;
 		static std::string								s_glslVersion;
+
 		int												m_program;
 		std::vector<int>								m_shaders;
 		std::vector<std::string>						m_uniformNames;
@@ -84,7 +99,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		//Shader(const Shader& other) = delete;
 		Shader& operator=(Shader const&) = delete;
 
 		static std::unordered_map<std::string, ShaderData*> s_resourceMap;

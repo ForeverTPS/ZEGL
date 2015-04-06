@@ -52,6 +52,6 @@ namespace ZEGL
 		ReferenceCounter(ReferenceCounter const&) = delete;
 		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
 
-		int m_refCount;		/*!< The number of times the object is referenced */
+		int m_refCount;
 	};
 }

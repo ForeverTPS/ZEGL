@@ -496,13 +496,13 @@ namespace ZEGL
 		Input(Input const&) = delete;
 		Input& operator=(Input const&) = delete;
 
-		bool		m_inputs[MAX_KEYS];					/*!< Array to monitor keyboard key held state */
-		bool		m_downKeys[MAX_KEYS];				/*!< Array to monitor keyboard key pressed state */
-		bool		m_upKeys[MAX_KEYS];					/*!< Array to monitor keyboard key released state */
-		bool		m_mouseInput[MAX_MOUSE_BUTTONS];	/*!< Array to monitor mouse button held state */
-		bool		m_downMouse[MAX_MOUSE_BUTTONS];		/*!< Array to monitor mouse button pressed state */
-		bool		m_upMouse[MAX_MOUSE_BUTTONS];		/*!< Array to monitor mouse button released state */
-		int			m_mouseX;							/*!< Screen x coordinate of the cursor */
-		int			m_mouseY;							/*!< Screen y coordinate of the cursor */
+		bool		m_inputs[MAX_KEYS];					
+		bool		m_downKeys[MAX_KEYS];				
+		bool		m_upKeys[MAX_KEYS];					
+		bool		m_mouseInput[MAX_MOUSE_BUTTONS];	
+		bool		m_downMouse[MAX_MOUSE_BUTTONS];		
+		bool		m_upMouse[MAX_MOUSE_BUTTONS];		
+		int			m_mouseX;							
+		int			m_mouseY;							
 	};
 }

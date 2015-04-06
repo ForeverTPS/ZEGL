@@ -70,15 +70,12 @@ void Core::Start()
 
 		while (unprocessedTime > m_frameTime)
 		{
-			m_window->Update();
-
+			m_game->Update((float)m_frameTime);
+			
 			if (m_window->IsCloseRequested())
 			{
 				Stop();
 			}
-
-			m_game->ProcessInput(m_window->GetInput(), (float)m_frameTime);
-			m_game->Update((float)m_frameTime);
 
 			render = true;
 

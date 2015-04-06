@@ -63,9 +63,9 @@ namespace ZEGL
 		Core(Core const&) = delete;
 		Core& operator=(Core const&) = delete;
 
-		Window*		m_window;		/*!< The Window used for rendering */
-		Game*		m_game;			/*!< The Game or inherited game which is running */
-		bool		m_isRunning;	/*!< Flag to control if the game loop is running */
-		double		m_frameTime;	/*!< The desired frame rate (used to calculate fixed time step updates) */
+		Window*		m_window;	
+		Game*		m_game;		
+		bool		m_isRunning;
+		double		m_frameTime;
 	};
 }

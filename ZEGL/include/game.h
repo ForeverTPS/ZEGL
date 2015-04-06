@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "input.h"
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -24,7 +25,6 @@ struct FONScontext;
 namespace ZEGL
 {
 	class Camera;
-	class Input;
 	class Light;
 	class Window;
 
@@ -51,23 +51,11 @@ namespace ZEGL
 		* \param[in] window Pointer to an already created Window
 		* \see [Window]
 		*/
-		void Init(const Window* window);
+		void Init(Window* window);
 
 		/**
-		* Any user input will be registered and actioned here.
-		*
-		* \param[in] input Input class which is managing the user input
-		* \param[in] delta Delta frame time in milliseconds
-		*
-		* \warning To ensure input is handled correctly this function must be called
-		* after Window::Update() but before Game::Update().
-		*
-		* \see [Input][Window]
-		*/
-		void ProcessInput(const Input& input, float delta);
-
-		/**
-		* Update all game objects using delta time step.
+		* Update all game objects using delta time step. Any SDL_Events are polled
+		* for and handled here
 		*
 		* \param[in] delta Delta frame time in milliseconds
 		*/
@@ -126,17 +114,18 @@ namespace ZEGL
 		inline const Window* GetWindow() { return m_window; }
 
 	protected:
-		Camera*				m_camera;			/*!< The game Camera */
-		const Window*		m_window;			/*!< The Window used for rendering */
+		Camera*				m_camera;		
+		Window*				m_window;		
+		Input				m_input;		
 
-		glm::vec4			m_ambientColor;		/*!< Ambient color for the world (used if there is no Light) */
+		glm::vec4			m_ambientColor;	
 
-		const Light*		m_activeLight;		/*!< Pointer to the currently active Light */
-		std::vector<Light*>	m_lights;			/*!< Stores all the lights for the game */
+		Light*				m_activeLight;	
+		std::vector<Light*>	m_lights;		
 
-		FONScontext*		m_fontContext;		/*!< Cache of all fonts loaded - request by int index */
+		FONScontext*		m_fontContext;	
 
-		char				m_fps[16];			/*!< char array for displaying FPS string */
+		char				m_fps[16];		
 
 	private:
 		Game(Game const&) = delete;

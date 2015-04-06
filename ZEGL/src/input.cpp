@@ -16,7 +16,6 @@
 
 #include "input.h"
 #include "window.h"
-#include <glm/glm.hpp>
 
 using namespace ZEGL;
 

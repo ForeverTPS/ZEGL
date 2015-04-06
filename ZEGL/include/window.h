@@ -16,7 +16,9 @@
 
 #pragma once
 
-#include "input.h"
+#include <SDL.h>
+#include <glm/glm.hpp>
+#include <string>
 
 namespace ZEGL
 {
@@ -28,7 +30,7 @@ namespace ZEGL
 	{
 	public:
 		/**
-		* Creates an SDL_Window using an SDL_GLContext with the given width and height
+		* Creates an SDL_Window using an SDL_GLContext with the given width and height.
 		*
 		* \param[in] width The width to make the window
 		* \param[in] height The height to make the window
@@ -37,20 +39,64 @@ namespace ZEGL
 		Window(int width, int height, const std::string& title);
 		~Window();
 
-		void Update();
+		/**
+		* Swaps the GL buffers round so that the last rendered buffer is now displayed 
+		* on screen.
+		*/
 		void SwapBuffers();
-		void BindAsRenderTarget() const;
-		
-		inline int GetWidth() const { return m_width; }
-		inline int GetHeight() const { return m_height; }
-		inline float GetAspect() const { return (float)m_width / (float)m_height; }
-		inline const std::string& GetTitle() const { return m_title; }
-		inline glm::vec2 GetCenter() const { return glm::vec2((float)m_width / 2.0f, (float)m_height / 2.0f); }
-		inline SDL_Window* GetSDLWindow() { return m_window; }
-		inline const Input& GetInput() const { return m_input; }
 
+		/**
+		* Gets the window width in pixels.
+		*
+		* \return The window width in pixels
+		*/
+		inline int GetWidth() const { return m_width; }
+
+		/**
+		* Gets the window height in pixels.
+		*
+		* \return The window height in pixels
+		*/
+		inline int GetHeight() const { return m_height; }
+
+		/**
+		* Gets the window aspect ratio.
+		*
+		* \return The window aspect ratio
+		*/
+		inline float GetAspect() const { return (float)m_width / (float)m_height; }
+
+		/**
+		* Gets the coordinates of the center point in the window.
+		*
+		* \return The center point of the window as a glm::vec2
+		*/
+		inline glm::vec2 GetCenter() const { return glm::vec2((float)m_width / 2.0f, (float)m_height / 2.0f); }
+
+		/**
+		* Gets the SDL_Window.
+		*
+		* \return The SDL_Window which is encapsulated by this class
+		*/
+		inline SDL_Window* GetSDLWindow() { return m_window; }
+
+		/**
+		* Tells the window to close on the next frame.
+		*/
+		inline void Close() { m_isCloseRequested = true; }
+
+		/**
+		* Check if the window is closing.
+		*
+		* \return Whether the window is flagged to close
+		*/
 		inline bool IsCloseRequested() const { return m_isCloseRequested; }
 
+		/**
+		* Make the window full screen or windowed
+		*
+		* \param[in] value Whether or not to make the window full screen true/false
+		*/
 		void SetFullScreen(bool value);
 
 	protected:
@@ -60,10 +106,9 @@ namespace ZEGL
 
 		int           m_width;
 		int           m_height;
-		std::string   m_title;
+		std::string   m_title;				
 		SDL_Window*   m_window;
 		SDL_GLContext m_glContext;
-		Input         m_input;
 		bool          m_isCloseRequested;
 	};
 }
