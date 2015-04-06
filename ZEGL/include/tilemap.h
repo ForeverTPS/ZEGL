@@ -94,6 +94,11 @@ namespace ZEGL
 		float m_tileSize;
 	};
 
+	/**
+	* A collection of tiles making up a level/map
+	*
+	* \see [Tile]
+	*/
 	class TileMap
 	{
 	public:

@@ -50,7 +50,7 @@ namespace ZEGL
 		* \param[in] shader The shader associated with this light
 		* \param[in] pos Position of the light
 		* \param[in] lightCol Color of the main light emitted (alpha is used for intensity)
-		* \param[in] lightCol Color of the ambient light emitted (alpha is used for intensity)
+		* \param[in] ambientCol Color of the ambient light emitted (alpha is used for intensity)
 		* \param[in] falloff Values to use (x,y,z) in calculating attenuation using 
 		* [Constant Linear Quadratic Falloff](https://developer.valvesoftware.com/wiki/Constant-Linear-Quadratic_Falloff)
 		*

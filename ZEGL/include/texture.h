@@ -23,6 +23,9 @@
 
 namespace ZEGL
 {
+	/**
+	* Base level class for holding image date
+	*/
 	class Texture
 	{
 	public:
