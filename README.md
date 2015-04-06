@@ -1,11 +1,17 @@
 ZEGL
 ====
 
-Game development with SDL and OpenGL
+Game development with SDL and OpenGL.
 
-Windows Development
+Documentation
+-------------
+
+The engine is documented using Doxygen and can be generated with the doxygen configuration file provided in the repository. Alternatively the documentation can be found here - [http://zammalad.github.io/ZEGL/](http://zammalad.github.io/ZEGL/)
+
+The engine comes with all required external libraries packed and such such there is no requirement to download them individually.
+
+External Libraries
 -------------------
-- Visual Studio 2013
 - [SDL2](https://www.libsdl.org/index.php)
 - [OpenGL 3.x](https://www.opengl.org/)
 - [GLM](http://glm.g-truc.net/0.9.6/index.html)
