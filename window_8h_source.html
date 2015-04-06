@@ -106,54 +106,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;input.h&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_z_e_g_l.html">ZEGL</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_z_e_g_l_1_1_window.html">Window</a></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">Window</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keyword">const</span> std::string&amp; title);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        ~<a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> Update();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> SwapBuffers();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">void</span> BindAsRenderTarget() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> GetWidth()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_width; }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> GetHeight()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_height; }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> GetAspect()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)m_width / (float)m_height; }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::string&amp; GetTitle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_title; }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">inline</span> glm::vec2 GetCenter()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> glm::vec2((<span class="keywordtype">float</span>)m_width / 2.0f, (<span class="keywordtype">float</span>)m_height / 2.0f); }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">inline</span> SDL_Window* GetSDLWindow() { <span class="keywordflow">return</span> m_window; }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_input.html">Input</a>&amp; GetInput()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_input; }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">bool</span> IsCloseRequested()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_isCloseRequested; }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">void</span> SetFullScreen(<span class="keywordtype">bool</span> value);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">Window</a>(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">int</span>           m_width;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">int</span>           m_height;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        std::string   m_title;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        SDL_Window*   m_window;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        SDL_GLContext m_glContext;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_input.html">Input</a>         m_input;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">bool</span>          m_isCloseRequested;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    };</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="ttc" id="class_z_e_g_l_1_1_input_html"><div class="ttname"><a href="class_z_e_g_l_1_1_input.html">ZEGL::Input</a></div><div class="ttdef"><b>Definition:</b> input.h:38</div></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;SDL.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_z_e_g_l.html">ZEGL</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html">   29</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_z_e_g_l_1_1_window.html">Window</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">Window</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keyword">const</span> std::string&amp; title);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        ~<a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a71cb69b4fcef65fea1b6b76a1751a6d2">SwapBuffers</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#a72d51a5848206c942eef6155b58c43bd">   53</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a72d51a5848206c942eef6155b58c43bd">GetWidth</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_width; }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#ad7886b325583ea1059878e822c7f080d">   60</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_z_e_g_l_1_1_window.html#ad7886b325583ea1059878e822c7f080d">GetHeight</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_height; }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#a2125db36818bd9110a28658b6e8e3d85">   67</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a2125db36818bd9110a28658b6e8e3d85">GetAspect</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)m_width / (float)m_height; }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#ab38a9c7f9d73195fc84ab0b04b2bfbad">   74</a></span>&#160;        <span class="keyword">inline</span> glm::vec2 <a class="code" href="class_z_e_g_l_1_1_window.html#ab38a9c7f9d73195fc84ab0b04b2bfbad">GetCenter</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> glm::vec2((<span class="keywordtype">float</span>)m_width / 2.0f, (<span class="keywordtype">float</span>)m_height / 2.0f); }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#ac563daa5dc6417b74601b05aa87fd5b8">   81</a></span>&#160;        <span class="keyword">inline</span> SDL_Window* <a class="code" href="class_z_e_g_l_1_1_window.html#ac563daa5dc6417b74601b05aa87fd5b8">GetSDLWindow</a>() { <span class="keywordflow">return</span> m_window; }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#a65004238887d03bfa522eee36b5de7ba">   86</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a65004238887d03bfa522eee36b5de7ba">Close</a>() { m_isCloseRequested = <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_window.html#a1dfc1788b9219491978175766665ecf3">   93</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a1dfc1788b9219491978175766665ecf3">IsCloseRequested</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_isCloseRequested; }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_window.html#a208a7378fa400d74539f9dfaf3d9a2d6">SetFullScreen</a>(<span class="keywordtype">bool</span> value);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">Window</a>(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordtype">int</span>           m_width;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">int</span>           m_height;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        std::string   m_title;              </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        SDL_Window*   m_window;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        SDL_GLContext m_glContext;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordtype">bool</span>          m_isCloseRequested;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    };</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a208a7378fa400d74539f9dfaf3d9a2d6"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a208a7378fa400d74539f9dfaf3d9a2d6">ZEGL::Window::SetFullScreen</a></div><div class="ttdeci">void SetFullScreen(bool value)</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a2125db36818bd9110a28658b6e8e3d85"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a2125db36818bd9110a28658b6e8e3d85">ZEGL::Window::GetAspect</a></div><div class="ttdeci">float GetAspect() const </div><div class="ttdef"><b>Definition:</b> window.h:67</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a71cb69b4fcef65fea1b6b76a1751a6d2"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a71cb69b4fcef65fea1b6b76a1751a6d2">ZEGL::Window::SwapBuffers</a></div><div class="ttdeci">void SwapBuffers()</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_window_html_abb1d5d7893a89cb84d1a0a75c718665f"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">ZEGL::Window::Window</a></div><div class="ttdeci">Window(int width, int height, const std::string &amp;title)</div></div>
 <div class="ttc" id="namespace_z_e_g_l_html"><div class="ttname"><a href="namespace_z_e_g_l.html">ZEGL</a></div><div class="ttdef"><b>Definition:</b> camera.h:22</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_window_html"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html">ZEGL::Window</a></div><div class="ttdef"><b>Definition:</b> window.h:27</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_ab38a9c7f9d73195fc84ab0b04b2bfbad"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#ab38a9c7f9d73195fc84ab0b04b2bfbad">ZEGL::Window::GetCenter</a></div><div class="ttdeci">glm::vec2 GetCenter() const </div><div class="ttdef"><b>Definition:</b> window.h:74</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_ad7886b325583ea1059878e822c7f080d"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#ad7886b325583ea1059878e822c7f080d">ZEGL::Window::GetHeight</a></div><div class="ttdeci">int GetHeight() const </div><div class="ttdef"><b>Definition:</b> window.h:60</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a72d51a5848206c942eef6155b58c43bd"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a72d51a5848206c942eef6155b58c43bd">ZEGL::Window::GetWidth</a></div><div class="ttdeci">int GetWidth() const </div><div class="ttdef"><b>Definition:</b> window.h:53</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a65004238887d03bfa522eee36b5de7ba"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a65004238887d03bfa522eee36b5de7ba">ZEGL::Window::Close</a></div><div class="ttdeci">void Close()</div><div class="ttdef"><b>Definition:</b> window.h:86</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_ac563daa5dc6417b74601b05aa87fd5b8"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#ac563daa5dc6417b74601b05aa87fd5b8">ZEGL::Window::GetSDLWindow</a></div><div class="ttdeci">SDL_Window * GetSDLWindow()</div><div class="ttdef"><b>Definition:</b> window.h:81</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html_a1dfc1788b9219491978175766665ecf3"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a1dfc1788b9219491978175766665ecf3">ZEGL::Window::IsCloseRequested</a></div><div class="ttdeci">bool IsCloseRequested() const </div><div class="ttdef"><b>Definition:</b> window.h:93</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_window_html"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html">ZEGL::Window</a></div><div class="ttdef"><b>Definition:</b> window.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 15:05:58 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 18:50:09 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

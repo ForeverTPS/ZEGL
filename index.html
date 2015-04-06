@@ -99,6 +99,7 @@ Introduction</h1>
 <li><a href="https://github.com/Zammalad/fontstash">FontStash - Forked and modified for my use</a></li>
 </ul>
 <p>All library and dll files are packaged with the source so there is no need to download them. This helps ensure that the compatibility is maintained if new versions are released.</p>
+<p>Github Repo - <a href="https://github.com/Zammalad/ZEGL">https://github.com/Zammalad/ZEGL</a></p>
 <p>The <code>Game</code> class is designed to be used as a base class and inherited from to create each new game. Once implemented, your main.cpp file should look like this (where <code>MyGame</code> is your inherited game class)</p>
 <p>An example is included with the source.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;platform.h&quot;</span></div>
@@ -117,7 +118,7 @@ Introduction</h1>
 <div class="line">  LOG_INIT(<span class="stringliteral">&quot;ZEGL&quot;</span>);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Perform system initialization</span></div>
-<div class="line">  <span class="keywordflow">if</span> (ZEGL::Init())</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code" href="namespace_system.html#ae7c7ee5f426be1bdaddffaeae07899a8">System::Init</a>())</div>
 <div class="line">  {</div>
 <div class="line">    <span class="comment">// Create a window with width 800, height 600 and a title</span></div>
 <div class="line">    <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a> window(800, 600, <span class="stringliteral">&quot;ZEGL&quot;</span>);</div>
@@ -130,7 +131,7 @@ Introduction</h1>
 <div class="line">    engine.Start();</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// System cleanup</span></div>
-<div class="line">    ZEGL::Quit();</div>
+<div class="line">    <a class="code" href="namespace_system.html#a559fc4b13b8f39ed1df7074ca17a860e">System::Quit</a>();</div>
 <div class="line">  }</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Finish logging</span></div>
@@ -141,7 +142,7 @@ Introduction</h1>
 </div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 15:06:00 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 18:50:11 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

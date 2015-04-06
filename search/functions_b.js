@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['todegree',['ToDegree',['../namespace_util.html#a5fcc7ab9f9a5586362305cf336cb7d90',1,'Util']]],
-  ['toradian',['ToRadian',['../namespace_util.html#ae400d5b8d2d363687f9059b342507eb1',1,'Util']]]
+  ['update',['Update',['../class_z_e_g_l_1_1_game.html#a07e03623e2d3b19c70c7286a81104c31',1,'ZEGL::Game']]]
 ];

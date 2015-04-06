@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['window',['Window',['../class_z_e_g_l_1_1_window.html',1,'ZEGL']]],
-  ['window',['Window',['../class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f',1,'ZEGL::Window']]]
+  ['zegl_20index_20page',['ZEGL Index Page',['../index.html',1,'']]]
 ];
