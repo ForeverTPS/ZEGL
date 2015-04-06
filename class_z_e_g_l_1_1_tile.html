@@ -94,6 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ZEGL::Tile Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="tilemap_8h_source.html">tilemap.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ZEGL::Tile:</div>
 <div class="dyncontent">
@@ -107,11 +109,9 @@ Inheritance diagram for ZEGL::Tile:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae8c9e67c0b0151fde4b7afb5b1c29522"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8c9e67c0b0151fde4b7afb5b1c29522"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tile</b> (const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;texture, const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;normalMap, const <a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a> &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=(float) DEFAULT_TILE_SIZE)</td></tr>
+<tr class="memitem:ae8c9e67c0b0151fde4b7afb5b1c29522"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile.html#ae8c9e67c0b0151fde4b7afb5b1c29522">Tile</a> (const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;texture, const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;normalMap, const <a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a> &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=(float) DEFAULT_TILE_SIZE)</td></tr>
 <tr class="separator:ae8c9e67c0b0151fde4b7afb5b1c29522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65e4b5642243952f3ef1446ddddb3cbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65e4b5642243952f3ef1446ddddb3cbe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tile</b> (const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;texture, const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;normalMap, const glm::vec2 textureCoords[4], const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=(float) DEFAULT_TILE_SIZE)</td></tr>
+<tr class="memitem:a65e4b5642243952f3ef1446ddddb3cbe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile.html#a65e4b5642243952f3ef1446ddddb3cbe">Tile</a> (const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;texture, const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;normalMap, const glm::vec2 textureCoords[4], const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=(float) DEFAULT_TILE_SIZE)</td></tr>
 <tr class="separator:a65e4b5642243952f3ef1446ddddb3cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4e27990a268ca1e7991a2d66fdbee6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4e27990a268ca1e7991a2d66fdbee6a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Tile</b> (const <a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a> &amp;tile)</td></tr>
@@ -173,13 +173,146 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_hasTextureAtlas</b>
 <a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td></tr>
 <tr class="separator:a5f2e808fb78c9d7f4f16f755c4f598af inherit pro_attribs_class_z_e_g_l_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An individual tile in a map/level</p>
+<p>All tiles for a map/level are stored within a <a class="el" href="class_z_e_g_l_1_1_tile_map.html">TileMap</a>. They are extensions of the <a class="el" href="class_z_e_g_l_1_1_render_entity.html">RenderEntity</a> class which allows rendering. The main extension is the tile size member.</p>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_render_entity.html">RenderEntity</a>][<a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a>][<a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a>][<a class="el" href="class_z_e_g_l_1_1_tile_map.html">TileMap</a>] </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae8c9e67c0b0151fde4b7afb5b1c29522"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ZEGL::Tile::Tile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>normalMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a> &amp;&#160;</td>
+          <td class="paramname"><em>textureAtlas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const glm::vec3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em> = <code>glm::vec3(0.0f)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rot</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em> = <code>(float)&#160;DEFAULT_TILE_SIZE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor using a <a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a>.</p>
+<p>Used for a tile which has a texture containing multiple areas that can be used for rendering different things.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">texture</td><td><a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> to use for the tile </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">normalMap</td><td>Corresponding normal map for the texture </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">textureAtlas</td><td>A texture atlas which defines the texture </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>Initial position of the entity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rot</td><td>Initial rotation angle (in radians) of the tile </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Initial scale of the tile</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a>][<a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a>] </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a65e4b5642243952f3ef1446ddddb3cbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ZEGL::Tile::Tile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>normalMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const glm::vec2&#160;</td>
+          <td class="paramname"><em>textureCoords</em>[4], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const glm::vec3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em> = <code>glm::vec3(0.0f)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rot</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em> = <code>(float)&#160;DEFAULT_TILE_SIZE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor using a pre-calculated texture coordinates.</p>
+<p>Used for a tile which has a texture coordinate data and no atlas.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">texture</td><td><a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a> to use for the tile </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">normalMap</td><td>Corresponding normal map for the texture </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">textureCoords</td><td>Quad texture coordinates </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>Initial position of the tile </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rot</td><td>Initial rotation angle (in radians) of the tile </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Initial scale of the tile</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_texture.html">Texture</a>][<a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a>] </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="tilemap_8h_source.html">tilemap.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 18:50:11 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 22:32:34 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

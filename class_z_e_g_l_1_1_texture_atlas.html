@@ -88,32 +88,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_z_e_g_l_1_1_texture_atlas-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ZEGL::TextureAtlas Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="textureatlas_8h_source.html">textureatlas.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afb2282d5b0af1ef61404d9384edb793e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb2282d5b0af1ef61404d9384edb793e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TextureAtlas</b> (const std::string &amp;fileName=&quot;default_atlas.xml&quot;)</td></tr>
-<tr class="separator:afb2282d5b0af1ef61404d9384edb793e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca1f2033ca2d5ac22a705c5369f07233"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_texture_atlas.html#aca1f2033ca2d5ac22a705c5369f07233">TextureAtlas</a> (const std::string &amp;fileName=&quot;./res/textures/default_atlas.xml&quot;)</td></tr>
+<tr class="separator:aca1f2033ca2d5ac22a705c5369f07233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad13418f677a63121b0bcc522da5fd7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ad13418f677a63121b0bcc522da5fd7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TextureAtlas</b> (<a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a> const &amp;)</td></tr>
 <tr class="separator:a3ad13418f677a63121b0bcc522da5fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae378e096c56ce8f6f8c3871bdf020ff8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae378e096c56ce8f6f8c3871bdf020ff8"></a>
-<a class="el" href="struct_z_e_g_l_1_1_texture_region.html">TextureRegion</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetRegion</b> (const std::string &amp;regionName) const </td></tr>
+<tr class="memitem:ae378e096c56ce8f6f8c3871bdf020ff8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_z_e_g_l_1_1_texture_region.html">TextureRegion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_texture_atlas.html#ae378e096c56ce8f6f8c3871bdf020ff8">GetRegion</a> (const std::string &amp;regionName) const </td></tr>
 <tr class="separator:ae378e096c56ce8f6f8c3871bdf020ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The texture atlas is used to provide functionality to have more than one texture stored in a single file. The atlas defines one or more <a class="el" href="struct_z_e_g_l_1_1_texture_region.html">TextureRegion</a> values in the large texture file. These are stored in a map by name.</p>
+<p><a class="el" href="class_z_e_g_l_1_1_texture_atlas.html">TextureAtlas</a> data is stored in XML files. An example of one is included in the engine called default_atlas.xml. It contains a single region which would be the full size of a 512x512 texture. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aca1f2033ca2d5ac22a705c5369f07233"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ZEGL::TextureAtlas::TextureAtlas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fileName</em> = <code>&quot;./res/textures/default_atlas.xml&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Load a texture atlas with the given file name.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>The name of the atlas to load </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae378e096c56ce8f6f8c3871bdf020ff8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_z_e_g_l_1_1_texture_region.html">TextureRegion</a> ZEGL::TextureAtlas::GetRegion </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>regionName</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get a named region from the atlas.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">regionName</td><td>Name of the region to find</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The requested texture region</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="struct_z_e_g_l_1_1_texture_region.html">TextureRegion</a>] </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="textureatlas_8h_source.html">textureatlas.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 18:50:10 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 22:32:34 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

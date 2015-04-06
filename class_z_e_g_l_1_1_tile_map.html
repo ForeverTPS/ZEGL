@@ -97,29 +97,136 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3ed2f267119ce09b3f1066eaa0fd6d7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ed2f267119ce09b3f1066eaa0fd6d7c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TileMap</b> (const std::string &amp;fileName)</td></tr>
+<tr class="memitem:a3ed2f267119ce09b3f1066eaa0fd6d7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a3ed2f267119ce09b3f1066eaa0fd6d7c">TileMap</a> (const std::string &amp;fileName)</td></tr>
 <tr class="separator:a3ed2f267119ce09b3f1066eaa0fd6d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eb181de4646c39a17f9fc82267d2bfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eb181de4646c39a17f9fc82267d2bfe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> (float delta)</td></tr>
-<tr class="separator:a8eb181de4646c39a17f9fc82267d2bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0e43e0816a4cd2488b0f65d1c1d72c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0e43e0816a4cd2488b0f65d1c1d72c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateActiveTiles</b> (const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *window, const glm::vec3 &amp;cameraPos)</td></tr>
+<tr class="memitem:ac0e43e0816a4cd2488b0f65d1c1d72c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#ac0e43e0816a4cd2488b0f65d1c1d72c8">UpdateActiveTiles</a> (const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *window, const glm::vec3 &amp;cameraPos)</td></tr>
 <tr class="separator:ac0e43e0816a4cd2488b0f65d1c1d72c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae52f183a2710f7dc2835fbc02ea3a81c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae52f183a2710f7dc2835fbc02ea3a81c"></a>
-const std::vector&lt; <a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetActiveTiles</b> () const </td></tr>
+<tr class="memitem:ae52f183a2710f7dc2835fbc02ea3a81c"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#ae52f183a2710f7dc2835fbc02ea3a81c">GetActiveTiles</a> () const </td></tr>
 <tr class="separator:ae52f183a2710f7dc2835fbc02ea3a81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49f94f1a578a4a25fb15bf1dfde1ab26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49f94f1a578a4a25fb15bf1dfde1ab26"></a>
-const std::vector&lt; <a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetActiveTilesData</b> () const </td></tr>
+<tr class="memitem:a49f94f1a578a4a25fb15bf1dfde1ab26"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a49f94f1a578a4a25fb15bf1dfde1ab26">GetActiveTilesData</a> () const </td></tr>
 <tr class="separator:a49f94f1a578a4a25fb15bf1dfde1ab26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a3ed2f267119ce09b3f1066eaa0fd6d7c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ZEGL::TileMap::TileMap </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fileName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create and load a tile map from the specified file.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of the tile map file</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>The tile map file must have a tile definition file with it that must have the same full name (including extension) but also an extra extension of .tdef for example tilemap.ldf and tilemap.ldf.tdef </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac0e43e0816a4cd2488b0f65d1c1d72c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZEGL::TileMap::UpdateActiveTiles </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const glm::vec3 &amp;&#160;</td>
+          <td class="paramname"><em>cameraPos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Refresh the list of active tiles.</p>
+<p>Removes any tiles not visible and adds any tiles now on screen to the active tile list</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">window</td><td>The display window </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cameraPos</td><td>The current camera position.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_window.html">Window</a>] </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae52f183a2710f7dc2835fbc02ea3a81c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a>&gt;&amp; ZEGL::TileMap::GetActiveTiles </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get all the active tiles.</p>
+<dl class="section return"><dt>Returns</dt><dd>All of the currently active tiles in the map</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a>] </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a49f94f1a578a4a25fb15bf1dfde1ab26"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a>&gt;&amp; ZEGL::TileMap::GetActiveTilesData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get all the active tiles data for passing to a shader.</p>
+<dl class="section return"><dt>Returns</dt><dd>All of the currently active tile data</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a>] </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="tilemap_8h_source.html">tilemap.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 18:50:11 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 22:32:34 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

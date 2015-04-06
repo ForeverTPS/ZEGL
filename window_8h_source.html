@@ -141,14 +141,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_window.html#abb1d5d7893a89cb84d1a0a75c718665f">Window</a>(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>&amp; other) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordtype">int</span>           m_width;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">int</span>           m_height;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        std::string   m_title;              </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        SDL_Window*   m_window;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        SDL_GLContext m_glContext;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordtype">bool</span>          m_isCloseRequested;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    };</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span>   s_glewInitialized;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">int</span>           m_width;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordtype">int</span>           m_height;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        std::string   m_title;              </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        SDL_Window*   m_window;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        SDL_GLContext m_glContext;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordtype">bool</span>          m_isCloseRequested;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    };</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
 <div class="ttc" id="class_z_e_g_l_1_1_window_html_a208a7378fa400d74539f9dfaf3d9a2d6"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a208a7378fa400d74539f9dfaf3d9a2d6">ZEGL::Window::SetFullScreen</a></div><div class="ttdeci">void SetFullScreen(bool value)</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_window_html_a2125db36818bd9110a28658b6e8e3d85"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a2125db36818bd9110a28658b6e8e3d85">ZEGL::Window::GetAspect</a></div><div class="ttdeci">float GetAspect() const </div><div class="ttdef"><b>Definition:</b> window.h:67</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_window_html_a71cb69b4fcef65fea1b6b76a1751a6d2"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html#a71cb69b4fcef65fea1b6b76a1751a6d2">ZEGL::Window::SwapBuffers</a></div><div class="ttdeci">void SwapBuffers()</div></div>
@@ -164,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 18:50:09 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 6 2015 22:32:33 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
