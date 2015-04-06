@@ -158,9 +158,6 @@
     <ClInclude Include="include\logger.h">
       <Filter>include\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\timer.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\timing.h">
       <Filter>include\core</Filter>
     </ClInclude>

@@ -28,18 +28,6 @@ Window::Window(int width, int height, const std::string& title) :
 	m_title(title),
 	m_isCloseRequested(false)
 {
-	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-
 	m_window = System::CreateAndLogWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
 	m_glContext = SDL_GL_CreateContext(m_window);
 	if (m_glContext == nullptr)
@@ -58,15 +46,7 @@ Window::Window(int width, int height, const std::string& title) :
 		LOG_ERROR("Error: " << glewGetErrorString(error));
 	}
 
-	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
-	SDL_GL_SetSwapInterval(1);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glViewport(0, 0, width, height);
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 Window::~Window()
@@ -93,7 +73,8 @@ void Window::Update()
 
 		if (e.type == SDL_MOUSEMOTION)
 		{
-			m_input.SetMousePosition(this, glm::vec2(e.motion.x, e.motion.y));
+			m_input.SetMouseX(e.motion.x);
+			m_input.SetMouseY(e.motion.y);
 		}
 
 		if (e.type == SDL_KEYDOWN)

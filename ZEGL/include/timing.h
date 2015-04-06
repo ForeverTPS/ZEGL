@@ -16,7 +16,16 @@
 
 #pragma once
 
+/**
+* Using a namespace rather than a static class or singleton etc to provide
+* timing values for use in timers and the game loop.
+*/
 namespace Time
 {
+	/**
+	* Get the time passed since the application started
+	*
+	* \return Time in milliseconds
+	*/
 	double GetTime();
 };

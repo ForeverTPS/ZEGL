@@ -137,7 +137,6 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClInclude Include="include\textureatlas.h" />
     <ClInclude Include="include\tilemap.h" />
     <ClInclude Include="include\timing.h" />
-    <ClInclude Include="include\timer.h" />
     <ClInclude Include="include\tinyxml2.h" />
     <ClInclude Include="include\util.h" />
     <ClInclude Include="include\window.h" />

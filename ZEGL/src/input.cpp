@@ -20,7 +20,9 @@
 
 using namespace ZEGL;
 
-Input::Input() : m_mousePos(glm::vec2(0.0f))
+Input::Input() : 
+	m_mouseX(0),
+	m_mouseY(0)
 {
 	ResetAllKeyDown();
 	ResetAllKeyUp();
@@ -44,8 +46,9 @@ void Input::SetCursorVisible(bool visible) const
 	}
 }
 
-void Input::SetMousePosition(Window* window, const glm::vec2& pos)
+void Input::SetMousePosition(Window* window, int x, int y)
 {
-	SDL_WarpMouseInWindow(window->GetSDLWindow(), (int)pos.x, (int)pos.y);
-	m_mousePos = pos;
+	SDL_WarpMouseInWindow(window->GetSDLWindow(), x, y);
+	m_mouseX = x;
+	m_mouseY = y;
 }

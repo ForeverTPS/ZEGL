@@ -24,14 +24,68 @@
 */
 namespace System
 {
+	/**
+	* Initialize the core of the system
+	*
+	* This performs all low level initialization for things such as SDL, OpenGL and
+	* and utilities such as random number generation.
+	*
+	* \return Whether the initialization was successful or not
+	*/
 	bool Init();
+
+	/**
+	* Performs any 3rd party system cleanup e.g. SDL_Quit()
+	*/
 	void Quit();
 
+	/**
+	* Logs the compiled and linked version of SDL to the log file.
+	*/
 	void LogSDLInfo();
+
+	/**
+	* Logs basic information about the client system (Logical CPUs, RAM etc)
+	*/
 	void LogSystemInfo();
+
+	/**
+	* Logs basic OS information (only type etc)
+	*
+	* \param[in] window The main display window (the SDL_Window member of Window)
+	*
+	* \see [Window]
+	*/
 	void LogSubSystemInfo(SDL_Window* window);
+
+	/**
+	* Extension of LogSubSystemInfo which logs more about the OS e.g. 32bit/64bit
+	*/
 	void LogOSInfo();
 
+	/**
+	* Creates a new SDL_Window in the center of the screen
+	*
+	* \param[in] title Title for the window
+	* \param[in] w Width to make the window
+	* \param[in] h Height to make the window
+	* \param[in] flags Creation flags for the window (See SDL documentation)
+	*
+	* \return An SDL_Window pointer to be assigned to a Window
+	*/
 	SDL_Window* CreateAndLogWindow(const char* title, int w, int h, Uint32 flags);
+
+	/**
+	* Creates a new SDL_Window at the given coordinates
+	*
+	* \param[in] title Title for the window
+	* \param[in] x X coordinate to make the window
+	* \param[in] y X coordinate to make the window
+	* \param[in] w Width to make the window
+	* \param[in] h Height to make the window
+	* \param[in] flags Creation flags for the window (See SDL documentation)
+	*
+	* \return An SDL_Window pointer to be assigned to a Window
+	*/
 	SDL_Window* CreateAndLogWindow(const char* title, int x, int y, int w, int h, Uint32 flags);
 }

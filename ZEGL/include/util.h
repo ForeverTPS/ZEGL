@@ -29,10 +29,7 @@
 namespace ZEGL
 {
 	#if _MSC_VER
-		#define snprintf	_snprintf_s
-//		#define vsprintf	vsprintf_s
-//		#define vsnprintf	vsnprintf_s
-//		#define	getenv		_dupenv_s
+		#define snprintf _snprintf_s
 	#endif
 
 	#ifndef NDEBUG
@@ -52,20 +49,13 @@ namespace ZEGL
 
 namespace Util
 {
-	#define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
-	#define INVALID_VALUE 0xFFFFFFFF
+	inline float ToRadian(const float deg) { return (deg * 0.01745329251994329576923690768f); }
+	inline float ToDegree(const float rad) { return (rad * 57.2957795130823208767981548141f); }
 
-	const float MATH_PI = 3.1415926535897932384626433832795f;
-	const float DEG2RAD = 0.01745329251994329576923690768f;
-	const float RAD2DEG = 57.2957795130823208767981548141f;
+	inline void	Sleep(int milliseconds)	{ SDL_Delay(milliseconds); }
 
-	inline float	ToRadian(const float deg)	{ return (deg * DEG2RAD); }
-	inline float	ToDegree(const float rad)	{ return (rad * RAD2DEG); }
-
-	inline void		Sleep(int milliseconds)			{ SDL_Delay(milliseconds); }
-
-	std::vector<std::string>&	SplitString(const std::string& s, char delim, std::vector<std::string>& elems);
-	std::vector<std::string>	SplitString(const std::string& s, char delim);
+	std::vector<std::string>& SplitString(const std::string& s, char delim, std::vector<std::string>& elems);
+	std::vector<std::string> SplitString(const std::string& s, char delim);
 
 	bool IsNumber(const std::string& s);
 
@@ -108,21 +98,4 @@ namespace Util
 			return a;
 		}
 	}
-
-	template <typename T>
-	class MySingleton
-	{
-	public:
-		static T* GetInstance()
-		{
-			static T s_instance;
-			return &s_instance;
-		}
-
-	private:
-		MySingleton();
-		~MySingleton();
-		MySingleton(MySingleton const&);
-		MySingleton& operator=(MySingleton const&);
-	};
 };
