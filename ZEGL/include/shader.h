@@ -27,78 +27,92 @@ namespace ZEGL
 	class Camera;
 	class Game;
 
-	/**
-	* This class is used to share data between the shaders. Anything which can be used by
-	* the shader is stored here and by inheriting from ReferenceCounter it is possible
-	* to keep the data in memory until no shaders are using it.
-	*
-	* \see [ReferenceCounter][Shader]
-	*/
-	class ShaderData : public ReferenceCounter
-	{
-	public:
-		/**
-		* Create the shader shared data.
-		*
-		* The file name passed in will be used to create both a vertex and fragmnent
-		* shader. It will internally append _vs.glsl and _fs.glsl to the name passed.
-		*
-		* \param[in] fileName The name of the shader with no path or extension 
-		*/
-		ShaderData(const std::string& fileName);
-		~ShaderData();
-
-		inline int GetProgram() const { return m_program; }
-		inline const std::vector<std::string>& GetUniformNames() const { return m_uniformNames; }
-		inline const std::vector<std::string>& GetUniformTypes() const { return m_uniformTypes; }
-		inline const std::unordered_map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
-
-	protected:
-	private:
-		ShaderData(ShaderData const&) = delete;
-		ShaderData& operator=(ShaderData const&) = delete;
-
-		void AddProgram(const std::string& text, int type);
-
-		void AddAllAttributes(const std::string& vertexShaderText);
-		void AddAllUniforms(const std::string& shaderText);
-		void AddUniform(const std::string& uniformName, const std::string& uniformType);
-
-		void CompileShader() const;
-
-		static int										s_supportedOpenGLLevel;
-		static std::string								s_glslVersion;
-
-		int												m_program;
-		std::vector<int>								m_shaders;
-		std::vector<std::string>						m_uniformNames;
-		std::vector<std::string>						m_uniformTypes;
-		std::unordered_map<std::string, unsigned int>	m_uniformMap;
-	};
-
 	class Shader
 	{
 	public:
+		/**
+		* Create a shader with the given name by either loading from file or
+		* if the shader has already been loaded, incrementing the reference count.
+		*
+		* \param[in] fileName fileName The name of the shader with no path or extension
+		*/
 		Shader(const std::string& fileName = "basic_shader");
 		Shader(const Shader& other);
 		~Shader();
 
-		void Load(const std::string& fileName);
-
+		/**
+		* Set the shader active for use in rendering
+		*/
 		void Bind() const;
+
+		/**
+		* Set the shader as no longer in use for rendering
+		*/
 		void UnBind() const;
 
+		//@{
+		/**
+		* Update the specified uniform with a new value.
+		*
+		* \param[in] uniformName Name of the uniform to update
+		* \param[in] value Value to assign to the uniform
+		*/
 		void SetUniformi(const std::string& uniformName, int value) const;
 		void SetUniformf(const std::string& uniformName, float value) const;
 		void SetUniformVector2f(const std::string& uniformName, const glm::vec2& value) const;
 		void SetUniformVector3f(const std::string& uniformName, const glm::vec3& value) const;
 		void SetUniformVector4f(const std::string& uniformName, const glm::vec4& value) const;
 		void SetUniformMatrix4f(const std::string& uniformName, const glm::mat4& value) const;
+		//@}
 
+
+		/**
+		* Updates all known uniforms. 
+		*
+		* Called every from Game::Update() to update all hard-coded uniform options.
+		*
+		* \param[in] game The game to provide access to lights, camera etc
+		*
+		* \see [Game]
+		*/
 		void UpdateUniforms(Game* game) const;
 
 	protected:
 	private:
+		class ShaderData : public ReferenceCounter
+		{
+		public:
+			ShaderData(const std::string& fileName);
+			~ShaderData();
+
+			inline int GetProgram() const { return m_program; }
+			inline const std::vector<std::string>& GetUniformNames() const { return m_uniformNames; }
+			inline const std::vector<std::string>& GetUniformTypes() const { return m_uniformTypes; }
+			inline const std::unordered_map<std::string, unsigned int>& GetUniformMap() const { return m_uniformMap; }
+
+		protected:
+		private:
+			ShaderData(ShaderData const&) = delete;
+			ShaderData& operator=(ShaderData const&) = delete;
+
+			void AddProgram(const std::string& text, int type);
+
+			void AddAllAttributes(const std::string& vertexShaderText);
+			void AddAllUniforms(const std::string& shaderText);
+			void AddUniform(const std::string& uniformName, const std::string& uniformType);
+
+			void CompileShader() const;
+
+			static int										s_supportedOpenGLLevel;
+			static std::string								s_glslVersion;
+
+			int												m_program;
+			std::vector<int>								m_shaders;
+			std::vector<std::string>						m_uniformNames;
+			std::vector<std::string>						m_uniformTypes;
+			std::unordered_map<std::string, unsigned int>	m_uniformMap;
+		};
+
 		Shader& operator=(Shader const&) = delete;
 
 		static std::unordered_map<std::string, ShaderData*> s_resourceMap;

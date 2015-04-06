@@ -44,15 +44,6 @@ namespace System
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
-		glewExperimental = GL_TRUE;
-
-		GLenum error = GL_NO_ERROR;
-		error = glewInit();
-		if (error != GLEW_OK)
-		{
-			LOG_ERROR("Error: " << glewGetErrorString(error));
-		}
-
 		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 		SDL_GL_SetSwapInterval(1);
 

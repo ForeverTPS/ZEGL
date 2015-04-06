@@ -123,51 +123,19 @@ namespace ZEGL
 
 	protected:
 	private:
-		/**
-		* Stores and updates the orthographic transformation.
-		*
-		* In addition to storing the orthographic transformation matrix, this struct 
-		* stores the last known position, rotation and zoom values. This is to enable
-		* the recreation of the transformation matrix to only be required if one of those
-		* values is changed
-		*/
 		struct Transformation
 		{
-			glm::mat4	m_matrix;		/*!< The orthographic transformation matrix */
-			glm::vec3	m_lastPos;		/*!< The last recorded position */
-			float		m_lastRot;		/*!< The last recorded rotation (in radians) */
-			float		m_lastZoom;		/*!< The last recorded zoom factor */
+			glm::mat4	m_matrix;		
+			glm::vec3	m_lastPos;		
+			float		m_lastRot;		
+			float		m_lastZoom;		
 
-			/**
-			* Updates the last recorded position, rotation and zoom values
-			*
-			* \param[in] pos The camera position
-			* \param[in] rot The camera rotation (in radians)
-			* \param[in] zoom The camera zoom factor
-			*/
 			void Update(const glm::vec3& pos, float rot, float zoom)
 			{
 				m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
 			}
 		};
 
-		/**
-		* Recalculate the transformation matrix.
-		*
-		* If the last position, rotation or zoom value has changed the Window which 
-		* is passed in used to re-calculate a transformation matrix.
-		*
-		* \param[in] window Pointer to a Window (defaults to nullptr)
-		*
-		* \return Description
-		*
-		* \see [Window]
-		*
-		* \warning If no Window is passed a default orthographic
-		* projection is used. This is to prevent a crash but should not be used
-		* for general purpose i.e. make sure you pass a Window in order to get
-		* correct rendering.
-		*/
 		void RecreateTransform(const Window* window);
 
 		glm::vec3		m_pos;		

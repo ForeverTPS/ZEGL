@@ -42,7 +42,7 @@ namespace ZEGL
 		* \param[in] rot Initial rotation angle (in radians) of the entity
 		* \param[in] scale Initial scale of the entity
 		*
-		* \see [Entity][Texture][TextureAtlas]
+		* \see [Texture][TextureAtlas]
 		*/
 		RenderEntity(const Texture& texture,
 			const Texture& normalMap,
@@ -63,7 +63,7 @@ namespace ZEGL
 		* \param[in] rot Initial rotation angle (in radians) of the entity
 		* \param[in] scale Initial scale of the entity
 		*
-		* \see [Entity][Texture][TextureAtlas]
+		* \see [Texture][TextureAtlas]
 		*/
 		RenderEntity(const Texture& texture,
 			const Texture& normalMap,

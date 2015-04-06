@@ -30,10 +30,10 @@ using namespace ZEGL;
 static void			CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage);
 static std::string	LoadShader(const std::string& fileName);
 
-std::unordered_map<std::string, ShaderData*> Shader::s_resourceMap;
+std::unordered_map<std::string, Shader::ShaderData*> Shader::s_resourceMap;
 
-int			ShaderData::s_supportedOpenGLLevel = 0;
-std::string	ShaderData::s_glslVersion = "";
+int			Shader::ShaderData::s_supportedOpenGLLevel = 0;
+std::string	Shader::ShaderData::s_glslVersion = "";
 
 static void CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage)
 {
@@ -88,7 +88,7 @@ static std::string LoadShader(const std::string& fileName)
 	return output;
 };
 
-ShaderData::ShaderData(const std::string& fileName)
+Shader::ShaderData::ShaderData(const std::string& fileName)
 {
 	m_program = glCreateProgram();
 
@@ -158,7 +158,7 @@ ShaderData::ShaderData(const std::string& fileName)
 	AddAllUniforms(fragmentShaderText);
 }
 
-ShaderData::~ShaderData()
+Shader::ShaderData::~ShaderData()
 {
 	for (std::vector<int>::iterator it = m_shaders.begin(); it != m_shaders.end(); ++it)
 	{
@@ -168,7 +168,7 @@ ShaderData::~ShaderData()
 	glDeleteProgram(m_program);
 }
 
-void ShaderData::AddProgram(const std::string& text, int type)
+void Shader::ShaderData::AddProgram(const std::string& text, int type)
 {
 	int shader = glCreateShader(type);
 
@@ -202,7 +202,7 @@ void ShaderData::AddProgram(const std::string& text, int type)
 	m_shaders.push_back(shader);
 }
 
-void ShaderData::AddAllAttributes(const std::string& vertexShaderText)
+void Shader::ShaderData::AddAllAttributes(const std::string& vertexShaderText)
 {
 	const std::string ATTRIBUTE_KEY = "attribute";
 	int currentAttribLocation = 0;
@@ -242,7 +242,7 @@ void ShaderData::AddAllAttributes(const std::string& vertexShaderText)
 	}
 }
 
-void ShaderData::AddAllUniforms(const std::string& shaderText)
+void Shader::ShaderData::AddAllUniforms(const std::string& shaderText)
 {
 	static const std::string UNIFORM_KEY = "uniform";
 
@@ -277,7 +277,7 @@ void ShaderData::AddAllUniforms(const std::string& shaderText)
 	}
 }
 
-void ShaderData::AddUniform(const std::string& uniformName, const std::string& uniformType)
+void Shader::ShaderData::AddUniform(const std::string& uniformName, const std::string& uniformType)
 {
 	unsigned int location = glGetUniformLocation(m_program, uniformName.c_str());
 
@@ -290,7 +290,7 @@ void ShaderData::AddUniform(const std::string& uniformName, const std::string& u
 	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));
 }
 
-void ShaderData::CompileShader() const
+void Shader::ShaderData::CompileShader() const
 {
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");

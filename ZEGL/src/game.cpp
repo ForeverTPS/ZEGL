@@ -76,7 +76,7 @@ void Game::Init(Window* window)
 	m_fontContext = gl3fonsCreate(512, 512, FONS_ZERO_TOPLEFT);
 	testFont = fonsAddFont(m_fontContext, "sans", "./res/fonts/DroidSerif-Regular.ttf");
 	
-	tileMap = new TileMap("test_level.ldf");
+	tileMap = new TileMap("./res/levels/test_level.ldf");
 
 	light = new Light(Shader("point_light"));
 	light->SetLightColor(glm::vec4(1.0f, 0.8f, 0.6f, 1.0f));

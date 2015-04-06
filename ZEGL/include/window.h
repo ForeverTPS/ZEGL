@@ -104,6 +104,8 @@ namespace ZEGL
 		Window(const Window& other) = delete;
 		void operator=(const Window& other) = delete;
 
+		static bool   s_glewInitialized;
+
 		int           m_width;
 		int           m_height;
 		std::string   m_title;				

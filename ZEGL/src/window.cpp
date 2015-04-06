@@ -22,6 +22,8 @@
 
 using namespace ZEGL;
 
+bool Window::s_glewInitialized = false;
+
 Window::Window(int width, int height, const std::string& title) :
 	m_width(width),
 	m_height(height),
@@ -37,13 +39,16 @@ Window::Window(int width, int height, const std::string& title) :
 		exit(1);
 	}
 
-	glewExperimental = GL_TRUE;
-
-	GLenum error = GL_NO_ERROR;
-	error = glewInit();
-	if (error != GLEW_OK)
+	if (!s_glewInitialized)
 	{
-		LOG_ERROR("Error: " << glewGetErrorString(error));
+		glewExperimental = GL_TRUE;
+
+		GLenum error = GL_NO_ERROR;
+		error = glewInit();
+		if (error != GLEW_OK)
+		{
+			LOG_ERROR("Error: " << glewGetErrorString(error));
+		}
 	}
 
 	glViewport(0, 0, width, height);

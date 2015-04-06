@@ -23,9 +23,9 @@
 
 using namespace ZEGL;
 
-std::unordered_map<std::string, TextureData*> Texture::s_resourceMap;
+std::unordered_map<std::string, Texture::TextureData*> Texture::s_resourceMap;
 
-TextureData::TextureData(GLenum textureTarget, int width, int height, int numTextures, unsigned char** data, 
+Texture::TextureData::TextureData(GLenum textureTarget, int width, int height, int numTextures, unsigned char** data, 
 	GLfloat* filters, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachments) :
 	m_textureID(new GLuint[numTextures]),
 	m_textureTarget(textureTarget),
@@ -40,7 +40,7 @@ TextureData::TextureData(GLenum textureTarget, int width, int height, int numTex
 	InitRenderTargets(attachments);
 }
 
-TextureData::~TextureData()
+Texture::TextureData::~TextureData()
 {
 	if (*m_textureID)
 	{
@@ -60,7 +60,7 @@ TextureData::~TextureData()
 	}
 }
 
-void TextureData::InitTextures(unsigned char** data, GLfloat* filters, GLenum* internalFormat, GLenum* format, bool clamp)
+void Texture::TextureData::InitTextures(unsigned char** data, GLfloat* filters, GLenum* internalFormat, GLenum* format, bool clamp)
 {
 	glGenTextures(m_numTextures, m_textureID);
 	for (int i = 0; i < m_numTextures; i++)
@@ -96,7 +96,7 @@ void TextureData::InitTextures(unsigned char** data, GLfloat* filters, GLenum* i
 	}
 }
 
-void TextureData::InitRenderTargets(GLenum* attachments)
+void Texture::TextureData::InitRenderTargets(GLenum* attachments)
 {
 	if (attachments == 0)
 		return;
@@ -161,12 +161,12 @@ void TextureData::InitRenderTargets(GLenum* attachments)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void TextureData::Bind(int textureNum) const
+void Texture::TextureData::Bind(int textureNum) const
 {
 	glBindTexture(m_textureTarget, m_textureID[textureNum]);
 }
 
-void TextureData::BindAsRenderTarget() const
+void Texture::TextureData::BindAsRenderTarget() const
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);

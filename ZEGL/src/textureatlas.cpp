@@ -22,20 +22,20 @@
 using namespace tinyxml2;
 using namespace ZEGL;
 
-std::unordered_map<std::string, TextureAtlasData*> TextureAtlas::s_resourceMap;
+std::unordered_map<std::string, TextureAtlas::TextureAtlasData*> TextureAtlas::s_resourceMap;
 
-TextureAtlasData::TextureAtlasData(const std::string& fileName)
+TextureAtlas::TextureAtlasData::TextureAtlasData(const std::string& fileName)
 {
 	ParseTextureAtlas(fileName);
 }
 
-void TextureAtlasData::ParseTextureAtlas(const std::string& fileName)
+void TextureAtlas::TextureAtlasData::ParseTextureAtlas(const std::string& fileName)
 {
 	bool success = true;
 	std::string error;
 
 	XMLDocument doc;
-	if (doc.LoadFile(("./res/textures/" + fileName).c_str()) != XML_NO_ERROR)
+	if (doc.LoadFile((fileName).c_str()) != XML_NO_ERROR)
 	{
 		success = false;
 		error = "Failed loading TextureAtlas: " + fileName;

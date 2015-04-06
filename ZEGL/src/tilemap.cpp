@@ -55,7 +55,7 @@ void TileMap::Load(const std::string& fileName)
 	std::string error;
 
 	XMLDocument doc;
-	if (doc.LoadFile(("./res/levels/" + fileName + ".tdef").c_str()) != XML_NO_ERROR)
+	if (doc.LoadFile((fileName + ".tdef").c_str()) != XML_NO_ERROR)
 	{
 		success = false;
 		error = "Failed loading tile definitions: " + fileName + ".tdef";
@@ -89,7 +89,7 @@ void TileMap::Load(const std::string& fileName)
 			}
 
 			std::ifstream file;
-			file.open(("./res/levels/" + fileName).c_str());
+			file.open((fileName).c_str());
 
 			std::string line;
 
