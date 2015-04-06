@@ -5,7 +5,7 @@ var searchData=
   ['randint',['RandInt',['../namespace_random.html#a1df1df554acc51763182dc0feffabb45',1,'Random::RandInt(int max)'],['../namespace_random.html#af95f32ab928b256643961ed85ada5d9b',1,'Random::RandInt(int min, int max)']]],
   ['referencecounter',['ReferenceCounter',['../class_z_e_g_l_1_1_reference_counter.html#a5aa2918535e2dcd3ae8aae7c136c9f97',1,'ZEGL::ReferenceCounter']]],
   ['removereference',['RemoveReference',['../class_z_e_g_l_1_1_reference_counter.html#a3118c4d9747b185355b81c033b2fd099',1,'ZEGL::ReferenceCounter']]],
-  ['render',['Render',['../class_z_e_g_l_1_1_game.html#a3141b7d386d4300ae44dbb0b5891ff62',1,'ZEGL::Game']]],
+  ['render',['Render',['../class_z_e_g_l_1_1_game.html#a1171fd0755e958fc5591544589aa0f5b',1,'ZEGL::Game']]],
   ['renderentity',['RenderEntity',['../class_z_e_g_l_1_1_render_entity.html#a956d5b93d9b922a379ed7c48bc628cdd',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const Texture &amp;normalMap, const TextureAtlas &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=1.0f)'],['../class_z_e_g_l_1_1_render_entity.html#ad37cf5ff742efc645e3d37fc12a9c017',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const Texture &amp;normalMap, const glm::vec2 textureCoords[4], const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=1.0f)']]],
   ['resetallkey',['ResetAllKey',['../class_z_e_g_l_1_1_input.html#a92dcce33735e5cce785111c14265fbbe',1,'ZEGL::Input']]],
   ['resetallkeydown',['ResetAllKeyDown',['../class_z_e_g_l_1_1_input.html#a9a8a02715446b41ea4828dbd15b596b2',1,'ZEGL::Input']]],
