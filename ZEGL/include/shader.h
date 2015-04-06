@@ -31,7 +31,7 @@ namespace ZEGL
 	{
 	public:
 		ShaderData(const std::string& fileName);
-		virtual ~ShaderData();
+		~ShaderData();
 
 		inline int GetProgram()														const { return m_program; }
 		inline const std::vector<int>& GetShaders()									const { return m_shaders; }
@@ -66,7 +66,7 @@ namespace ZEGL
 	public:
 		Shader(const std::string& fileName = "basic_shader");
 		Shader(const Shader& other);
-		virtual ~Shader();
+		~Shader();
 
 		void Load(const std::string& fileName);
 

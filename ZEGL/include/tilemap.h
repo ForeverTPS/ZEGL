@@ -57,7 +57,6 @@ namespace ZEGL
 	{
 	public:
 		TileMap(const std::string& fileName);
-		virtual ~TileMap() {}
 
 		void Update(float delta) {}
 		void UpdateActiveTiles(const Window* window, const glm::vec3& cameraPos);

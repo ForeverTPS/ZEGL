@@ -31,7 +31,6 @@ namespace ZEGL
 	{
 	public:
 		TextureAtlasData(const std::string& fileName);
-		virtual ~TextureAtlasData() {}
 
 		inline const std::unordered_map<std::string, TextureRegion>& GetRegions() const { return m_textureRegions; }
 
@@ -50,7 +49,7 @@ namespace ZEGL
 	public:
 		TextureAtlas(const std::string& fileName = "default_atlas.xml");
 		TextureAtlas(TextureAtlas const&);
-		virtual ~TextureAtlas();
+		~TextureAtlas();
 
 		TextureRegion GetRegion(const std::string& regionName) const;
 
