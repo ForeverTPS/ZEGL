@@ -101,8 +101,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ed2f267119ce09b3f1066eaa0fd6d7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a3ed2f267119ce09b3f1066eaa0fd6d7c">TileMap</a> (const std::string &amp;fileName)</td></tr>
 <tr class="separator:a3ed2f267119ce09b3f1066eaa0fd6d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0e43e0816a4cd2488b0f65d1c1d72c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#ac0e43e0816a4cd2488b0f65d1c1d72c8">UpdateActiveTiles</a> (const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *window, const glm::vec3 &amp;cameraPos)</td></tr>
-<tr class="separator:ac0e43e0816a4cd2488b0f65d1c1d72c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b1ab73caff0d9d718a8bb642ae85f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a17b1ab73caff0d9d718a8bb642ae85f7">Update</a> (const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *window, const glm::vec3 &amp;cameraPos)</td></tr>
+<tr class="separator:a17b1ab73caff0d9d718a8bb642ae85f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293de899692edde693d6452f7fd18822"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a293de899692edde693d6452f7fd18822">Render</a> (<a class="el" href="class_z_e_g_l_1_1_game.html">Game</a> *game)</td></tr>
+<tr class="separator:a293de899692edde693d6452f7fd18822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae52f183a2710f7dc2835fbc02ea3a81c"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#ae52f183a2710f7dc2835fbc02ea3a81c">GetActiveTiles</a> () const </td></tr>
 <tr class="separator:ae52f183a2710f7dc2835fbc02ea3a81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49f94f1a578a4a25fb15bf1dfde1ab26"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_tile_map.html#a49f94f1a578a4a25fb15bf1dfde1ab26">GetActiveTilesData</a> () const </td></tr>
@@ -137,12 +139,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac0e43e0816a4cd2488b0f65d1c1d72c8"></a>
+<a class="anchor" id="a17b1ab73caff0d9d718a8bb642ae85f7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ZEGL::TileMap::UpdateActiveTiles </td>
+          <td class="memname">void ZEGL::TileMap::Update </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_z_e_g_l_1_1_window.html">Window</a> *&#160;</td>
           <td class="paramname"><em>window</em>, </td>
@@ -170,6 +172,30 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_window.html">Window</a>] </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a293de899692edde693d6452f7fd18822"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZEGL::TileMap::Render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_z_e_g_l_1_1_game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders all of the active tiles to screen using the shader for the current active light.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">game</td><td>The game which is rendering</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>[<a class="el" href="class_z_e_g_l_1_1_game.html">Game</a>][<a class="el" href="class_z_e_g_l_1_1_shader.html">Shader</a>][<a class="el" href="class_z_e_g_l_1_1_tile.html">Tile</a>] </dd></dl>
 
 </div>
 </div>
@@ -231,7 +257,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 6 2015 23:13:41 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 7 2015 15:27:59 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

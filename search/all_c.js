@@ -7,7 +7,7 @@ var searchData=
   ['referencecounter',['ReferenceCounter',['../class_z_e_g_l_1_1_reference_counter.html#a5aa2918535e2dcd3ae8aae7c136c9f97',1,'ZEGL::ReferenceCounter']]],
   ['referencecounter',['ReferenceCounter',['../class_z_e_g_l_1_1_reference_counter.html',1,'ZEGL']]],
   ['removereference',['RemoveReference',['../class_z_e_g_l_1_1_reference_counter.html#a3118c4d9747b185355b81c033b2fd099',1,'ZEGL::ReferenceCounter']]],
-  ['render',['Render',['../class_z_e_g_l_1_1_game.html#a1171fd0755e958fc5591544589aa0f5b',1,'ZEGL::Game']]],
+  ['render',['Render',['../class_z_e_g_l_1_1_game.html#a1171fd0755e958fc5591544589aa0f5b',1,'ZEGL::Game::Render()'],['../class_z_e_g_l_1_1_tile_map.html#a293de899692edde693d6452f7fd18822',1,'ZEGL::TileMap::Render()']]],
   ['renderentity',['RenderEntity',['../class_z_e_g_l_1_1_render_entity.html',1,'ZEGL']]],
   ['renderentity',['RenderEntity',['../class_z_e_g_l_1_1_render_entity.html#a956d5b93d9b922a379ed7c48bc628cdd',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const Texture &amp;normalMap, const TextureAtlas &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=1.0f)'],['../class_z_e_g_l_1_1_render_entity.html#ad37cf5ff742efc645e3d37fc12a9c017',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const Texture &amp;normalMap, const glm::vec2 textureCoords[4], const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float scale=1.0f)']]],
   ['resetallkey',['ResetAllKey',['../class_z_e_g_l_1_1_input.html#a92dcce33735e5cce785111c14265fbbe',1,'ZEGL::Input']]],
