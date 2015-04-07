@@ -23,6 +23,7 @@ namespace ZEGL
 {
 #define DEFAULT_TILE_SIZE 64
 
+	class Game;
 	class Window;
 
 	/**
@@ -112,7 +113,8 @@ namespace ZEGL
 		* extension of .tdef for example tilemap.ldf and tilemap.ldf.tdef
 		*/
 		TileMap(const std::string& fileName);
-
+		virtual ~TileMap();
+		
 		/**
 		* Refresh the list of active tiles.
 		*
@@ -124,7 +126,17 @@ namespace ZEGL
 		*
 		* \see [Window]
 		*/
-		void UpdateActiveTiles(const Window* window, const glm::vec3& cameraPos);
+		void Update(const Window* window, const glm::vec3& cameraPos);
+
+		/**
+		* Renders all of the active tiles to screen using the shader for
+		* the current active light.
+		*
+		* \param[in] game The game which is rendering
+		*
+		* \see [Game][Shader][Tile]
+		*/
+		void Render(Game* game);
 
 		/**
 		* Get all the active tiles.
@@ -154,5 +166,9 @@ namespace ZEGL
 		std::vector<Tile>		m_map;
 		std::vector<Tile>		m_activeTiles;
 		std::vector<EntityData>	m_activeTilesData;
+
+		GLuint					m_VAO;
+		GLuint					m_VAB;
+		size_t					m_bytesAllocated;
 	};
 }

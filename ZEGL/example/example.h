@@ -37,8 +37,6 @@ private:
 	MyGame(MyGame const&) = delete;
 	MyGame& operator=(MyGame const&) = delete;
 
-	GLuint		m_gVAO;
-	GLuint		m_gVAB;
 	Light*		m_light;
 	TileMap*	m_tileMap;
 };
