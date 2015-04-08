@@ -86,8 +86,15 @@ TileMap::TileMap(const std::string& fileName) :
 
 TileMap::~TileMap()
 {
-	glDeleteBuffers(1, &m_VAB);
-	glDeleteVertexArrays(1, &m_VAO);
+	if (m_VAB)
+	{
+		glDeleteBuffers(1, &m_VAB);
+	}
+	if (m_VAO)
+	{
+		glBindVertexArray(0);
+		glDeleteVertexArrays(1, &m_VAO);
+	}
 }
 
 void TileMap::Load(const std::string& fileName)
