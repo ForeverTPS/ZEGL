@@ -86,7 +86,7 @@ namespace ZEGL
 		*
 		* \see [TextureAtlas]
 		*/
-		void CalcTextureCoords(const std::string regionName);
+		virtual void CalcTextureCoords(const std::string regionName);
 
 		/**
 		* Get the texture used by this entity.
