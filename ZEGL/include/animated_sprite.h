@@ -14,33 +14,31 @@
 * limitations under the License.
 */
 
-#include "game.h"
+#pragma once
+
 #include "sprite.h"
-#include "tilemap.h"
 
-using namespace ZEGL;
-
-/**
-* Example of inheriting the Game class to create a new game.
-*/
-class MyGame : public Game
+namespace ZEGL
 {
-public:
-	MyGame();
-	~MyGame();
+	class AnimatedSprite : public Sprite
+	{
+	public:
+		AnimatedSprite(const Texture& texture,
+			const Texture& normalMap,
+			const TextureAtlas& textureAtlas,
+			const std::vector<std::string>& frameNames,
+			const glm::vec3& pos = glm::vec3(0.0f),
+			float rot = 0.0f);
 
-	MyGame(MyGame const&) = delete;
-	MyGame& operator=(MyGame const&) = delete;
+		AnimatedSprite(AnimatedSprite const&) = delete;
+		AnimatedSprite& operator=(AnimatedSprite const&) = delete;
+		~AnimatedSprite();
 
-	void Init(Window* window);
-	void Update(float delta);
-	void Render();
-	
-protected:
-private:
-	Light*		m_light;
-	TileMap*	m_tileMap;
+		void SetFrame(int frame);
 
-	SpriteBatch m_spriteBatch;
-	Sprite*		m_testSprite;
-};
+	protected:
+	private:
+		std::unordered_map<std::string, int>	m_frames;
+		std::vector<glm::vec4>					m_textureCoordinates;
+	};
+}

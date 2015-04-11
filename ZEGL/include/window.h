@@ -37,6 +37,8 @@ namespace ZEGL
 		* \param[in] title The name to give the window (appears in menu bar etc)
 		*/
 		Window(int width, int height, const std::string& title);
+		Window(const Window& other) = delete;
+		void operator=(const Window& other) = delete;
 		~Window();
 
 		/**
@@ -101,9 +103,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		Window(const Window& other) = delete;
-		void operator=(const Window& other) = delete;
-
 		static bool   s_glewInitialized;
 
 		int           m_width;

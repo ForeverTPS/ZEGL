@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-#include "textureatlas.h"
+#include "texture_atlas.h"
 #include "logger.h"
 #include "tinyxml2.h"
 #include "util.h"

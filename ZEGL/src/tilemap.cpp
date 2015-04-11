@@ -28,24 +28,6 @@
 using namespace tinyxml2;
 using namespace ZEGL;
 
-Tile::Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-	const glm::vec3& pos, float rot, float scale) :
-	m_tileSize(scale),
-	RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale)
-{
-}
-
-Tile::Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-	const glm::vec3& pos, float rot, float scale) :
-	m_tileSize(scale),
-	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale)
-{
-}
-
-Tile::Tile(const Tile& tile) :
-	m_tileSize(tile.m_tileSize),
-	RenderEntity(tile) {}
-
 TileMap::TileMap(const std::string& fileName) :
 	m_VAO(0),
 	m_VAB(0),
@@ -161,7 +143,7 @@ void TileMap::Load(const std::string& fileName)
 							TextureAtlas textureAtlas(it->second.textureAtlasName);
 
 							m_map.push_back(Tile(texture, textureNormal, textureAtlas, glm::vec3(x, y, 0.0f), 0.0f, DEFAULT_TILE_SIZE));
-							m_map[m_map.size() - 1].CalcTextureCoords(tiles[i]);
+							m_map[m_map.size() - 1].CalcTextureCoords(it->second.tilename);
 
 							x += DEFAULT_TILE_SIZE;
 						}
@@ -177,7 +159,6 @@ void TileMap::Load(const std::string& fileName)
 
 				for (unsigned int i = 0; i < m_map.size(); i++)
 				{
-					m_map[i].CalcTextureCoords("rock");
 					m_activeTiles.push_back(m_map[i]);
 					m_activeTilesData.push_back(m_map[i].GetData());
 				}
@@ -216,11 +197,13 @@ void TileMap::Update(const Window* window, const glm::vec3& cameraPos)
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VAB);
 	size_t bytesNeeded = sizeof(EntityData) * m_activeTilesData.size();
-	if (bytesNeeded > m_bytesAllocated) {
+	if (bytesNeeded > m_bytesAllocated) 
+	{
 		glBufferData(GL_ARRAY_BUFFER, bytesNeeded, &m_activeTilesData[0], GL_STREAM_DRAW);
 		m_bytesAllocated = bytesNeeded;
 	}
-	else {
+	else 
+	{
 		glBufferSubData(GL_ARRAY_BUFFER, 0, bytesNeeded, &m_activeTilesData[0]);
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -228,19 +211,19 @@ void TileMap::Update(const Window* window, const glm::vec3& cameraPos)
 
 void TileMap::Render(Game* game)
 {
-	Texture texture = m_activeTiles[0].GetTexture();
-	Texture normalMap = m_activeTiles[0].GetNormalMap();
+	Texture* texture = m_activeTiles[0].GetTexture();
+	Texture* normalMap = m_activeTiles[0].GetNormalMap();
 
 	Shader shader = game->GetActiveLight()->GetShader();
 
 	shader.Bind();
 	shader.UpdateUniforms(game);
 
-	texture.Bind(0);
-	normalMap.Bind(1);
+	texture->Bind(0);
+	normalMap->Bind(1);
 
 	glBindVertexArray(m_VAO);
-	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, 16);
+	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, m_activeTilesData.size());
 	glBindVertexArray(0);
 
 	shader.UnBind();

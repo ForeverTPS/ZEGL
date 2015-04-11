@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "referencecounter.h"
+#include "reference_counter.h"
 #include <string>
 #include <unordered_map>
 
@@ -55,6 +55,7 @@ namespace ZEGL
 		*/
 		TextureAtlas(const std::string& fileName = "./res/textures/default_atlas.xml");
 		TextureAtlas(TextureAtlas const&);
+		TextureAtlas& operator=(TextureAtlas const&) = delete;
 		~TextureAtlas();
 
 		/**
@@ -75,19 +76,17 @@ namespace ZEGL
 		public:
 			TextureAtlasData(const std::string& fileName);
 
+			TextureAtlasData(TextureAtlasData const&) = delete;
+			TextureAtlasData& operator=(TextureAtlasData const&) = delete;
+
 			inline const std::unordered_map<std::string, TextureRegion>& GetRegions() const { return m_textureRegions; }
 
 		protected:
 		private:
-			TextureAtlasData(TextureAtlasData const&) = delete;
-			TextureAtlasData& operator=(TextureAtlasData const&) = delete;
-
 			void ParseTextureAtlas(const std::string& fileName);
 
 			std::unordered_map<std::string, TextureRegion> m_textureRegions;
 		};
-
-		TextureAtlas& operator=(TextureAtlas const&) = delete;
 
 		static std::unordered_map<std::string, TextureAtlasData*> s_resourceMap;
 

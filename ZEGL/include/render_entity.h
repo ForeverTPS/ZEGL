@@ -52,6 +52,27 @@ namespace ZEGL
 			float scale = 1.0f);
 
 		/**
+		* Constructor using a TextureAtlas but default normal map.
+		*
+		* Used for an entity which has a texture containing multiple areas
+		* that can be used for rendering different things. This uses a default
+		* normal map texture.
+		*
+		* \param[in] texture Texture to use for the entity
+		* \param[in] textureAtlas A texture atlas which defines the texture
+		* \param[in] pos Initial position of the entity
+		* \param[in] rot Initial rotation angle (in radians) of the entity
+		* \param[in] scale Initial scale of the entity
+		*
+		* \see [Texture][TextureAtlas]
+		*/
+		RenderEntity(const Texture& texture,
+			const TextureAtlas& textureAtlas,
+			const glm::vec3& pos = glm::vec3(0.0f),
+			float rot = 0.0f,
+			float scale = 1.0f);
+
+		/**
 		* Constructor using a pre-calculated texture coordinates.
 		*
 		* Used for an entity which has a texture coordinate data and no atlas.
@@ -73,7 +94,7 @@ namespace ZEGL
 			float scale = 1.0f);
 
 		RenderEntity(const RenderEntity& renderEntity);
-		void operator=(RenderEntity renderEntity);
+		void operator=(RenderEntity renderEntity) = delete;
 		virtual ~RenderEntity() {}
 
 		/**
@@ -95,7 +116,7 @@ namespace ZEGL
 		*
 		* \see [Texture]
 		*/
-		inline const Texture& GetTexture() const { return m_texture; }
+		inline Texture* GetTexture() { return &m_texture; }
 
 		/**
 		* Get the texture used by this entity for normal mapping.
@@ -104,7 +125,7 @@ namespace ZEGL
 		*
 		* \see [Texture]
 		*/
-		inline const Texture& GetNormalMap() const { return m_normalMap; }
+		inline Texture* GetNormalMap() { return &m_normalMap; }
 
 	protected:
 		bool			m_hasTextureAtlas;	/*!< Whether the entity uses a render atlas */

@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "referencecounter.h"
+#include "reference_counter.h"
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
@@ -40,9 +40,11 @@ namespace ZEGL
 		*
 		* \param[in] fileName fileName The name of the shader with no path or extension
 		*/
-		Shader(const std::string& fileName = "basic_shader");
+		Shader(const std::string& fileName = "./res/shaders/basic_shader");
 		Shader(const Shader& other);
 		~Shader();
+
+		Shader& operator=(Shader const&) = delete;
 
 		/**
 		* Set the shader active for use in rendering
@@ -87,6 +89,8 @@ namespace ZEGL
 		{
 		public:
 			ShaderData(const std::string& fileName);
+			ShaderData(ShaderData const&) = delete;
+			ShaderData& operator=(ShaderData const&) = delete;
 			~ShaderData();
 
 			inline int GetProgram() const { return m_program; }
@@ -96,9 +100,6 @@ namespace ZEGL
 
 		protected:
 		private:
-			ShaderData(ShaderData const&) = delete;
-			ShaderData& operator=(ShaderData const&) = delete;
-
 			void AddProgram(const std::string& text, int type);
 
 			void AddAllAttributes(const std::string& vertexShaderText);
@@ -116,8 +117,6 @@ namespace ZEGL
 			std::vector<std::string>						m_uniformTypes;
 			std::unordered_map<std::string, unsigned int>	m_uniformMap;
 		};
-
-		Shader& operator=(Shader const&) = delete;
 
 		static std::unordered_map<std::string, ShaderData*> s_resourceMap;
 

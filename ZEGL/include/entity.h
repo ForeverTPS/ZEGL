@@ -17,7 +17,7 @@
 #pragma once
 
 #include "texture.h"
-#include "textureatlas.h"
+#include "texture_atlas.h"
 #include <glm/glm.hpp>
 
 namespace ZEGL
@@ -65,6 +65,7 @@ namespace ZEGL
 			m_data.m_rot = rot;
 			m_data.m_scale = scale;
 		}
+
 		virtual ~Entity() {}
 
 		/**

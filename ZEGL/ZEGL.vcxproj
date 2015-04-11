@@ -100,16 +100,18 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClCompile Include="example\main.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
-    <ClCompile Include="src\renderentity.cpp" />
+    <ClCompile Include="src\render_entity.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\logger.cpp" />
     <ClCompile Include="src\random.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\sprite.cpp" />
+    <ClCompile Include="src\sprite_batch.cpp" />
     <ClCompile Include="src\stb_image.c" />
     <ClCompile Include="src\system.cpp" />
     <ClCompile Include="src\texture.cpp" />
-    <ClCompile Include="src\textureatlas.cpp" />
+    <ClCompile Include="src\texture_atlas.cpp" />
     <ClCompile Include="src\tilemap.cpp" />
     <ClCompile Include="src\timing.cpp" />
     <ClCompile Include="src\tinyxml2.cpp" />
@@ -118,6 +120,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="example\example.h" />
+    <ClInclude Include="include\animated_sprite.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\core.h" />
     <ClInclude Include="include\doxygen.h" />
@@ -128,13 +131,16 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\platform.h" />
     <ClInclude Include="include\random.h" />
-    <ClInclude Include="include\referencecounter.h" />
-    <ClInclude Include="include\renderentity.h" />
+    <ClInclude Include="include\reference_counter.h" />
+    <ClInclude Include="include\render_entity.h" />
     <ClInclude Include="include\shader.h" />
+    <ClInclude Include="include\sprite.h" />
+    <ClInclude Include="include\sprite_batch.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\system.h" />
     <ClInclude Include="include\texture.h" />
-    <ClInclude Include="include\textureatlas.h" />
+    <ClInclude Include="include\texture_atlas.h" />
+    <ClInclude Include="include\tile.h" />
     <ClInclude Include="include\tilemap.h" />
     <ClInclude Include="include\timing.h" />
     <ClInclude Include="include\tinyxml2.h" />
@@ -155,6 +161,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
   <ItemGroup>
     <Image Include="res\textures\black.png" />
     <Image Include="res\textures\default.png" />
+    <Image Include="res\textures\default_n.png" />
     <Image Include="res\textures\rock.png" />
     <Image Include="res\textures\rock_n.png" />
     <Image Include="res\textures\white.png" />

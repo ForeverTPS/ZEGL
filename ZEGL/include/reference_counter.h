@@ -33,6 +33,8 @@ namespace ZEGL
 		ReferenceCounter() :
 			m_refCount(1) {}
 
+		ReferenceCounter(ReferenceCounter const&) = delete;
+		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
 		virtual ~ReferenceCounter() {}
 
 		/**
@@ -49,9 +51,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		ReferenceCounter(ReferenceCounter const&) = delete;
-		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
-
 		int m_refCount;
 	};
 }

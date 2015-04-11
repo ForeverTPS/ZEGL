@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "referenceCounter.h"
+#include "reference_counter.h"
 #include <GL/glew.h>
 #include <unordered_map>
 #include <string>
@@ -121,7 +121,9 @@ namespace ZEGL
 				bool clamp,
 				GLenum* attachments);
 
-			virtual ~TextureData();
+			TextureData(TextureData const&) = delete;
+			TextureData& operator=(TextureData const&) = delete;
+			~TextureData();
 
 			void Bind(int textureNum) const;
 			void BindAsRenderTarget() const;
@@ -131,9 +133,6 @@ namespace ZEGL
 
 		protected:
 		private:
-			TextureData(TextureData const&) = delete;
-			TextureData& operator=(TextureData const&) = delete;
-
 			void InitTextures(unsigned char** data, GLfloat* filter, GLenum* internalFormat, GLenum* format, bool clamp);
 			void InitRenderTargets(GLenum* attachments);
 

@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-#include "renderentity.h"
+#include "render_entity.h"
 
 using namespace ZEGL;
 
@@ -29,6 +29,19 @@ RenderEntity::RenderEntity(const Texture& texture,
 	m_normalMap(normalMap),
 	m_hasTextureAtlas(true),
 	Entity(pos, rot, scale) 
+{
+}
+
+RenderEntity::RenderEntity(const Texture& texture,
+						   const TextureAtlas& textureAtlas,
+						   const glm::vec3& pos,
+						   float rot,
+						   float scale) :
+	m_textureAtlas(textureAtlas),
+	m_texture(texture),
+	m_normalMap(Texture("./res/textures/default_n.png")),
+	m_hasTextureAtlas(true),
+	Entity(pos, rot, scale)
 {
 }
 
@@ -54,16 +67,8 @@ RenderEntity::RenderEntity(const RenderEntity& renderEntity) :
 	m_texture(renderEntity.m_texture),
 	m_normalMap(renderEntity.m_normalMap),
 	m_hasTextureAtlas(renderEntity.m_hasTextureAtlas),
-	Entity(renderEntity) 
+	Entity(renderEntity)
 {
-}
-
-void RenderEntity::operator=(RenderEntity renderEntity)
-{
-	char* temp[sizeof(RenderEntity) / sizeof(char)];
-	memcpy(temp, (void*)this, sizeof(RenderEntity));
-	memcpy((void*)this, (void*)&renderEntity, sizeof(RenderEntity));
-	memcpy((void*)&renderEntity, temp, sizeof(RenderEntity));
 }
 
 void RenderEntity::CalcTextureCoords(const std::string regionName)

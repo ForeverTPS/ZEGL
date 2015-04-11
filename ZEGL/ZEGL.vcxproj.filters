@@ -57,9 +57,6 @@
     <ClCompile Include="src\random.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderentity.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\system.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -87,7 +84,16 @@
     <ClCompile Include="src\texture.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\textureatlas.cpp">
+    <ClCompile Include="src\sprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render_entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture_atlas.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sprite_batch.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,12 +128,6 @@
     <ClInclude Include="include\random.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\referencecounter.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderentity.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\system.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -155,10 +155,28 @@
     <ClInclude Include="include\texture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\textureatlas.h">
+    <ClInclude Include="include\tilemap.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\tilemap.h">
+    <ClInclude Include="include\sprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\animated_sprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\reference_counter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\render_entity.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture_atlas.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sprite_batch.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -205,6 +223,9 @@
       <Filter>res\textures</Filter>
     </Image>
     <Image Include="res\textures\default.png">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\default_n.png">
       <Filter>res\textures</Filter>
     </Image>
   </ItemGroup>

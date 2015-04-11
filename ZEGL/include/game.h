@@ -41,6 +41,8 @@ namespace ZEGL
 	{
 	public:
 		Game();
+		Game(Game const&) = delete;
+		Game& operator=(Game const&) = delete;
 		virtual ~Game();
 
 		/**
@@ -126,9 +128,5 @@ namespace ZEGL
 		int					m_debugFont;		/*!< Font to display debug info */
 
 		char				m_fps[16];			/*!< char array for displaying FPS string */
-
-	private:
-		Game(Game const&) = delete;
-		Game& operator=(Game const&) = delete;
 	};
 }

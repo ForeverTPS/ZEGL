@@ -16,84 +16,13 @@
 
 #pragma once
 
-#include "renderentity.h"
+#include "tile.h"
 #include <vector>
 
 namespace ZEGL
 {
-#define DEFAULT_TILE_SIZE 64
-
 	class Game;
 	class Window;
-
-	/**
-	* Holds the attributes which define a tile when loaded from a (tile definition) .tdef file
-	*/
-	struct TileDefinition
-	{
-		std::string tilename;			/*!< Name of the tile */
-		std::string textureName;		/*!< Name of the texture used by the tile */
-		std::string normalMapName;		/*!< Name of the normal map texture used by the tile */
-		std::string textureAtlasName;	/*!< Name of the atlas map which defines the tile */
-	};
-
-	/**
-	* An individual tile in a map/level
-	*
-	* All tiles for a map/level are stored within a TileMap. They are extensions
-	* of the RenderEntity class which allows rendering. The main extension is the
-	* tile size member.
-	*
-	* \see [RenderEntity][Texture][TextureAtlas][TileMap]
-	*/
-	class Tile : public RenderEntity
-	{
-	public:
-		/**
-		* Constructor using a TextureAtlas.
-		*
-		* Used for a tile which has a texture containing multiple areas
-		* that can be used for rendering different things.
-		*
-		* \param[in] texture Texture to use for the tile
-		* \param[in] normalMap Corresponding normal map for the texture
-		* \param[in] textureAtlas A texture atlas which defines the texture
-		* \param[in] pos Initial position of the entity
-		* \param[in] rot Initial rotation angle (in radians) of the tile
-		* \param[in] scale Initial scale of the tile
-		*
-		* \see [Texture][TextureAtlas]
-		*/
-		Tile(const Texture& texture, const Texture& normalMap, const TextureAtlas& textureAtlas,
-			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
-
-		/**
-		* Constructor using a pre-calculated texture coordinates.
-		*
-		* Used for a tile which has a texture coordinate data and no atlas.
-		*
-		* \param[in] texture Texture to use for the tile
-		* \param[in] normalMap Corresponding normal map for the texture
-		* \param[in] textureCoords Quad texture coordinates
-		* \param[in] pos Initial position of the tile
-		* \param[in] rot Initial rotation angle (in radians) of the tile
-		* \param[in] scale Initial scale of the tile
-		*
-		* \see [Texture][TextureAtlas]
-		*/
-		Tile(const Texture& texture, const Texture& normalMap, const glm::vec2 textureCoords[4],
-			const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = (float)DEFAULT_TILE_SIZE);
-
-		Tile(const Tile& tile);
-
-		virtual ~Tile() {}
-
-	protected:
-	private:
-		Tile& operator=(Tile const&) = delete;
-
-		float m_tileSize;
-	};
 
 	/**
 	* A collection of tiles making up a level/map
@@ -113,7 +42,9 @@ namespace ZEGL
 		* extension of .tdef for example tilemap.ldf and tilemap.ldf.tdef
 		*/
 		TileMap(const std::string& fileName);
-		virtual ~TileMap();
+		TileMap(TileMap const&) = delete;
+		TileMap& operator=(TileMap const&) = delete;
+		~TileMap();
 		
 		/**
 		* Refresh the list of active tiles.
@@ -158,9 +89,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		TileMap(TileMap const&) = delete;
-		TileMap& operator=(TileMap const&) = delete;
-
 		void Load(const std::string& fileName);
 
 		std::vector<Tile>		m_map;

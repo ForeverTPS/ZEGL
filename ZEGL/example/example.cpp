@@ -17,18 +17,21 @@
 #include "example.h"
 #include "camera.h"
 #include "light.h"
+#include "sprite.h"
 #include "util.h"
 #include "window.h"
 
 MyGame::MyGame() :
 	m_light(nullptr),
-	m_tileMap(nullptr)
+	m_tileMap(nullptr),
+	m_testSprite(nullptr)
 {
 }
 
 MyGame::~MyGame()
 {
 	Util::SafeDelete(m_tileMap);
+	Util::SafeDelete(m_testSprite);
 }
 
 void MyGame::Init(Window* window)
@@ -37,10 +40,15 @@ void MyGame::Init(Window* window)
 
 	m_tileMap = new TileMap("./res/levels/test_level.ldf");
 
-	m_light = new Light(Shader("point_light"));
+	m_light = new Light(Shader("./res/shaders/point_light"));
 	m_light->SetLightColor(glm::vec4(1.0f, 0.8f, 0.6f, 1.0f));
 	m_light->SetAmbientColor(glm::vec4(0.6f, 0.6f, 1.0f, 0.2f));
 	m_lights.push_back(m_light);
+
+	m_spriteBatch.Init();
+	Texture rock("./res/textures/rock.png");
+	TextureAtlas atlas("./res/textures/test_atlas.xml");
+	m_testSprite = new Sprite(rock, atlas, "rock");
 }
 
 void MyGame::Update(float delta)
@@ -57,21 +65,27 @@ void MyGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for (unsigned int i = 0; i < m_lights.size(); i++)
-	{
-		glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
+
+	//for (unsigned int i = 0; i < m_lights.size(); i++)
+	//{
+		
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDepthMask(GL_FALSE);
 		glDepthFunc(GL_EQUAL);
+	//	m_activeLight = m_lights[i];
+	//	m_tileMap->Render(this);
+	//}
 
-		m_activeLight = m_lights[i];
+	//m_activeLight = nullptr;
 
-		m_tileMap->Render(this);
+	//Shader shader = m_light->GetShader();
+	//m_spriteBatch.SetShader(&shader);
+	m_spriteBatch.Begin(this);
+	m_testSprite->Draw(m_spriteBatch);
+	m_spriteBatch.End();
 
-		glDisable(GL_BLEND);
-	}
-
-	m_activeLight = nullptr;
+	glDisable(GL_BLEND);
 
 	Game::Render();
 }

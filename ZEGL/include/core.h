@@ -43,6 +43,9 @@ namespace ZEGL
 		*/
 		Core(double frameRate, Window* window, Game* game);
 
+		Core(Core const&) = delete;
+		Core& operator=(Core const&) = delete;
+
 		/**
 		* Starts the game timer and enters the game loop which will run until
 		* Stop() is called.
@@ -60,9 +63,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		Core(Core const&) = delete;
-		Core& operator=(Core const&) = delete;
-
 		Window*		m_window;	
 		Game*		m_game;		
 		bool		m_isRunning;

@@ -67,7 +67,7 @@ static void CheckShaderError(int shader, int flag, bool isProgram, const std::st
 static std::string LoadShader(const std::string& fileName)
 {
 	std::ifstream file;
-	file.open(("./res/shaders/" + fileName).c_str());
+	file.open((fileName).c_str());
 
 	std::string output;
 	std::string line;

@@ -316,6 +316,9 @@ namespace ZEGL
 		*/
 		Input();
 
+		Input(Input const&) = delete;
+		Input& operator=(Input const&) = delete;
+
 		/**
 		* Test if a specific key is held down.
 		*
@@ -499,9 +502,6 @@ namespace ZEGL
 
 	protected:
 	private:
-		Input(Input const&) = delete;
-		Input& operator=(Input const&) = delete;
-
 		bool		m_inputs[MAX_KEYS];					
 		bool		m_downKeys[MAX_KEYS];				
 		bool		m_upKeys[MAX_KEYS];					
