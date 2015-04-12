@@ -196,12 +196,6 @@
     <None Include="res\shaders\point_light_vs.glsl">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\ambient_shader_fs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="res\shaders\ambient_shader_vs.glsl">
-      <Filter>res\shaders</Filter>
-    </None>
     <None Include="res\levels\test_level.ldf.tdef">
       <Filter>res\levels</Filter>
     </None>

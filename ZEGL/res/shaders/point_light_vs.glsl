@@ -19,6 +19,7 @@
 #define attribute in
 
 attribute vec3 pos;
+attribute float rot;
 attribute float xSize;
 attribute float ySize;
 attribute vec2 texCoord0;
@@ -46,9 +47,26 @@ void main()
 	else if (gl_VertexID == 1)	vTexCoord = texCoord1;
 	else if (gl_VertexID == 2)	vTexCoord = texCoord2;
 	else						vTexCoord = texCoord3;
+
+	mat4 t1 = mat4(1, 0, 0, 0,
+				   0, 1, 0, 0,
+				   0, 0, 1, 0,
+				   pos.x, pos.y, 0, 1);
+
+	mat4 r = mat4(cos(rot), sin(rot), 0, 0,
+				 -sin(rot), cos(rot), 0, 0,
+				         0,		   0, 1, 0,
+					     0,		   0, 0, 1);
+
+	mat4 t2 = mat4(1, 0, 0, 0,
+			  	   0, 1, 0, 0,
+				   0, 0, 1, 0,
+				   -pos.x, -pos.y, 0, 1);
+
+	mat4 model = t1 * r * t2;
   
-	gl_Position = MVP * vec4(pos.x + (offset.x * xSize),
-							 pos.y + (offset.y * ySize), 
-							 0, 
-							 1);
+	gl_Position = MVP * model * vec4(pos.x + (offset.x * xSize),
+									 pos.y + (offset.y * ySize), 
+									 0, 
+									 1);
 }

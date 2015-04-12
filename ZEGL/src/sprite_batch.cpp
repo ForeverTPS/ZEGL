@@ -52,20 +52,22 @@ void SpriteBatch::Init()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VAB);
 
 	glEnableVertexAttribArray(0); // pos
-	glEnableVertexAttribArray(1); // x size
-	glEnableVertexAttribArray(2); // y size
-	glEnableVertexAttribArray(3); // texCoords0
-	glEnableVertexAttribArray(4); // texCoords1
-	glEnableVertexAttribArray(5); // texCoords2
-	glEnableVertexAttribArray(6); // texCoords3
+	glEnableVertexAttribArray(1); // rot
+	glEnableVertexAttribArray(2); // x size
+	glEnableVertexAttribArray(3); // y size
+	glEnableVertexAttribArray(4); // texCoords0
+	glEnableVertexAttribArray(5); // texCoords1
+	glEnableVertexAttribArray(6); // texCoords2
+	glEnableVertexAttribArray(7); // texCoords3
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)0);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
-	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)24);
-	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)32);
-	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)40);
-	glVertexAttribPointer(6, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)48);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)12);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)16);
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)20);
+	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)24);
+	glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)32);
+	glVertexAttribPointer(6, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)40);
+	glVertexAttribPointer(7, 2, GL_FLOAT, GL_FALSE, sizeof(EntityData), (GLvoid*)48);
 
 	glVertexAttribDivisor(0, 1);
 	glVertexAttribDivisor(1, 1);
@@ -74,6 +76,7 @@ void SpriteBatch::Init()
 	glVertexAttribDivisor(4, 1);
 	glVertexAttribDivisor(5, 1);
 	glVertexAttribDivisor(6, 1);
+	glVertexAttribDivisor(7, 1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);

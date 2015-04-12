@@ -60,7 +60,7 @@ void MyGame::Update(float delta)
 
 	m_tileMap->Update(m_window, m_camera->GetPos());
 
-	m_camera->SetRot(m_camera->GetRot() + 0.01f);
+	m_testSprite->SetRot(m_testSprite->GetRot() + 0.5f * delta);
 }
 
 void MyGame::Render()
