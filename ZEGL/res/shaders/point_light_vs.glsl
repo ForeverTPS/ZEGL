@@ -19,7 +19,8 @@
 #define attribute in
 
 attribute vec3 pos;
-attribute float size;
+attribute float xSize;
+attribute float ySize;
 attribute vec2 texCoord0;
 attribute vec2 texCoord1;
 attribute vec2 texCoord2;
@@ -46,8 +47,8 @@ void main()
 	else if (gl_VertexID == 2)	vTexCoord = texCoord2;
 	else						vTexCoord = texCoord3;
   
-	gl_Position = MVP * vec4(pos.x + (offset.x * size),
-							 pos.y + (offset.y * size), 
+	gl_Position = MVP * vec4(pos.x + (offset.x * xSize),
+							 pos.y + (offset.y * ySize), 
 							 0, 
 							 1);
 }

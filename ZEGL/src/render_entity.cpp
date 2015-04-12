@@ -23,12 +23,12 @@ RenderEntity::RenderEntity(const Texture& texture,
 						   const TextureAtlas& textureAtlas,
 						   const glm::vec3& pos, 
 						   float rot, 
-						   float scale) :
+						   float xScale,
+						   float yScale) :
 	m_textureAtlas(textureAtlas),
 	m_texture(texture),
 	m_normalMap(normalMap),
-	m_hasTextureAtlas(true),
-	Entity(pos, rot, scale) 
+	Entity(pos, rot, xScale, yScale) 
 {
 }
 
@@ -36,48 +36,25 @@ RenderEntity::RenderEntity(const Texture& texture,
 						   const TextureAtlas& textureAtlas,
 						   const glm::vec3& pos,
 						   float rot,
-						   float scale) :
+						   float xScale,
+						   float yScale) :
 	m_textureAtlas(textureAtlas),
 	m_texture(texture),
 	m_normalMap(Texture("./res/textures/default_n.png")),
-	m_hasTextureAtlas(true),
-	Entity(pos, rot, scale)
+	Entity(pos, rot, xScale, yScale)
 {
-}
-
-RenderEntity::RenderEntity(const Texture& texture, 
-						   const Texture& normalMap, 
-						   const glm::vec2 textureCoords[4],
-						   const glm::vec3& pos, 
-						   float rot, 
-						   float scale) :
-	m_texture(texture),
-	m_normalMap(normalMap),
-	m_hasTextureAtlas(false),
-	Entity(pos, rot, scale)
-{
-	for (unsigned int i = 0; i < 4; i++)
-	{
-		m_data.m_texCoords[i] = textureCoords[i];
-	}
 }
 
 RenderEntity::RenderEntity(const RenderEntity& renderEntity) :
 	m_textureAtlas(renderEntity.m_textureAtlas),
 	m_texture(renderEntity.m_texture),
 	m_normalMap(renderEntity.m_normalMap),
-	m_hasTextureAtlas(renderEntity.m_hasTextureAtlas),
 	Entity(renderEntity)
 {
 }
 
 void RenderEntity::CalcTextureCoords(const std::string regionName)
 {
-	if (!m_hasTextureAtlas)
-	{
-		return;
-	}
-
 	TextureRegion region = m_textureAtlas.GetRegion(regionName);
 	if (region.w != 0)
 	{
@@ -88,6 +65,12 @@ void RenderEntity::CalcTextureCoords(const std::string regionName)
 		float y = region.y / textureHeight;
 		float w = region.w / textureWidth;
 		float h = region.h / textureHeight;
+
+		if (GetXScale() == -1.0f || GetYScale() == -1.0f)
+		{
+			SetXScale(region.w);
+			SetYScale(region.h);
+		}
 
 		m_data.m_texCoords[0] = glm::vec2(x, y + h);
 		m_data.m_texCoords[1] = glm::vec2(x + w, y + h);

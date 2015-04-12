@@ -297,6 +297,7 @@ ZEGL.html
 !ZEGL/res/levels/*
 doxygen/html/
 doxygen/latex/
+copy_resources.bat
 
 ### CMake ###
 CMakeCache.txt

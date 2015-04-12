@@ -19,39 +19,30 @@
 using namespace ZEGL;
 
 Sprite::Sprite(const Texture& texture,
-	const Texture& normalMap,
-	const TextureAtlas& textureAtlas,
-	const std::string& regionName,
-	const glm::vec3& pos,
-	float rot,
-	float scale) :
+			   const Texture& normalMap,
+			   const TextureAtlas& textureAtlas,
+			   const std::string& regionName,
+			   const glm::vec3& pos,
+			   float rot,
+			   float xScale,
+			   float yScale) :
 	m_name(regionName),
-	RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale)
+	RenderEntity(texture, normalMap, textureAtlas, pos, rot, xScale, yScale)
 {
 	CalcTextureCoords(m_name);
 }
 
 Sprite::Sprite(const Texture& texture,
-	const TextureAtlas& textureAtlas,
-	const std::string& regionName,
-	const glm::vec3& pos,
-	float rot,
-	float scale) :
+			   const TextureAtlas& textureAtlas,
+			   const std::string& regionName,
+			   const glm::vec3& pos,
+			   float rot,
+			   float xScale,
+			   float yScale) :
 	m_name(regionName),
-	RenderEntity(texture, textureAtlas, pos, rot, scale)
+	RenderEntity(texture, textureAtlas, pos, rot, xScale, yScale)
 {
 	CalcTextureCoords(m_name);
-}
-
-Sprite::Sprite(const Texture& texture,
-	const Texture& normalMap,
-	const glm::vec2 textureCoords[4],
-	const glm::vec3& pos,
-	float rot,
-	float scale) :
-	m_name(""),
-	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale)
-{
 }
 
 Sprite::Sprite(const Sprite& sprite) :

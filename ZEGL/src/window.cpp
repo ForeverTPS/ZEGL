@@ -50,8 +50,6 @@ Window::Window(int width, int height, const std::string& title) :
 			LOG_ERROR("Error: " << glewGetErrorString(error));
 		}
 	}
-
-	glViewport(0, 0, width, height);
 }
 
 Window::~Window()

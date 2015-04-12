@@ -26,7 +26,8 @@ Camera::Camera(const Window* window) :
 	m_pos(glm::vec3(0.0f)),
 	m_rot(0.0f)
 {
-	m_transform.Update(m_pos, m_rot, m_zoom);
+	m_origin = window ? glm::vec3(window->GetWidth() / 2.0f, window->GetHeight() / 2.0f, 0.0f) : glm::vec3(0.0f);
+	m_transform.Update(m_origin, m_pos, m_rot, m_zoom);
 
 	RecreateTransform(window);
 }
@@ -45,17 +46,16 @@ const glm::mat4& Camera::GetTransform(const Window* window)
 
 void Camera::RecreateTransform(const Window* window)
 {
-	m_transform.Update(m_pos, m_rot, m_zoom);
-
-	glm::mat4 reverseTransMat = glm::translate(glm::mat4(1.0f), glm::vec3(-m_pos.x, -m_pos.y, 0.0f));
-	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(m_zoom, m_zoom, 1.0f));
-	glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f),	m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
+	m_transform.Update(m_origin, m_pos, m_rot, m_zoom);
 
 	glm::mat4 ortho(1.0f);
 	if (window)
 	{
-		ortho = glm::ortho(0.0f, (float)window->GetWidth(), 0.0f, (float)window->GetHeight(), -1.0f, 1.0f);
+		ortho = glm::ortho(0.0f, (float)window->GetWidth(), (float)window->GetHeight(), 0.0f, -1.0f, 1.0f);
 	}
 
-	m_transform.m_matrix = ortho * reverseTransMat * rotMat * scaleMat;
+	m_transform.m_matrix = glm::translate(ortho, glm::vec3(m_origin.x, m_origin.y, 0.0f));
+	m_transform.m_matrix = glm::scale(m_transform.m_matrix, glm::vec3(m_zoom, m_zoom, 1.0f));
+	m_transform.m_matrix = glm::rotate(m_transform.m_matrix, m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
+	m_transform.m_matrix = glm::translate(m_transform.m_matrix, glm::vec3(-m_origin.x, -m_origin.y, 0.0f));
 }

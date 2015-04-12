@@ -96,6 +96,9 @@
     <ClCompile Include="src\sprite_batch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\animated_sprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="example\example.h">
@@ -210,12 +213,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\black.png">
-      <Filter>res\textures</Filter>
-    </Image>
-    <Image Include="res\textures\white.png">
-      <Filter>res\textures</Filter>
-    </Image>
     <Image Include="res\textures\rock.png">
       <Filter>res\textures</Filter>
     </Image>

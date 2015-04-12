@@ -17,6 +17,7 @@
 #pragma once
 
 #include "sprite.h"
+#include <SDL.h>
 
 namespace ZEGL
 {
@@ -24,21 +25,56 @@ namespace ZEGL
 	{
 	public:
 		AnimatedSprite(const Texture& texture,
-			const Texture& normalMap,
-			const TextureAtlas& textureAtlas,
-			const std::vector<std::string>& frameNames,
-			const glm::vec3& pos = glm::vec3(0.0f),
-			float rot = 0.0f);
+					   const Texture& normalMap,
+					   const TextureAtlas& textureAtlas,
+					   const std::vector<std::string>& frameNames,
+					   const glm::vec3& pos = glm::vec3(0.0f),
+					   float rot = 0.0f,
+					   float xScale = -1.0f,
+					   float yScale = -1.0f);
 
-		AnimatedSprite(AnimatedSprite const&) = delete;
+		AnimatedSprite(const Texture& texture,
+					   const TextureAtlas& textureAtlas,
+					   const std::vector<std::string>& frameNames,
+					   const glm::vec3& pos = glm::vec3(0.0f),
+					   float rot = 0.0f,
+					   float xScale = -1.0f,
+					   float yScale = -1.0f);
+
+		AnimatedSprite(AnimatedSprite const&);
 		AnimatedSprite& operator=(AnimatedSprite const&) = delete;
-		~AnimatedSprite();
+		virtual ~AnimatedSprite() {}
 
-		void SetFrame(int frame);
+		void CalcTextureCoords();
+
+		void SetFrame(unsigned int frame);
+
+		void Reset(bool restart = false);
+
+		void Start(unsigned int frame = 0);
+
+		inline int	Pause() { m_isAnimating = false; }
+		
+		inline void Resume() { m_isAnimating = true; }
+		
+		inline void Stop() { Reset(); }
+
+		inline void SetLooping(bool loop) { m_loop = loop; }
+		
+		inline void SetSpeed(Uint32 speed) { m_speed = speed; }
+
+		void Animate();
 
 	protected:
 	private:
-		std::unordered_map<std::string, int>	m_frames;
-		std::vector<glm::vec4>					m_textureCoordinates;
+		unsigned int									m_currentFrame;
+		std::unordered_map<std::string, unsigned int>	m_frameNames;
+		std::vector<glm::vec2[4]>						m_textureCoordinates;
+
+		bool											m_isAnimating;
+		bool											m_loop;
+
+		double											m_lastAnimated;
+		double											m_speed;
 	};
 }

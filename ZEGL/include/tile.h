@@ -65,13 +65,13 @@ namespace ZEGL
 		* \see [Texture][TextureAtlas]
 		*/
 		Tile(const Texture& texture,
-			const Texture& normalMap,
-			const TextureAtlas& textureAtlas,
-			const glm::vec3& pos = glm::vec3(0.0f),
-			float rot = 0.0f,
-			float scale = (float)DEFAULT_TILE_SIZE) :
+			 const Texture& normalMap,
+			 const TextureAtlas& textureAtlas,
+			 const glm::vec3& pos = glm::vec3(0.0f),
+			 float rot = 0.0f,
+			 float scale = (float)DEFAULT_TILE_SIZE) :
 			m_tileSize(scale),
-			RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale)
+			RenderEntity(texture, normalMap, textureAtlas, pos, rot, scale, scale)
 		{
 		}
 
@@ -89,16 +89,16 @@ namespace ZEGL
 		*
 		* \see [Texture][TextureAtlas]
 		*/
-		Tile(const Texture& texture,
-			const Texture& normalMap,
-			const glm::vec2 textureCoords[4],
-			const glm::vec3& pos = glm::vec3(0.0f),
-			float rot = 0.0f,
-			float scale = (float)DEFAULT_TILE_SIZE) :
-			m_tileSize(scale),
-			RenderEntity(texture, normalMap, textureCoords, pos, rot, scale)
-		{
-		}
+		//Tile(const Texture& texture,
+		//	 const Texture& normalMap,
+		//	 const glm::vec2 textureCoords[4],
+		//	 const glm::vec3& pos = glm::vec3(0.0f),
+		//	 float rot = 0.0f,
+		//	 float scale = (float)DEFAULT_TILE_SIZE) :
+		//	m_tileSize(scale),
+		//	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale, scale)
+		//{
+		//}
 
 		Tile(const Tile& tile) :
 			m_tileSize(tile.m_tileSize),

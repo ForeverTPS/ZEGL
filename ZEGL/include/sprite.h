@@ -41,7 +41,8 @@ namespace ZEGL
 		* \param[in] regionName Name of the region in the texture atlas for this sprite
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
+		* \param[in] scale Initial x scale of the entity
+		* \param[in] scale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -51,7 +52,8 @@ namespace ZEGL
 			   const std::string& regionName,
 			   const glm::vec3& pos = glm::vec3(0.0f),
 			   float rot = 0.0f,
-			   float scale = 1.0f);
+			   float xScale = -1.0f,
+			   float yScale = -1.0f);
 		
 		/**
 		* Constructor using a TextureAtlas but default normal map.
@@ -65,7 +67,8 @@ namespace ZEGL
 		* \param[in] regionName Name of the region in the texture atlas for this sprite
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
+		* \param[in] scale Initial x scale of the entity
+		* \param[in] scale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -74,28 +77,8 @@ namespace ZEGL
 			const std::string& regionName,
 			const glm::vec3& pos = glm::vec3(0.0f),
 			float rot = 0.0f,
-			float scale = 1.0f);
-
-		/**
-		* Constructor using a pre-calculated texture coordinates.
-		*
-		* Used for an entity which has a texture coordinate data and no atlas.
-		*
-		* \param[in] texture Texture to use for the entity
-		* \param[in] normalMap Corresponding normal map for the texture
-		* \param[in] textureCoords Quad texture coordinates
-		* \param[in] pos Initial position of the entity
-		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
-		*
-		* \see [Texture][TextureAtlas]
-		*/
-		Sprite(const Texture& texture,
-			const Texture& normalMap,
-			const glm::vec2 textureCoords[4],
-			const glm::vec3& pos = glm::vec3(0.0f),
-			float rot = 0.0f,
-			float scale = 1.0f);
+			float xScale = -1.0f,
+			float yScale = -1.0f);
 
 		Sprite(Sprite const&);
 		Sprite& operator=(Sprite const&) = delete;		

@@ -28,6 +28,7 @@
 #include "tilemap.h"
 #include "util.h"
 #include "window.h"
+#include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
 using namespace ZEGL;
@@ -129,7 +130,8 @@ void Game::Update(float delta)
 
 void Game::Render()
 {
-	gl3fonsProjection(m_fontContext, (GLfloat*)&(m_camera->GetTransform(m_window)[0][0]), m_window->GetWidth(), m_window->GetHeight());
+	glm::mat4 ortho = glm::ortho(0.0f, (float)m_window->GetWidth(), (float)m_window->GetHeight(), 0.0f, -1.0f, 1.0f);
+	gl3fonsProjection(m_fontContext, (GLfloat*)&(ortho[0][0]), m_window->GetWidth(), m_window->GetHeight());
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

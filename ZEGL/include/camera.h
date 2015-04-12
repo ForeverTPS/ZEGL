@@ -91,6 +91,20 @@ namespace ZEGL
 		inline void SetPos(glm::vec3 pos) { m_pos = pos; }
 
 		/**
+		* Get the current origin of the camera.
+		*
+		* \return glm::vec3 representing the camera origin
+		*/
+		inline glm::vec3 GetOrigin() const { return m_origin; }
+
+		/**
+		* Set the origin of the camera using an existing glm::vec3.
+		*
+		* \param[in] origin New origin value
+		*/
+		inline void SetOrigin(glm::vec3 origin) { m_origin = origin; }
+
+		/**
 		* Get the current rotation of the camera.
 		*
 		* \return Camera rotation in radians
@@ -126,18 +140,23 @@ namespace ZEGL
 		struct Transformation
 		{
 			glm::mat4	m_matrix;		
-			glm::vec3	m_lastPos;		
+			glm::vec3	m_lastOrigin;
+			glm::vec3	m_lastPos;
 			float		m_lastRot;		
 			float		m_lastZoom;		
 
-			void Update(const glm::vec3& pos, float rot, float zoom)
+			inline void Update(const glm::vec3& origin, const glm::vec3& pos, float rot, float zoom)
 			{
-				m_lastPos = pos; m_lastRot = rot; m_lastZoom = zoom;
+				m_lastOrigin = origin;
+				m_lastPos = pos; 
+				m_lastRot = rot; 
+				m_lastZoom = zoom;
 			}
 		};
 
 		void RecreateTransform(const Window* window);
 
+		glm::vec3		m_origin;
 		glm::vec3		m_pos;		
 		float			m_rot;		
 		float			m_zoom;		

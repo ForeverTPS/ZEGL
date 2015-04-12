@@ -40,7 +40,8 @@ namespace ZEGL
 		* \param[in] textureAtlas A texture atlas which defines the texture
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
+		* \param[in] xScale Scale factor of the entity
+		* \param[in] yScale Scale factor of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -49,7 +50,8 @@ namespace ZEGL
 			const TextureAtlas& textureAtlas,
 			const glm::vec3& pos = glm::vec3(0.0f),
 			float rot = 0.0f,
-			float scale = 1.0f);
+			float xScale = -1.0f,
+			float yScale = -1.0f);
 
 		/**
 		* Constructor using a TextureAtlas but default normal map.
@@ -62,7 +64,8 @@ namespace ZEGL
 		* \param[in] textureAtlas A texture atlas which defines the texture
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
+		* \param[in] xScale Scale factor of the entity
+		* \param[in] yScale Scale factor of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -70,28 +73,8 @@ namespace ZEGL
 			const TextureAtlas& textureAtlas,
 			const glm::vec3& pos = glm::vec3(0.0f),
 			float rot = 0.0f,
-			float scale = 1.0f);
-
-		/**
-		* Constructor using a pre-calculated texture coordinates.
-		*
-		* Used for an entity which has a texture coordinate data and no atlas.
-		*
-		* \param[in] texture Texture to use for the entity
-		* \param[in] normalMap Corresponding normal map for the texture
-		* \param[in] textureCoords Quad texture coordinates
-		* \param[in] pos Initial position of the entity
-		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial scale of the entity
-		*
-		* \see [Texture][TextureAtlas]
-		*/
-		RenderEntity(const Texture& texture,
-			const Texture& normalMap,
-			const glm::vec2 textureCoords[4],
-			const glm::vec3& pos = glm::vec3(0.0f),
-			float rot = 0.0f,
-			float scale = 1.0f);
+			float xScale = -1.0f,
+			float yScale = -1.0f);
 
 		RenderEntity(const RenderEntity& renderEntity);
 		void operator=(RenderEntity renderEntity) = delete;
@@ -128,7 +111,6 @@ namespace ZEGL
 		inline Texture* GetNormalMap() { return &m_normalMap; }
 
 	protected:
-		bool			m_hasTextureAtlas;	/*!< Whether the entity uses a render atlas */
 		TextureAtlas	m_textureAtlas;		/*!< The TextureAtlas for the entity */
 		Texture			m_texture;			/*!< The render Texture for the entity */
 		Texture			m_normalMap;		/*!< The normal map Texture for the entity */

@@ -39,8 +39,9 @@ namespace ZEGL
 	{
 		glm::vec3	m_pos;			/*!< Position - size 12 bytes, offset 0 */
 		float		m_rot;			/*!< Rotation (radians) - size 4 bytes, offset 12 */
-		float		m_scale;		/*!< Scale - size 4 bytes, offset 16 */
-		glm::vec2	m_texCoords[4];	/*!< Texture Coordinates - size 32 bytes, offset 20|28|36|44 */
+		float		m_xScale;		/*!< X Scale - size 4 bytes, offset 16 */
+		float		m_yScale;		/*!< Y Scale - size 4 bytes, offset 20 */
+		glm::vec2	m_texCoords[4];	/*!< Texture Coordinates - size 32 bytes, offset 24|32|40|48 */
 	};
 
 	/**
@@ -57,13 +58,15 @@ namespace ZEGL
 		*
 		* \param[in] pos Position of the entity
 		* \param[in] rot Rotation of the entity (in radians) 
-		* \param[in] scale Scale factor of the entity
+		* \param[in] xScale Scale factor of the entity
+		* \param[in] yScale Scale factor of the entity
 		*/
-		Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float scale = 1.0f)
+		Entity(const glm::vec3& pos = glm::vec3(0.0f), float rot = 0.0f, float xScale = 1.0f, float yScale = 1.0f)
 		{
 			m_data.m_pos = pos;
 			m_data.m_rot = rot;
-			m_data.m_scale = scale;
+			m_data.m_xScale = xScale;
+			m_data.m_yScale = yScale;
 		}
 
 		virtual ~Entity() {}
@@ -106,18 +109,39 @@ namespace ZEGL
 		inline void	SetRot(float rot) { m_data.m_rot = rot; }
 
 		/**
-		* Get the current zoom factor of the entity.
+		* Get the current x scale factor of the entity.
 		*
-		* \return Scale factor for the entity
+		* \return X scale factor for the entity
 		*/
-		inline float GetScale()	const { return m_data.m_scale; }
+		inline float GetXScale() const { return m_data.m_xScale; }
+
+		/**
+		* Set the entity x scale factor.
+		*
+		* \param[in] scale X scaling factor for the entity
+		*/
+		inline void	SetXScale(float scale) { m_data.m_xScale = scale; }
+
+		/**
+		* Get the current y scale factor of the entity.
+		*
+		* \return Y scale factor for the entity
+		*/
+		inline float GetYScale() const { return m_data.m_yScale; }
+
+		/**
+		* Set the entity y scale factor.
+		*
+		* \param[in] scale y scaling factor for the entity
+		*/
+		inline void	SetYScale(float scale) { m_data.m_yScale = scale; }
 
 		/**
 		* Set the entity scale factor.
 		*
 		* \param[in] scale Scaling factor for the entity
 		*/
-		inline void	SetScale(float scale) { m_data.m_scale = scale; }
+		inline void	SetScale(float scale) { m_data.m_xScale = m_data.m_yScale = scale; }
 
 		/**
 		* Get the entity data structure

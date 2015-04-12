@@ -98,6 +98,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
   <ItemGroup>
     <ClCompile Include="example\example.cpp" />
     <ClCompile Include="example\main.cpp" />
+    <ClCompile Include="src\animated_sprite.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\core.cpp" />
     <ClCompile Include="src\render_entity.cpp" />
@@ -159,12 +160,10 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <None Include="res\shaders\point_light_vs.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\black.png" />
     <Image Include="res\textures\default.png" />
     <Image Include="res\textures\default_n.png" />
     <Image Include="res\textures\rock.png" />
     <Image Include="res\textures\rock_n.png" />
-    <Image Include="res\textures\white.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\textures\default_atlas.xml">

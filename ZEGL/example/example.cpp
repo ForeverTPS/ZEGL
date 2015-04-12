@@ -48,7 +48,7 @@ void MyGame::Init(Window* window)
 	m_spriteBatch.Init();
 	Texture rock("./res/textures/rock.png");
 	TextureAtlas atlas("./res/textures/test_atlas.xml");
-	m_testSprite = new Sprite(rock, atlas, "rock");
+	m_testSprite = new Sprite(rock, atlas, "rock", glm::vec3(300.0f, 300.0f, 0.0f));
 }
 
 void MyGame::Update(float delta)
@@ -59,6 +59,8 @@ void MyGame::Update(float delta)
 	m_light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), m_light->GetPos().z);
 
 	m_tileMap->Update(m_window, m_camera->GetPos());
+
+	m_camera->SetRot(m_camera->GetRot() + 0.01f);
 }
 
 void MyGame::Render()
@@ -67,25 +69,23 @@ void MyGame::Render()
 
 	glEnable(GL_BLEND);
 
-	//for (unsigned int i = 0; i < m_lights.size(); i++)
-	//{
+	for (unsigned int i = 0; i < m_lights.size(); i++)
+	{
 		
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDepthMask(GL_FALSE);
 		glDepthFunc(GL_EQUAL);
-	//	m_activeLight = m_lights[i];
-	//	m_tileMap->Render(this);
-	//}
+		m_activeLight = m_lights[i];
+		m_tileMap->Render(this);
+	}
 
-	//m_activeLight = nullptr;
+	glDisable(GL_BLEND);
 
-	//Shader shader = m_light->GetShader();
-	//m_spriteBatch.SetShader(&shader);
+	m_activeLight = nullptr;
+
 	m_spriteBatch.Begin(this);
 	m_testSprite->Draw(m_spriteBatch);
 	m_spriteBatch.End();
-
-	glDisable(GL_BLEND);
 
 	Game::Render();
 }
