@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calctexturecoords',['CalcTextureCoords',['../class_z_e_g_l_1_1_render_entity.html#a7cd71d583ec0c39e106cbaae469bd446',1,'ZEGL::RenderEntity']]],
+  ['calctexturecoords',['CalcTextureCoords',['../class_z_e_g_l_1_1_animated_sprite.html#ae2ca16bc519d97782bce17f639bea3a4',1,'ZEGL::AnimatedSprite::CalcTextureCoords()'],['../class_z_e_g_l_1_1_render_entity.html#ae8febfeb871f9c62812c0e4f9e81ae4f',1,'ZEGL::RenderEntity::CalcTextureCoords()']]],
   ['camera',['Camera',['../class_z_e_g_l_1_1_camera.html#a70070e91dca0135de34f30c4139285da',1,'ZEGL::Camera']]],
   ['camera',['Camera',['../class_z_e_g_l_1_1_camera.html',1,'ZEGL']]],
   ['clamp',['Clamp',['../namespace_util.html#abcb13a4c0e23d4cff27fc8fc4852b5ce',1,'Util']]],

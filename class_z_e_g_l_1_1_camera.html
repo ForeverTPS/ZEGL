@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>ZEGL</b></li><li class="navelem"><a class="el" href="class_z_e_g_l_1_1_camera.html">Camera</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_z_e_g_l.html">ZEGL</a></li><li class="navelem"><a class="el" href="class_z_e_g_l_1_1_camera.html">Camera</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -110,6 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3e4d6e95cf1c0357937de4b515f88b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88208583aa8052896eefbb077cf29a6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">SetPos</a> (glm::vec3 pos)</td></tr>
 <tr class="separator:a88208583aa8052896eefbb077cf29a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a34e5da126be402fb53c275faf78b3"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">GetOrigin</a> () const </td></tr>
+<tr class="separator:a55a34e5da126be402fb53c275faf78b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae25165f2dc4500e6555af89cbefbc1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">SetOrigin</a> (glm::vec3 origin)</td></tr>
+<tr class="separator:aae25165f2dc4500e6555af89cbefbc1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda8a25f5ba68c3dba29334659a66652"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">GetRot</a> () const </td></tr>
 <tr class="separator:adda8a25f5ba68c3dba29334659a66652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c44b901139b76428955637d7eeb000b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">SetRot</a> (float rot)</td></tr>
@@ -287,6 +291,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator delete</b> (
 
 </div>
 </div>
+<a class="anchor" id="a55a34e5da126be402fb53c275faf78b3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 ZEGL::Camera::GetOrigin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the current origin of the camera.</p>
+<dl class="section return"><dt>Returns</dt><dd>glm::vec3 representing the camera origin </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aae25165f2dc4500e6555af89cbefbc1f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZEGL::Camera::SetOrigin </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>origin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the origin of the camera using an existing glm::vec3.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">origin</td><td>New origin value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="adda8a25f5ba68c3dba29334659a66652"></a>
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +465,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator delete</b> (
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 7 2015 15:27:58 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 13 2015 22:26:35 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

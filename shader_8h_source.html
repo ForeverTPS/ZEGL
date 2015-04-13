@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;referencecounter.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;reference_counter.h&quot;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
@@ -120,87 +120,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_shader.html">   34</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html#a1a38a1c0bd502d7c75197ac8045551ff">Shader</a>(<span class="keyword">const</span> std::string&amp; fileName = <span class="stringliteral">&quot;basic_shader&quot;</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html#a1a38a1c0bd502d7c75197ac8045551ff">Shader</a>(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a>&amp; other);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html#ac66188fc63ceda83267c96ded0180d94">Shader</a>(<span class="keyword">const</span> std::string&amp; fileName = <span class="stringliteral">&quot;./res/shaders/basic_shader&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html#ac66188fc63ceda83267c96ded0180d94">Shader</a>(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a>&amp; other);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        ~<a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a>();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#af7fb03a39875b69397de4df892c32a79">Bind</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#ae0455cb62e9450c08e4904cf273cedb7">UnBind</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a>&amp; operator=(<a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#af7fb03a39875b69397de4df892c32a79">Bind</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#ae0455cb62e9450c08e4904cf273cedb7">UnBind</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#abfee347448c897e99d62d6e035e69358">SetUniformi</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keywordtype">int</span> value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#acbca99cac1953b2de8353d666a83e794">SetUniformf</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keywordtype">float</span> value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a642bb7070ea57524c2ee724b6724058f">SetUniformVector2f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec2&amp; value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a9d6176ba3f273fdb952a3b71645941c8">SetUniformVector3f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec3&amp; value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a0365959ddacdd9477b7dba05579dd91c">SetUniformVector4f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec4&amp; value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a8ff8d1827d9cf6707004f133090bbf0f">SetUniformMatrix4f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::mat4&amp; value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a7d09be75a56a8ff939e7e32114271f5e">UpdateUniforms</a>(<a class="code" href="class_z_e_g_l_1_1_game.html">Game</a>* game) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">class </span>ShaderData : <span class="keyword">public</span> <a class="code" href="class_z_e_g_l_1_1_reference_counter.html">ReferenceCounter</a></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            ShaderData(<span class="keyword">const</span> std::string&amp; fileName);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            ~ShaderData();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keyword">inline</span> <span class="keywordtype">int</span> GetProgram()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_program; }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; GetUniformNames()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformNames; }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; GetUniformTypes()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformTypes; }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::unordered_map&lt;std::string, unsigned int&gt;&amp; GetUniformMap()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformMap; }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            ShaderData(ShaderData <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            ShaderData&amp; operator=(ShaderData <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keywordtype">void</span> AddProgram(<span class="keyword">const</span> std::string&amp; text, <span class="keywordtype">int</span> type);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">void</span> AddAllAttributes(<span class="keyword">const</span> std::string&amp; vertexShaderText);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">void</span> AddAllUniforms(<span class="keyword">const</span> std::string&amp; shaderText);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">void</span> AddUniform(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> std::string&amp; uniformType);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordtype">void</span> CompileShader() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">int</span>                                      s_supportedOpenGLLevel;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keyword">static</span> std::string                              s_glslVersion;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordtype">int</span>                                             m_program;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            std::vector&lt;int&gt;                                m_shaders;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            std::vector&lt;std::string&gt;                        m_uniformNames;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            std::vector&lt;std::string&gt;                        m_uniformTypes;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            std::unordered_map&lt;std::string, unsigned int&gt;   m_uniformMap;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        };</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a>&amp; operator=(<a class="code" href="class_z_e_g_l_1_1_shader.html">Shader</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keyword">static</span> std::unordered_map&lt;std::string, ShaderData*&gt; s_resourceMap;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        ShaderData* m_shaderData;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        std::string m_fileName;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    };</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#abfee347448c897e99d62d6e035e69358">SetUniformi</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keywordtype">int</span> value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#acbca99cac1953b2de8353d666a83e794">SetUniformf</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keywordtype">float</span> value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a642bb7070ea57524c2ee724b6724058f">SetUniformVector2f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec2&amp; value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a9d6176ba3f273fdb952a3b71645941c8">SetUniformVector3f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec3&amp; value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a0365959ddacdd9477b7dba05579dd91c">SetUniformVector4f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::vec4&amp; value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a8ff8d1827d9cf6707004f133090bbf0f">SetUniformMatrix4f</a>(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> glm::mat4&amp; value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_shader.html#a7d09be75a56a8ff939e7e32114271f5e">UpdateUniforms</a>(<a class="code" href="class_z_e_g_l_1_1_game.html">Game</a>* game) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">class </span>ShaderData : <span class="keyword">public</span> <a class="code" href="class_z_e_g_l_1_1_reference_counter.html">ReferenceCounter</a></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            ShaderData(<span class="keyword">const</span> std::string&amp; fileName);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            ShaderData(ShaderData <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            ShaderData&amp; operator=(ShaderData <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            ~ShaderData();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keyword">inline</span> <span class="keywordtype">int</span> GetProgram()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_program; }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; GetUniformNames()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformNames; }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; GetUniformTypes()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformTypes; }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keyword">inline</span> <span class="keyword">const</span> std::unordered_map&lt;std::string, unsigned int&gt;&amp; GetUniformMap()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_uniformMap; }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordtype">void</span> AddProgram(<span class="keyword">const</span> std::string&amp; text, <span class="keywordtype">int</span> type);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">void</span> AddAllAttributes(<span class="keyword">const</span> std::string&amp; vertexShaderText);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">void</span> AddAllUniforms(<span class="keyword">const</span> std::string&amp; shaderText);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">void</span> AddUniform(<span class="keyword">const</span> std::string&amp; uniformName, <span class="keyword">const</span> std::string&amp; uniformType);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">void</span> CompileShader() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">int</span>                                      s_supportedOpenGLLevel;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keyword">static</span> std::string                              s_glslVersion;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordtype">int</span>                                             m_program;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            std::vector&lt;int&gt;                                m_shaders;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            std::vector&lt;std::string&gt;                        m_uniformNames;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            std::vector&lt;std::string&gt;                        m_uniformTypes;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            std::unordered_map&lt;std::string, unsigned int&gt;   m_uniformMap;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        };</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keyword">static</span> std::unordered_map&lt;std::string, ShaderData*&gt; s_resourceMap;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        ShaderData* m_shaderData;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        std::string m_fileName;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    };</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_a0365959ddacdd9477b7dba05579dd91c"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a0365959ddacdd9477b7dba05579dd91c">ZEGL::Shader::SetUniformVector4f</a></div><div class="ttdeci">void SetUniformVector4f(const std::string &amp;uniformName, const glm::vec4 &amp;value) const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_a8ff8d1827d9cf6707004f133090bbf0f"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a8ff8d1827d9cf6707004f133090bbf0f">ZEGL::Shader::SetUniformMatrix4f</a></div><div class="ttdeci">void SetUniformMatrix4f(const std::string &amp;uniformName, const glm::mat4 &amp;value) const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_a9d6176ba3f273fdb952a3b71645941c8"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a9d6176ba3f273fdb952a3b71645941c8">ZEGL::Shader::SetUniformVector3f</a></div><div class="ttdeci">void SetUniformVector3f(const std::string &amp;uniformName, const glm::vec3 &amp;value) const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_a7d09be75a56a8ff939e7e32114271f5e"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a7d09be75a56a8ff939e7e32114271f5e">ZEGL::Shader::UpdateUniforms</a></div><div class="ttdeci">void UpdateUniforms(Game *game) const </div></div>
-<div class="ttc" id="namespace_z_e_g_l_html"><div class="ttname"><a href="namespace_z_e_g_l.html">ZEGL</a></div><div class="ttdef"><b>Definition:</b> camera.h:22</div></div>
+<div class="ttc" id="namespace_z_e_g_l_html"><div class="ttname"><a href="namespace_z_e_g_l.html">ZEGL</a></div><div class="ttdef"><b>Definition:</b> animated_sprite.h:22</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_af7fb03a39875b69397de4df892c32a79"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#af7fb03a39875b69397de4df892c32a79">ZEGL::Shader::Bind</a></div><div class="ttdeci">void Bind() const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_acbca99cac1953b2de8353d666a83e794"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#acbca99cac1953b2de8353d666a83e794">ZEGL::Shader::SetUniformf</a></div><div class="ttdeci">void SetUniformf(const std::string &amp;uniformName, float value) const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_a642bb7070ea57524c2ee724b6724058f"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a642bb7070ea57524c2ee724b6724058f">ZEGL::Shader::SetUniformVector2f</a></div><div class="ttdeci">void SetUniformVector2f(const std::string &amp;uniformName, const glm::vec2 &amp;value) const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_game_html"><div class="ttname"><a href="class_z_e_g_l_1_1_game.html">ZEGL::Game</a></div><div class="ttdef"><b>Definition:</b> game.h:40</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html">ZEGL::Shader</a></div><div class="ttdef"><b>Definition:</b> shader.h:34</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_shader_html_a1a38a1c0bd502d7c75197ac8045551ff"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#a1a38a1c0bd502d7c75197ac8045551ff">ZEGL::Shader::Shader</a></div><div class="ttdeci">Shader(const std::string &amp;fileName=&quot;basic_shader&quot;)</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_ae0455cb62e9450c08e4904cf273cedb7"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#ae0455cb62e9450c08e4904cf273cedb7">ZEGL::Shader::UnBind</a></div><div class="ttdeci">void UnBind() const </div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_shader_html_abfee347448c897e99d62d6e035e69358"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#abfee347448c897e99d62d6e035e69358">ZEGL::Shader::SetUniformi</a></div><div class="ttdeci">void SetUniformi(const std::string &amp;uniformName, int value) const </div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_reference_counter_html"><div class="ttname"><a href="class_z_e_g_l_1_1_reference_counter.html">ZEGL::ReferenceCounter</a></div><div class="ttdef"><b>Definition:</b> referencecounter.h:27</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_shader_html_ac66188fc63ceda83267c96ded0180d94"><div class="ttname"><a href="class_z_e_g_l_1_1_shader.html#ac66188fc63ceda83267c96ded0180d94">ZEGL::Shader::Shader</a></div><div class="ttdeci">Shader(const std::string &amp;fileName=&quot;./res/shaders/basic_shader&quot;)</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_reference_counter_html"><div class="ttname"><a href="class_z_e_g_l_1_1_reference_counter.html">ZEGL::ReferenceCounter</a></div><div class="ttdef"><b>Definition:</b> reference_counter.h:27</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 7 2015 15:27:58 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 13 2015 22:26:35 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
