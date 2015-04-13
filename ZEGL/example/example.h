@@ -15,7 +15,7 @@
 */
 
 #include "game.h"
-#include "sprite.h"
+#include "animated_sprite.h"
 #include "tilemap.h"
 
 using namespace ZEGL;
@@ -38,9 +38,10 @@ public:
 	
 protected:
 private:
-	Light*		m_light;
-	TileMap*	m_tileMap;
+	Light*				m_light;
+	TileMap*			m_tileMap;
 
-	SpriteBatch m_spriteBatch;
-	Sprite*		m_testSprite;
+	SpriteBatch			m_spriteBatch;
+	Sprite*				m_testSprite;
+	AnimatedSprite*		m_testAnimSprite;
 };

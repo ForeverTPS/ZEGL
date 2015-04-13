@@ -219,12 +219,18 @@
     <Image Include="res\textures\default_n.png">
       <Filter>res\textures</Filter>
     </Image>
+    <Image Include="res\textures\gb.png">
+      <Filter>res\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\textures\test_atlas.xml">
       <Filter>res\textures</Filter>
     </Xml>
     <Xml Include="res\textures\default_atlas.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
+    <Xml Include="res\textures\gb.xml">
       <Filter>res\textures</Filter>
     </Xml>
   </ItemGroup>

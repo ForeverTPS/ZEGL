@@ -17,14 +17,14 @@
 #include "example.h"
 #include "camera.h"
 #include "light.h"
-#include "sprite.h"
 #include "util.h"
 #include "window.h"
 
 MyGame::MyGame() :
 	m_light(nullptr),
 	m_tileMap(nullptr),
-	m_testSprite(nullptr)
+	m_testSprite(nullptr),
+	m_testAnimSprite(nullptr)
 {
 }
 
@@ -32,6 +32,7 @@ MyGame::~MyGame()
 {
 	Util::SafeDelete(m_tileMap);
 	Util::SafeDelete(m_testSprite);
+	Util::SafeDelete(m_testAnimSprite);
 }
 
 void MyGame::Init(Window* window)
@@ -46,9 +47,24 @@ void MyGame::Init(Window* window)
 	m_lights.push_back(m_light);
 
 	m_spriteBatch.Init();
+	
 	Texture rock("./res/textures/rock.png");
 	TextureAtlas atlas("./res/textures/test_atlas.xml");
 	m_testSprite = new Sprite(rock, atlas, "rock", glm::vec3(300.0f, 300.0f, 0.0f));
+
+	Texture gb("./res/textures/gb.png");
+	TextureAtlas gbAtlas("./res/textures/gb.xml");
+	std::vector<std::string> frames;
+	frames.push_back("gb_walk-0-0");
+	frames.push_back("gb_walk-1-0");
+	frames.push_back("gb_walk-2-0");
+	frames.push_back("gb_walk-3-0");
+	frames.push_back("gb_walk-4-0");
+	frames.push_back("gb_walk-5-0");
+	m_testAnimSprite = new AnimatedSprite(gb, gbAtlas, frames, glm::vec3(600.0f, 400.0f, 0.0f));
+	m_testAnimSprite->SetLooping(true);
+	m_testAnimSprite->SetSpeed(75);
+	m_testAnimSprite->Start();
 }
 
 void MyGame::Update(float delta)
@@ -61,6 +77,7 @@ void MyGame::Update(float delta)
 	m_tileMap->Update(m_window, m_camera->GetPos());
 
 	m_testSprite->SetRot(m_testSprite->GetRot() + 0.5f * delta);
+	m_testAnimSprite->Animate();
 }
 
 void MyGame::Render()
@@ -68,24 +85,26 @@ void MyGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	glDepthMask(GL_FALSE);
+	glDepthFunc(GL_EQUAL);
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
-		
-		glBlendFunc(GL_ONE, GL_ONE);
-		glDepthMask(GL_FALSE);
-		glDepthFunc(GL_EQUAL);
 		m_activeLight = m_lights[i];
 		m_tileMap->Render(this);
 	}
 
-	glDisable(GL_BLEND);
-
 	m_activeLight = nullptr;
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	m_spriteBatch.Begin(this);
 	m_testSprite->Draw(m_spriteBatch);
+	m_testAnimSprite->Draw(m_spriteBatch);
 	m_spriteBatch.End();
+
+	glDisable(GL_BLEND);
 
 	Game::Render();
 }

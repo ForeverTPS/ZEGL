@@ -177,6 +177,8 @@ void SpriteBatch::Flush()
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	m_spriteData.clear();
 }
 
 void SpriteBatch::SetShader(Shader* shader)

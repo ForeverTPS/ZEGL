@@ -75,16 +75,46 @@ AnimatedSprite::AnimatedSprite(const AnimatedSprite& sprite) :
 {
 	for (unsigned int i = 0; i < sprite.m_textureCoordinates.size(); i++)
 	{
-		m_textureCoordinates[i][0] = sprite.m_textureCoordinates[i][0];
-		m_textureCoordinates[i][1] = sprite.m_textureCoordinates[i][1];
-		m_textureCoordinates[i][2] = sprite.m_textureCoordinates[i][2];
-		m_textureCoordinates[i][3] = sprite.m_textureCoordinates[i][3];
+		m_textureCoordinates[i] = sprite.m_textureCoordinates[i];
 	}
 }
 
 void AnimatedSprite::CalcTextureCoords()
 {
+	unsigned int i = 0;
+	for (std::unordered_map<std::string, unsigned int>::const_iterator it = m_frameNames.begin(); it != m_frameNames.end(); it++)
+	{
+		TextureRegion region = m_textureAtlas.GetRegion(it->first);
+		if (region.w != 0)
+		{
+			int textureWidth = m_texture.GetWidth();
+			int textureHeight = m_texture.GetHeight();
 
+			float x = region.x / textureWidth;
+			float y = region.y / textureHeight;
+			float w = region.w / textureWidth;
+			float h = region.h / textureHeight;
+
+			if (GetXScale() == -1.0f || GetYScale() == -1.0f)
+			{
+				SetXScale(region.w);
+				SetYScale(region.h);
+			}
+
+			QuadTexCoords texCoords;
+
+			texCoords.topLeft = glm::vec2(x, y + h);
+			texCoords.topRight = glm::vec2(x + w, y + h);
+			texCoords.bottomLeft = glm::vec2(x, y);
+			texCoords.bottomRight = glm::vec2(x + w, y);
+
+			m_textureCoordinates.push_back(texCoords);
+
+			i++;
+		}
+	}
+
+	SetFrame(0);
 }
 
 void AnimatedSprite::SetFrame(unsigned int frame)
@@ -96,29 +126,38 @@ void AnimatedSprite::SetFrame(unsigned int frame)
 
 	m_currentFrame = frame;
 
-	for (int i = 0; i < 4; i++)
-	{
-		m_data.m_texCoords[i] = m_textureCoordinates[m_currentFrame][i];
-	}
+	m_data.m_texCoords[0] = m_textureCoordinates[m_currentFrame].topLeft;
+	m_data.m_texCoords[1] = m_textureCoordinates[m_currentFrame].topRight;
+	m_data.m_texCoords[2] = m_textureCoordinates[m_currentFrame].bottomLeft;
+	m_data.m_texCoords[3] = m_textureCoordinates[m_currentFrame].bottomRight;
 }
 
 void AnimatedSprite::Reset(bool restart)
 {
-	SetFrame(0);
 	m_isAnimating = restart;
+	if (restart)
+	{
+		Start(0);
+	}
+	else
+	{
+		m_isAnimating = false;
+		SetFrame(0);
+	}
 }
 
 void AnimatedSprite::Start(unsigned int frame)
 {
 	SetFrame(frame);
 	m_isAnimating = true;
+	m_lastAnimated = 0;
 }
 
 void AnimatedSprite::Animate()
 {
 	if (m_isAnimating)
 	{
-		double time = Time::GetTime();
+		Uint32 time = SDL_GetTicks();
 		if ((time - m_lastAnimated) > m_speed)
 		{
 			m_lastAnimated = time;

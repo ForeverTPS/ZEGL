@@ -160,6 +160,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
   <ItemGroup>
     <Image Include="res\textures\default.png" />
     <Image Include="res\textures\default_n.png" />
+    <Image Include="res\textures\gb.png" />
     <Image Include="res\textures\rock.png" />
     <Image Include="res\textures\rock_n.png" />
   </ItemGroup>
@@ -167,6 +168,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <Xml Include="res\textures\default_atlas.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="res\textures\gb.xml" />
     <Xml Include="res\textures\test_atlas.xml">
       <SubType>Designer</SubType>
     </Xml>
