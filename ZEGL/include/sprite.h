@@ -41,8 +41,8 @@ namespace ZEGL
 		* \param[in] regionName Name of the region in the texture atlas for this sprite
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial x scale of the entity
-		* \param[in] scale Initial y scale of the entity
+		* \param[in] xScale Initial x scale of the entity
+		* \param[in] yScale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -67,8 +67,8 @@ namespace ZEGL
 		* \param[in] regionName Name of the region in the texture atlas for this sprite
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial x scale of the entity
-		* \param[in] scale Initial y scale of the entity
+		* \param[in] xScale Initial x scale of the entity
+		* \param[in] yScale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas]
 		*/
@@ -84,6 +84,13 @@ namespace ZEGL
 		Sprite& operator=(Sprite const&) = delete;		
 		virtual ~Sprite() {}
 
+		/**
+		* Adds the sprite data to a sprite batch for rendering
+		*
+		* \param[in] batch A SpriteBatch which will be used to render the sprite
+		*
+		* \see [SpriteBatch]
+		*/
 		void Draw(SpriteBatch& batch);
 
 	protected:

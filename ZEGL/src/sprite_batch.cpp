@@ -92,14 +92,15 @@ void SpriteBatch::Begin(Game* game)
 	if (m_customShader != nullptr)
 	{
 		m_customShader->Bind();
+		m_customShader->UpdateUniforms(game);
 	}
 	else
 	{
 		m_defaultShader.Bind();
+		m_defaultShader.UpdateUniforms(game);
 	}
 
 	m_spriteData.clear();
-	m_defaultShader.UpdateUniforms(game);
 
 	m_isDrawing = true;
 }

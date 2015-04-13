@@ -42,8 +42,8 @@ namespace ZEGL
 		* \param[in] frameNames List of each animation frame names (TextureRegion)
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial x scale of the entity
-		* \param[in] scale Initial y scale of the entity
+		* \param[in] xScale Initial x scale of the entity
+		* \param[in] yScale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas][TextureRegion]
 		*/
@@ -68,8 +68,8 @@ namespace ZEGL
 		* \param[in] frameNames List of each animation frame names (TextureRegion)
 		* \param[in] pos Initial position of the entity
 		* \param[in] rot Initial rotation angle (in radians) of the entity
-		* \param[in] scale Initial x scale of the entity
-		* \param[in] scale Initial y scale of the entity
+		* \param[in] xScale Initial x scale of the entity
+		* \param[in] yScale Initial y scale of the entity
 		*
 		* \see [Texture][TextureAtlas][TextureRegion]
 		*/

@@ -75,31 +75,6 @@ namespace ZEGL
 		{
 		}
 
-		/**
-		* Constructor using a pre-calculated texture coordinates.
-		*
-		* Used for a tile which has a texture coordinate data and no atlas.
-		*
-		* \param[in] texture Texture to use for the tile
-		* \param[in] normalMap Corresponding normal map for the texture
-		* \param[in] textureCoords Quad texture coordinates
-		* \param[in] pos Initial position of the tile
-		* \param[in] rot Initial rotation angle (in radians) of the tile
-		* \param[in] scale Initial scale of the tile
-		*
-		* \see [Texture][TextureAtlas]
-		*/
-		//Tile(const Texture& texture,
-		//	 const Texture& normalMap,
-		//	 const glm::vec2 textureCoords[4],
-		//	 const glm::vec3& pos = glm::vec3(0.0f),
-		//	 float rot = 0.0f,
-		//	 float scale = (float)DEFAULT_TILE_SIZE) :
-		//	m_tileSize(scale),
-		//	RenderEntity(texture, normalMap, textureCoords, pos, rot, scale, scale)
-		//{
-		//}
-
 		Tile(const Tile& tile) :
 			m_tileSize(tile.m_tileSize),
 			RenderEntity(tile)
