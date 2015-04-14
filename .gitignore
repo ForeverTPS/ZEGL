@@ -297,6 +297,8 @@ ZEGL.html
 !ZEGL/res/levels/*
 doxygen/html/
 doxygen/latex/
+msvcp120d.dll
+msvcr120d.dll
 copy_resources.bat
 
 ### CMake ###
