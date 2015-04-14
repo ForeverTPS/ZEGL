@@ -15,6 +15,7 @@
 */
 
 #include "example.h"
+#include "audio.h"
 #include "camera.h"
 #include "light.h"
 #include "util.h"
@@ -65,6 +66,9 @@ void MyGame::Init(Window* window)
 	m_testAnimSprite->SetLooping(true);
 	m_testAnimSprite->SetSpeed(75);
 	m_testAnimSprite->Start();
+
+	Audio::AddMusic("./res/sound/music/MI_Intro.mp3", "Intro");
+	Audio::PlayMusic("Intro");
 }
 
 void MyGame::Update(float delta)

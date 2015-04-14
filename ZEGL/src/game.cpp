@@ -23,6 +23,7 @@
 #include "fontstash/gl3fontstash.h"
 
 #include "game.h"
+#include "audio.h"
 #include "camera.h"
 #include "light.h"
 #include "tilemap.h"
@@ -57,12 +58,16 @@ Game::~Game()
 	}
 
 	gl3fonsDelete(m_fontContext);
+
+	Audio::Clear();
 }
 
 void Game::Init(Window* window)
 {
 	m_window = window;
 	m_camera = new Camera(m_window);
+
+	Audio::Init();
 	
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	

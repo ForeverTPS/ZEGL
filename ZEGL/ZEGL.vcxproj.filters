@@ -31,6 +31,15 @@
     <Filter Include="example">
       <UniqueIdentifier>{78cd6492-69f1-4fd9-9f17-1e2c794da0db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\sound">
+      <UniqueIdentifier>{ba8cb758-c446-40ce-9e71-df3e62cdaffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\sound\music">
+      <UniqueIdentifier>{48ef4383-09dd-43b8-9e5b-5d2c9cbaf746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\sound\sfx">
+      <UniqueIdentifier>{684fdf8e-007e-43f5-832d-e9c7a9413c4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="example\example.cpp">
@@ -97,6 +106,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\animated_sprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\audio.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,6 +194,9 @@
     <ClInclude Include="include\sprite_batch.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\audio.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic_shader_vs.glsl">
@@ -238,5 +253,10 @@
     <Font Include="res\fonts\DroidSerif-Regular.ttf">
       <Filter>res\fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\sound\music\MI_Intro.mp3">
+      <Filter>res\sound\music</Filter>
+    </Media>
   </ItemGroup>
 </Project>
