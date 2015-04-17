@@ -104,87 +104,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">* limitations under the License.</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_z_e_g_l.html">ZEGL</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">class </span>Window;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html">   31</a></span>&#160;    __declspec(align(16)) class <a class="code" href="class_z_e_g_l_1_1_camera.html">Camera</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        Camera(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>* window = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">const</span> glm::mat4&amp; GetTransform(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>* window);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">   75</a></span>&#160;        <span class="keyword">inline</span> glm::vec3 <a class="code" href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">GetPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_pos; }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">   84</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">SetPos</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> z = 0.0f) { m_pos.x = x; m_pos.y = y; m_pos.z = z; }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">   91</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">SetPos</a>(glm::vec3 pos) { m_pos = pos; }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">   98</a></span>&#160;        <span class="keyword">inline</span> glm::vec3 <a class="code" href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">GetOrigin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_origin; }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">  105</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">SetOrigin</a>(glm::vec3 origin) { m_origin = origin; }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">  112</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">GetRot</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_rot; }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">  119</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">SetRot</a>(<span class="keywordtype">float</span> rot) { m_rot = rot; }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">  126</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">GetZoom</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_zoom; }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">  133</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">SetZoom</a>(<span class="keywordtype">float</span> zoom) { m_zoom = zoom; }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordtype">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>(<span class="keywordtype">size_t</span> i)    { <span class="keywordflow">return</span> _mm_malloc(i, 16); }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">void</span>  <span class="keyword">operator</span> <span class="keyword">delete</span>(<span class="keywordtype">void</span>* p)  { _mm_free(p); }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keyword">struct </span>Transformation</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            glm::mat4   m_matrix;       </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            glm::vec3   m_lastOrigin;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            glm::vec3   m_lastPos;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordtype">float</span>       m_lastRot;      </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordtype">float</span>       m_lastZoom;     </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keyword">inline</span> <span class="keywordtype">void</span> Update(<span class="keyword">const</span> glm::vec3&amp; origin, <span class="keyword">const</span> glm::vec3&amp; pos, <span class="keywordtype">float</span> rot, <span class="keywordtype">float</span> zoom)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                m_lastOrigin = origin;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                m_lastPos = pos; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                m_lastRot = rot; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                m_lastZoom = zoom;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        };</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordtype">void</span> RecreateTransform(<span class="keyword">const</span> Window* window);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        glm::vec3       m_origin;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        glm::vec3       m_pos;      </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">float</span>           m_rot;      </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordtype">float</span>           m_zoom;     </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        Transformation  m_transform;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    };</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a3e4d6e95cf1c0357937de4b515f88b6b"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">ZEGL::Camera::SetPos</a></div><div class="ttdeci">void SetPos(float x, float y, float z=0.0f)</div><div class="ttdef"><b>Definition:</b> camera.h:84</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html">ZEGL::Camera</a></div><div class="ttdef"><b>Definition:</b> camera.h:31</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_ae90bbfb4a99f096269973a524a3697d8"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">ZEGL::Camera::GetZoom</a></div><div class="ttdeci">float GetZoom() const </div><div class="ttdef"><b>Definition:</b> camera.h:126</div></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_z_e_g_l.html">ZEGL</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">class </span>Window;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html">   30</a></span>&#160;    __declspec(align(16)) class <a class="code" href="class_z_e_g_l_1_1_camera.html">Camera</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Camera(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>* window = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">const</span> glm::mat4&amp; GetTransform(<span class="keyword">const</span> <a class="code" href="class_z_e_g_l_1_1_window.html">Window</a>* window);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">   74</a></span>&#160;        <span class="keyword">inline</span> glm::vec3 <a class="code" href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">GetPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_pos; }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">   83</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">SetPos</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> z = 0.0f) { m_pos.x = x; m_pos.y = y; m_pos.z = z; }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">   90</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">SetPos</a>(glm::vec3 pos) { m_pos = pos; }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">   97</a></span>&#160;        <span class="keyword">inline</span> glm::vec3 <a class="code" href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">GetOrigin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_origin; }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">  104</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">SetOrigin</a>(glm::vec3 origin) { m_origin = origin; }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">  111</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">GetRot</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_rot; }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">  118</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">SetRot</a>(<span class="keywordtype">float</span> rot) { m_rot = rot; }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">  125</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">GetZoom</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_zoom; }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">  132</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">SetZoom</a>(<span class="keywordtype">float</span> zoom) { m_zoom = zoom; }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordtype">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>(<span class="keywordtype">size_t</span> i)    { <span class="keywordflow">return</span> _mm_malloc(i, 16); }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordtype">void</span>  <span class="keyword">operator</span> <span class="keyword">delete</span>(<span class="keywordtype">void</span>* p)  { _mm_free(p); }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keyword">struct </span>Transformation</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            glm::mat4   m_matrix;       </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            glm::vec3   m_lastOrigin;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            glm::vec3   m_lastPos;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordtype">float</span>       m_lastRot;      </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordtype">float</span>       m_lastZoom;     </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keyword">inline</span> <span class="keywordtype">void</span> Update(<span class="keyword">const</span> glm::vec3&amp; origin, <span class="keyword">const</span> glm::vec3&amp; pos, <span class="keywordtype">float</span> rot, <span class="keywordtype">float</span> zoom)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                m_lastOrigin = origin;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                m_lastPos = pos; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                m_lastRot = rot; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                m_lastZoom = zoom;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        };</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordtype">void</span> RecreateTransform(<span class="keyword">const</span> Window* window);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        glm::vec3       m_origin;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        glm::vec3       m_pos;      </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordtype">float</span>           m_rot;      </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">float</span>           m_zoom;     </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        Transformation  m_transform;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    };</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a3e4d6e95cf1c0357937de4b515f88b6b"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a3e4d6e95cf1c0357937de4b515f88b6b">ZEGL::Camera::SetPos</a></div><div class="ttdeci">void SetPos(float x, float y, float z=0.0f)</div><div class="ttdef"><b>Definition:</b> camera.h:83</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html">ZEGL::Camera</a></div><div class="ttdef"><b>Definition:</b> camera.h:30</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_ae90bbfb4a99f096269973a524a3697d8"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8">ZEGL::Camera::GetZoom</a></div><div class="ttdeci">float GetZoom() const </div><div class="ttdef"><b>Definition:</b> camera.h:125</div></div>
 <div class="ttc" id="namespace_z_e_g_l_html"><div class="ttname"><a href="namespace_z_e_g_l.html">ZEGL</a></div><div class="ttdef"><b>Definition:</b> animated_sprite.h:22</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a0dbdf23ce58ffee1a5a7fcfe7672f1cc"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">ZEGL::Camera::GetPos</a></div><div class="ttdeci">glm::vec3 GetPos() const </div><div class="ttdef"><b>Definition:</b> camera.h:75</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_ac487ced7703cdedce8d7b3041cc580d7"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">ZEGL::Camera::SetZoom</a></div><div class="ttdeci">void SetZoom(float zoom)</div><div class="ttdef"><b>Definition:</b> camera.h:133</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a88208583aa8052896eefbb077cf29a6f"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">ZEGL::Camera::SetPos</a></div><div class="ttdeci">void SetPos(glm::vec3 pos)</div><div class="ttdef"><b>Definition:</b> camera.h:91</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_adda8a25f5ba68c3dba29334659a66652"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">ZEGL::Camera::GetRot</a></div><div class="ttdeci">float GetRot() const </div><div class="ttdef"><b>Definition:</b> camera.h:112</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a55a34e5da126be402fb53c275faf78b3"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">ZEGL::Camera::GetOrigin</a></div><div class="ttdeci">glm::vec3 GetOrigin() const </div><div class="ttdef"><b>Definition:</b> camera.h:98</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_aae25165f2dc4500e6555af89cbefbc1f"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">ZEGL::Camera::SetOrigin</a></div><div class="ttdeci">void SetOrigin(glm::vec3 origin)</div><div class="ttdef"><b>Definition:</b> camera.h:105</div></div>
-<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a1c44b901139b76428955637d7eeb000b"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">ZEGL::Camera::SetRot</a></div><div class="ttdeci">void SetRot(float rot)</div><div class="ttdef"><b>Definition:</b> camera.h:119</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a0dbdf23ce58ffee1a5a7fcfe7672f1cc"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a0dbdf23ce58ffee1a5a7fcfe7672f1cc">ZEGL::Camera::GetPos</a></div><div class="ttdeci">glm::vec3 GetPos() const </div><div class="ttdef"><b>Definition:</b> camera.h:74</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_ac487ced7703cdedce8d7b3041cc580d7"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#ac487ced7703cdedce8d7b3041cc580d7">ZEGL::Camera::SetZoom</a></div><div class="ttdeci">void SetZoom(float zoom)</div><div class="ttdef"><b>Definition:</b> camera.h:132</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a88208583aa8052896eefbb077cf29a6f"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a88208583aa8052896eefbb077cf29a6f">ZEGL::Camera::SetPos</a></div><div class="ttdeci">void SetPos(glm::vec3 pos)</div><div class="ttdef"><b>Definition:</b> camera.h:90</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_adda8a25f5ba68c3dba29334659a66652"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#adda8a25f5ba68c3dba29334659a66652">ZEGL::Camera::GetRot</a></div><div class="ttdeci">float GetRot() const </div><div class="ttdef"><b>Definition:</b> camera.h:111</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a55a34e5da126be402fb53c275faf78b3"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a55a34e5da126be402fb53c275faf78b3">ZEGL::Camera::GetOrigin</a></div><div class="ttdeci">glm::vec3 GetOrigin() const </div><div class="ttdef"><b>Definition:</b> camera.h:97</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_aae25165f2dc4500e6555af89cbefbc1f"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#aae25165f2dc4500e6555af89cbefbc1f">ZEGL::Camera::SetOrigin</a></div><div class="ttdeci">void SetOrigin(glm::vec3 origin)</div><div class="ttdef"><b>Definition:</b> camera.h:104</div></div>
+<div class="ttc" id="class_z_e_g_l_1_1_camera_html_a1c44b901139b76428955637d7eeb000b"><div class="ttname"><a href="class_z_e_g_l_1_1_camera.html#a1c44b901139b76428955637d7eeb000b">ZEGL::Camera::SetRot</a></div><div class="ttdeci">void SetRot(float rot)</div><div class="ttdef"><b>Definition:</b> camera.h:118</div></div>
 <div class="ttc" id="class_z_e_g_l_1_1_window_html"><div class="ttname"><a href="class_z_e_g_l_1_1_window.html">ZEGL::Window</a></div><div class="ttdef"><b>Definition:</b> window.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 13 2015 22:26:35 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 17 2015 22:25:57 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
