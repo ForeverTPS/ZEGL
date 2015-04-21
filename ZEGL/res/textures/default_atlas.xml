@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Region name="default" x="0.0" y="0.0" w="512.0" h="512.0" />
+<Region>
+  <Region name="default" x="0.0" y="0.0" w="512.0" h="512.0" />
+</Region>

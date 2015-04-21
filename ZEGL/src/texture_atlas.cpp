@@ -42,7 +42,7 @@ void TextureAtlas::TextureAtlasData::ParseTextureAtlas(const std::string& fileNa
 	}
 	else
 	{
-		XMLElement* region = doc.FirstChildElement("Region");
+		/*XMLElement* region = doc.FirstChildElement("Region");
 		if (region == nullptr)
 		{
 			success = false;
@@ -65,7 +65,41 @@ void TextureAtlas::TextureAtlasData::ParseTextureAtlas(const std::string& fileNa
 
 				region = region->NextSiblingElement();
 			}
+		}*/
+		XMLElement* region = doc.RootElement();
+		if (region == nullptr)
+		{
+			success = false;
+			error = "No REGIONS node defined.";
 		}
+		else
+		{
+			region = region->FirstChildElement("Region");
+			if (region == nullptr)
+			{
+				success = false;
+				error = "No REGION nodes defined.";
+			}
+			else
+			{
+				while (region != nullptr)
+				{
+					std::string regionName;
+					TextureRegion textureRegion;
+
+					regionName = region->Attribute("name");
+					region->QueryFloatAttribute("x", &textureRegion.x);
+					region->QueryFloatAttribute("y", &textureRegion.y);
+					region->QueryFloatAttribute("w", &textureRegion.w);
+					region->QueryFloatAttribute("h", &textureRegion.h);
+
+					m_textureRegions.insert(std::pair<std::string, TextureRegion>(regionName, textureRegion));
+
+					region = region->NextSiblingElement();
+				}
+			}
+		}
+
 	}
 
 	if (!success)
