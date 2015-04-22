@@ -137,11 +137,19 @@ namespace ZEGL
 		inline void	SetYScale(float scale) { m_data.m_yScale = scale; }
 
 		/**
-		* Set the entity scale factor.
+		* Scale the entity.
 		*
-		* \param[in] scale Scaling factor for the entity
+		* \param[in] xScale Amount to scale the current X size by
+		* \param[in] yScale Amount to scale the current Y size by
 		*/
-		inline void	SetScale(float scale) { m_data.m_xScale = m_data.m_yScale = scale; }
+		inline void	Scale(float xScale, float yScale) { m_data.m_xScale *= xScale;  m_data.m_yScale *= yScale; }
+
+		/**
+		* Scale the entity.
+		*
+		* \param[in] scale Amount to scale the current X & Y size by
+		*/
+		inline void	Scale(float scale) { m_data.m_xScale *= scale;  m_data.m_yScale *= scale; }
 
 		/**
 		* Get the entity data structure

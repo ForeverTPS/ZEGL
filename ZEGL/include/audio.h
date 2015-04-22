@@ -19,6 +19,10 @@
 #include <SDL_mixer.h>
 #include <string>
 
+/**
+* Using a namespace rather than a static class or singleton etc to provide
+* audio in the form of music and sound effects
+*/
 namespace Audio
 {
 	// MUSIC

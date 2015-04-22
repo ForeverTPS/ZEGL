@@ -65,6 +65,7 @@ void MyGame::Init(Window* window)
 	m_testAnimSprite = new AnimatedSprite(gb, gbAtlas, frames, glm::vec3(600.0f, 400.0f, 0.0f));
 	m_testAnimSprite->SetLooping(true);
 	m_testAnimSprite->SetSpeed(75);
+	m_testAnimSprite->Scale(0.5f);
 	m_testAnimSprite->Start();
 
 	Audio::AddMusic("./res/sound/music/MI_Intro.mp3", "Intro");
