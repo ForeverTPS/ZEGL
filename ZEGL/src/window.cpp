@@ -69,3 +69,10 @@ void Window::SetFullScreen(bool value)
 	SDL_SetWindowFullscreen(m_window, mode);
 }
 
+void Window::BindAsRenderTarget() const
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, m_width, m_height);
+}
+

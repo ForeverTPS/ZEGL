@@ -101,6 +101,8 @@ namespace ZEGL
 		*/
 		void SetFullScreen(bool value);
 
+		void BindAsRenderTarget() const;
+
 	protected:
 	private:
 		static bool   s_glewInitialized;
