@@ -220,6 +220,12 @@
     <None Include="..\doxygen\default.doxyfile">
       <Filter>documentation</Filter>
     </None>
+    <None Include="res\shaders\basic_sprite_fs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\basic_sprite_vs.glsl">
+      <Filter>res\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\rock.png">

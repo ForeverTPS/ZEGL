@@ -44,4 +44,9 @@ private:
 	SpriteBatch			m_spriteBatch;
 	Sprite*				m_testSprite;
 	AnimatedSprite*		m_testAnimSprite;
+
+	Texture*			m_screenFBO;
+	GLuint				m_screenVAO;
+	GLuint				m_screenVBO;
+	Shader				g_screenShader;
 };

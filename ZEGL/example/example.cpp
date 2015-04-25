@@ -21,6 +21,15 @@
 #include "util.h"
 #include "window.h"
 
+static const GLfloat s_screenQuad[] = {
+	-1.0f, -1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	1.0f, 1.0f, 0.0f,
+};
+
 MyGame::MyGame() :
 	m_light(nullptr),
 	m_tileMap(nullptr),
@@ -34,11 +43,30 @@ MyGame::~MyGame()
 	Util::SafeDelete(m_tileMap);
 	Util::SafeDelete(m_testSprite);
 	Util::SafeDelete(m_testAnimSprite);
+
+	Util::SafeDelete(m_screenFBO);
+
+	if (m_screenVBO)
+	{
+		glDeleteBuffers(1, &m_screenVBO);
+	}
+	if (m_screenVAO)
+	{
+		glBindVertexArray(0);
+		glDeleteVertexArrays(1, &m_screenVAO);
+	}
 }
 
 void MyGame::Init(Window* window)
 {
 	Game::Init(window);
+
+	m_screenFBO = new Texture(800, 600, nullptr, GL_TEXTURE_2D, GL_LINEAR_MIPMAP_LINEAR, GL_RGBA, GL_RGBA, false, GL_COLOR_ATTACHMENT0);
+	glGenVertexArrays(1, &m_screenVAO);
+	glBindVertexArray(m_screenVAO);
+	glGenBuffers(1, &m_screenVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_screenVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(s_screenQuad), s_screenQuad, GL_STATIC_DRAW);
 
 	m_tileMap = new TileMap("./res/levels/test_level.ldf");
 
@@ -87,6 +115,7 @@ void MyGame::Update(float delta)
 
 void MyGame::Render()
 {
+	//m_screenFBO->BindAsRenderTarget();
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glEnable(GL_BLEND);
@@ -110,6 +139,30 @@ void MyGame::Render()
 	m_spriteBatch.End();
 
 	glDisable(GL_BLEND);
+
+	//m_window->BindAsRenderTarget();
+	//glClear(GL_COLOR_BUFFER_BIT);
+
+	//glBindVertexArray(m_screenVAO);
+
+	//g_screenShader.Bind();
+	//m_screenFBO->Bind(0);
+	//g_screenShader.UpdateUniforms(this);
+
+	//glEnableVertexAttribArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, s_screenQuad);
+	//glVertexAttribPointer(
+	//	0,           
+	//	3,           
+	//	GL_FLOAT,    
+	//	GL_FALSE,    
+	//	0,           
+	//	(void*)0     
+	//	);
+
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	//glDisableVertexAttribArray(0);
 
 	Game::Render();
 }

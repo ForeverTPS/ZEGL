@@ -157,6 +157,8 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <None Include="res\levels\test_level.ldf.tdef" />
     <None Include="res\shaders\basic_shader_fs.glsl" />
     <None Include="res\shaders\basic_shader_vs.glsl" />
+    <None Include="res\shaders\basic_sprite_fs.glsl" />
+    <None Include="res\shaders\basic_sprite_vs.glsl" />
     <None Include="res\shaders\point_light_fs.glsl" />
     <None Include="res\shaders\point_light_vs.glsl" />
   </ItemGroup>

@@ -1,8 +1,4 @@
-/*  ____ ____ ____ ____
- * ||Z |||E |||G |||L ||
- * ||__|||__|||__|||__||
- * |/__\|/__\|/__\|/__\|
- *
+/**
  * Copyright(c) 2014, Phil Sampson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,18 +14,15 @@
  * limitations under the License.
  */
 
-#version 330
+#version 150
 
-in vec2 vTexCoords;
+in vec2 vTexCoord;
 
-layout(location=0) out vec4 fragColor;
-layout(location=1) out vec4 normalColor;
+out vec4 fragColor;
 
-uniform vec4 uAmbient;
-uniform sampler2D uDiffuse, uNormal;
+uniform sampler2D u_diffuse;
 
 void main() 
 {
-    normalColor = texture(uNormal, vTexCoords, 0);
-    fragColor = texture(uDiffuse, vTexCoords, 0) * uAmbient;
+	fragColor = texture(u_diffuse, vTexCoord);
 }

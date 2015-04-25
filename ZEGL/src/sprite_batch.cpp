@@ -22,6 +22,7 @@ using namespace ZEGL;
 SpriteBatch::SpriteBatch() :
 	m_lastTexture(nullptr),
 	m_lastNormalMap(nullptr),
+	m_defaultShader("./res/shaders/basic_sprite"),
 	m_customShader(nullptr),
 	m_VAO(0),
 	m_VAB(0),
