@@ -43,7 +43,7 @@ namespace ZEGL
 		Game();
 		Game(Game const&) = delete;
 		Game& operator=(Game const&) = delete;
-		virtual ~Game();
+		virtual ~Game() = 0;
 
 		/**
 		* All resource loading, game related initialization and OpenGL rendering
@@ -112,7 +112,7 @@ namespace ZEGL
 		*
 		* \see [Window]
 		*/
-		inline const Window* GetWindow() { return m_window; }
+		inline const Window* GetWindow() const { return m_window; }
 
 	protected:
 		Camera*				m_camera;			/*!< The Game Camera */

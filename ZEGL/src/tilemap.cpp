@@ -225,8 +225,8 @@ void TileMap::Render(Game* game)
 		return;
 	}
 
-	Texture* texture = m_activeTiles[0].GetTexture();
-	Texture* normalMap = m_activeTiles[0].GetNormalMap();
+	const Texture* texture = m_activeTiles[0].GetTexture();
+	const Texture* normalMap = m_activeTiles[0].GetNormalMap();
 
 	Shader shader = game->GetActiveLight()->GetShader();
 

@@ -41,7 +41,7 @@ namespace ZEGL
 		/**
 		* Remap of the SDL mouse button codes
 		*/
-		enum class MouseButton
+		enum
 		{
 			MOUSE_LEFT_BUTTON = SDL_BUTTON_LEFT,				/*!< Left mouse button */
 			MOUSE_MIDDLE_BUTTON = SDL_BUTTON_MIDDLE,			/*!< Middle mouse button */
@@ -53,7 +53,7 @@ namespace ZEGL
 		/**
 		* Remap of the SDL key codes
 		*/
-		enum class KeyboardKey
+		enum
 		{
 			KEY_UNKOWN = SDLK_UNKNOWN,							/*!< Unknown key value */
 
@@ -445,7 +445,7 @@ namespace ZEGL
 		*
 		* \param[in] window The Window in which to position the cursor
 		* \param[in] x The new x coordinate
-		* \param[in] x The new y coordinate
+		* \param[in] y The new y coordinate
 		*/
 		void SetMousePosition(Window* window, int x, int y);
 

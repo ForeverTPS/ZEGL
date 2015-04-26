@@ -101,6 +101,11 @@ namespace ZEGL
 		*/
 		void SetFullScreen(bool value);
 
+		/**
+		* Sets the window as the target to be rendered to. This should be called if
+		* using render to texture technique so that the framebuffer is no longer the
+		* texture.
+		*/
 		void BindAsRenderTarget() const;
 
 	protected:

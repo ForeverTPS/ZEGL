@@ -122,7 +122,7 @@ namespace ZEGL
 		/**
 		* Pause the animation at the current frame.
 		*/
-		inline int	Pause() { m_isAnimating = false; }
+		inline int Pause() { m_isAnimating = false; }
 		
 		/**
 		* Resume the animation from the last frame.

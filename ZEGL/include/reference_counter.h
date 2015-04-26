@@ -30,9 +30,7 @@ namespace ZEGL
 		/**
 		* The constructor initializes the reference count to 1
 		*/
-		ReferenceCounter() :
-			m_refCount(1) {}
-
+		ReferenceCounter() : m_refCount(1) {}
 		ReferenceCounter(ReferenceCounter const&) = delete;
 		ReferenceCounter& operator=(ReferenceCounter const&) = delete;
 		virtual ~ReferenceCounter() {}
@@ -47,7 +45,7 @@ namespace ZEGL
 		*
 		* \return True if the reference count is reduced to 0 otherwise false
 		*/
-		inline bool RemoveReference()	{ m_refCount--; return m_refCount == 0; }
+		inline bool RemoveReference() { m_refCount--; return m_refCount == 0; }
 
 	protected:
 	private:

@@ -27,7 +27,10 @@ namespace
 
 namespace Audio
 {
+	//////////////////////////////////////////////////////////////////////////
 	// MUSIC
+	//////////////////////////////////////////////////////////////////////////
+
 	void AddMusic(std::string fileName, std::string key)
 	{
 		std::unordered_map<std::string, Mix_Music*>::const_iterator it = s_music.find(key);
@@ -97,7 +100,10 @@ namespace Audio
 		Mix_VolumeMusic((MIX_MAX_VOLUME / 100) * Util::Clamp(volume, 0, 100));
 	}
 
+	//////////////////////////////////////////////////////////////////////////
 	// SFX
+	//////////////////////////////////////////////////////////////////////////
+
 	void AddSoundEffect(std::string fileName, std::string key)
 	{
 		std::unordered_map<std::string, Mix_Chunk*>::const_iterator it = s_soundEffects.find(key);
@@ -165,7 +171,10 @@ namespace Audio
 		Mix_Volume(-1, (MIX_MAX_VOLUME / 100) * Util::Clamp(volume, 0, 100));
 	}
 
+	//////////////////////////////////////////////////////////////////////////
 	// GENERAL
+	//////////////////////////////////////////////////////////////////////////
+
 	void Init(int frequency, Uint16 format, int channels, int chunksize)
 	{
 		if (Mix_OpenAudio(frequency, format, channels, chunksize) < 0)

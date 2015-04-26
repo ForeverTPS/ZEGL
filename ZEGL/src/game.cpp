@@ -104,14 +104,14 @@ void Game::Update(float delta)
 
 		if (e.type == SDL_KEYDOWN)
 		{
-			int value = e.key.keysym.scancode;
+			int value = e.key.keysym.sym;
 
 			m_input.SetKey(value, true);
 			m_input.SetKeyDown(value, true);
 		}
 		if (e.type == SDL_KEYUP)
 		{
-			int value = e.key.keysym.scancode;
+			int value = e.key.keysym.sym;
 
 			m_input.SetKey(value, false);
 			m_input.SetKeyUp(value, true);

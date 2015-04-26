@@ -85,7 +85,7 @@ namespace ZEGL
 		*
 		* \see [EntityData]
 		*/
-		inline const std::vector<EntityData>& GetActiveTilesData()	const { return m_activeTilesData; }
+		inline const std::vector<EntityData>& GetActiveTilesData() const { return m_activeTilesData; }
 
 	protected:
 	private:
