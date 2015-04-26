@@ -17,6 +17,24 @@
   <ItemGroup>
     <ClInclude Include="include\example.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\ZEGL\res\sound\music\MI_Intro.mp3">
+      <FileType>Document</FileType>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ZEGL\res\textures\gb.png" />
+    <Image Include="..\ZEGL\res\textures\rock.png" />
+    <Image Include="..\ZEGL\res\textures\rock_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\ZEGL\res\textures\gb.xml" />
+    <Xml Include="..\ZEGL\res\textures\test_atlas.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\levels\test_level.ldf" />
+    <None Include="res\levels\test_level.ldf.tdef" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CCA24DBF-ABEA-4771-A777-9909F5395CBA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

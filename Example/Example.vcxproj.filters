@@ -13,6 +13,27 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="res\fonts">
+      <UniqueIdentifier>{c70fcf4f-26da-49db-8fa9-d8a9827061b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\levels">
+      <UniqueIdentifier>{365d4eba-7151-463f-9c44-560edde05164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\sounds">
+      <UniqueIdentifier>{83357211-4d6e-4b0c-bd18-d0b0f3bbb020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\textures">
+      <UniqueIdentifier>{52d139e1-6fda-43ab-a22f-a453e374236d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\shaders">
+      <UniqueIdentifier>{f891de1e-241b-4e29-b34f-1d61836e3cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\sounds\music">
+      <UniqueIdentifier>{caf6cfc7-1eca-422b-92c8-a59e709912dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\sounds\sfx">
+      <UniqueIdentifier>{411b2986-a592-4008-bf7e-795f8481dd04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\example.cpp">
@@ -26,5 +47,37 @@
     <ClInclude Include="include\example.h">
       <Filter>include</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\ZEGL\res\sound\music\MI_Intro.mp3">
+      <Filter>res\sounds\sfx</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ZEGL\res\textures\gb.png">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="..\ZEGL\res\textures\rock.png">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="..\ZEGL\res\textures\rock_n.png">
+      <Filter>res\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\ZEGL\res\textures\gb.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
+    <Xml Include="..\ZEGL\res\textures\test_atlas.xml">
+      <Filter>res\textures</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\levels\test_level.ldf">
+      <Filter>res\levels</Filter>
+    </None>
+    <None Include="res\levels\test_level.ldf.tdef">
+      <Filter>res\levels</Filter>
+    </None>
   </ItemGroup>
 </Project>

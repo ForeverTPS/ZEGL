@@ -208,12 +208,6 @@
     <None Include="res\shaders\point_light_vs.glsl">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\levels\test_level.ldf.tdef">
-      <Filter>res\levels</Filter>
-    </None>
-    <None Include="res\levels\test_level.ldf">
-      <Filter>res\levels</Filter>
-    </None>
     <None Include="..\doxygen\default.doxyfile">
       <Filter>documentation</Filter>
     </None>
@@ -225,30 +219,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\rock.png">
-      <Filter>res\textures</Filter>
-    </Image>
-    <Image Include="res\textures\rock_n.png">
-      <Filter>res\textures</Filter>
-    </Image>
     <Image Include="res\textures\default.png">
       <Filter>res\textures</Filter>
     </Image>
     <Image Include="res\textures\default_n.png">
       <Filter>res\textures</Filter>
     </Image>
-    <Image Include="res\textures\gb.png">
-      <Filter>res\textures</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\test_atlas.xml">
-      <Filter>res\textures</Filter>
-    </Xml>
     <Xml Include="res\textures\default_atlas.xml">
-      <Filter>res\textures</Filter>
-    </Xml>
-    <Xml Include="res\textures\gb.xml">
       <Filter>res\textures</Filter>
     </Xml>
   </ItemGroup>
@@ -256,10 +235,5 @@
     <Font Include="res\fonts\DroidSerif-Regular.ttf">
       <Filter>res\fonts</Filter>
     </Font>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="res\sound\music\MI_Intro.mp3">
-      <Filter>res\sound\music</Filter>
-    </Media>
   </ItemGroup>
 </Project>

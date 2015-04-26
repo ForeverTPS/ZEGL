@@ -165,8 +165,6 @@ xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Comma
   </ItemGroup>
   <ItemGroup>
     <None Include="..\doxygen\default.doxyfile" />
-    <None Include="res\levels\test_level.ldf" />
-    <None Include="res\levels\test_level.ldf.tdef" />
     <None Include="res\shaders\basic_shader_fs.glsl" />
     <None Include="res\shaders\basic_shader_vs.glsl" />
     <None Include="res\shaders\basic_sprite_fs.glsl" />
@@ -177,24 +175,14 @@ xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Comma
   <ItemGroup>
     <Image Include="res\textures\default.png" />
     <Image Include="res\textures\default_n.png" />
-    <Image Include="res\textures\gb.png" />
-    <Image Include="res\textures\rock.png" />
-    <Image Include="res\textures\rock_n.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\textures\default_atlas.xml">
       <SubType>Designer</SubType>
     </Xml>
-    <Xml Include="res\textures\gb.xml" />
-    <Xml Include="res\textures\test_atlas.xml">
-      <SubType>Designer</SubType>
-    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\fonts\DroidSerif-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="res\sound\music\MI_Intro.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
