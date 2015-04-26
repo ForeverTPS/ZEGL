@@ -91,87 +91,120 @@ void TileMap::Load(const std::string& fileName)
 	std::string error;
 
 	XMLDocument doc;
-	if (doc.LoadFile((fileName + ".tdef").c_str()) != XML_NO_ERROR)
+	if (doc.LoadFile(fileName.c_str()) != XML_NO_ERROR)
 	{
 		success = false;
-		error = "Failed loading tile definitions: " + fileName + ".tdef";
+		error = "Failed loading level: " + fileName;
 	}
 	else
 	{
-		XMLElement* tileElement = doc.FirstChildElement("Tile");
-		if (tileElement == nullptr)
+		XMLElement* element = doc.RootElement();
+		if (element == nullptr)
 		{
 			success = false;
-			error = "No Tiles defined.";
+			error = "No LEVEL node defined.";
 		}
 		else
 		{
-			std::unordered_map<std::string, TileDefinition> m_tileDefs;
-
-			while (tileElement != nullptr)
+			element = element->FirstChildElement("TileDefs");
+			if (element == nullptr)
 			{
-				std::string tileId;
-				TileDefinition tileDef;
-
-				tileId = tileElement->Attribute("id");
-				tileDef.tilename = tileElement->Attribute("name");
-				tileDef.textureName = tileElement->Attribute("texture");
-				tileDef.normalMapName = tileElement->Attribute("normalMap");
-				tileDef.textureAtlasName = tileElement->Attribute("textureAtlas");
-
-				m_tileDefs.insert(std::pair<std::string, TileDefinition>(tileId, tileDef));
-
-				tileElement = tileElement->NextSiblingElement();
-			}
-
-			std::ifstream file;
-			file.open((fileName).c_str());
-
-			std::string line;
-
-			if (file.is_open())
-			{
-				float x = DEFAULT_TILE_SIZE / 2;
-				float y = x;
-
-				while (file.good())
-				{
-					getline(file, line);
-				
-					std::vector<std::string> tiles = Util::SplitString(line, ',');
-					for (unsigned int i = 0; i < tiles.size(); i++)
-					{
-						std::unordered_map<std::string, TileDefinition>::const_iterator it = m_tileDefs.find(tiles[i]);
-						if (it != m_tileDefs.end())
-						{
-							Texture texture(it->second.textureName);
-							Texture textureNormal(it->second.normalMapName);
-							TextureAtlas textureAtlas(it->second.textureAtlasName);
-
-							m_map.push_back(Tile(texture, textureNormal, textureAtlas, glm::vec3(x, y, 0.0f)));
-							m_map[m_map.size() - 1].CalcTextureCoords(it->second.tilename);
-
-							x += DEFAULT_TILE_SIZE;
-						}
-						else
-						{
-							//TODO: Handle error
-						}
-					}
-
-					x = DEFAULT_TILE_SIZE / 2;
-					y += DEFAULT_TILE_SIZE;
-				}
-
-				for (unsigned int i = 0; i < m_map.size(); i++)
-				{
-					m_activeTiles.push_back(m_map[i]);
-					m_activeTilesData.push_back(m_map[i].GetData());
-				}
+				success = false;
+				error = "No TILEDEFS node defined.";
 			}
 			else
 			{
-				std::cerr << "Unable to load tile map: " << fileName << std::endl;
+				element = element->FirstChildElement("Tile");
+				if (element == nullptr)
+				{
+					success = false;
+					error = "No TILE nodes defined.";
+				}
+				else
+				{
+					std::unordered_map<std::string, TileDefinition> tileDefs;
+
+					while (element != nullptr)
+					{
+						std::string tileId;
+						TileDefinition tileDef;
+
+						tileId = element->Attribute("id");
+						tileDef.tilename = element->Attribute("name");
+						tileDef.textureName = element->Attribute("texture");
+						tileDef.normalMapName = element->Attribute("normalMap");
+						tileDef.textureAtlasName = element->Attribute("textureAtlas");
+
+						tileDefs.insert(std::pair<std::string, TileDefinition>(tileId, tileDef));
+
+						element = element->NextSiblingElement();
+					}
+
+					element = doc.RootElement()->FirstChildElement("Layers");
+					if (element == nullptr)
+					{
+						success = false;
+						error = "No LAYERS defined.";
+					}
+					else
+					{
+						element = element->FirstChildElement("Layer");
+						if (element == nullptr)
+						{
+							success = false;
+							error = "No LAYER nodes defined.";
+						}
+						else
+						{
+							element = element->FirstChildElement("Row");
+							if (element == nullptr)
+							{
+								success = false;
+								error = "No ROW nodes defined.";
+							}
+							else
+							{
+								float x = DEFAULT_TILE_SIZE / 2;
+								float y = x;
+
+								while (element != nullptr)
+								{
+									std::vector<std::string> tiles = Util::SplitString(element->Attribute("tiles"), ',');
+									for (unsigned int i = 0; i < tiles.size(); i++)
+									{
+										std::unordered_map<std::string, TileDefinition>::const_iterator it = tileDefs.find(tiles[i]);
+										if (it != tileDefs.end())
+										{
+											Texture texture(it->second.textureName);
+											Texture textureNormal(it->second.normalMapName);
+											TextureAtlas textureAtlas(it->second.textureAtlasName);
+
+											m_map.push_back(Tile(texture, textureNormal, textureAtlas, glm::vec3(x, y, 0.0f)));
+											m_map[m_map.size() - 1].CalcTextureCoords(it->second.tilename);
+
+											x += DEFAULT_TILE_SIZE;
+										}
+										else
+										{
+											//TODO: Handle error
+										}
+									}
+
+									x = DEFAULT_TILE_SIZE / 2;
+									y += DEFAULT_TILE_SIZE;
+
+									element = element->NextSiblingElement();
+								}
+
+								for (unsigned int i = 0; i < m_map.size(); i++)
+								{
+									m_activeTiles.push_back(m_map[i]);
+									m_activeTilesData.push_back(m_map[i].GetData());
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}

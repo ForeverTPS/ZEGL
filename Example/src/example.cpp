@@ -77,7 +77,7 @@ void MyGame::Init(Window* window)
 	m_testSprite = new Sprite(rock, atlas, "rock", glm::vec3(300.0f, 300.0f, 0.0f));
 
 	Texture gb("./res/textures/gb.png");
-	TextureAtlas gbAtlas("./res/textures/gb.xml");
+	TextureAtlas gbAtlas("./res/textures/gb.atl");
 	std::vector<std::string> frames;
 	frames.push_back("gb_walk-0-0");
 	frames.push_back("gb_walk-1-0");

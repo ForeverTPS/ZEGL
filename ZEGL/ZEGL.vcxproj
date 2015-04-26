@@ -68,9 +68,9 @@
       <AdditionalDependencies>lua5.1.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;opengl32.lib;glu32.lib;glew32.lib;glew32mx.lib;glew32mxs.lib;glew32s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r
-xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Command>
+      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /y /r
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /y /e /r
+xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /y /r</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -99,9 +99,9 @@ xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Comma
       <AdditionalDependencies>lua5.1.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;opengl32.lib;glu32.lib;glew32.lib;glew32mx.lib;glew32mxs.lib;glew32s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r
-xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Command>
+      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /y /r
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /y /e /r
+xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /y /r</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>

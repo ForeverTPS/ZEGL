@@ -52,9 +52,6 @@
     <None Include="res\levels\test_level.ldf">
       <Filter>res\levels</Filter>
     </None>
-    <None Include="res\levels\test_level.ldf.tdef">
-      <Filter>res\levels</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="res\sound\music\MI_Intro.mp3">
@@ -73,10 +70,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\gb.xml">
+    <Xml Include="res\textures\test_atlas.atl">
       <Filter>res\textures</Filter>
     </Xml>
-    <Xml Include="res\textures\test_atlas.atl">
+    <Xml Include="res\textures\gb.atl">
       <Filter>res\textures</Filter>
     </Xml>
   </ItemGroup>

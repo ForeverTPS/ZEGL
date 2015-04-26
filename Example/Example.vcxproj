@@ -19,7 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\levels\test_level.ldf" />
-    <None Include="res\levels\test_level.ldf.tdef" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="res\sound\music\MI_Intro.mp3" />
@@ -30,7 +29,7 @@
     <Image Include="res\textures\rock_n.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\gb.xml" />
+    <Xml Include="res\textures\gb.atl" />
     <Xml Include="res\textures\test_atlas.atl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -89,14 +88,14 @@
       <AdditionalDependencies>ZEGL.lib;lua5.1.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;opengl32.lib;glu32.lib;glew32.lib;glew32mx.lib;glew32mxs.lib;glew32s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "..\ZEGL\include" "$(ProjectDir)include" /i /d /y /e /r
-xcopy "..\ZEGL\dll\*.dll" "$(ProjectDir)dll" /i /d /y /r 
-xcopy "..\ZEGL\lib\*.lib" "$(ProjectDir)lib" /i /d /y /r
-xcopy "..\ZEGL\res" "$(ProjectDir)res" /i /d /y /e /r</Command>
+      <Command>xcopy "..\ZEGL\include" "$(ProjectDir)include" /i /y /e /r
+xcopy "..\ZEGL\dll\*.dll" "$(ProjectDir)dll" /i /y /r 
+xcopy "..\ZEGL\lib\*.lib" "$(ProjectDir)lib" /i /y /r
+xcopy "..\ZEGL\res" "$(ProjectDir)res" /i /y /e /r</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
+      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /y /r
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /y /e /r</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,14 +119,14 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
       <AdditionalDependencies>ZEGL.lib;lua5.1.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;opengl32.lib;glu32.lib;glew32.lib;glew32mx.lib;glew32mxs.lib;glew32s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "..\ZEGL\include" "$(ProjectDir)include" /i /d /y /e /r
-xcopy "..\ZEGL\dll\*.dll" "$(ProjectDir)dll" /i /d /y /r 
-xcopy "..\ZEGL\lib\*.lib" "$(ProjectDir)lib" /i /d /y /r
-xcopy "..\ZEGL\res" "$(ProjectDir)res" /i /d /y /e /r</Command>
+      <Command>xcopy "..\ZEGL\include" "$(ProjectDir)include" /i /y /e /r
+xcopy "..\ZEGL\dll\*.dll" "$(ProjectDir)dll" /i /y /r 
+xcopy "..\ZEGL\lib\*.lib" "$(ProjectDir)lib" /i /y /r
+xcopy "..\ZEGL\res" "$(ProjectDir)res" /i /y /e /r</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
+      <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /y /r
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /y /e /r</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Level>
   <TileDefs>
     <Tile id="1" name="rock" texture="./res/textures/rock.png" normalMap="./res/textures/rock_n.png" textureAtlas="./res/textures/test_atlas.atl" />
