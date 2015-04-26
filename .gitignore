@@ -297,9 +297,23 @@ ZEGL.html
 !ZEGL/res/levels/*
 doxygen/html/
 doxygen/latex/
-msvcp120d.dll
-msvcr120d.dll
 copy_resources.bat
+
+Example/lib/
+Example/dll/
+Example/res/textures/default.png
+Example/res/textures/default_n.png
+Example/res/textures/default_atlas.xml
+Example/res/shaders/basic_shader_*
+Example/res/shaders/basic_sprite_*
+Example/res/shaders/point_light_*
+Example/res/fonts/DroidSerif-Regular.ttf
+!Example/res/levels/*
+Example/include/fontstash/
+Example/include/GL/
+Example/include/glm/
+Example/include/SDL2/
+Example/include/ZEGL/
 
 ### CMake ###
 CMakeCache.txt

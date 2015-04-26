@@ -28,9 +28,6 @@
     <Filter Include="documentation">
       <UniqueIdentifier>{84ae21b2-dfe5-41d5-bd60-156bfb762017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="example">
-      <UniqueIdentifier>{78cd6492-69f1-4fd9-9f17-1e2c794da0db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="res\sound">
       <UniqueIdentifier>{ba8cb758-c446-40ce-9e71-df3e62cdaffd}</UniqueIdentifier>
     </Filter>
@@ -42,12 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="example\example.cpp">
-      <Filter>example</Filter>
-    </ClCompile>
-    <ClCompile Include="example\main.cpp">
-      <Filter>example</Filter>
-    </ClCompile>
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -113,88 +104,94 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="example\example.h">
-      <Filter>example</Filter>
-    </ClInclude>
     <ClInclude Include="include\doxygen.h">
       <Filter>documentation</Filter>
     </ClInclude>
-    <ClInclude Include="include\camera.h">
+    <ClInclude Include="include\ZEGL\animated_sprite.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\core.h">
+    <ClInclude Include="include\ZEGL\audio.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\entity.h">
+    <ClInclude Include="include\ZEGL\camera.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\game.h">
+    <ClInclude Include="include\ZEGL\core.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\input.h">
+    <ClInclude Include="include\ZEGL\doxygen.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\logger.h">
+    <ClInclude Include="include\ZEGL\entity.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\platform.h">
+    <ClInclude Include="include\ZEGL\game.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\random.h">
+    <ClInclude Include="include\ZEGL\input.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\system.h">
+    <ClInclude Include="include\ZEGL\light.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\timing.h">
+    <ClInclude Include="include\ZEGL\logger.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\tinyxml2.h">
+    <ClInclude Include="include\ZEGL\platform.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\util.h">
+    <ClInclude Include="include\ZEGL\random.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\window.h">
+    <ClInclude Include="include\ZEGL\reference_counter.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\light.h">
+    <ClInclude Include="include\ZEGL\render_entity.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\shader.h">
+    <ClInclude Include="include\ZEGL\shader.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\stb_image.h">
+    <ClInclude Include="include\ZEGL\sprite.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\texture.h">
+    <ClInclude Include="include\ZEGL\sprite_batch.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\tilemap.h">
+    <ClInclude Include="include\ZEGL\stb_image.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\sprite.h">
+    <ClInclude Include="include\ZEGL\stdafx.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\animated_sprite.h">
+    <ClInclude Include="include\ZEGL\system.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\reference_counter.h">
+    <ClInclude Include="include\ZEGL\texture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\render_entity.h">
+    <ClInclude Include="include\ZEGL\texture_atlas.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\texture_atlas.h">
+    <ClInclude Include="include\ZEGL\tile.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\tile.h">
+    <ClInclude Include="include\ZEGL\tilemap.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\sprite_batch.h">
+    <ClInclude Include="include\ZEGL\timing.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\audio.h">
+    <ClInclude Include="include\ZEGL\tinyxml2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZEGL\util.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZEGL\window.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZEGL\ZEGL.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

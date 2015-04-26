@@ -17,13 +17,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -43,11 +43,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)output\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)build\$(Configuration)\$(Platform)\</IntDir>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)output\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)build\$(Configuration)\$(Platform)\</IntDir>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -57,7 +59,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\ZEGL;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -67,8 +69,13 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r
+xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,7 +87,7 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;$(ProjectDir)include;$(ProjectDir)include\ZEGL;$(ProjectDir)include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -93,12 +100,15 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)dll\*.dll" "$(OutDir)" /i /d /y /r
-xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
+xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r
+xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="example\example.cpp" />
-    <ClCompile Include="example\main.cpp" />
     <ClCompile Include="src\animated_sprite.cpp" />
     <ClCompile Include="src\audio.cpp" />
     <ClCompile Include="src\camera.cpp" />
@@ -122,34 +132,36 @@ xcopy "$(ProjectDir)res" "$(OutDir)res" /i /d /y /e /r</Command>
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="example\example.h" />
-    <ClInclude Include="include\animated_sprite.h" />
-    <ClInclude Include="include\audio.h" />
-    <ClInclude Include="include\camera.h" />
-    <ClInclude Include="include\core.h" />
     <ClInclude Include="include\doxygen.h" />
-    <ClInclude Include="include\entity.h" />
-    <ClInclude Include="include\game.h" />
-    <ClInclude Include="include\input.h" />
-    <ClInclude Include="include\light.h" />
-    <ClInclude Include="include\logger.h" />
-    <ClInclude Include="include\platform.h" />
-    <ClInclude Include="include\random.h" />
-    <ClInclude Include="include\reference_counter.h" />
-    <ClInclude Include="include\render_entity.h" />
-    <ClInclude Include="include\shader.h" />
-    <ClInclude Include="include\sprite.h" />
-    <ClInclude Include="include\sprite_batch.h" />
-    <ClInclude Include="include\stb_image.h" />
-    <ClInclude Include="include\system.h" />
-    <ClInclude Include="include\texture.h" />
-    <ClInclude Include="include\texture_atlas.h" />
-    <ClInclude Include="include\tile.h" />
-    <ClInclude Include="include\tilemap.h" />
-    <ClInclude Include="include\timing.h" />
-    <ClInclude Include="include\tinyxml2.h" />
-    <ClInclude Include="include\util.h" />
-    <ClInclude Include="include\window.h" />
+    <ClInclude Include="include\ZEGL\animated_sprite.h" />
+    <ClInclude Include="include\ZEGL\audio.h" />
+    <ClInclude Include="include\ZEGL\camera.h" />
+    <ClInclude Include="include\ZEGL\core.h" />
+    <ClInclude Include="include\ZEGL\doxygen.h" />
+    <ClInclude Include="include\ZEGL\entity.h" />
+    <ClInclude Include="include\ZEGL\game.h" />
+    <ClInclude Include="include\ZEGL\input.h" />
+    <ClInclude Include="include\ZEGL\light.h" />
+    <ClInclude Include="include\ZEGL\logger.h" />
+    <ClInclude Include="include\ZEGL\platform.h" />
+    <ClInclude Include="include\ZEGL\random.h" />
+    <ClInclude Include="include\ZEGL\reference_counter.h" />
+    <ClInclude Include="include\ZEGL\render_entity.h" />
+    <ClInclude Include="include\ZEGL\shader.h" />
+    <ClInclude Include="include\ZEGL\sprite.h" />
+    <ClInclude Include="include\ZEGL\sprite_batch.h" />
+    <ClInclude Include="include\ZEGL\stb_image.h" />
+    <ClInclude Include="include\ZEGL\stdafx.h" />
+    <ClInclude Include="include\ZEGL\system.h" />
+    <ClInclude Include="include\ZEGL\texture.h" />
+    <ClInclude Include="include\ZEGL\texture_atlas.h" />
+    <ClInclude Include="include\ZEGL\tile.h" />
+    <ClInclude Include="include\ZEGL\tilemap.h" />
+    <ClInclude Include="include\ZEGL\timing.h" />
+    <ClInclude Include="include\ZEGL\tinyxml2.h" />
+    <ClInclude Include="include\ZEGL\util.h" />
+    <ClInclude Include="include\ZEGL\window.h" />
+    <ClInclude Include="include\ZEGL\ZEGL.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\doxygen\default.doxyfile" />

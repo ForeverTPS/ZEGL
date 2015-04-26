@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<Tile id="1" name="rock" texture="./res/textures/rock.png" normalMap="./res/textures/rock_n.png" textureAtlas="./res/textures/test_atlas.xml" />
