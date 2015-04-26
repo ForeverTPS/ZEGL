@@ -32,7 +32,7 @@ var searchData=
   ['gettime',['GetTime',['../namespace_time.html#aa5dcef5b8d122df3f323afd164dd67f7',1,'Time']]],
   ['gettransform',['GetTransform',['../class_z_e_g_l_1_1_camera.html#af96e705ce1f0e1f3c2d7ce0141756917',1,'ZEGL::Camera']]],
   ['getwidth',['GetWidth',['../class_z_e_g_l_1_1_texture.html#a057016894ae04b4a4200810e9f4c731d',1,'ZEGL::Texture::GetWidth()'],['../class_z_e_g_l_1_1_window.html#a72d51a5848206c942eef6155b58c43bd',1,'ZEGL::Window::GetWidth()']]],
-  ['getwindow',['GetWindow',['../class_z_e_g_l_1_1_game.html#a12474b22720b2559db897cd83b7dffce',1,'ZEGL::Game']]],
+  ['getwindow',['GetWindow',['../class_z_e_g_l_1_1_game.html#a1752d0dc3954efba5e28e423340fb0eb',1,'ZEGL::Game']]],
   ['getxscale',['GetXScale',['../class_z_e_g_l_1_1_entity.html#a04d948d8023566b48fcaa2f2f142de97',1,'ZEGL::Entity']]],
   ['getyscale',['GetYScale',['../class_z_e_g_l_1_1_entity.html#a1117e99a595fc4a99c70ffeb407550a3',1,'ZEGL::Entity']]],
   ['getzoom',['GetZoom',['../class_z_e_g_l_1_1_camera.html#ae90bbfb4a99f096269973a524a3697d8',1,'ZEGL::Camera']]]

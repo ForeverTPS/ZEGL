@@ -125,6 +125,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 <tr class="separator:a1dfc1788b9219491978175766665ecf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a208a7378fa400d74539f9dfaf3d9a2d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_window.html#a208a7378fa400d74539f9dfaf3d9a2d6">SetFullScreen</a> (bool value)</td></tr>
 <tr class="separator:a208a7378fa400d74539f9dfaf3d9a2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf1647a0c7d0cf510a8aeeec2d41c0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_window.html#a8cf1647a0c7d0cf510a8aeeec2d41c0d">BindAsRenderTarget</a> () const </td></tr>
+<tr class="separator:a8cf1647a0c7d0cf510a8aeeec2d41c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The window is used for displaying the game to screen. It acts as a wrapper for the SDL_Window with some extra functionality. </p>
@@ -384,13 +386,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 
 </div>
 </div>
+<a class="anchor" id="a8cf1647a0c7d0cf510a8aeeec2d41c0d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZEGL::Window::BindAsRenderTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the window as the target to be rendered to. This should be called if using render to texture technique so that the framebuffer is no longer the texture. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="window_8h_source.html">window.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 17 2015 22:25:59 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 26 2015 10:53:31 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

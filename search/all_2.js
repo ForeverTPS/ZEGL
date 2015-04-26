@@ -4,6 +4,7 @@ var searchData=
   ['camera',['Camera',['../class_z_e_g_l_1_1_camera.html#a70070e91dca0135de34f30c4139285da',1,'ZEGL::Camera']]],
   ['camera',['Camera',['../class_z_e_g_l_1_1_camera.html',1,'ZEGL']]],
   ['clamp',['Clamp',['../namespace_util.html#abcb13a4c0e23d4cff27fc8fc4852b5ce',1,'Util']]],
+  ['clear',['Clear',['../namespace_audio.html#ac23e2948eaff34b015ddddf5e597a008',1,'Audio']]],
   ['close',['Close',['../class_z_e_g_l_1_1_window.html#a65004238887d03bfa522eee36b5de7ba',1,'ZEGL::Window::Close()'],['../namespace_logger.html#ab13114d60ca5f1f69f2ba0f2f1a5bd19',1,'Logger::Close()']]],
   ['core',['Core',['../class_z_e_g_l_1_1_core.html',1,'ZEGL']]],
   ['core',['Core',['../class_z_e_g_l_1_1_core.html#a530e138d65adbe257b1b9cee9ef90f81',1,'ZEGL::Core']]],

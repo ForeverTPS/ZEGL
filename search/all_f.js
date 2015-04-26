@@ -6,7 +6,9 @@ var searchData=
   ['random',['Random',['../namespace_random.html',1,'']]],
   ['referencecounter',['ReferenceCounter',['../class_z_e_g_l_1_1_reference_counter.html#a5aa2918535e2dcd3ae8aae7c136c9f97',1,'ZEGL::ReferenceCounter']]],
   ['referencecounter',['ReferenceCounter',['../class_z_e_g_l_1_1_reference_counter.html',1,'ZEGL']]],
+  ['removemusic',['RemoveMusic',['../namespace_audio.html#af9d3121b7e59e86f89749691e9872318',1,'Audio']]],
   ['removereference',['RemoveReference',['../class_z_e_g_l_1_1_reference_counter.html#a3118c4d9747b185355b81c033b2fd099',1,'ZEGL::ReferenceCounter']]],
+  ['removesoundeffect',['RemoveSoundEffect',['../namespace_audio.html#acf23e95be458caee0490f5ae914b13a1',1,'Audio']]],
   ['render',['Render',['../class_z_e_g_l_1_1_game.html#a1171fd0755e958fc5591544589aa0f5b',1,'ZEGL::Game::Render()'],['../class_z_e_g_l_1_1_tile_map.html#a293de899692edde693d6452f7fd18822',1,'ZEGL::TileMap::Render()']]],
   ['renderentity',['RenderEntity',['../class_z_e_g_l_1_1_render_entity.html',1,'ZEGL']]],
   ['renderentity',['RenderEntity',['../class_z_e_g_l_1_1_render_entity.html#afd5361cd4bb5f0af736116862f5c3d1e',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const Texture &amp;normalMap, const TextureAtlas &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float xScale=-1.0f, float yScale=-1.0f)'],['../class_z_e_g_l_1_1_render_entity.html#a14cf1cd5f27d21d70650df75d68103e8',1,'ZEGL::RenderEntity::RenderEntity(const Texture &amp;texture, const TextureAtlas &amp;textureAtlas, const glm::vec3 &amp;pos=glm::vec3(0.0f), float rot=0.0f, float xScale=-1.0f, float yScale=-1.0f)']]],
@@ -17,5 +19,6 @@ var searchData=
   ['resetallmousebutton',['ResetAllMouseButton',['../class_z_e_g_l_1_1_input.html#a1311f11deabbdb49c60c57681e1f57e7',1,'ZEGL::Input']]],
   ['resetallmousebuttondown',['ResetAllMouseButtonDown',['../class_z_e_g_l_1_1_input.html#a28dd62765418ea03370644f1c6802eb6',1,'ZEGL::Input']]],
   ['resetallmousebuttonup',['ResetAllMouseButtonUp',['../class_z_e_g_l_1_1_input.html#a2b9d96cff7251b33c61f845bced59702',1,'ZEGL::Input']]],
-  ['resume',['Resume',['../class_z_e_g_l_1_1_animated_sprite.html#aa4972f98d75199976dd34436776f9521',1,'ZEGL::AnimatedSprite']]]
+  ['resume',['Resume',['../class_z_e_g_l_1_1_animated_sprite.html#aa4972f98d75199976dd34436776f9521',1,'ZEGL::AnimatedSprite::Resume()'],['../namespace_audio.html#ababe8b81104f2a8e9ff0395f5bcdbb85',1,'Audio::Resume()']]],
+  ['resumemusic',['ResumeMusic',['../namespace_audio.html#a4667fc740187c5bde88786a8b3857f12',1,'Audio']]]
 ];

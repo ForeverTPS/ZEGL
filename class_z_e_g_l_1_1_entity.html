@@ -133,8 +133,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1117e99a595fc4a99c70ffeb407550a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac07e4a46af715c93d48e66d3f64c83b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_entity.html#ac07e4a46af715c93d48e66d3f64c83b0">SetYScale</a> (float scale)</td></tr>
 <tr class="separator:ac07e4a46af715c93d48e66d3f64c83b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3060c368e4fae9e3baec9147f5d5d84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_entity.html#ae3060c368e4fae9e3baec9147f5d5d84">SetScale</a> (float scale)</td></tr>
-<tr class="separator:ae3060c368e4fae9e3baec9147f5d5d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f1cc8b5b9ce44f09bec9f3f07f638f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_entity.html#a4f1cc8b5b9ce44f09bec9f3f07f638f4">Scale</a> (float xScale, float yScale)</td></tr>
+<tr class="separator:a4f1cc8b5b9ce44f09bec9f3f07f638f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d1f520dfadd09aeeb05aee1635a68f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_entity.html#a54d1f520dfadd09aeeb05aee1635a68f">Scale</a> (float scale)</td></tr>
+<tr class="separator:a54d1f520dfadd09aeeb05aee1635a68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a656c356c7c35e01445ce543770c60e6f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_z_e_g_l_1_1_entity_data.html">EntityData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_z_e_g_l_1_1_entity.html#a656c356c7c35e01445ce543770c60e6f">GetData</a> () const </td></tr>
 <tr class="separator:a656c356c7c35e01445ce543770c60e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -476,7 +478,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae3060c368e4fae9e3baec9147f5d5d84"></a>
+<a class="anchor" id="a4f1cc8b5b9ce44f09bec9f3f07f638f4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -484,7 +486,49 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ZEGL::Entity::SetScale </td>
+          <td class="memname">void ZEGL::Entity::Scale </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>xScale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yScale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Scale the entity.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">xScale</td><td>Amount to scale the current X size by </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yScale</td><td>Amount to scale the current Y size by </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a54d1f520dfadd09aeeb05aee1635a68f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZEGL::Entity::Scale </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>scale</em></td><td>)</td>
@@ -497,10 +541,10 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the entity scale factor.</p>
+<p>Scale the entity.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling factor for the entity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Amount to scale the current X &amp; Y size by </td></tr>
   </table>
   </dd>
 </dl>
@@ -561,7 +605,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 17 2015 22:25:58 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 26 2015 10:53:30 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

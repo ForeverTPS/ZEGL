@@ -18,10 +18,9 @@ var searchData=
   ['m_5fwindow',['m_window',['../class_z_e_g_l_1_1_game.html#a5a5ff9da183cfd84244c473ec6f927f3',1,'ZEGL::Game']]],
   ['m_5fxscale',['m_xScale',['../struct_z_e_g_l_1_1_entity_data.html#a60b37aef80ad23f85d0fbe6338acc357',1,'ZEGL::EntityData']]],
   ['m_5fyscale',['m_yScale',['../struct_z_e_g_l_1_1_entity_data.html#af842f31f015d82e58f6253222cdc4d46',1,'ZEGL::EntityData']]],
-  ['mouse_5fleft_5fbutton',['MOUSE_LEFT_BUTTON',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75a8366449059a847db983219604844c327',1,'ZEGL::Input']]],
-  ['mouse_5fmiddle_5fbutton',['MOUSE_MIDDLE_BUTTON',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75ad3a817d00cf70f09147d70681cd67690',1,'ZEGL::Input']]],
-  ['mouse_5fright_5fbutton',['MOUSE_RIGHT_BUTTON',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75a6fccdec51863cf3cb05c8ea9379dedd5',1,'ZEGL::Input']]],
-  ['mouse_5fwheel_5fdown',['MOUSE_WHEEL_DOWN',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75ae3de004dd84368394e6a13c423f34b56',1,'ZEGL::Input']]],
-  ['mouse_5fwheel_5fup',['MOUSE_WHEEL_UP',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75aa122d023530c752925f0cbf35a9e17d9',1,'ZEGL::Input']]],
-  ['mousebutton',['MouseButton',['../class_z_e_g_l_1_1_input.html#a372bb1e53c600001cd7e6fb9f967ae75',1,'ZEGL::Input']]]
+  ['mouse_5fleft_5fbutton',['MOUSE_LEFT_BUTTON',['../class_z_e_g_l_1_1_input.html#aa767ce6639ffad5eb032a94b3c423b9aa7250dcb02eea69017e8a383d655f5fda',1,'ZEGL::Input']]],
+  ['mouse_5fmiddle_5fbutton',['MOUSE_MIDDLE_BUTTON',['../class_z_e_g_l_1_1_input.html#aa767ce6639ffad5eb032a94b3c423b9aae36afdc7f39f3b8758b052426d317845',1,'ZEGL::Input']]],
+  ['mouse_5fright_5fbutton',['MOUSE_RIGHT_BUTTON',['../class_z_e_g_l_1_1_input.html#aa767ce6639ffad5eb032a94b3c423b9aa480468b145df29e40b332904e88108bd',1,'ZEGL::Input']]],
+  ['mouse_5fwheel_5fdown',['MOUSE_WHEEL_DOWN',['../class_z_e_g_l_1_1_input.html#aa767ce6639ffad5eb032a94b3c423b9aac7c788206fb6e7c13aaa74eb3bc02666',1,'ZEGL::Input']]],
+  ['mouse_5fwheel_5fup',['MOUSE_WHEEL_UP',['../class_z_e_g_l_1_1_input.html#aa767ce6639ffad5eb032a94b3c423b9aadd6aca5a667dd4bba95872741498d228',1,'ZEGL::Input']]]
 ];

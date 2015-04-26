@@ -109,50 +109,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;SDL_mixer.h&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_audio.html">Audio</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// MUSIC</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> AddMusic(std::string fileName, std::string key);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> RemoveMusic(std::string key);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> PlayMusic(std::string key, <span class="keywordtype">int</span> numLoops = 0);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> StopMusic();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> PauseMusic();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> ResumeMusic();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> SetMusicVolume(<span class="keywordtype">int</span> volume);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// SFX</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> AddSoundEffect(std::string fileName, std::string key);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> RemoveSoundEffect(std::string key);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> PlaySoundEffect(std::string key, <span class="keywordtype">int</span> numLoops = 0);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> SetSoundEffectVolume(std::string key, <span class="keywordtype">int</span> volume);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> SetAllSoundEffectVolumes(<span class="keywordtype">int</span> volume);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// GENERAL</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> Init(<span class="keywordtype">int</span> frequency = 44100, Uint16 format = AUDIO_S16SYS, <span class="keywordtype">int</span> channels = 2, <span class="keywordtype">int</span> chunksize = 1024);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> Stop();</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="namespace_audio.html">   26</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_audio.html">Audio</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// MUSIC</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a42be4339cdfdc093745f337e4ce5e5d9">AddMusic</a>(std::string fileName, std::string key);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#af9d3121b7e59e86f89749691e9872318">RemoveMusic</a>(std::string key);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a92d00fb976d76cea8bfcccaf1c544c57">PlayMusic</a>(std::string key, <span class="keywordtype">int</span> numLoops = 0);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> Pause();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> Resume();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> Clear();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="ttc" id="namespace_audio_html"><div class="ttname"><a href="namespace_audio.html">Audio</a></div><div class="ttdef"><b>Definition:</b> audio.h:22</div></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a70d7b0e9df6ae9ccd60752e8b0c5a309">StopMusic</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a46bedb8e99e838dbf37bb164a4296e47">PauseMusic</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a4667fc740187c5bde88786a8b3857f12">ResumeMusic</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a5b995115f4058f82762a01a3017fb0ae">SetMusicVolume</a>(<span class="keywordtype">int</span> volume);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">// SFX</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a79735d5cf800982d2481deca10a73c2a">AddSoundEffect</a>(std::string fileName, std::string key);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#acf23e95be458caee0490f5ae914b13a1">RemoveSoundEffect</a>(std::string key);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#ac1838b3616fcfe8ab0fc13f7a4093a02">PlaySoundEffect</a>(std::string key, <span class="keywordtype">int</span> numLoops = 0);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a7e9d6bcf99681f2dcaf37e1711227041">SetSoundEffectVolume</a>(std::string key, <span class="keywordtype">int</span> volume);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a7e57559d25333c6bf427ba73b11d205f">SetAllSoundEffectVolumes</a>(<span class="keywordtype">int</span> volume);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// GENERAL</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> Init(<span class="keywordtype">int</span> frequency = 44100, Uint16 format = AUDIO_S16SYS, <span class="keywordtype">int</span> channels = 2, <span class="keywordtype">int</span> chunksize = 1024);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a1bd980bcdd3778875b019d7352e75754">Stop</a>();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#a4344357ce631213d469fba37dfabfab8">Pause</a>();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#ababe8b81104f2a8e9ff0395f5bcdbb85">Resume</a>();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespace_audio.html#ac23e2948eaff34b015ddddf5e597a008">Clear</a>();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
+<div class="ttc" id="namespace_audio_html_acf23e95be458caee0490f5ae914b13a1"><div class="ttname"><a href="namespace_audio.html#acf23e95be458caee0490f5ae914b13a1">Audio::RemoveSoundEffect</a></div><div class="ttdeci">void RemoveSoundEffect(std::string key)</div></div>
+<div class="ttc" id="namespace_audio_html_a42be4339cdfdc093745f337e4ce5e5d9"><div class="ttname"><a href="namespace_audio.html#a42be4339cdfdc093745f337e4ce5e5d9">Audio::AddMusic</a></div><div class="ttdeci">void AddMusic(std::string fileName, std::string key)</div></div>
+<div class="ttc" id="namespace_audio_html_a92d00fb976d76cea8bfcccaf1c544c57"><div class="ttname"><a href="namespace_audio.html#a92d00fb976d76cea8bfcccaf1c544c57">Audio::PlayMusic</a></div><div class="ttdeci">void PlayMusic(std::string key, int numLoops=0)</div></div>
+<div class="ttc" id="namespace_audio_html_a4667fc740187c5bde88786a8b3857f12"><div class="ttname"><a href="namespace_audio.html#a4667fc740187c5bde88786a8b3857f12">Audio::ResumeMusic</a></div><div class="ttdeci">void ResumeMusic()</div></div>
+<div class="ttc" id="namespace_audio_html_ac1838b3616fcfe8ab0fc13f7a4093a02"><div class="ttname"><a href="namespace_audio.html#ac1838b3616fcfe8ab0fc13f7a4093a02">Audio::PlaySoundEffect</a></div><div class="ttdeci">void PlaySoundEffect(std::string key, int numLoops=0)</div></div>
+<div class="ttc" id="namespace_audio_html_ababe8b81104f2a8e9ff0395f5bcdbb85"><div class="ttname"><a href="namespace_audio.html#ababe8b81104f2a8e9ff0395f5bcdbb85">Audio::Resume</a></div><div class="ttdeci">void Resume()</div></div>
+<div class="ttc" id="namespace_audio_html_a7e9d6bcf99681f2dcaf37e1711227041"><div class="ttname"><a href="namespace_audio.html#a7e9d6bcf99681f2dcaf37e1711227041">Audio::SetSoundEffectVolume</a></div><div class="ttdeci">void SetSoundEffectVolume(std::string key, int volume)</div></div>
+<div class="ttc" id="namespace_audio_html_a1bd980bcdd3778875b019d7352e75754"><div class="ttname"><a href="namespace_audio.html#a1bd980bcdd3778875b019d7352e75754">Audio::Stop</a></div><div class="ttdeci">void Stop()</div></div>
+<div class="ttc" id="namespace_audio_html_ac23e2948eaff34b015ddddf5e597a008"><div class="ttname"><a href="namespace_audio.html#ac23e2948eaff34b015ddddf5e597a008">Audio::Clear</a></div><div class="ttdeci">void Clear()</div></div>
+<div class="ttc" id="namespace_audio_html_a4344357ce631213d469fba37dfabfab8"><div class="ttname"><a href="namespace_audio.html#a4344357ce631213d469fba37dfabfab8">Audio::Pause</a></div><div class="ttdeci">void Pause()</div></div>
+<div class="ttc" id="namespace_audio_html_a5b995115f4058f82762a01a3017fb0ae"><div class="ttname"><a href="namespace_audio.html#a5b995115f4058f82762a01a3017fb0ae">Audio::SetMusicVolume</a></div><div class="ttdeci">void SetMusicVolume(int volume)</div></div>
+<div class="ttc" id="namespace_audio_html_a70d7b0e9df6ae9ccd60752e8b0c5a309"><div class="ttname"><a href="namespace_audio.html#a70d7b0e9df6ae9ccd60752e8b0c5a309">Audio::StopMusic</a></div><div class="ttdeci">void StopMusic()</div></div>
+<div class="ttc" id="namespace_audio_html_a46bedb8e99e838dbf37bb164a4296e47"><div class="ttname"><a href="namespace_audio.html#a46bedb8e99e838dbf37bb164a4296e47">Audio::PauseMusic</a></div><div class="ttdeci">void PauseMusic()</div></div>
+<div class="ttc" id="namespace_audio_html_af9d3121b7e59e86f89749691e9872318"><div class="ttname"><a href="namespace_audio.html#af9d3121b7e59e86f89749691e9872318">Audio::RemoveMusic</a></div><div class="ttdeci">void RemoveMusic(std::string key)</div></div>
+<div class="ttc" id="namespace_audio_html_a7e57559d25333c6bf427ba73b11d205f"><div class="ttname"><a href="namespace_audio.html#a7e57559d25333c6bf427ba73b11d205f">Audio::SetAllSoundEffectVolumes</a></div><div class="ttdeci">void SetAllSoundEffectVolumes(int volume)</div></div>
+<div class="ttc" id="namespace_audio_html"><div class="ttname"><a href="namespace_audio.html">Audio</a></div><div class="ttdef"><b>Definition:</b> audio.h:26</div></div>
+<div class="ttc" id="namespace_audio_html_a79735d5cf800982d2481deca10a73c2a"><div class="ttname"><a href="namespace_audio.html#a79735d5cf800982d2481deca10a73c2a">Audio::AddSoundEffect</a></div><div class="ttdeci">void AddSoundEffect(std::string fileName, std::string key)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 17 2015 22:25:57 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 26 2015 10:53:29 for ZEGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
