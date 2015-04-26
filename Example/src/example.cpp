@@ -73,7 +73,7 @@ void MyGame::Init(Window* window)
 	m_spriteBatch.Init();
 	
 	Texture rock("./res/textures/rock.png");
-	TextureAtlas atlas("./res/textures/test_atlas.xml");
+	TextureAtlas atlas("./res/textures/test_atlas.atl");
 	m_testSprite = new Sprite(rock, atlas, "rock", glm::vec3(300.0f, 300.0f, 0.0f));
 
 	Texture gb("./res/textures/gb.png");

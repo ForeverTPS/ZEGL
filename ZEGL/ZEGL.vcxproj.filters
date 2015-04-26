@@ -227,13 +227,13 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\default_atlas.xml">
-      <Filter>res\textures</Filter>
-    </Xml>
-  </ItemGroup>
-  <ItemGroup>
     <Font Include="res\fonts\DroidSerif-Regular.ttf">
       <Filter>res\fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\textures\default_atlas.atl">
+      <Filter>res\textures</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

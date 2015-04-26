@@ -1,4 +1,14 @@
-1,1,1,1
-1,1,1,1
-1,1,1,1
-1,1,1,1
+<?xml version="1.0"?>
+<Level>
+  <TileDefs>
+    <Tile id="1" name="rock" texture="./res/textures/rock.png" normalMap="./res/textures/rock_n.png" textureAtlas="./res/textures/test_atlas.atl" />
+  </TileDefs>
+  <Layers>
+    <Layer id="0">
+      <Row tiles="1,1,1,1"></Row>
+      <Row tiles="1,1,1,1"></Row>
+      <Row tiles="1,1,1,1"></Row>
+      <Row tiles="1,1,1,1"></Row>
+    </Layer>
+  </Layers>
+</Level>

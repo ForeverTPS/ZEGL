@@ -177,7 +177,7 @@ xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /d /y /r</Comma
     <Image Include="res\textures\default_n.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\textures\default_atlas.xml">
+    <Xml Include="res\textures\default_atlas.atl">
       <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>
