@@ -309,6 +309,7 @@ Example/res/shaders/basic_sprite_*
 Example/res/shaders/point_light_*
 Example/res/fonts/DroidSerif-Regular.ttf
 !Example/res/levels/*
+Example/include/Box2D/
 Example/include/fontstash/
 Example/include/GL/
 Example/include/glm/
