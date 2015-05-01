@@ -81,6 +81,15 @@ namespace ZEGL
 		virtual ~RenderEntity() {}
 
 		/**
+		* Virtual update function to be implemented by any inherited classes
+		*
+		* Description in full
+		*
+		* \param[in] delta Delta frame time in milliseconds
+		*/
+		virtual void Update(float delta) {}
+
+		/**
 		* Calculate the texture coordinates based on a region.
 		*
 		* If the entity has a texture atlas then by passing in a region name this

@@ -346,8 +346,9 @@ void Shader::UnBind() const
 	glUseProgram(0);
 }
 
-void Shader::UpdateUniforms(Game* game) const
+void Shader::UpdateUniforms() const
 {
+	Game* game = Game::GetInstance();
 	Camera camera = game->GetCamera();
 	const Light* light = game->GetActiveLight();
 
@@ -417,7 +418,7 @@ void Shader::UpdateUniforms(Game* game) const
 		}
 		else if (uniformName == "MVP")
 		{
-			SetUniformMatrix4f(uniformName, camera.GetTransform(game->GetWindow()));
+			SetUniformMatrix4f(uniformName, camera.GetTransform());
 		}
 		else
 		{

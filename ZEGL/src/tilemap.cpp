@@ -15,6 +15,7 @@
 */
 
 #include "tilemap.h"
+#include "camera.h"
 #include "game.h"
 #include "light.h"
 #include "logger.h"
@@ -217,8 +218,11 @@ void TileMap::Load(const std::string& fileName)
 	}
 }
 
-void TileMap::Update(const Window* window, const glm::vec3& cameraPos)
+void TileMap::Update(float delta)
 {
+	const Window* window = Game::GetInstance()->GetWindow();
+	glm::vec3 cameraPos = Game::GetInstance()->GetCamera().GetPos();
+
 	m_activeTiles.clear();
 	m_activeTilesData.clear();
 	
@@ -251,7 +255,7 @@ void TileMap::Update(const Window* window, const glm::vec3& cameraPos)
 	}
 }
 
-void TileMap::Render(Game* game)
+void TileMap::Render()
 {
 	if (m_activeTilesData.size() == 0)
 	{
@@ -261,10 +265,10 @@ void TileMap::Render(Game* game)
 	const Texture* texture = m_activeTiles[0].GetTexture();
 	const Texture* normalMap = m_activeTiles[0].GetNormalMap();
 
-	Shader shader = game->GetActiveLight()->GetShader();
+	Shader shader = Game::GetInstance()->GetActiveLight()->GetShader();
 
 	shader.Bind();
-	shader.UpdateUniforms(game);
+	shader.UpdateUniforms();
 
 	texture->Bind(0);
 	normalMap->Bind(1);

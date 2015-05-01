@@ -153,7 +153,7 @@ void AnimatedSprite::Start(unsigned int frame)
 	m_lastAnimated = 0;
 }
 
-void AnimatedSprite::Animate()
+void AnimatedSprite::Update(float delta)
 {
 	if (m_isAnimating)
 	{

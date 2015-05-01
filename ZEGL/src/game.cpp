@@ -34,10 +34,7 @@
 
 using namespace ZEGL;
 
-GLuint gVAO;
-GLuint gVAB;
-Light* light;
-TileMap* tileMap;
+Game* Game::s_gameInstance = nullptr;
 
 Game::Game() :
 	m_camera(nullptr),
@@ -46,6 +43,7 @@ Game::Game() :
 	m_activeLight(nullptr),
 	m_fontContext(nullptr)
 {
+	Game::s_gameInstance = this;
 }
 
 Game::~Game()
@@ -65,7 +63,7 @@ Game::~Game()
 void Game::Init(Window* window)
 {
 	m_window = window;
-	m_camera = new Camera(m_window);
+	m_camera = new Camera();
 
 	Audio::Init();
 	

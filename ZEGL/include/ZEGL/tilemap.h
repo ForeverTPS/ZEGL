@@ -36,10 +36,6 @@ namespace ZEGL
 		* Create and load a tile map from the specified file.
 		*
 		* \param[in] fileName Name of the tile map file
-		*
-		* \warning The tile map file must have a tile definition file with it that 
-		* must have the same full name (including extension) but also an extra 
-		* extension of .tdef for example tilemap.ldf and tilemap.ldf.tdef
 		*/
 		TileMap(const std::string& fileName);
 		TileMap(TileMap const&) = delete;
@@ -47,17 +43,14 @@ namespace ZEGL
 		~TileMap();
 		
 		/**
-		* Refresh the list of active tiles.
+		* Performs all update actions for the tile map.
 		*
 		* Removes any tiles not visible and adds any tiles now on screen to the
 		* active tile list
 		*
-		* \param[in] window The display window
-		* \param[in] cameraPos The current camera position.
-		*
-		* \see [Window]
+		* \param[in] delta Delta frame time in milliseconds
 		*/
-		void Update(const Window* window, const glm::vec3& cameraPos);
+		void Update(float delta);
 
 		/**
 		* Renders all of the active tiles to screen using the shader for
@@ -67,7 +60,7 @@ namespace ZEGL
 		*
 		* \see [Game][Shader][Tile]
 		*/
-		void Render(Game* game);
+		void Render();
 
 		/**
 		* Get all the active tiles.

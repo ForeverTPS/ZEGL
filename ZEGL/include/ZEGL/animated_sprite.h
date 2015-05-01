@@ -154,8 +154,10 @@ namespace ZEGL
 		/**
 		* Essentially an update function which decides when to move on to
 		* the next frame if not done so manually.
+		*
+		* \param[in] delta Delta frame time in milliseconds
 		*/
-		void Animate();
+		void Update(float delta);
 
 	protected:
 	private:

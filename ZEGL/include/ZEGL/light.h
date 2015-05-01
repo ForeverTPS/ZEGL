@@ -66,6 +66,15 @@ namespace ZEGL
 		virtual ~Light() {}
 
 		/**
+		* Virtual update function to be implemented by any inherited classes
+		*
+		* Description in full
+		*
+		* \param[in] delta Delta frame time in milliseconds
+		*/
+		virtual void Update(float delta) {}
+
+		/**
 		* Get the main color of the light.
 		*
 		* \return The main light color (alpha is used for intensity)

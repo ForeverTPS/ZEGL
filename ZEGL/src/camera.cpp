@@ -15,37 +15,41 @@
 */
 
 #include "camera.h"
-#include "window.h"
+#include "game.h"
+#include "Window.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 
 using namespace ZEGL;
 
-Camera::Camera(const Window* window) :
+Camera::Camera() :
 	m_zoom(1.0f),
 	m_pos(glm::vec3(0.0f)),
 	m_rot(0.0f)
 {
+	const Window* window = Game::GetInstance()->GetWindow();
 	m_origin = window ? glm::vec3(window->GetWidth() / 2.0f, window->GetHeight() / 2.0f, 0.0f) : glm::vec3(0.0f);
 	m_transform.Update(m_origin, m_pos, m_rot, m_zoom);
 
-	RecreateTransform(window);
+	RecreateTransform();
 }
 
-const glm::mat4& Camera::GetTransform(const Window* window)
+const glm::mat4& Camera::GetTransform()
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||
 		m_transform.m_lastZoom != m_zoom)
 	{
-		RecreateTransform(window);
+		RecreateTransform();
 	}
 
 	return m_transform.m_matrix;
 }
 
-void Camera::RecreateTransform(const Window* window)
+void Camera::RecreateTransform()
 {
+	const Window* window = Game::GetInstance()->GetWindow();
+
 	m_transform.Update(m_origin, m_pos, m_rot, m_zoom);
 
 	glm::mat4 ortho(1.0f);

@@ -50,6 +50,7 @@ namespace ZEGL
 		* configuration is performed here.
 		*
 		* \param[in] window Pointer to an already created Window
+		*
 		* \see [Window]
 		*/
 		virtual void Init(Window* window);
@@ -114,6 +115,13 @@ namespace ZEGL
 		*/
 		inline const Window* GetWindow() const { return m_window; }
 
+		/**
+		* Get the game instance.
+		*
+		* \return Pointer to the active game instance
+		*/
+		static inline Game* GetInstance() { return s_gameInstance; }
+
 	protected:
 		Camera*				m_camera;			/*!< The Game Camera */
 		Window*				m_window;			/*!< The Window used for rendering */
@@ -128,5 +136,8 @@ namespace ZEGL
 		int					m_debugFont;		/*!< Font to display debug info */
 
 		char				m_fps[16];			/*!< char array for displaying FPS string */
+
+	private:
+		static Game*		s_gameInstance;		
 	};
 }

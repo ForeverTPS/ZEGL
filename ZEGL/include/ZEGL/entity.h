@@ -72,6 +72,15 @@ namespace ZEGL
 		virtual ~Entity() {}
 
 		/**
+		* Pure virtual update function to be implemented by any inherited classes
+		*
+		* Description in full
+		*
+		* \param[in] delta Delta frame time in milliseconds
+		*/
+		virtual void Update(float delta) = 0;
+
+		/**
 		* Get the current position of the entity.
 		*
 		* \return glm::vec3 representing the entity position

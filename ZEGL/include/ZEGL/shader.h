@@ -76,12 +76,8 @@ namespace ZEGL
 		* Updates all known uniforms. 
 		*
 		* Called every from Game::Update() to update all hard-coded uniform options.
-		*
-		* \param[in] game The game to provide access to lights, camera etc
-		*
-		* \see [Game]
 		*/
-		void UpdateUniforms(Game* game) const;
+		void UpdateUniforms() const;
 
 	protected:
 	private:

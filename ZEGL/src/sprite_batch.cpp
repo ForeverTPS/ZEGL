@@ -83,7 +83,7 @@ void SpriteBatch::Init()
 	glBindVertexArray(0);
 }
 
-void SpriteBatch::Begin(Game* game)
+void SpriteBatch::Begin()
 {
 	if (m_isDrawing)
 	{
@@ -93,12 +93,12 @@ void SpriteBatch::Begin(Game* game)
 	if (m_customShader != nullptr)
 	{
 		m_customShader->Bind();
-		m_customShader->UpdateUniforms(game);
+		m_customShader->UpdateUniforms();
 	}
 	else
 	{
 		m_defaultShader.Bind();
-		m_defaultShader.UpdateUniforms(game);
+		m_defaultShader.UpdateUniforms();
 	}
 
 	m_spriteData.clear();

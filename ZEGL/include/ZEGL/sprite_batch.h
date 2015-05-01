@@ -43,7 +43,7 @@ namespace ZEGL
 		*
 		* \see [Game]
 		*/
-		void Begin(Game* game);
+		void Begin();
 
 		/**
 		* Call when all sprite drawing is finished. This will push all registered

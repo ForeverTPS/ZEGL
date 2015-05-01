@@ -161,9 +161,6 @@
     <ClInclude Include="include\ZEGL\stb_image.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ZEGL\stdafx.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ZEGL\system.h">
       <Filter>include</Filter>
     </ClInclude>

@@ -17,7 +17,7 @@
 
 #include "example.h"
 
-#if defined(DEBUG_MODE) && defined(_MSC_FULL_VER)
+#if !defined(NDEBUG) && defined(_MSC_FULL_VER)
 	#include "vld.h"
 #endif
 

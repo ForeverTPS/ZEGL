@@ -102,10 +102,10 @@ void MyGame::Update(float delta)
 	glm::vec2 mousePos = m_input.GetMousePosition();
 	m_light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), m_light->GetPos().z);
 
-	m_tileMap->Update(m_window, m_camera->GetPos());
+	m_tileMap->Update(delta);
 
 	m_testSprite->SetRot(m_testSprite->GetRot() + 0.5f * delta);
-	m_testAnimSprite->Animate();
+	m_testAnimSprite->Update(delta);
 }
 
 void MyGame::Render()
@@ -121,14 +121,14 @@ void MyGame::Render()
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
 		m_activeLight = m_lights[i];
-		m_tileMap->Render(this);
+		m_tileMap->Render();
 	}
 
 	m_activeLight = nullptr;
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	m_spriteBatch.Begin(this);
+	m_spriteBatch.Begin();
 	m_testSprite->Draw(m_spriteBatch);
 	m_testAnimSprite->Draw(m_spriteBatch);
 	m_spriteBatch.End();

@@ -151,7 +151,6 @@ xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(ProjectDir)lib" /i /y /r</Command>
     <ClInclude Include="include\ZEGL\sprite.h" />
     <ClInclude Include="include\ZEGL\sprite_batch.h" />
     <ClInclude Include="include\ZEGL\stb_image.h" />
-    <ClInclude Include="include\ZEGL\stdafx.h" />
     <ClInclude Include="include\ZEGL\system.h" />
     <ClInclude Include="include\ZEGL\texture.h" />
     <ClInclude Include="include\ZEGL\texture_atlas.h" />
