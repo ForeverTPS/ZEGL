@@ -71,6 +71,8 @@ namespace ZEGL
 
 		virtual ~Entity() {}
 
+		virtual void ReadEntity() {}
+
 		/**
 		* Pure virtual update function to be implemented by any inherited classes
 		*

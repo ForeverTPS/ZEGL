@@ -24,6 +24,9 @@ namespace ZEGL
 	class Game;
 	class Window;
 
+	typedef Entity* (*CreateCustomEntity)();
+	typedef std::unordered_map<std::string, CreateCustomEntity> CustomEntityMap;
+
 	/**
 	* A collection of tiles making up a level/map
 	*
@@ -41,6 +44,10 @@ namespace ZEGL
 		TileMap(TileMap const&) = delete;
 		TileMap& operator=(TileMap const&) = delete;
 		~TileMap();
+
+		void RegisterType(std::string name, Entity* (*CreateCustomEntity)());
+
+		Entity* ReadEntity();
 		
 		/**
 		* Performs all update actions for the tile map.
@@ -83,6 +90,8 @@ namespace ZEGL
 	protected:
 	private:
 		void Load(const std::string& fileName);
+
+		CustomEntityMap			m_customEntityConstructors;
 
 		std::vector<Tile>		m_map;
 		std::vector<Tile>		m_activeTiles;

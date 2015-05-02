@@ -86,6 +86,39 @@ TileMap::~TileMap()
 	}
 }
 
+void TileMap::RegisterType(std::string name, Entity* (*entityReader)())
+{
+	if (entityReader != nullptr) 
+	{
+		auto it = m_customEntityConstructors.find(name);
+		if (it == m_customEntityConstructors.end()) 
+		{
+			m_customEntityConstructors.insert(std::make_pair(name, entityReader));
+		}
+		else 
+		{
+			LOG_WARNING("Skipping add parser for " << name << " as function pointer already exists");
+		}
+	}
+	else 
+	{
+		LOG_ERROR("Unable to add parser for " << name << " as function pointer is invalid: nullptr");
+	}
+}
+
+Entity* TileMap::ReadEntity() {
+	Entity* result = nullptr;
+
+	auto it = m_customEntityConstructors.find("");
+	if (it != m_customEntityConstructors.end())
+	{
+		Entity* e = it->second();
+		e->ReadEntity();
+	}
+
+	return result;
+}
+
 void TileMap::Load(const std::string& fileName)
 {
 	bool success = true;
