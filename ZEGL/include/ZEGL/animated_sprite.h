@@ -123,12 +123,12 @@ namespace ZEGL
 		* Pause the animation at the current frame.
 		*/
 		inline int Pause() { m_isAnimating = false; }
-		
+
 		/**
 		* Resume the animation from the last frame.
 		*/
 		inline void Resume() { m_isAnimating = true; }
-		
+
 		/**
 		* Stop the animation and reset.
 		*/
@@ -141,7 +141,7 @@ namespace ZEGL
 		* \param[in] loop Whether the animation should loop
 		*/
 		inline void SetLooping(bool loop) { m_loop = loop; }
-		
+
 		/**
 		* Set the speed at which the sprite animates
 		*

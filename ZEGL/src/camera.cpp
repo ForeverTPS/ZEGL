@@ -38,7 +38,8 @@ const glm::mat4& Camera::GetTransform()
 {
 	if (m_transform.m_lastPos != m_pos ||
 		m_transform.m_lastRot != m_rot ||
-		m_transform.m_lastZoom != m_zoom)
+		m_transform.m_lastZoom != m_zoom ||
+		m_transform.m_lastOrigin != m_origin)
 	{
 		RecreateTransform();
 	}
@@ -58,8 +59,8 @@ void Camera::RecreateTransform()
 		ortho = glm::ortho(0.0f, (float)window->GetWidth(), (float)window->GetHeight(), 0.0f, -1.0f, 1.0f);
 	}
 
-	m_transform.m_matrix = glm::translate(ortho, glm::vec3(m_origin.x, m_origin.y, 0.0f));
-	m_transform.m_matrix = glm::scale(m_transform.m_matrix, glm::vec3(m_zoom, m_zoom, 1.0f));
+	m_transform.m_matrix = glm::translate(m_transform.m_matrix, glm::vec3(m_origin.x, m_origin.y, 0.0f));
 	m_transform.m_matrix = glm::rotate(m_transform.m_matrix, m_rot, glm::vec3(0.0f, 0.0f, 1.0f));
-	m_transform.m_matrix = glm::translate(m_transform.m_matrix, glm::vec3(-m_origin.x, -m_origin.y, 0.0f));
+	m_transform.m_matrix = glm::scale(m_transform.m_matrix, glm::vec3(m_zoom, m_zoom, 1.0f));
+	m_transform.m_matrix = glm::translate(ortho, glm::vec3(-m_pos.x, -m_pos.y, 0.0f));
 }

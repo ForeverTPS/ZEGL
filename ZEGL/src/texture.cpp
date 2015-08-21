@@ -25,7 +25,7 @@ using namespace ZEGL;
 
 std::unordered_map<std::string, Texture::TextureData*> Texture::s_resourceMap;
 
-Texture::TextureData::TextureData(GLenum textureTarget, int width, int height, int numTextures, unsigned char** data, 
+Texture::TextureData::TextureData(GLenum textureTarget, int width, int height, int numTextures, unsigned char** data,
 	GLfloat* filters, GLenum* internalFormat, GLenum* format, bool clamp, GLenum* attachments) :
 	m_textureID(new GLuint[numTextures]),
 	m_textureTarget(textureTarget),
@@ -151,7 +151,7 @@ void Texture::TextureData::InitRenderTargets(GLenum* attachments)
 	}
 
 	glDrawBuffers(m_numTextures, drawBuffers);
-	
+
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
 		LOG_ERROR("Framebuffer creation failed!");

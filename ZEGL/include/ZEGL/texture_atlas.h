@@ -38,7 +38,7 @@ namespace ZEGL
 
 	/**
 	* The texture atlas is used to provide functionality to have more than
-	* one texture stored in a single file. The atlas defines one or more TextureRegion 
+	* one texture stored in a single file. The atlas defines one or more TextureRegion
 	* values in the large texture file. These are stored in a map by name.
 	*
 	* TextureAtlas data is stored in XML files. An example of one is included in the

@@ -66,7 +66,7 @@ namespace Audio
 			LOG_WARNING("The music can't be removed because it doesn't exist! Key: " << key);
 		}
 	}
-	
+
 	void PlayMusic(std::string key, int numLoops)
 	{
 		std::unordered_map<std::string, Mix_Music*>::const_iterator it = s_music.find(key);
@@ -139,7 +139,7 @@ namespace Audio
 			LOG_WARNING("The sfx can't be removed because it doesn't exist! Key: " << key);
 		}
 	}
-	
+
 	void PlaySoundEffect(std::string key, int numLoops)
 	{
 		std::unordered_map<std::string, Mix_Chunk*>::const_iterator it = s_soundEffects.find(key);
@@ -165,7 +165,7 @@ namespace Audio
 			LOG_WARNING("Sfx volume couldn't be set because it doesn't exist! Key: " << key);
 		}
 	}
-	
+
 	void SetAllSoundEffectVolumes(int volume)
 	{
 		Mix_Volume(-1, (MIX_MAX_VOLUME / 100) * Util::Clamp(volume, 0, 100));

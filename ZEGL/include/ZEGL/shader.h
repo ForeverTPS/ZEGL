@@ -73,7 +73,7 @@ namespace ZEGL
 
 
 		/**
-		* Updates all known uniforms. 
+		* Updates all known uniforms.
 		*
 		* Called every from Game::Update() to update all hard-coded uniform options.
 		*/

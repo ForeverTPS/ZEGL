@@ -42,7 +42,7 @@ namespace ZEGL
 		~Window();
 
 		/**
-		* Swaps the GL buffers round so that the last rendered buffer is now displayed 
+		* Swaps the GL buffers round so that the last rendered buffer is now displayed
 		* on screen.
 		*/
 		void SwapBuffers();
@@ -114,7 +114,7 @@ namespace ZEGL
 
 		int           m_width;
 		int           m_height;
-		std::string   m_title;				
+		std::string   m_title;
 		SDL_Window*   m_window;
 		SDL_GLContext m_glContext;
 		bool          m_isCloseRequested;

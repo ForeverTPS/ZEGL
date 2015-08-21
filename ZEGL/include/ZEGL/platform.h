@@ -30,7 +30,7 @@
 	#define OS_UNIX
 #elif defined(__APPLE__) || defined(__MACH__)
 	#define OS_APPLE
-	
+
 	#include "CoreFoundation/CoreFoundation.h"
 
 	CFBundleRef mainBundle = CFBundleGetMainBundle();

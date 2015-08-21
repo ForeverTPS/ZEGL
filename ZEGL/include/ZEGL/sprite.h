@@ -54,7 +54,7 @@ namespace ZEGL
 			   float rot = 0.0f,
 			   float xScale = -1.0f,
 			   float yScale = -1.0f);
-		
+
 		/**
 		* Constructor using a TextureAtlas but default normal map.
 		*
@@ -81,7 +81,7 @@ namespace ZEGL
 			float yScale = -1.0f);
 
 		Sprite(Sprite const&);
-		Sprite& operator=(Sprite const&) = delete;		
+		Sprite& operator=(Sprite const&) = delete;
 		virtual ~Sprite() {}
 
 		/**

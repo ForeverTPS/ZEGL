@@ -48,7 +48,7 @@ void Core::Start()
 
 	while (m_isRunning)
 	{
-		bool render = false;						
+		bool render = false;
 
 		double startTime = Time::GetTime();			// Current time at the start of the frame.
 		double passedTime = startTime - lastTime;	// Amount of passed time since last frame.
@@ -71,7 +71,7 @@ void Core::Start()
 		while (unprocessedTime > m_frameTime)
 		{
 			m_game->Update((float)m_frameTime);
-			
+
 			if (m_window->IsCloseRequested())
 			{
 				Stop();

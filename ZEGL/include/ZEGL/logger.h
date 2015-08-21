@@ -28,8 +28,8 @@ namespace Logger
 	/**
 	* Initialize the log.
 	*
-	* Created the file and logs the start time. The file will be created in the user 
-	* home directory under a folder ZEGL with the passed file name and a html extension. 
+	* Created the file and logs the start time. The file will be created in the user
+	* home directory under a folder ZEGL with the passed file name and a html extension.
 	*
 	* \param[in] fname File name for the log file. Name only, no path or extension.
 	*
@@ -41,7 +41,7 @@ namespace Logger
 	/**
 	* Closes the log file.
 	*
-	* Logs the end time, number of warning and errors and closes the log file down. 
+	* Logs the end time, number of warning and errors and closes the log file down.
 	*
 	* \warning Do not call this function directly, instead use the preprocessor macro
 	* LOG_CLOSE()
@@ -49,7 +49,7 @@ namespace Logger
 	void Close();
 
 	/**
-	* Inserts a new line in the log file. 
+	* Inserts a new line in the log file.
 	*
 	* \warning Do not call this function directly, instead use the preprocessor macro
 	* LOG_NEWLINE()
@@ -60,7 +60,7 @@ namespace Logger
 	* Logs an information message to the log file.
 	*
 	* Logs the passed message string to the log file with a date/time stamp and labels
-	* it as [INFO]. 
+	* it as [INFO].
 	*
 	* \param[in] msg Message string to log
 	*
@@ -73,7 +73,7 @@ namespace Logger
 	* Logs a warning message to the log file.
 	*
 	* Logs the passed message string to the log file with a date/time stamp and labels
-	* it as [WARN]. 
+	* it as [WARN].
 	*
 	* \param[in] msg Message string to log
 	*
@@ -86,7 +86,7 @@ namespace Logger
 	* Logs an error message to the log file.
 	*
 	* Logs the passed message string to the log file with a date/time stamp and labels
-	* it as [ERROR]. 
+	* it as [ERROR].
 	*
 	* \param[in] msg Message string to log
 	*

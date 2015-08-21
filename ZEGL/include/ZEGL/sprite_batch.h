@@ -50,7 +50,7 @@ namespace ZEGL
 		* sprites to the GPU to be displayed.
 		*/
 		void End();
-	
+
 		/**
 		* Register an entity to be drawn by the sprite batch.
 		*

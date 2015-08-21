@@ -48,7 +48,7 @@ namespace ZEGL
 		void RegisterType(std::string name, Entity* (*CreateCustomEntity)());
 
 		Entity* ReadEntity();
-		
+
 		/**
 		* Performs all update actions for the tile map.
 		*

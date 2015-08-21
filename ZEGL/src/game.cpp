@@ -66,9 +66,9 @@ void Game::Init(Window* window)
 	m_camera = new Camera();
 
 	Audio::Init();
-	
+
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	
+
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);

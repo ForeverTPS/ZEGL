@@ -88,19 +88,19 @@ TileMap::~TileMap()
 
 void TileMap::RegisterType(std::string name, Entity* (*entityReader)())
 {
-	if (entityReader != nullptr) 
+	if (entityReader != nullptr)
 	{
 		auto it = m_customEntityConstructors.find(name);
-		if (it == m_customEntityConstructors.end()) 
+		if (it == m_customEntityConstructors.end())
 		{
 			m_customEntityConstructors.insert(std::make_pair(name, entityReader));
 		}
-		else 
+		else
 		{
 			LOG_WARNING("Skipping add parser for " << name << " as function pointer already exists");
 		}
 	}
-	else 
+	else
 	{
 		LOG_ERROR("Unable to add parser for " << name << " as function pointer is invalid: nullptr");
 	}
@@ -258,7 +258,7 @@ void TileMap::Update(float delta)
 
 	m_activeTiles.clear();
 	m_activeTilesData.clear();
-	
+
 	for (unsigned int i = 0; i < m_map.size(); i++)
 	{
 		glm::vec3 pos = m_map[i].GetPos();

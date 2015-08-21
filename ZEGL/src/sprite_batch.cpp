@@ -165,7 +165,7 @@ void SpriteBatch::Flush()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VAB);
 
 	size_t bytesNeeded = sizeof(EntityData)* m_spriteData.size();
-	if (bytesNeeded > m_bytesAllocated) 
+	if (bytesNeeded > m_bytesAllocated)
 	{
 		glBufferData(GL_ARRAY_BUFFER, bytesNeeded, &m_spriteData[0], GL_STREAM_DRAW);
 		m_bytesAllocated = bytesNeeded;
@@ -185,7 +185,7 @@ void SpriteBatch::Flush()
 
 void SpriteBatch::SetShader(Shader* shader)
 {
-	if (m_isDrawing) 
+	if (m_isDrawing)
 	{
 		Flush();
 		if (m_customShader != nullptr)
@@ -199,8 +199,8 @@ void SpriteBatch::SetShader(Shader* shader)
 	}
 
 	m_customShader = shader;
-	
-	if (m_isDrawing) 
+
+	if (m_isDrawing)
 	{
 		if (m_customShader != nullptr)
 		{

@@ -29,7 +29,7 @@ namespace ZEGL
 
 	/**
 	* Holds common data in a structure so that it can easily be passed around
-	* for use in other areas e.g. rendering using in an array using a vertex 
+	* for use in other areas e.g. rendering using in an array using a vertex
 	* buffer, without having to pass around the full class. Contains position,
 	* rotation, scale and texture coordinate data.
 	*
@@ -57,7 +57,7 @@ namespace ZEGL
 		* of the entity. Defaults are used if none are passed
 		*
 		* \param[in] pos Position of the entity
-		* \param[in] rot Rotation of the entity (in radians) 
+		* \param[in] rot Rotation of the entity (in radians)
 		* \param[in] xScale Scale factor of the entity
 		* \param[in] yScale Scale factor of the entity
 		*/

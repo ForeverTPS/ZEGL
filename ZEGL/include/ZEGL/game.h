@@ -6,7 +6,7 @@
 * You may obtain a copy of the License at
 *
 * http://www.apache.org/licenses/LICENSE-2.0
-* 
+*
 * Unless required by applicable law or agreed to in writing, software
 * distributed under the License is distributed on an "AS IS" BASIS,
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,9 +31,9 @@ namespace ZEGL
 	/**
 	* Base game class
 	*
-	* This class is intended to be inherited  from to create a new class for each project. 
-	* The game class would be where all game-play related systems/objects reside e.g levels, 
-	* fonts, entities. Then each can be updated and rendered in the respective Update() and 
+	* This class is intended to be inherited  from to create a new class for each project.
+	* The game class would be where all game-play related systems/objects reside e.g levels,
+	* fonts, entities. Then each can be updated and rendered in the respective Update() and
 	* Render() functions of the inherited
 	* game class.
 	*/
@@ -138,6 +138,6 @@ namespace ZEGL
 		char				m_fps[16];			/*!< char array for displaying FPS string */
 
 	private:
-		static Game*		s_gameInstance;		
+		static Game*		s_gameInstance;
 	};
 }

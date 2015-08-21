@@ -39,8 +39,6 @@ MyGame::~MyGame()
 	Util::SafeDelete(m_testSprite);
 	Util::SafeDelete(m_testAnimSprite);
 
-	Util::SafeDelete(m_screenFBO);
-
 	if (m_screenVBO)
 	{
 		glDeleteBuffers(1, &m_screenVBO);
@@ -56,7 +54,6 @@ void MyGame::Init(Window* window)
 {
 	Game::Init(window);
 
-	m_screenFBO = new Texture(800, 600, nullptr, GL_TEXTURE_2D, GL_LINEAR_MIPMAP_LINEAR, GL_RGBA, GL_RGBA, false, GL_COLOR_ATTACHMENT0);
 	glGenVertexArrays(1, &m_screenVAO);
 	glBindVertexArray(m_screenVAO);
 	glGenBuffers(1, &m_screenVBO);
@@ -71,7 +68,7 @@ void MyGame::Init(Window* window)
 	m_lights.push_back(m_light);
 
 	m_spriteBatch.Init();
-	
+
 	Texture rock("./res/textures/rock.png");
 	TextureAtlas atlas("./res/textures/test_atlas.atl");
 	m_testSprite = new Sprite(rock, atlas, "rock", glm::vec3(300.0f, 300.0f, 0.0f));
@@ -99,6 +96,8 @@ void MyGame::Update(float delta)
 {
 	Game::Update(delta);
 
+	m_camera->SetPos(m_camera->GetPos().x - 1.0f, m_camera->GetPos().y);
+
 	glm::vec2 mousePos = m_input.GetMousePosition();
 	m_light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), m_light->GetPos().z);
 
@@ -110,7 +109,6 @@ void MyGame::Update(float delta)
 
 void MyGame::Render()
 {
-	//m_screenFBO->BindAsRenderTarget();
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glEnable(GL_BLEND);
@@ -134,30 +132,6 @@ void MyGame::Render()
 	m_spriteBatch.End();
 
 	glDisable(GL_BLEND);
-
-	//m_window->BindAsRenderTarget();
-	//glClear(GL_COLOR_BUFFER_BIT);
-
-	//glBindVertexArray(m_screenVAO);
-
-	//g_screenShader.Bind();
-	//m_screenFBO->Bind(0);
-	//g_screenShader.UpdateUniforms(this);
-
-	//glEnableVertexAttribArray(0);
-	//glBindBuffer(GL_ARRAY_BUFFER, s_screenQuad);
-	//glVertexAttribPointer(
-	//	0,           
-	//	3,           
-	//	GL_FLOAT,    
-	//	GL_FALSE,    
-	//	0,           
-	//	(void*)0     
-	//	);
-
-	//glDrawArrays(GL_TRIANGLES, 0, 6);
-
-	//glDisableVertexAttribArray(0);
 
 	Game::Render();
 }

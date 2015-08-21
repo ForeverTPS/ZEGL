@@ -63,8 +63,8 @@ namespace ZEGL
 
 	protected:
 	private:
-		Window*		m_window;	
-		Game*		m_game;		
+		Window*		m_window;
+		Game*		m_game;
 		bool		m_isRunning;
 		double		m_frameTime;
 	};

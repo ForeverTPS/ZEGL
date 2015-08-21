@@ -33,7 +33,7 @@ public:
 	void Init(Window* window);
 	void Update(float delta);
 	void Render();
-	
+
 protected:
 private:
 	Light*				m_light;
@@ -43,7 +43,7 @@ private:
 	Sprite*				m_testSprite;
 	AnimatedSprite*		m_testAnimSprite;
 
-	Texture*			m_screenFBO;
+	//Texture*			m_screenFBO;
 	GLuint				m_screenVAO;
 	GLuint				m_screenVBO;
 	Shader				g_screenShader;

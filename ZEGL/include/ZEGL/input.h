@@ -28,11 +28,11 @@ namespace ZEGL
 	class Window;
 
 	/**
-	* Manages the state of keyboard and mouse input. The class maintains 3 arrays 
-	* which hold true or false values. These arrays represent if the key/button was 
-	* just pressed in the current frame, if the key/button was pressed in the previous 
+	* Manages the state of keyboard and mouse input. The class maintains 3 arrays
+	* which hold true or false values. These arrays represent if the key/button was
+	* just pressed in the current frame, if the key/button was pressed in the previous
 	* frame and also if the key/button was just released in the frame. By combining them
-	* the class is able to report if key/mouse button was just pressed, is currently held 
+	* the class is able to report if key/mouse button was just pressed, is currently held
 	* or was just released. The cursor can also be manipulated (position, visibility).
 	*/
 	class Input
@@ -94,9 +94,9 @@ namespace ZEGL
 			KEY_GREATER = SDLK_GREATER,							/*!< . */
 			KEY_QUESTION = SDLK_QUESTION,						/*!< . */
 			KEY_AT = SDLK_AT,									/*!< . */
-																	 
-			// Skip uppercase letters								 
-																	 
+
+			// Skip uppercase letters
+
 			KEY_LEFTBRACKET = SDLK_LEFTBRACKET,					/*!< . */
 			KEY_BACKSLASH = SDLK_BACKSLASH,						/*!< . */
 			KEY_RIGHTBRACKET = SDLK_RIGHTBRACKET,				/*!< . */
@@ -129,9 +129,9 @@ namespace ZEGL
 			KEY_X = SDLK_x,										/*!< . */
 			KEY_Y = SDLK_y,										/*!< . */
 			KEY_Z = SDLK_z,										/*!< . */
-																	 
+
 			KEY_CAPSLOCK = SDLK_CAPSLOCK,						/*!< . */
-																	 
+
 			KEY_F1 = SDLK_F1,									/*!< . */
 			KEY_F2 = SDLK_F2,									/*!< . */
 			KEY_F3 = SDLK_F3,									/*!< . */
@@ -144,7 +144,7 @@ namespace ZEGL
 			KEY_F10 = SDLK_F10,									/*!< . */
 			KEY_F11 = SDLK_F11,									/*!< . */
 			KEY_F12 = SDLK_F12,									/*!< . */
-																	 
+
 			KEY_PRINTSCREEN = SDLK_PRINTSCREEN,					/*!< . */
 			KEY_SCROLLLOCK = SDLK_SCROLLLOCK,					/*!< . */
 			KEY_PAUSE = SDLK_PAUSE,								/*!< . */
@@ -158,7 +158,7 @@ namespace ZEGL
 			KEY_LEFT = SDLK_LEFT,								/*!< . */
 			KEY_DOWN = SDLK_DOWN,								/*!< . */
 			KEY_UP = SDLK_UP,									/*!< . */
-																	 
+
 			KEY_NUMLOCKCLEAR = SDLK_NUMLOCKCLEAR,				/*!< . */
 			KEY_KP_DIVIDE = SDLK_KP_DIVIDE,						/*!< . */
 			KEY_KP_MULTIPLY = SDLK_KP_MULTIPLY,					/*!< . */
@@ -176,7 +176,7 @@ namespace ZEGL
 			KEY_KP_9 = SDLK_KP_9,								/*!< . */
 			KEY_KP_0 = SDLK_KP_0,								/*!< . */
 			KEY_KP_PERIOD = SDLK_KP_PERIOD,						/*!< . */
-																	 
+
 			KEY_APPLICATION = SDLK_APPLICATION,					/*!< . */
 			KEY_POWER = SDLK_POWER,								/*!< . */
 			KEY_KP_EQUALS = SDLK_KP_EQUALS,						/*!< . */
@@ -208,7 +208,7 @@ namespace ZEGL
 			KEY_VOLUMEDOWN = SDLK_VOLUMEDOWN,					/*!< . */
 			KEY_KP_COMMA = SDLK_KP_COMMA,						/*!< . */
 			KEY_KP_EQUALSAS400 = SDLK_KP_EQUALSAS400,			/*!< . */
-																	 
+
 			KEY_ALTERASE = SDLK_ALTERASE,						/*!< . */
 			KEY_SYSREQ = SDLK_SYSREQ,							/*!< . */
 			KEY_CANCEL = SDLK_CANCEL,							/*!< . */
@@ -221,7 +221,7 @@ namespace ZEGL
 			KEY_CLEARAGAIN = SDLK_CLEARAGAIN,					/*!< . */
 			KEY_CRSEL = SDLK_CRSEL,								/*!< . */
 			KEY_EXSEL = SDLK_EXSEL,								/*!< . */
-																	 
+
 			KEY_KP_00 = SDLK_KP_00,								/*!< . */
 			KEY_KP_000 = SDLK_KP_000,							/*!< . */
 			KEY_THOUSANDSSEPARATOR = SDLK_THOUSANDSSEPARATOR,	/*!< . */
@@ -268,7 +268,7 @@ namespace ZEGL
 			KEY_KP_OCTAL = SDLK_KP_OCTAL,						/*!< . */
 			KEY_KP_DECIMAL = SDLK_KP_DECIMAL,					/*!< . */
 			KEY_KP_HEXADECIMAL = SDLK_KP_HEXADECIMAL,			/*!< . */
-																	 
+
 			KEY_LCTRL = SDLK_LCTRL,								/*!< . */
 			KEY_LSHIFT = SDLK_LSHIFT,							/*!< . */
 			KEY_LALT = SDLK_LALT,								/*!< . */
@@ -277,9 +277,9 @@ namespace ZEGL
 			KEY_RSHIFT = SDLK_RSHIFT,							/*!< . */
 			KEY_RALT = SDLK_RALT,								/*!< . */
 			KEY_RGUI = SDLK_RGUI,								/*!< . */
-																	 
+
 			KEY_MODE = SDLK_MODE,								/*!< . */
-																	 
+
 			KEY_AUDIONEXT = SDLK_AUDIONEXT,						/*!< . */
 			KEY_AUDIOPREV = SDLK_AUDIOPREV,						/*!< . */
 			KEY_AUDIOSTOP = SDLK_AUDIOSTOP,						/*!< . */
@@ -297,7 +297,7 @@ namespace ZEGL
 			KEY_AC_STOP = SDLK_AC_STOP,							/*!< . */
 			KEY_AC_REFRESH = SDLK_AC_REFRESH,					/*!< . */
 			KEY_AC_BOOKMARKS = SDLK_AC_BOOKMARKS,				/*!< . */
-																	 
+
 			KEY_BRIGHTNESSDOWN = SDLK_BRIGHTNESSDOWN,			/*!< . */
 			KEY_BRIGHTNESSUP = SDLK_BRIGHTNESSUP,				/*!< . */
 			KEY_DISPLAYDWITCH = SDLK_DISPLAYSWITCH,				/*!< . */
@@ -462,14 +462,14 @@ namespace ZEGL
 		* \param[in] value The new y coordinate
 		*/
 		inline void SetMouseY(int value) { m_mouseY = value; }
-		
+
 		/**
 		* Hide or display the mouse cursor.
 		*
 		* \param[in] visible Flag whether to show or hide the cursor (true/false)
 		*/
 		void SetCursorVisible(bool visible) const;
-		
+
 		/**
 		* Reset the array monitoring keys which have just been pressed to all be false.
 		*/
@@ -502,13 +502,13 @@ namespace ZEGL
 
 	protected:
 	private:
-		bool		m_inputs[MAX_KEYS];					
-		bool		m_downKeys[MAX_KEYS];				
-		bool		m_upKeys[MAX_KEYS];					
-		bool		m_mouseInput[MAX_MOUSE_BUTTONS];	
-		bool		m_downMouse[MAX_MOUSE_BUTTONS];		
-		bool		m_upMouse[MAX_MOUSE_BUTTONS];		
-		int			m_mouseX;							
-		int			m_mouseY;							
+		bool		m_inputs[MAX_KEYS];
+		bool		m_downKeys[MAX_KEYS];
+		bool		m_upKeys[MAX_KEYS];
+		bool		m_mouseInput[MAX_MOUSE_BUTTONS];
+		bool		m_downMouse[MAX_MOUSE_BUTTONS];
+		bool		m_upMouse[MAX_MOUSE_BUTTONS];
+		int			m_mouseX;
+		int			m_mouseY;
 	};
 }

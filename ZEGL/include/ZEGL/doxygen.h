@@ -31,7 +31,7 @@
 * - [tinyxml2](https://github.com/leethomason/tinyxml2)
 * - [FontStash - Forked and modified for my use](https://github.com/Zammalad/fontstash)
 *
-* All library and dll files are packaged with the source so there is no need to download them. 
+* All library and dll files are packaged with the source so there is no need to download them.
 * This helps ensure that the compatibility is maintained if new versions are released.
 *
 * Github Repo - [https://github.com/Zammalad/ZEGL](https://github.com/Zammalad/ZEGL)
@@ -50,34 +50,34 @@
 * #include "system.h"
 * #include "util.h"
 * #include "window.h"
-* 
+*
 * using namespace ZEGL;
-* 
+*
 * int main(int argc, char *argv[])
 * {
 *	// Initialize the logger class and pass a filename
 *	LOG_INIT("ZEGL");
-* 
+*
 *	// Perform system initialization
 *	if (System::Init())
 *	{
 *		// Create a window with width 800, height 600 and a title
 *		Window window(800, 600, "ZEGL");
 *		MyGame game;
-* 
+*
 *		// Create the core system passing in the desired target fps
 *		/ and pointers to the window and game just created
 *		Core engine(60, &window, &game);
 *		// Enter the game loop
 *		engine.Start();
-* 
+*
 *		// System cleanup
 *		System::Quit();
 *	}
-* 
+*
 *	// Finish logging
 *	LOG_CLOSE();
-* 
+*
 *	return 0;
 * }
 * \endcode

@@ -41,17 +41,17 @@ double Time::GetTime()
 			{
 				std::cerr << "QueryPerformanceFrequency failed in timer initialization" << std::endl;
 			}
-			
+
 			g_freq = double(li.QuadPart);
 			g_timerInitialized = true;
 		}
-	
+
 		LARGE_INTEGER li;
 		if (!QueryPerformanceCounter(&li))
 		{
 			std::cerr << "QueryPerformanceCounter failed in get time!" << std::endl;
 		}
-		
+
 		return double(li.QuadPart)/g_freq;
 
 	#elif defined(OS_LINUX)

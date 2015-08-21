@@ -134,17 +134,17 @@ namespace ZEGL
 	private:
 		struct Transformation
 		{
-			glm::mat4	m_matrix;		
+			glm::mat4	m_matrix;
 			glm::vec3	m_lastOrigin;
 			glm::vec3	m_lastPos;
-			float		m_lastRot;		
-			float		m_lastZoom;		
+			float		m_lastRot;
+			float		m_lastZoom;
 
 			inline void Update(const glm::vec3& origin, const glm::vec3& pos, float rot, float zoom)
 			{
 				m_lastOrigin = origin;
-				m_lastPos = pos; 
-				m_lastRot = rot; 
+				m_lastPos = pos;
+				m_lastRot = rot;
 				m_lastZoom = zoom;
 			}
 		};
@@ -152,9 +152,9 @@ namespace ZEGL
 		void RecreateTransform();
 
 		glm::vec3		m_origin;
-		glm::vec3		m_pos;		
-		float			m_rot;		
-		float			m_zoom;		
+		glm::vec3		m_pos;
+		float			m_rot;
+		float			m_zoom;
 		Transformation	m_transform;
 	};
 }

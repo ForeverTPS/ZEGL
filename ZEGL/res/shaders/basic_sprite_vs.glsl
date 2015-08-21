@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,8 +39,8 @@ const vec2 quadpos[] = vec2[4] (
 	vec2(0.5,  -0.5)
 );
 
-void main() 
-{ 
+void main()
+{
 	vec2 offset = quadpos[gl_VertexID];
 
 	if (gl_VertexID == 0)		vTexCoord = texCoord0;
@@ -64,9 +64,9 @@ void main()
 				   -pos.x, -pos.y, 0, 1);
 
 	mat4 model = t1 * r * t2;
-  
+
 	gl_Position = MVP * model * vec4(pos.x + (offset.x * xSize),
-									 pos.y + (offset.y * ySize), 
-									 0, 
+									 pos.y + (offset.y * ySize),
+									 0,
 									 1);
 }

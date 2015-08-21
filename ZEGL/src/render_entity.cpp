@@ -18,17 +18,17 @@
 
 using namespace ZEGL;
 
-RenderEntity::RenderEntity(const Texture& texture, 
-						   const Texture& normalMap, 
+RenderEntity::RenderEntity(const Texture& texture,
+						   const Texture& normalMap,
 						   const TextureAtlas& textureAtlas,
-						   const glm::vec3& pos, 
-						   float rot, 
+						   const glm::vec3& pos,
+						   float rot,
 						   float xScale,
 						   float yScale) :
 	m_textureAtlas(textureAtlas),
 	m_texture(texture),
 	m_normalMap(normalMap),
-	Entity(pos, rot, xScale, yScale) 
+	Entity(pos, rot, xScale, yScale)
 {
 }
 

@@ -367,11 +367,11 @@ void Shader::UpdateUniforms() const
 		}
 		else if (uniformName.substr(0, 2) == "L_")
 		{
-			std::string unprefixedName = uniformName.substr(2, uniformName.length());	
+			std::string unprefixedName = uniformName.substr(2, uniformName.length());
 
 			if (unprefixedName == "AmbientColor")
 			{
-				glm::vec4 color = light ? light->GetAmbientColor() : game->GetAmbientColor();		
+				glm::vec4 color = light ? light->GetAmbientColor() : game->GetAmbientColor();
 				SetUniformVector4f(uniformName, color);
 			}
 			else if (unprefixedName == "Resolution")

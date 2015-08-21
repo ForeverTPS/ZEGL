@@ -19,7 +19,7 @@
 
 using namespace ZEGL;
 
-Input::Input() : 
+Input::Input() :
 	m_mouseX(0),
 	m_mouseY(0)
 {

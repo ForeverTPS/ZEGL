@@ -24,7 +24,7 @@
 using namespace ZEGL;
 
 int main(int argc, char *argv[])
-{  
+{
 	LOG_INIT("ZEGL");
 
 	if (System::Init())
