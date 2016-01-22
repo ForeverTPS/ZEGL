@@ -96,8 +96,6 @@ void MyGame::Update(float delta)
 {
 	Game::Update(delta);
 
-	//m_camera->SetPos(m_camera->GetPos().x - 1.0f, m_camera->GetPos().y);
-
 	glm::vec2 mousePos = m_input.GetMousePosition();
 	m_light->SetPos((mousePos.x / m_window->GetWidth()), (1.0f - mousePos.y / m_window->GetHeight()), m_light->GetPos().z);
 
