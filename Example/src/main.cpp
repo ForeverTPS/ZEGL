@@ -17,10 +17,6 @@
 
 #include "example.h"
 
-#if !defined(NDEBUG) && defined(_MSC_FULL_VER)
-	#include "vld.h"
-#endif
-
 using namespace ZEGL;
 
 int main(int argc, char *argv[])
